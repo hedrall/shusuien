@@ -208,20 +208,20 @@
           {
             Object.freeze(emptyObject);
           }
-          function Component2(props, context, updater) {
+          function Component3(props, context, updater) {
             this.props = props;
             this.context = context;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
           }
-          Component2.prototype.isReactComponent = {};
-          Component2.prototype.setState = function(partialState, callback) {
+          Component3.prototype.isReactComponent = {};
+          Component3.prototype.setState = function(partialState, callback) {
             if (typeof partialState !== "object" && typeof partialState !== "function" && partialState != null) {
               throw new Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
             }
             this.updater.enqueueSetState(this, partialState, callback, "setState");
           };
-          Component2.prototype.forceUpdate = function(callback) {
+          Component3.prototype.forceUpdate = function(callback) {
             this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
           };
           {
@@ -230,7 +230,7 @@
               replaceState: ["replaceState", "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."]
             };
             var defineDeprecationWarning = function(methodName, info) {
-              Object.defineProperty(Component2.prototype, methodName, {
+              Object.defineProperty(Component3.prototype, methodName, {
                 get: function() {
                   warn("%s(...) is deprecated in plain JavaScript React classes. %s", info[0], info[1]);
                   return void 0;
@@ -245,7 +245,7 @@
           }
           function ComponentDummy() {
           }
-          ComponentDummy.prototype = Component2.prototype;
+          ComponentDummy.prototype = Component3.prototype;
           function PureComponent(props, context, updater) {
             this.props = props;
             this.context = context;
@@ -254,7 +254,7 @@
           }
           var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
           pureComponentPrototype.constructor = PureComponent;
-          assign(pureComponentPrototype, Component2.prototype);
+          assign(pureComponentPrototype, Component3.prototype);
           pureComponentPrototype.isPureReactComponent = true;
           function createRef() {
             var refObject = {
@@ -441,7 +441,7 @@
               }
             }
           }
-          var ReactElement = function(type, key, ref, self, source, owner, props) {
+          var ReactElement = function(type, key, ref, self2, source, owner, props) {
             var element = {
               $$typeof: REACT_ELEMENT_TYPE,
               type,
@@ -462,7 +462,7 @@
                 configurable: false,
                 enumerable: false,
                 writable: false,
-                value: self
+                value: self2
               });
               Object.defineProperty(element, "_source", {
                 configurable: false,
@@ -482,7 +482,7 @@
             var props = {};
             var key = null;
             var ref = null;
-            var self = null;
+            var self2 = null;
             var source = null;
             if (config != null) {
               if (hasValidRef(config)) {
@@ -497,7 +497,7 @@
                 }
                 key = "" + config.key;
               }
-              self = config.__self === void 0 ? null : config.__self;
+              self2 = config.__self === void 0 ? null : config.__self;
               source = config.__source === void 0 ? null : config.__source;
               for (propName in config) {
                 if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
@@ -539,7 +539,7 @@
                 }
               }
             }
-            return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
+            return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
           }
           function cloneAndReplaceKey(oldElement, newKey) {
             var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
@@ -553,7 +553,7 @@
             var props = assign({}, element.props);
             var key = element.key;
             var ref = element.ref;
-            var self = element._self;
+            var self2 = element._self;
             var source = element._source;
             var owner = element._owner;
             if (config != null) {
@@ -591,7 +591,7 @@
               }
               props.children = childArray;
             }
-            return ReactElement(element.type, key, ref, self, source, owner, props);
+            return ReactElement(element.type, key, ref, self2, source, owner, props);
           }
           function isValidElement2(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
@@ -950,10 +950,10 @@
                 get: function() {
                   return ownName;
                 },
-                set: function(name) {
-                  ownName = name;
+                set: function(name5) {
+                  ownName = name5;
                   if (!render.name && !render.displayName) {
-                    render.displayName = name;
+                    render.displayName = name5;
                   }
                 }
               });
@@ -997,10 +997,10 @@
                 get: function() {
                   return ownName;
                 },
-                set: function(name) {
-                  ownName = name;
+                set: function(name5) {
+                  ownName = name5;
                   if (!type.name && !type.displayName) {
-                    type.displayName = name;
+                    type.displayName = name5;
                   }
                 }
               });
@@ -1168,7 +1168,7 @@
           }
           var ReactCurrentDispatcher$1 = ReactSharedInternals.ReactCurrentDispatcher;
           var prefix;
-          function describeBuiltInComponentFrame(name, source, ownerFn) {
+          function describeBuiltInComponentFrame(name5, source, ownerFn) {
             {
               if (prefix === void 0) {
                 try {
@@ -1178,7 +1178,7 @@
                   prefix = match && match[1] || "";
                 }
               }
-              return "\n" + prefix + name;
+              return "\n" + prefix + name5;
             }
           }
           var reentry = false;
@@ -1281,8 +1281,8 @@
               }
               Error.prepareStackTrace = previousPrepareStackTrace;
             }
-            var name = fn ? fn.displayName || fn.name : "";
-            var syntheticFrame = name ? describeBuiltInComponentFrame(name) : "";
+            var name5 = fn ? fn.displayName || fn.name : "";
+            var syntheticFrame = name5 ? describeBuiltInComponentFrame(name5) : "";
             {
               if (typeof fn === "function") {
                 componentFrameCache.set(fn, syntheticFrame);
@@ -1295,8 +1295,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component3) {
-            var prototype = Component3.prototype;
+          function shouldConstruct(Component4) {
+            var prototype = Component4.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -1397,9 +1397,9 @@
           }
           function getDeclarationErrorAddendum() {
             if (ReactCurrentOwner.current) {
-              var name = getComponentNameFromType(ReactCurrentOwner.current.type);
-              if (name) {
-                return "\n\nCheck the render method of `" + name + "`.";
+              var name5 = getComponentNameFromType(ReactCurrentOwner.current.type);
+              if (name5) {
+                return "\n\nCheck the render method of `" + name5 + "`.";
               }
             }
             return "";
@@ -1494,8 +1494,8 @@
                 return;
               }
               if (propTypes) {
-                var name = getComponentNameFromType(type);
-                checkPropTypes(propTypes, element.props, "prop", name, element);
+                var name5 = getComponentNameFromType(type);
+                checkPropTypes(propTypes, element.props, "prop", name5, element);
               } else if (type.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
                 propTypesMisspellWarningShown = true;
                 var _name = getComponentNameFromType(type);
@@ -1800,7 +1800,7 @@
             only: onlyChild
           };
           exports.Children = Children2;
-          exports.Component = Component2;
+          exports.Component = Component3;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
           exports.PureComponent = PureComponent;
@@ -2530,19 +2530,19 @@
             }
             return false;
           }
-          function shouldIgnoreAttribute(name, propertyInfo, isCustomComponentTag) {
+          function shouldIgnoreAttribute(name5, propertyInfo, isCustomComponentTag) {
             if (propertyInfo !== null) {
               return propertyInfo.type === RESERVED;
             }
             if (isCustomComponentTag) {
               return false;
             }
-            if (name.length > 2 && (name[0] === "o" || name[0] === "O") && (name[1] === "n" || name[1] === "N")) {
+            if (name5.length > 2 && (name5[0] === "o" || name5[0] === "O") && (name5[1] === "n" || name5[1] === "N")) {
               return true;
             }
             return false;
           }
-          function shouldRemoveAttributeWithWarning(name, value, propertyInfo, isCustomComponentTag) {
+          function shouldRemoveAttributeWithWarning(name5, value, propertyInfo, isCustomComponentTag) {
             if (propertyInfo !== null && propertyInfo.type === RESERVED) {
               return false;
             }
@@ -2557,7 +2557,7 @@
                 if (propertyInfo !== null) {
                   return !propertyInfo.acceptsBooleans;
                 } else {
-                  var prefix2 = name.toLowerCase().slice(0, 5);
+                  var prefix2 = name5.toLowerCase().slice(0, 5);
                   return prefix2 !== "data-" && prefix2 !== "aria-";
                 }
               }
@@ -2565,11 +2565,11 @@
                 return false;
             }
           }
-          function shouldRemoveAttribute(name, value, propertyInfo, isCustomComponentTag) {
+          function shouldRemoveAttribute(name5, value, propertyInfo, isCustomComponentTag) {
             if (value === null || typeof value === "undefined") {
               return true;
             }
-            if (shouldRemoveAttributeWithWarning(name, value, propertyInfo, isCustomComponentTag)) {
+            if (shouldRemoveAttributeWithWarning(name5, value, propertyInfo, isCustomComponentTag)) {
               return true;
             }
             if (isCustomComponentTag) {
@@ -2589,15 +2589,15 @@
             }
             return false;
           }
-          function getPropertyInfo(name) {
-            return properties.hasOwnProperty(name) ? properties[name] : null;
+          function getPropertyInfo(name5) {
+            return properties.hasOwnProperty(name5) ? properties[name5] : null;
           }
-          function PropertyInfoRecord(name, type, mustUseProperty, attributeName, attributeNamespace, sanitizeURL2, removeEmptyString) {
+          function PropertyInfoRecord(name5, type, mustUseProperty, attributeName, attributeNamespace, sanitizeURL2, removeEmptyString) {
             this.acceptsBooleans = type === BOOLEANISH_STRING || type === BOOLEAN || type === OVERLOADED_BOOLEAN;
             this.attributeName = attributeName;
             this.attributeNamespace = attributeNamespace;
             this.mustUseProperty = mustUseProperty;
-            this.propertyName = name;
+            this.propertyName = name5;
             this.type = type;
             this.sanitizeURL = sanitizeURL2;
             this.removeEmptyString = removeEmptyString;
@@ -2613,21 +2613,21 @@
             "suppressHydrationWarning",
             "style"
           ];
-          reservedProps.forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(
-              name,
+          reservedProps.forEach(function(name5) {
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               RESERVED,
               false,
-              name,
+              name5,
               null,
               false,
               false
             );
           });
           [["acceptCharset", "accept-charset"], ["className", "class"], ["htmlFor", "for"], ["httpEquiv", "http-equiv"]].forEach(function(_ref) {
-            var name = _ref[0], attributeName = _ref[1];
-            properties[name] = new PropertyInfoRecord(
-              name,
+            var name5 = _ref[0], attributeName = _ref[1];
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               STRING,
               false,
               attributeName,
@@ -2636,23 +2636,23 @@
               false
             );
           });
-          ["contentEditable", "draggable", "spellCheck", "value"].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(
-              name,
+          ["contentEditable", "draggable", "spellCheck", "value"].forEach(function(name5) {
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               BOOLEANISH_STRING,
               false,
-              name.toLowerCase(),
+              name5.toLowerCase(),
               null,
               false,
               false
             );
           });
-          ["autoReverse", "externalResourcesRequired", "focusable", "preserveAlpha"].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(
-              name,
+          ["autoReverse", "externalResourcesRequired", "focusable", "preserveAlpha"].forEach(function(name5) {
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               BOOLEANISH_STRING,
               false,
-              name,
+              name5,
               null,
               false,
               false
@@ -2682,12 +2682,12 @@
             "scoped",
             "seamless",
             "itemScope"
-          ].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(
-              name,
+          ].forEach(function(name5) {
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               BOOLEAN,
               false,
-              name.toLowerCase(),
+              name5.toLowerCase(),
               null,
               false,
               false
@@ -2698,12 +2698,12 @@
             "multiple",
             "muted",
             "selected"
-          ].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(
-              name,
+          ].forEach(function(name5) {
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               BOOLEAN,
               true,
-              name,
+              name5,
               null,
               false,
               false
@@ -2712,12 +2712,12 @@
           [
             "capture",
             "download"
-          ].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(
-              name,
+          ].forEach(function(name5) {
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               OVERLOADED_BOOLEAN,
               false,
-              name,
+              name5,
               null,
               false,
               false
@@ -2728,23 +2728,23 @@
             "rows",
             "size",
             "span"
-          ].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(
-              name,
+          ].forEach(function(name5) {
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               POSITIVE_NUMERIC,
               false,
-              name,
+              name5,
               null,
               false,
               false
             );
           });
-          ["rowSpan", "start"].forEach(function(name) {
-            properties[name] = new PropertyInfoRecord(
-              name,
+          ["rowSpan", "start"].forEach(function(name5) {
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               NUMERIC,
               false,
-              name.toLowerCase(),
+              name5.toLowerCase(),
               null,
               false,
               false
@@ -2829,9 +2829,9 @@
             "xmlns:xlink",
             "x-height"
           ].forEach(function(attributeName) {
-            var name = attributeName.replace(CAMELIZE, capitalize);
-            properties[name] = new PropertyInfoRecord(
-              name,
+            var name5 = attributeName.replace(CAMELIZE, capitalize);
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               STRING,
               false,
               attributeName,
@@ -2848,9 +2848,9 @@
             "xlink:title",
             "xlink:type"
           ].forEach(function(attributeName) {
-            var name = attributeName.replace(CAMELIZE, capitalize);
-            properties[name] = new PropertyInfoRecord(
-              name,
+            var name5 = attributeName.replace(CAMELIZE, capitalize);
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               STRING,
               false,
               attributeName,
@@ -2864,9 +2864,9 @@
             "xml:lang",
             "xml:space"
           ].forEach(function(attributeName) {
-            var name = attributeName.replace(CAMELIZE, capitalize);
-            properties[name] = new PropertyInfoRecord(
-              name,
+            var name5 = attributeName.replace(CAMELIZE, capitalize);
+            properties[name5] = new PropertyInfoRecord(
+              name5,
               STRING,
               false,
               attributeName,
@@ -2917,14 +2917,14 @@
               }
             }
           }
-          function getValueForProperty(node, name, expected, propertyInfo) {
+          function getValueForProperty(node, name5, expected, propertyInfo) {
             {
               if (propertyInfo.mustUseProperty) {
                 var propertyName = propertyInfo.propertyName;
                 return node[propertyName];
               } else {
                 {
-                  checkAttributeStringCoercion(expected, name);
+                  checkAttributeStringCoercion(expected, name5);
                 }
                 if (propertyInfo.sanitizeURL) {
                   sanitizeURL("" + expected);
@@ -2937,7 +2937,7 @@
                     if (value === "") {
                       return true;
                     }
-                    if (shouldRemoveAttribute(name, expected, propertyInfo, false)) {
+                    if (shouldRemoveAttribute(name5, expected, propertyInfo, false)) {
                       return value;
                     }
                     if (value === "" + expected) {
@@ -2946,7 +2946,7 @@
                     return value;
                   }
                 } else if (node.hasAttribute(attributeName)) {
-                  if (shouldRemoveAttribute(name, expected, propertyInfo, false)) {
+                  if (shouldRemoveAttribute(name5, expected, propertyInfo, false)) {
                     return node.getAttribute(attributeName);
                   }
                   if (propertyInfo.type === BOOLEAN) {
@@ -2954,7 +2954,7 @@
                   }
                   stringValue = node.getAttribute(attributeName);
                 }
-                if (shouldRemoveAttribute(name, expected, propertyInfo, false)) {
+                if (shouldRemoveAttribute(name5, expected, propertyInfo, false)) {
                   return stringValue === null ? expected : stringValue;
                 } else if (stringValue === "" + expected) {
                   return expected;
@@ -2964,17 +2964,17 @@
               }
             }
           }
-          function getValueForAttribute(node, name, expected, isCustomComponentTag) {
+          function getValueForAttribute(node, name5, expected, isCustomComponentTag) {
             {
-              if (!isAttributeNameSafe(name)) {
+              if (!isAttributeNameSafe(name5)) {
                 return;
               }
-              if (!node.hasAttribute(name)) {
+              if (!node.hasAttribute(name5)) {
                 return expected === void 0 ? void 0 : null;
               }
-              var value = node.getAttribute(name);
+              var value = node.getAttribute(name5);
               {
-                checkAttributeStringCoercion(expected, name);
+                checkAttributeStringCoercion(expected, name5);
               }
               if (value === "" + expected) {
                 return expected;
@@ -2982,22 +2982,22 @@
               return value;
             }
           }
-          function setValueForProperty(node, name, value, isCustomComponentTag) {
-            var propertyInfo = getPropertyInfo(name);
-            if (shouldIgnoreAttribute(name, propertyInfo, isCustomComponentTag)) {
+          function setValueForProperty(node, name5, value, isCustomComponentTag) {
+            var propertyInfo = getPropertyInfo(name5);
+            if (shouldIgnoreAttribute(name5, propertyInfo, isCustomComponentTag)) {
               return;
             }
-            if (shouldRemoveAttribute(name, value, propertyInfo, isCustomComponentTag)) {
+            if (shouldRemoveAttribute(name5, value, propertyInfo, isCustomComponentTag)) {
               value = null;
             }
             if (isCustomComponentTag || propertyInfo === null) {
-              if (isAttributeNameSafe(name)) {
-                var _attributeName = name;
+              if (isAttributeNameSafe(name5)) {
+                var _attributeName = name5;
                 if (value === null) {
                   node.removeAttribute(_attributeName);
                 } else {
                   {
-                    checkAttributeStringCoercion(value, name);
+                    checkAttributeStringCoercion(value, name5);
                   }
                   node.setAttribute(_attributeName, "" + value);
                 }
@@ -3152,7 +3152,7 @@
           }
           var ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher;
           var prefix;
-          function describeBuiltInComponentFrame(name, source, ownerFn) {
+          function describeBuiltInComponentFrame(name5, source, ownerFn) {
             {
               if (prefix === void 0) {
                 try {
@@ -3162,7 +3162,7 @@
                   prefix = match && match[1] || "";
                 }
               }
-              return "\n" + prefix + name;
+              return "\n" + prefix + name5;
             }
           }
           var reentry = false;
@@ -3265,8 +3265,8 @@
               }
               Error.prepareStackTrace = previousPrepareStackTrace;
             }
-            var name = fn ? fn.displayName || fn.name : "";
-            var syntheticFrame = name ? describeBuiltInComponentFrame(name) : "";
+            var name5 = fn ? fn.displayName || fn.name : "";
+            var syntheticFrame = name5 ? describeBuiltInComponentFrame(name5) : "";
             {
               if (typeof fn === "function") {
                 componentFrameCache.set(fn, syntheticFrame);
@@ -3284,8 +3284,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component2) {
-            var prototype = Component2.prototype;
+          function shouldConstruct(Component3) {
+            var prototype = Component3.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -3617,7 +3617,7 @@
             if (node.hasOwnProperty(valueField) || typeof descriptor === "undefined" || typeof descriptor.get !== "function" || typeof descriptor.set !== "function") {
               return;
             }
-            var get2 = descriptor.get, set2 = descriptor.set;
+            var get2 = descriptor.get, set3 = descriptor.set;
             Object.defineProperty(node, valueField, {
               configurable: true,
               get: function() {
@@ -3628,7 +3628,7 @@
                   checkFormFieldValueStringCoercion(value);
                 }
                 currentValue = "" + value;
-                set2.call(this, value);
+                set3.call(this, value);
               }
             });
             Object.defineProperty(node, valueField, {
@@ -3791,16 +3791,16 @@
                 node.defaultValue = initialValue;
               }
             }
-            var name = node.name;
-            if (name !== "") {
+            var name5 = node.name;
+            if (name5 !== "") {
               node.name = "";
             }
             {
               node.defaultChecked = !node.defaultChecked;
               node.defaultChecked = !!node._wrapperState.initialChecked;
             }
-            if (name !== "") {
-              node.name = name;
+            if (name5 !== "") {
+              node.name = name5;
             }
           }
           function restoreControlledState(element, props) {
@@ -3809,16 +3809,16 @@
             updateNamedCousins(node, props);
           }
           function updateNamedCousins(rootNode, props) {
-            var name = props.name;
-            if (props.type === "radio" && name != null) {
+            var name5 = props.name;
+            if (props.type === "radio" && name5 != null) {
               var queryRoot = rootNode;
               while (queryRoot.parentNode) {
                 queryRoot = queryRoot.parentNode;
               }
               {
-                checkAttributeStringCoercion(name, "name");
+                checkAttributeStringCoercion(name5, "name");
               }
-              var group = queryRoot.querySelectorAll("input[name=" + JSON.stringify("" + name) + '][type="radio"]');
+              var group = queryRoot.querySelectorAll("input[name=" + JSON.stringify("" + name5) + '][type="radio"]');
               for (var i = 0; i < group.length; i++) {
                 var otherNode = group[i];
                 if (otherNode === rootNode || otherNode.form !== rootNode.form) {
@@ -4250,23 +4250,23 @@
               isUnitlessNumber[prefixKey(prefix2, prop)] = isUnitlessNumber[prop];
             });
           });
-          function dangerousStyleValue(name, value, isCustomProperty) {
+          function dangerousStyleValue(name5, value, isCustomProperty) {
             var isEmpty = value == null || typeof value === "boolean" || value === "";
             if (isEmpty) {
               return "";
             }
-            if (!isCustomProperty && typeof value === "number" && value !== 0 && !(isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name])) {
+            if (!isCustomProperty && typeof value === "number" && value !== 0 && !(isUnitlessNumber.hasOwnProperty(name5) && isUnitlessNumber[name5])) {
               return value + "px";
             }
             {
-              checkCSSPropertyStringCoercion(value, name);
+              checkCSSPropertyStringCoercion(value, name5);
             }
             return ("" + value).trim();
           }
           var uppercasePattern = /([A-Z])/g;
           var msPattern = /^ms-/;
-          function hyphenateStyleName(name) {
-            return name.replace(uppercasePattern, "-$1").toLowerCase().replace(msPattern, "-ms-");
+          function hyphenateStyleName(name5) {
+            return name5.replace(uppercasePattern, "-$1").toLowerCase().replace(msPattern, "-ms-");
           }
           var warnValidStyle = function() {
           };
@@ -4284,58 +4284,58 @@
                 return character.toUpperCase();
               });
             };
-            var warnHyphenatedStyleName = function(name) {
-              if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
+            var warnHyphenatedStyleName = function(name5) {
+              if (warnedStyleNames.hasOwnProperty(name5) && warnedStyleNames[name5]) {
                 return;
               }
-              warnedStyleNames[name] = true;
+              warnedStyleNames[name5] = true;
               error(
                 "Unsupported style property %s. Did you mean %s?",
-                name,
-                camelize(name.replace(msPattern$1, "ms-"))
+                name5,
+                camelize(name5.replace(msPattern$1, "ms-"))
               );
             };
-            var warnBadVendoredStyleName = function(name) {
-              if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
+            var warnBadVendoredStyleName = function(name5) {
+              if (warnedStyleNames.hasOwnProperty(name5) && warnedStyleNames[name5]) {
                 return;
               }
-              warnedStyleNames[name] = true;
-              error("Unsupported vendor-prefixed style property %s. Did you mean %s?", name, name.charAt(0).toUpperCase() + name.slice(1));
+              warnedStyleNames[name5] = true;
+              error("Unsupported vendor-prefixed style property %s. Did you mean %s?", name5, name5.charAt(0).toUpperCase() + name5.slice(1));
             };
-            var warnStyleValueWithSemicolon = function(name, value) {
+            var warnStyleValueWithSemicolon = function(name5, value) {
               if (warnedStyleValues.hasOwnProperty(value) && warnedStyleValues[value]) {
                 return;
               }
               warnedStyleValues[value] = true;
-              error(`Style property values shouldn't contain a semicolon. Try "%s: %s" instead.`, name, value.replace(badStyleValueWithSemicolonPattern, ""));
+              error(`Style property values shouldn't contain a semicolon. Try "%s: %s" instead.`, name5, value.replace(badStyleValueWithSemicolonPattern, ""));
             };
-            var warnStyleValueIsNaN = function(name, value) {
+            var warnStyleValueIsNaN = function(name5, value) {
               if (warnedForNaNValue) {
                 return;
               }
               warnedForNaNValue = true;
-              error("`NaN` is an invalid value for the `%s` css style property.", name);
+              error("`NaN` is an invalid value for the `%s` css style property.", name5);
             };
-            var warnStyleValueIsInfinity = function(name, value) {
+            var warnStyleValueIsInfinity = function(name5, value) {
               if (warnedForInfinityValue) {
                 return;
               }
               warnedForInfinityValue = true;
-              error("`Infinity` is an invalid value for the `%s` css style property.", name);
+              error("`Infinity` is an invalid value for the `%s` css style property.", name5);
             };
-            warnValidStyle = function(name, value) {
-              if (name.indexOf("-") > -1) {
-                warnHyphenatedStyleName(name);
-              } else if (badVendoredStyleNamePattern.test(name)) {
-                warnBadVendoredStyleName(name);
+            warnValidStyle = function(name5, value) {
+              if (name5.indexOf("-") > -1) {
+                warnHyphenatedStyleName(name5);
+              } else if (badVendoredStyleNamePattern.test(name5)) {
+                warnBadVendoredStyleName(name5);
               } else if (badStyleValueWithSemicolonPattern.test(value)) {
-                warnStyleValueWithSemicolon(name, value);
+                warnStyleValueWithSemicolon(name5, value);
               }
               if (typeof value === "number") {
                 if (isNaN(value)) {
-                  warnStyleValueIsNaN(name, value);
+                  warnStyleValueIsNaN(name5, value);
                 } else if (!isFinite(value)) {
-                  warnStyleValueIsInfinity(name, value);
+                  warnStyleValueIsInfinity(name5, value);
                 }
               }
             };
@@ -5024,35 +5024,35 @@
           var warnedProperties = {};
           var rARIA = new RegExp("^(aria)-[" + ATTRIBUTE_NAME_CHAR + "]*$");
           var rARIACamel = new RegExp("^(aria)[A-Z][" + ATTRIBUTE_NAME_CHAR + "]*$");
-          function validateProperty(tagName, name) {
+          function validateProperty(tagName, name5) {
             {
-              if (hasOwnProperty.call(warnedProperties, name) && warnedProperties[name]) {
+              if (hasOwnProperty.call(warnedProperties, name5) && warnedProperties[name5]) {
                 return true;
               }
-              if (rARIACamel.test(name)) {
-                var ariaName = "aria-" + name.slice(4).toLowerCase();
+              if (rARIACamel.test(name5)) {
+                var ariaName = "aria-" + name5.slice(4).toLowerCase();
                 var correctName = ariaProperties.hasOwnProperty(ariaName) ? ariaName : null;
                 if (correctName == null) {
-                  error("Invalid ARIA attribute `%s`. ARIA attributes follow the pattern aria-* and must be lowercase.", name);
-                  warnedProperties[name] = true;
+                  error("Invalid ARIA attribute `%s`. ARIA attributes follow the pattern aria-* and must be lowercase.", name5);
+                  warnedProperties[name5] = true;
                   return true;
                 }
-                if (name !== correctName) {
-                  error("Invalid ARIA attribute `%s`. Did you mean `%s`?", name, correctName);
-                  warnedProperties[name] = true;
+                if (name5 !== correctName) {
+                  error("Invalid ARIA attribute `%s`. Did you mean `%s`?", name5, correctName);
+                  warnedProperties[name5] = true;
                   return true;
                 }
               }
-              if (rARIA.test(name)) {
-                var lowerCasedName = name.toLowerCase();
+              if (rARIA.test(name5)) {
+                var lowerCasedName = name5.toLowerCase();
                 var standardName = ariaProperties.hasOwnProperty(lowerCasedName) ? lowerCasedName : null;
                 if (standardName == null) {
-                  warnedProperties[name] = true;
+                  warnedProperties[name5] = true;
                   return false;
                 }
-                if (name !== standardName) {
-                  error("Unknown ARIA attribute `%s`. Did you mean `%s`?", name, standardName);
-                  warnedProperties[name] = true;
+                if (name5 !== standardName) {
+                  error("Unknown ARIA attribute `%s`. Did you mean `%s`?", name5, standardName);
+                  warnedProperties[name5] = true;
                   return true;
                 }
               }
@@ -5108,95 +5108,95 @@
             var INVALID_EVENT_NAME_REGEX = /^on[^A-Z]/;
             var rARIA$1 = new RegExp("^(aria)-[" + ATTRIBUTE_NAME_CHAR + "]*$");
             var rARIACamel$1 = new RegExp("^(aria)[A-Z][" + ATTRIBUTE_NAME_CHAR + "]*$");
-            validateProperty$1 = function(tagName, name, value, eventRegistry) {
-              if (hasOwnProperty.call(warnedProperties$1, name) && warnedProperties$1[name]) {
+            validateProperty$1 = function(tagName, name5, value, eventRegistry) {
+              if (hasOwnProperty.call(warnedProperties$1, name5) && warnedProperties$1[name5]) {
                 return true;
               }
-              var lowerCasedName = name.toLowerCase();
+              var lowerCasedName = name5.toLowerCase();
               if (lowerCasedName === "onfocusin" || lowerCasedName === "onfocusout") {
                 error("React uses onFocus and onBlur instead of onFocusIn and onFocusOut. All React events are normalized to bubble, so onFocusIn and onFocusOut are not needed/supported by React.");
-                warnedProperties$1[name] = true;
+                warnedProperties$1[name5] = true;
                 return true;
               }
               if (eventRegistry != null) {
                 var registrationNameDependencies2 = eventRegistry.registrationNameDependencies, possibleRegistrationNames2 = eventRegistry.possibleRegistrationNames;
-                if (registrationNameDependencies2.hasOwnProperty(name)) {
+                if (registrationNameDependencies2.hasOwnProperty(name5)) {
                   return true;
                 }
                 var registrationName = possibleRegistrationNames2.hasOwnProperty(lowerCasedName) ? possibleRegistrationNames2[lowerCasedName] : null;
                 if (registrationName != null) {
-                  error("Invalid event handler property `%s`. Did you mean `%s`?", name, registrationName);
-                  warnedProperties$1[name] = true;
+                  error("Invalid event handler property `%s`. Did you mean `%s`?", name5, registrationName);
+                  warnedProperties$1[name5] = true;
                   return true;
                 }
-                if (EVENT_NAME_REGEX.test(name)) {
-                  error("Unknown event handler property `%s`. It will be ignored.", name);
-                  warnedProperties$1[name] = true;
+                if (EVENT_NAME_REGEX.test(name5)) {
+                  error("Unknown event handler property `%s`. It will be ignored.", name5);
+                  warnedProperties$1[name5] = true;
                   return true;
                 }
-              } else if (EVENT_NAME_REGEX.test(name)) {
-                if (INVALID_EVENT_NAME_REGEX.test(name)) {
-                  error("Invalid event handler property `%s`. React events use the camelCase naming convention, for example `onClick`.", name);
+              } else if (EVENT_NAME_REGEX.test(name5)) {
+                if (INVALID_EVENT_NAME_REGEX.test(name5)) {
+                  error("Invalid event handler property `%s`. React events use the camelCase naming convention, for example `onClick`.", name5);
                 }
-                warnedProperties$1[name] = true;
+                warnedProperties$1[name5] = true;
                 return true;
               }
-              if (rARIA$1.test(name) || rARIACamel$1.test(name)) {
+              if (rARIA$1.test(name5) || rARIACamel$1.test(name5)) {
                 return true;
               }
               if (lowerCasedName === "innerhtml") {
                 error("Directly setting property `innerHTML` is not permitted. For more information, lookup documentation on `dangerouslySetInnerHTML`.");
-                warnedProperties$1[name] = true;
+                warnedProperties$1[name5] = true;
                 return true;
               }
               if (lowerCasedName === "aria") {
                 error("The `aria` attribute is reserved for future use in React. Pass individual `aria-` attributes instead.");
-                warnedProperties$1[name] = true;
+                warnedProperties$1[name5] = true;
                 return true;
               }
               if (lowerCasedName === "is" && value !== null && value !== void 0 && typeof value !== "string") {
                 error("Received a `%s` for a string attribute `is`. If this is expected, cast the value to a string.", typeof value);
-                warnedProperties$1[name] = true;
+                warnedProperties$1[name5] = true;
                 return true;
               }
               if (typeof value === "number" && isNaN(value)) {
-                error("Received NaN for the `%s` attribute. If this is expected, cast the value to a string.", name);
-                warnedProperties$1[name] = true;
+                error("Received NaN for the `%s` attribute. If this is expected, cast the value to a string.", name5);
+                warnedProperties$1[name5] = true;
                 return true;
               }
-              var propertyInfo = getPropertyInfo(name);
+              var propertyInfo = getPropertyInfo(name5);
               var isReserved = propertyInfo !== null && propertyInfo.type === RESERVED;
               if (possibleStandardNames.hasOwnProperty(lowerCasedName)) {
                 var standardName = possibleStandardNames[lowerCasedName];
-                if (standardName !== name) {
-                  error("Invalid DOM property `%s`. Did you mean `%s`?", name, standardName);
-                  warnedProperties$1[name] = true;
+                if (standardName !== name5) {
+                  error("Invalid DOM property `%s`. Did you mean `%s`?", name5, standardName);
+                  warnedProperties$1[name5] = true;
                   return true;
                 }
-              } else if (!isReserved && name !== lowerCasedName) {
-                error("React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.", name, lowerCasedName);
-                warnedProperties$1[name] = true;
+              } else if (!isReserved && name5 !== lowerCasedName) {
+                error("React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.", name5, lowerCasedName);
+                warnedProperties$1[name5] = true;
                 return true;
               }
-              if (typeof value === "boolean" && shouldRemoveAttributeWithWarning(name, value, propertyInfo, false)) {
+              if (typeof value === "boolean" && shouldRemoveAttributeWithWarning(name5, value, propertyInfo, false)) {
                 if (value) {
-                  error('Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.', value, name, name, value, name);
+                  error('Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.', value, name5, name5, value, name5);
                 } else {
-                  error('Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.\n\nIf you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead.', value, name, name, value, name, name, name);
+                  error('Received `%s` for a non-boolean attribute `%s`.\n\nIf you want to write it to the DOM, pass a string instead: %s="%s" or %s={value.toString()}.\n\nIf you used to conditionally omit it with %s={condition && value}, pass %s={condition ? value : undefined} instead.', value, name5, name5, value, name5, name5, name5);
                 }
-                warnedProperties$1[name] = true;
+                warnedProperties$1[name5] = true;
                 return true;
               }
               if (isReserved) {
                 return true;
               }
-              if (shouldRemoveAttributeWithWarning(name, value, propertyInfo, false)) {
-                warnedProperties$1[name] = true;
+              if (shouldRemoveAttributeWithWarning(name5, value, propertyInfo, false)) {
+                warnedProperties$1[name5] = true;
                 return false;
               }
               if ((value === "false" || value === "true") && propertyInfo !== null && propertyInfo.type === BOOLEAN) {
-                error("Received the string `%s` for the boolean attribute `%s`. %s Did you mean %s={%s}?", value, name, value === "false" ? "The browser will interpret it as a truthy value." : 'Although this works, it will not work as expected if you pass the string "false".', name, value);
-                warnedProperties$1[name] = true;
+                error("Received the string `%s` for the boolean attribute `%s`. %s Did you mean %s={%s}?", value, name5, value === "false" ? "The browser will interpret it as a truthy value." : 'Although this works, it will not work as expected if you pass the string "false".', name5, value);
+                warnedProperties$1[name5] = true;
                 return true;
               }
               return true;
@@ -5339,8 +5339,8 @@
           function isInteractive(tag) {
             return tag === "button" || tag === "input" || tag === "select" || tag === "textarea";
           }
-          function shouldPreventMouseEvent(name, type, props) {
-            switch (name) {
+          function shouldPreventMouseEvent(name5, type, props) {
+            switch (name5) {
               case "onClick":
               case "onClickCapture":
               case "onDoubleClick":
@@ -5390,7 +5390,7 @@
               passiveBrowserEventsSupported = false;
             }
           }
-          function invokeGuardedCallbackProd(name, func, context, a, b, c, d, e, f) {
+          function invokeGuardedCallbackProd(name5, func, context, a, b, c, d, e, f) {
             var funcArgs = Array.prototype.slice.call(arguments, 3);
             try {
               func.apply(context, funcArgs);
@@ -5402,7 +5402,7 @@
           {
             if (typeof window !== "undefined" && typeof window.dispatchEvent === "function" && typeof document !== "undefined" && typeof document.createEvent === "function") {
               var fakeNode = document.createElement("react");
-              invokeGuardedCallbackImpl = function invokeGuardedCallbackDev(name, func, context, a, b, c, d, e, f) {
+              invokeGuardedCallbackImpl = function invokeGuardedCallbackDev(name5, func, context, a, b, c, d, e, f) {
                 if (typeof document === "undefined" || document === null) {
                   throw new Error("The `document` global was defined when React was initialized, but is not defined anymore. This can happen in a test environment if a component schedules an update from an asynchronous callback, but the test has already finished running. To solve this, you can either unmount the component at the end of your test (and ensure that any asynchronous operations get canceled in `componentWillUnmount`), or you can change the test itself to be asynchronous.");
                 }
@@ -5442,7 +5442,7 @@
                     }
                   }
                 }
-                var evtType = "react-" + (name ? name : "invokeguardedcallback");
+                var evtType = "react-" + (name5 ? name5 : "invokeguardedcallback");
                 window.addEventListener("error", handleWindowError);
                 fakeNode.addEventListener(evtType, callCallback2, false);
                 evt.initEvent(evtType, false, false);
@@ -5477,12 +5477,12 @@
               caughtError = error2;
             }
           };
-          function invokeGuardedCallback(name, func, context, a, b, c, d, e, f) {
+          function invokeGuardedCallback(name5, func, context, a, b, c, d, e, f) {
             hasError = false;
             caughtError = null;
             invokeGuardedCallbackImpl$1.apply(reporter, arguments);
           }
-          function invokeGuardedCallbackAndCatchFirstError(name, func, context, a, b, c, d, e, f) {
+          function invokeGuardedCallbackAndCatchFirstError(name5, func, context, a, b, c, d, e, f) {
             invokeGuardedCallback.apply(this, arguments);
             if (hasError) {
               var error2 = clearCaughtError();
@@ -5519,7 +5519,7 @@
           function has(key) {
             return key._reactInternals !== void 0;
           }
-          function set(key, value) {
+          function set2(key, value) {
             key._reactInternals = value;
           }
           var NoFlags = 0;
@@ -6441,14 +6441,14 @@
           function includesSomeLane(a, b) {
             return (a & b) !== NoLanes;
           }
-          function isSubsetOfLanes(set2, subset) {
-            return (set2 & subset) === subset;
+          function isSubsetOfLanes(set3, subset) {
+            return (set3 & subset) === subset;
           }
           function mergeLanes(a, b) {
             return a | b;
           }
-          function removeLanes(set2, subset) {
-            return set2 & ~subset;
+          function removeLanes(set3, subset) {
+            return set3 & ~subset;
           }
           function intersectLanes(a, b) {
             return a & b;
@@ -8869,8 +8869,8 @@
               }
               didWarnInvalidHydration = true;
               var names = [];
-              attributeNames.forEach(function(name) {
-                names.push(name);
+              attributeNames.forEach(function(name5) {
+                names.push(name5);
               });
               error("Extra attributes from the server: %s", names);
             };
@@ -9342,8 +9342,8 @@
               extraAttributeNames = /* @__PURE__ */ new Set();
               var attributes = domElement.attributes;
               for (var _i = 0; _i < attributes.length; _i++) {
-                var name = attributes[_i].name.toLowerCase();
-                switch (name) {
+                var name5 = attributes[_i].name.toLowerCase();
+                switch (name5) {
                   case "value":
                     break;
                   case "checked":
@@ -10438,9 +10438,9 @@
           var contextStackCursor = createCursor(emptyContextObject);
           var didPerformWorkStackCursor = createCursor(false);
           var previousContext = emptyContextObject;
-          function getUnmaskedContext(workInProgress2, Component2, didPushOwnContextIfProvider) {
+          function getUnmaskedContext(workInProgress2, Component3, didPushOwnContextIfProvider) {
             {
-              if (didPushOwnContextIfProvider && isContextProvider(Component2)) {
+              if (didPushOwnContextIfProvider && isContextProvider(Component3)) {
                 return previousContext;
               }
               return contextStackCursor.current;
@@ -10469,8 +10469,8 @@
                 context[key] = unmaskedContext[key];
               }
               {
-                var name = getComponentNameFromFiber(workInProgress2) || "Unknown";
-                checkPropTypes(contextTypes, context, "context", name);
+                var name5 = getComponentNameFromFiber(workInProgress2) || "Unknown";
+                checkPropTypes(contextTypes, context, "context", name5);
               }
               if (instance) {
                 cacheContext(workInProgress2, unmaskedContext, context);
@@ -10531,8 +10531,8 @@
                 }
               }
               {
-                var name = getComponentNameFromFiber(fiber) || "Unknown";
-                checkPropTypes(childContextTypes, childContext, "child context", name);
+                var name5 = getComponentNameFromFiber(fiber) || "Unknown";
+                checkPropTypes(childContextTypes, childContext, "child context", name5);
               }
               return assign({}, parentContext, childContext);
             }
@@ -10577,8 +10577,8 @@
                   case HostRoot:
                     return node.stateNode.context;
                   case ClassComponent: {
-                    var Component2 = node.type;
-                    if (isContextProvider(Component2)) {
+                    var Component3 = node.type;
+                    if (isContextProvider(Component3)) {
                       return node.stateNode.__reactInternalMemoizedMergedChildContext;
                     }
                     break;
@@ -11173,9 +11173,9 @@
               }
               return maybeStrictRoot;
             };
-            var setToSortedString = function(set2) {
+            var setToSortedString = function(set3) {
               var array = [];
-              set2.forEach(function(value) {
+              set3.forEach(function(value) {
                 array.push(value);
               });
               return array.sort().join(", ");
@@ -11334,10 +11334,10 @@
               pendingLegacyContextWarning = /* @__PURE__ */ new Map();
             };
           }
-          function resolveDefaultProps(Component2, baseProps) {
-            if (Component2 && Component2.defaultProps) {
+          function resolveDefaultProps(Component3, baseProps) {
+            if (Component3 && Component3.defaultProps) {
               var props = assign({}, baseProps);
-              var defaultProps = Component2.defaultProps;
+              var defaultProps = Component3.defaultProps;
               for (var propName in defaultProps) {
                 if (props[propName] === void 0) {
                   props[propName] = defaultProps[propName];
@@ -11438,8 +11438,8 @@
                   if (dependency.context === context) {
                     if (fiber.tag === ClassComponent) {
                       var lane = pickArbitraryLane(renderLanes2);
-                      var update = createUpdate(NoTimestamp, lane);
-                      update.tag = ForceUpdate;
+                      var update2 = createUpdate(NoTimestamp, lane);
+                      update2.tag = ForceUpdate;
                       var updateQueue = fiber.updateQueue;
                       if (updateQueue === null)
                         ;
@@ -11447,12 +11447,12 @@
                         var sharedQueue = updateQueue.shared;
                         var pending = sharedQueue.pending;
                         if (pending === null) {
-                          update.next = update;
+                          update2.next = update2;
                         } else {
-                          update.next = pending.next;
-                          pending.next = update;
+                          update2.next = pending.next;
+                          pending.next = update2;
                         }
-                        sharedQueue.pending = update;
+                        sharedQueue.pending = update2;
                       }
                     }
                     fiber.lanes = mergeLanes(fiber.lanes, renderLanes2);
@@ -11579,39 +11579,39 @@
               concurrentQueues = null;
             }
           }
-          function enqueueConcurrentHookUpdate(fiber, queue, update, lane) {
+          function enqueueConcurrentHookUpdate(fiber, queue, update2, lane) {
             var interleaved = queue.interleaved;
             if (interleaved === null) {
-              update.next = update;
+              update2.next = update2;
               pushConcurrentUpdateQueue(queue);
             } else {
-              update.next = interleaved.next;
-              interleaved.next = update;
+              update2.next = interleaved.next;
+              interleaved.next = update2;
             }
-            queue.interleaved = update;
+            queue.interleaved = update2;
             return markUpdateLaneFromFiberToRoot(fiber, lane);
           }
-          function enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update, lane) {
+          function enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update2, lane) {
             var interleaved = queue.interleaved;
             if (interleaved === null) {
-              update.next = update;
+              update2.next = update2;
               pushConcurrentUpdateQueue(queue);
             } else {
-              update.next = interleaved.next;
-              interleaved.next = update;
+              update2.next = interleaved.next;
+              interleaved.next = update2;
             }
-            queue.interleaved = update;
+            queue.interleaved = update2;
           }
-          function enqueueConcurrentClassUpdate(fiber, queue, update, lane) {
+          function enqueueConcurrentClassUpdate(fiber, queue, update2, lane) {
             var interleaved = queue.interleaved;
             if (interleaved === null) {
-              update.next = update;
+              update2.next = update2;
               pushConcurrentUpdateQueue(queue);
             } else {
-              update.next = interleaved.next;
-              interleaved.next = update;
+              update2.next = interleaved.next;
+              interleaved.next = update2;
             }
-            queue.interleaved = update;
+            queue.interleaved = update2;
             return markUpdateLaneFromFiberToRoot(fiber, lane);
           }
           function enqueueConcurrentRenderForLane(fiber, lane) {
@@ -11693,7 +11693,7 @@
             }
           }
           function createUpdate(eventTime, lane) {
-            var update = {
+            var update2 = {
               eventTime,
               lane,
               tag: UpdateState,
@@ -11701,9 +11701,9 @@
               callback: null,
               next: null
             };
-            return update;
+            return update2;
           }
-          function enqueueUpdate(fiber, update, lane) {
+          function enqueueUpdate(fiber, update2, lane) {
             var updateQueue = fiber.updateQueue;
             if (updateQueue === null) {
               return null;
@@ -11718,15 +11718,15 @@
             if (isUnsafeClassRenderPhaseUpdate()) {
               var pending = sharedQueue.pending;
               if (pending === null) {
-                update.next = update;
+                update2.next = update2;
               } else {
-                update.next = pending.next;
-                pending.next = update;
+                update2.next = pending.next;
+                pending.next = update2;
               }
-              sharedQueue.pending = update;
+              sharedQueue.pending = update2;
               return unsafe_markUpdateLaneFromFiberToRoot(fiber, lane);
             } else {
-              return enqueueConcurrentClassUpdate(fiber, sharedQueue, update, lane);
+              return enqueueConcurrentClassUpdate(fiber, sharedQueue, update2, lane);
             }
           }
           function entangleTransitions(root3, fiber, lane) {
@@ -11753,14 +11753,14 @@
                 var newLast = null;
                 var firstBaseUpdate = queue.firstBaseUpdate;
                 if (firstBaseUpdate !== null) {
-                  var update = firstBaseUpdate;
+                  var update2 = firstBaseUpdate;
                   do {
                     var clone = {
-                      eventTime: update.eventTime,
-                      lane: update.lane,
-                      tag: update.tag,
-                      payload: update.payload,
-                      callback: update.callback,
+                      eventTime: update2.eventTime,
+                      lane: update2.lane,
+                      tag: update2.tag,
+                      payload: update2.payload,
+                      callback: update2.callback,
                       next: null
                     };
                     if (newLast === null) {
@@ -11769,8 +11769,8 @@
                       newLast.next = clone;
                       newLast = clone;
                     }
-                    update = update.next;
-                  } while (update !== null);
+                    update2 = update2.next;
+                  } while (update2 !== null);
                   if (newLast === null) {
                     newFirst = newLast = capturedUpdate;
                   } else {
@@ -11799,10 +11799,10 @@
             }
             queue.lastBaseUpdate = capturedUpdate;
           }
-          function getStateFromUpdate(workInProgress2, queue, update, prevState, nextProps, instance) {
-            switch (update.tag) {
+          function getStateFromUpdate(workInProgress2, queue, update2, prevState, nextProps, instance) {
+            switch (update2.tag) {
               case ReplaceState: {
-                var payload = update.payload;
+                var payload = update2.payload;
                 if (typeof payload === "function") {
                   {
                     enterDisallowedContextReadInDEV();
@@ -11827,7 +11827,7 @@
                 workInProgress2.flags = workInProgress2.flags & ~ShouldCapture | DidCapture;
               }
               case UpdateState: {
-                var _payload = update.payload;
+                var _payload = update2.payload;
                 var partialState;
                 if (typeof _payload === "function") {
                   {
@@ -11900,17 +11900,17 @@
               var newBaseState = null;
               var newFirstBaseUpdate = null;
               var newLastBaseUpdate = null;
-              var update = firstBaseUpdate;
+              var update2 = firstBaseUpdate;
               do {
-                var updateLane = update.lane;
-                var updateEventTime = update.eventTime;
+                var updateLane = update2.lane;
+                var updateEventTime = update2.eventTime;
                 if (!isSubsetOfLanes(renderLanes2, updateLane)) {
                   var clone = {
                     eventTime: updateEventTime,
                     lane: updateLane,
-                    tag: update.tag,
-                    payload: update.payload,
-                    callback: update.callback,
+                    tag: update2.tag,
+                    payload: update2.payload,
+                    callback: update2.callback,
                     next: null
                   };
                   if (newLastBaseUpdate === null) {
@@ -11925,27 +11925,27 @@
                     var _clone = {
                       eventTime: updateEventTime,
                       lane: NoLane,
-                      tag: update.tag,
-                      payload: update.payload,
-                      callback: update.callback,
+                      tag: update2.tag,
+                      payload: update2.payload,
+                      callback: update2.callback,
                       next: null
                     };
                     newLastBaseUpdate = newLastBaseUpdate.next = _clone;
                   }
-                  newState = getStateFromUpdate(workInProgress2, queue, update, newState, props, instance);
-                  var callback = update.callback;
-                  if (callback !== null && update.lane !== NoLane) {
+                  newState = getStateFromUpdate(workInProgress2, queue, update2, newState, props, instance);
+                  var callback = update2.callback;
+                  if (callback !== null && update2.lane !== NoLane) {
                     workInProgress2.flags |= Callback;
                     var effects = queue.effects;
                     if (effects === null) {
-                      queue.effects = [update];
+                      queue.effects = [update2];
                     } else {
-                      effects.push(update);
+                      effects.push(update2);
                     }
                   }
                 }
-                update = update.next;
-                if (update === null) {
+                update2 = update2.next;
+                if (update2 === null) {
                   pendingQueue = queue.shared.pending;
                   if (pendingQueue === null) {
                     break;
@@ -11953,7 +11953,7 @@
                     var _lastPendingUpdate = pendingQueue;
                     var _firstPendingUpdate = _lastPendingUpdate.next;
                     _lastPendingUpdate.next = null;
-                    update = _firstPendingUpdate;
+                    update2 = _firstPendingUpdate;
                     queue.lastBaseUpdate = _lastPendingUpdate;
                     queue.shared.pending = null;
                   }
@@ -12085,15 +12085,15 @@
               var fiber = get(inst);
               var eventTime = requestEventTime();
               var lane = requestUpdateLane(fiber);
-              var update = createUpdate(eventTime, lane);
-              update.payload = payload;
+              var update2 = createUpdate(eventTime, lane);
+              update2.payload = payload;
               if (callback !== void 0 && callback !== null) {
                 {
                   warnOnInvalidCallback(callback, "setState");
                 }
-                update.callback = callback;
+                update2.callback = callback;
               }
-              var root3 = enqueueUpdate(fiber, update, lane);
+              var root3 = enqueueUpdate(fiber, update2, lane);
               if (root3 !== null) {
                 scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
                 entangleTransitions(root3, fiber, lane);
@@ -12106,16 +12106,16 @@
               var fiber = get(inst);
               var eventTime = requestEventTime();
               var lane = requestUpdateLane(fiber);
-              var update = createUpdate(eventTime, lane);
-              update.tag = ReplaceState;
-              update.payload = payload;
+              var update2 = createUpdate(eventTime, lane);
+              update2.tag = ReplaceState;
+              update2.payload = payload;
               if (callback !== void 0 && callback !== null) {
                 {
                   warnOnInvalidCallback(callback, "replaceState");
                 }
-                update.callback = callback;
+                update2.callback = callback;
               }
-              var root3 = enqueueUpdate(fiber, update, lane);
+              var root3 = enqueueUpdate(fiber, update2, lane);
               if (root3 !== null) {
                 scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
                 entangleTransitions(root3, fiber, lane);
@@ -12128,15 +12128,15 @@
               var fiber = get(inst);
               var eventTime = requestEventTime();
               var lane = requestUpdateLane(fiber);
-              var update = createUpdate(eventTime, lane);
-              update.tag = ForceUpdate;
+              var update2 = createUpdate(eventTime, lane);
+              update2.tag = ForceUpdate;
               if (callback !== void 0 && callback !== null) {
                 {
                   warnOnInvalidCallback(callback, "forceUpdate");
                 }
-                update.callback = callback;
+                update2.callback = callback;
               }
-              var root3 = enqueueUpdate(fiber, update, lane);
+              var root3 = enqueueUpdate(fiber, update2, lane);
               if (root3 !== null) {
                 scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
                 entangleTransitions(root3, fiber, lane);
@@ -12173,87 +12173,87 @@
           function checkClassInstance(workInProgress2, ctor, newProps) {
             var instance = workInProgress2.stateNode;
             {
-              var name = getComponentNameFromType(ctor) || "Component";
+              var name5 = getComponentNameFromType(ctor) || "Component";
               var renderPresent = instance.render;
               if (!renderPresent) {
                 if (ctor.prototype && typeof ctor.prototype.render === "function") {
-                  error("%s(...): No `render` method found on the returned component instance: did you accidentally return an object from the constructor?", name);
+                  error("%s(...): No `render` method found on the returned component instance: did you accidentally return an object from the constructor?", name5);
                 } else {
-                  error("%s(...): No `render` method found on the returned component instance: you may have forgotten to define `render`.", name);
+                  error("%s(...): No `render` method found on the returned component instance: you may have forgotten to define `render`.", name5);
                 }
               }
               if (instance.getInitialState && !instance.getInitialState.isReactClassApproved && !instance.state) {
-                error("getInitialState was defined on %s, a plain JavaScript class. This is only supported for classes created using React.createClass. Did you mean to define a state property instead?", name);
+                error("getInitialState was defined on %s, a plain JavaScript class. This is only supported for classes created using React.createClass. Did you mean to define a state property instead?", name5);
               }
               if (instance.getDefaultProps && !instance.getDefaultProps.isReactClassApproved) {
-                error("getDefaultProps was defined on %s, a plain JavaScript class. This is only supported for classes created using React.createClass. Use a static property to define defaultProps instead.", name);
+                error("getDefaultProps was defined on %s, a plain JavaScript class. This is only supported for classes created using React.createClass. Use a static property to define defaultProps instead.", name5);
               }
               if (instance.propTypes) {
-                error("propTypes was defined as an instance property on %s. Use a static property to define propTypes instead.", name);
+                error("propTypes was defined as an instance property on %s. Use a static property to define propTypes instead.", name5);
               }
               if (instance.contextType) {
-                error("contextType was defined as an instance property on %s. Use a static property to define contextType instead.", name);
+                error("contextType was defined as an instance property on %s. Use a static property to define contextType instead.", name5);
               }
               {
                 if (instance.contextTypes) {
-                  error("contextTypes was defined as an instance property on %s. Use a static property to define contextTypes instead.", name);
+                  error("contextTypes was defined as an instance property on %s. Use a static property to define contextTypes instead.", name5);
                 }
                 if (ctor.contextType && ctor.contextTypes && !didWarnAboutContextTypeAndContextTypes.has(ctor)) {
                   didWarnAboutContextTypeAndContextTypes.add(ctor);
-                  error("%s declares both contextTypes and contextType static properties. The legacy contextTypes property will be ignored.", name);
+                  error("%s declares both contextTypes and contextType static properties. The legacy contextTypes property will be ignored.", name5);
                 }
               }
               if (typeof instance.componentShouldUpdate === "function") {
-                error("%s has a method called componentShouldUpdate(). Did you mean shouldComponentUpdate()? The name is phrased as a question because the function is expected to return a value.", name);
+                error("%s has a method called componentShouldUpdate(). Did you mean shouldComponentUpdate()? The name is phrased as a question because the function is expected to return a value.", name5);
               }
               if (ctor.prototype && ctor.prototype.isPureReactComponent && typeof instance.shouldComponentUpdate !== "undefined") {
                 error("%s has a method called shouldComponentUpdate(). shouldComponentUpdate should not be used when extending React.PureComponent. Please extend React.Component if shouldComponentUpdate is used.", getComponentNameFromType(ctor) || "A pure component");
               }
               if (typeof instance.componentDidUnmount === "function") {
-                error("%s has a method called componentDidUnmount(). But there is no such lifecycle method. Did you mean componentWillUnmount()?", name);
+                error("%s has a method called componentDidUnmount(). But there is no such lifecycle method. Did you mean componentWillUnmount()?", name5);
               }
               if (typeof instance.componentDidReceiveProps === "function") {
-                error("%s has a method called componentDidReceiveProps(). But there is no such lifecycle method. If you meant to update the state in response to changing props, use componentWillReceiveProps(). If you meant to fetch data or run side-effects or mutations after React has updated the UI, use componentDidUpdate().", name);
+                error("%s has a method called componentDidReceiveProps(). But there is no such lifecycle method. If you meant to update the state in response to changing props, use componentWillReceiveProps(). If you meant to fetch data or run side-effects or mutations after React has updated the UI, use componentDidUpdate().", name5);
               }
               if (typeof instance.componentWillRecieveProps === "function") {
-                error("%s has a method called componentWillRecieveProps(). Did you mean componentWillReceiveProps()?", name);
+                error("%s has a method called componentWillRecieveProps(). Did you mean componentWillReceiveProps()?", name5);
               }
               if (typeof instance.UNSAFE_componentWillRecieveProps === "function") {
-                error("%s has a method called UNSAFE_componentWillRecieveProps(). Did you mean UNSAFE_componentWillReceiveProps()?", name);
+                error("%s has a method called UNSAFE_componentWillRecieveProps(). Did you mean UNSAFE_componentWillReceiveProps()?", name5);
               }
               var hasMutatedProps = instance.props !== newProps;
               if (instance.props !== void 0 && hasMutatedProps) {
-                error("%s(...): When calling super() in `%s`, make sure to pass up the same props that your component's constructor was passed.", name, name);
+                error("%s(...): When calling super() in `%s`, make sure to pass up the same props that your component's constructor was passed.", name5, name5);
               }
               if (instance.defaultProps) {
-                error("Setting defaultProps as an instance property on %s is not supported and will be ignored. Instead, define defaultProps as a static property on %s.", name, name);
+                error("Setting defaultProps as an instance property on %s is not supported and will be ignored. Instead, define defaultProps as a static property on %s.", name5, name5);
               }
               if (typeof instance.getSnapshotBeforeUpdate === "function" && typeof instance.componentDidUpdate !== "function" && !didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate.has(ctor)) {
                 didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate.add(ctor);
                 error("%s: getSnapshotBeforeUpdate() should be used with componentDidUpdate(). This component defines getSnapshotBeforeUpdate() only.", getComponentNameFromType(ctor));
               }
               if (typeof instance.getDerivedStateFromProps === "function") {
-                error("%s: getDerivedStateFromProps() is defined as an instance method and will be ignored. Instead, declare it as a static method.", name);
+                error("%s: getDerivedStateFromProps() is defined as an instance method and will be ignored. Instead, declare it as a static method.", name5);
               }
               if (typeof instance.getDerivedStateFromError === "function") {
-                error("%s: getDerivedStateFromError() is defined as an instance method and will be ignored. Instead, declare it as a static method.", name);
+                error("%s: getDerivedStateFromError() is defined as an instance method and will be ignored. Instead, declare it as a static method.", name5);
               }
               if (typeof ctor.getSnapshotBeforeUpdate === "function") {
-                error("%s: getSnapshotBeforeUpdate() is defined as a static method and will be ignored. Instead, declare it as an instance method.", name);
+                error("%s: getSnapshotBeforeUpdate() is defined as a static method and will be ignored. Instead, declare it as an instance method.", name5);
               }
               var _state = instance.state;
               if (_state && (typeof _state !== "object" || isArray(_state))) {
-                error("%s.state: must be set to an object or null", name);
+                error("%s.state: must be set to an object or null", name5);
               }
               if (typeof instance.getChildContext === "function" && typeof ctor.childContextTypes !== "object") {
-                error("%s.getChildContext(): childContextTypes must be defined in order to use getChildContext().", name);
+                error("%s.getChildContext(): childContextTypes must be defined in order to use getChildContext().", name5);
               }
             }
           }
           function adoptClassInstance(workInProgress2, instance) {
             instance.updater = classComponentUpdater;
             workInProgress2.stateNode = instance;
-            set(instance, workInProgress2);
+            set2(instance, workInProgress2);
             {
               instance._reactInternalInstance = fakeInternalInstance;
             }
@@ -13484,11 +13484,11 @@
           }
           function registerMutableSourceForHydration(root3, mutableSource) {
             var getVersion = mutableSource._getVersion;
-            var version = getVersion(mutableSource._source);
+            var version4 = getVersion(mutableSource._source);
             if (root3.mutableSourceEagerHydrationData == null) {
-              root3.mutableSourceEagerHydrationData = [mutableSource, version];
+              root3.mutableSourceEagerHydrationData = [mutableSource, version4];
             } else {
-              root3.mutableSourceEagerHydrationData.push(mutableSource, version);
+              root3.mutableSourceEagerHydrationData.push(mutableSource, version4);
             }
           }
           var ReactCurrentDispatcher$1 = ReactSharedInternals.ReactCurrentDispatcher, ReactCurrentBatchConfig$2 = ReactSharedInternals.ReactCurrentBatchConfig;
@@ -13589,7 +13589,7 @@
             }
             return true;
           }
-          function renderWithHooks(current2, workInProgress2, Component2, props, secondArg, nextRenderLanes) {
+          function renderWithHooks(current2, workInProgress2, Component3, props, secondArg, nextRenderLanes) {
             renderLanes = nextRenderLanes;
             currentlyRenderingFiber$1 = workInProgress2;
             {
@@ -13609,7 +13609,7 @@
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
               }
             }
-            var children = Component2(props, secondArg);
+            var children = Component3(props, secondArg);
             if (didScheduleRenderPhaseUpdateDuringThisPass) {
               var numberOfReRenders = 0;
               do {
@@ -13629,7 +13629,7 @@
                   hookTypesUpdateIndexDev = -1;
                 }
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnRerenderInDEV;
-                children = Component2(props, secondArg);
+                children = Component3(props, secondArg);
               } while (didScheduleRenderPhaseUpdateDuringThisPass);
             }
             ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
@@ -13813,15 +13813,15 @@
               var newBaseState = null;
               var newBaseQueueFirst = null;
               var newBaseQueueLast = null;
-              var update = first;
+              var update2 = first;
               do {
-                var updateLane = update.lane;
+                var updateLane = update2.lane;
                 if (!isSubsetOfLanes(renderLanes, updateLane)) {
                   var clone = {
                     lane: updateLane,
-                    action: update.action,
-                    hasEagerState: update.hasEagerState,
-                    eagerState: update.eagerState,
+                    action: update2.action,
+                    hasEagerState: update2.hasEagerState,
+                    eagerState: update2.eagerState,
                     next: null
                   };
                   if (newBaseQueueLast === null) {
@@ -13836,22 +13836,22 @@
                   if (newBaseQueueLast !== null) {
                     var _clone = {
                       lane: NoLane,
-                      action: update.action,
-                      hasEagerState: update.hasEagerState,
-                      eagerState: update.eagerState,
+                      action: update2.action,
+                      hasEagerState: update2.hasEagerState,
+                      eagerState: update2.eagerState,
                       next: null
                     };
                     newBaseQueueLast = newBaseQueueLast.next = _clone;
                   }
-                  if (update.hasEagerState) {
-                    newState = update.eagerState;
+                  if (update2.hasEagerState) {
+                    newState = update2.eagerState;
                   } else {
-                    var action = update.action;
+                    var action = update2.action;
                     newState = reducer(newState, action);
                   }
                 }
-                update = update.next;
-              } while (update !== null && update !== first);
+                update2 = update2.next;
+              } while (update2 !== null && update2 !== first);
               if (newBaseQueueLast === null) {
                 newBaseState = newState;
               } else {
@@ -13893,12 +13893,12 @@
             if (lastRenderPhaseUpdate !== null) {
               queue.pending = null;
               var firstRenderPhaseUpdate = lastRenderPhaseUpdate.next;
-              var update = firstRenderPhaseUpdate;
+              var update2 = firstRenderPhaseUpdate;
               do {
-                var action = update.action;
+                var action = update2.action;
                 newState = reducer(newState, action);
-                update = update.next;
-              } while (update !== firstRenderPhaseUpdate);
+                update2 = update2.next;
+              } while (update2 !== firstRenderPhaseUpdate);
               if (!objectIs(newState, hook.memoizedState)) {
                 markWorkInProgressReceivedUpdate();
               }
@@ -14388,7 +14388,7 @@
               }
             }
             var lane = requestUpdateLane(fiber);
-            var update = {
+            var update2 = {
               lane,
               action,
               hasEagerState: false,
@@ -14396,9 +14396,9 @@
               next: null
             };
             if (isRenderPhaseUpdate(fiber)) {
-              enqueueRenderPhaseUpdate(queue, update);
+              enqueueRenderPhaseUpdate(queue, update2);
             } else {
-              var root3 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+              var root3 = enqueueConcurrentHookUpdate(fiber, queue, update2, lane);
               if (root3 !== null) {
                 var eventTime = requestEventTime();
                 scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
@@ -14414,7 +14414,7 @@
               }
             }
             var lane = requestUpdateLane(fiber);
-            var update = {
+            var update2 = {
               lane,
               action,
               hasEagerState: false,
@@ -14422,7 +14422,7 @@
               next: null
             };
             if (isRenderPhaseUpdate(fiber)) {
-              enqueueRenderPhaseUpdate(queue, update);
+              enqueueRenderPhaseUpdate(queue, update2);
             } else {
               var alternate = fiber.alternate;
               if (fiber.lanes === NoLanes && (alternate === null || alternate.lanes === NoLanes)) {
@@ -14436,10 +14436,10 @@
                   try {
                     var currentState = queue.lastRenderedState;
                     var eagerState = lastRenderedReducer(currentState, action);
-                    update.hasEagerState = true;
-                    update.eagerState = eagerState;
+                    update2.hasEagerState = true;
+                    update2.eagerState = eagerState;
                     if (objectIs(eagerState, currentState)) {
-                      enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update, lane);
+                      enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update2, lane);
                       return;
                     }
                   } catch (error2) {
@@ -14450,7 +14450,7 @@
                   }
                 }
               }
-              var root3 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+              var root3 = enqueueConcurrentHookUpdate(fiber, queue, update2, lane);
               if (root3 !== null) {
                 var eventTime = requestEventTime();
                 scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
@@ -14463,16 +14463,16 @@
             var alternate = fiber.alternate;
             return fiber === currentlyRenderingFiber$1 || alternate !== null && alternate === currentlyRenderingFiber$1;
           }
-          function enqueueRenderPhaseUpdate(queue, update) {
+          function enqueueRenderPhaseUpdate(queue, update2) {
             didScheduleRenderPhaseUpdateDuringThisPass = didScheduleRenderPhaseUpdate = true;
             var pending = queue.pending;
             if (pending === null) {
-              update.next = update;
+              update2.next = update2;
             } else {
-              update.next = pending.next;
-              pending.next = update;
+              update2.next = pending.next;
+              pending.next = update2;
             }
-            queue.pending = update;
+            queue.pending = update2;
           }
           function entangleTransitionUpdate(root3, queue, lane) {
             if (isTransitionLane(lane)) {
@@ -15475,28 +15475,28 @@
           }
           var PossiblyWeakMap$1 = typeof WeakMap === "function" ? WeakMap : Map;
           function createRootErrorUpdate(fiber, errorInfo, lane) {
-            var update = createUpdate(NoTimestamp, lane);
-            update.tag = CaptureUpdate;
-            update.payload = {
+            var update2 = createUpdate(NoTimestamp, lane);
+            update2.tag = CaptureUpdate;
+            update2.payload = {
               element: null
             };
             var error2 = errorInfo.value;
-            update.callback = function() {
+            update2.callback = function() {
               onUncaughtError(error2);
               logCapturedError(fiber, errorInfo);
             };
-            return update;
+            return update2;
           }
           function createClassErrorUpdate(fiber, errorInfo, lane) {
-            var update = createUpdate(NoTimestamp, lane);
-            update.tag = CaptureUpdate;
+            var update2 = createUpdate(NoTimestamp, lane);
+            update2.tag = CaptureUpdate;
             var getDerivedStateFromError = fiber.type.getDerivedStateFromError;
             if (typeof getDerivedStateFromError === "function") {
               var error$1 = errorInfo.value;
-              update.payload = function() {
+              update2.payload = function() {
                 return getDerivedStateFromError(error$1);
               };
-              update.callback = function() {
+              update2.callback = function() {
                 {
                   markFailedErrorBoundaryForHotReloading(fiber);
                 }
@@ -15505,7 +15505,7 @@
             }
             var inst = fiber.stateNode;
             if (inst !== null && typeof inst.componentDidCatch === "function") {
-              update.callback = function callback() {
+              update2.callback = function callback() {
                 {
                   markFailedErrorBoundaryForHotReloading(fiber);
                 }
@@ -15527,7 +15527,7 @@
                 }
               };
             }
-            return update;
+            return update2;
           }
           function attachPingListener(root3, wakeable, lanes) {
             var pingCache = root3.pingCache;
@@ -15601,9 +15601,9 @@
                   if (currentSourceFiber === null) {
                     sourceFiber.tag = IncompleteClassComponent;
                   } else {
-                    var update = createUpdate(NoTimestamp, SyncLane);
-                    update.tag = ForceUpdate;
-                    enqueueUpdate(sourceFiber, update, SyncLane);
+                    var update2 = createUpdate(NoTimestamp, SyncLane);
+                    update2.tag = ForceUpdate;
+                    enqueueUpdate(sourceFiber, update2, SyncLane);
                   }
                 }
                 sourceFiber.lanes = mergeLanes(sourceFiber.lanes, SyncLane);
@@ -15671,8 +15671,8 @@
                   workInProgress2.flags |= ShouldCapture;
                   var lane = pickArbitraryLane(rootRenderLanes);
                   workInProgress2.lanes = mergeLanes(workInProgress2.lanes, lane);
-                  var update = createRootErrorUpdate(workInProgress2, _errorInfo, lane);
-                  enqueueCapturedUpdate(workInProgress2, update);
+                  var update2 = createRootErrorUpdate(workInProgress2, _errorInfo, lane);
+                  enqueueCapturedUpdate(workInProgress2, update2);
                   return;
                 }
                 case ClassComponent:
@@ -15728,21 +15728,21 @@
             workInProgress2.child = reconcileChildFibers(workInProgress2, current2.child, null, renderLanes2);
             workInProgress2.child = reconcileChildFibers(workInProgress2, null, nextChildren, renderLanes2);
           }
-          function updateForwardRef(current2, workInProgress2, Component2, nextProps, renderLanes2) {
+          function updateForwardRef(current2, workInProgress2, Component3, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component2.propTypes;
+                var innerPropTypes = Component3.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     "prop",
-                    getComponentNameFromType(Component2)
+                    getComponentNameFromType(Component3)
                   );
                 }
               }
             }
-            var render2 = Component2.render;
+            var render2 = Component3.render;
             var ref = workInProgress2.ref;
             var nextChildren;
             var hasId;
@@ -15780,10 +15780,10 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateMemoComponent(current2, workInProgress2, Component2, nextProps, renderLanes2) {
+          function updateMemoComponent(current2, workInProgress2, Component3, nextProps, renderLanes2) {
             if (current2 === null) {
-              var type = Component2.type;
-              if (isSimpleFunctionComponent(type) && Component2.compare === null && Component2.defaultProps === void 0) {
+              var type = Component3.type;
+              if (isSimpleFunctionComponent(type) && Component3.compare === null && Component3.defaultProps === void 0) {
                 var resolvedType = type;
                 {
                   resolvedType = resolveFunctionForHotReloading(type);
@@ -15806,14 +15806,14 @@
                   );
                 }
               }
-              var child = createFiberFromTypeAndProps(Component2.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
+              var child = createFiberFromTypeAndProps(Component3.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
               child.ref = workInProgress2.ref;
               child.return = workInProgress2;
               workInProgress2.child = child;
               return child;
             }
             {
-              var _type = Component2.type;
+              var _type = Component3.type;
               var _innerPropTypes = _type.propTypes;
               if (_innerPropTypes) {
                 checkPropTypes(
@@ -15828,7 +15828,7 @@
             var hasScheduledUpdateOrContext = checkScheduledUpdateOrContext(current2, renderLanes2);
             if (!hasScheduledUpdateOrContext) {
               var prevProps = currentChild.memoizedProps;
-              var compare = Component2.compare;
+              var compare = Component3.compare;
               compare = compare !== null ? compare : shallowEqual;
               if (compare(prevProps, nextProps) && current2.ref === workInProgress2.ref) {
                 return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
@@ -15841,7 +15841,7 @@
             workInProgress2.child = newChild;
             return newChild;
           }
-          function updateSimpleMemoComponent(current2, workInProgress2, Component2, nextProps, renderLanes2) {
+          function updateSimpleMemoComponent(current2, workInProgress2, Component3, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
                 var outerMemoType = workInProgress2.elementType;
@@ -15879,7 +15879,7 @@
                 }
               }
             }
-            return updateFunctionComponent(current2, workInProgress2, Component2, nextProps, renderLanes2);
+            return updateFunctionComponent(current2, workInProgress2, Component3, nextProps, renderLanes2);
           }
           function updateOffscreenComponent(current2, workInProgress2, renderLanes2) {
             var nextProps = workInProgress2.pendingProps;
@@ -15969,23 +15969,23 @@
               }
             }
           }
-          function updateFunctionComponent(current2, workInProgress2, Component2, nextProps, renderLanes2) {
+          function updateFunctionComponent(current2, workInProgress2, Component3, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component2.propTypes;
+                var innerPropTypes = Component3.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     "prop",
-                    getComponentNameFromType(Component2)
+                    getComponentNameFromType(Component3)
                   );
                 }
               }
             }
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component2, true);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component3, true);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             var nextChildren;
@@ -15997,12 +15997,12 @@
             {
               ReactCurrentOwner$1.current = workInProgress2;
               setIsRendering(true);
-              nextChildren = renderWithHooks(current2, workInProgress2, Component2, nextProps, context, renderLanes2);
+              nextChildren = renderWithHooks(current2, workInProgress2, Component3, nextProps, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               if (workInProgress2.mode & StrictLegacyMode) {
                 setIsStrictModeForDevtools(true);
                 try {
-                  nextChildren = renderWithHooks(current2, workInProgress2, Component2, nextProps, context, renderLanes2);
+                  nextChildren = renderWithHooks(current2, workInProgress2, Component3, nextProps, context, renderLanes2);
                   hasId = checkDidRenderIdHook();
                 } finally {
                   setIsStrictModeForDevtools(false);
@@ -16024,7 +16024,7 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateClassComponent(current2, workInProgress2, Component2, nextProps, renderLanes2) {
+          function updateClassComponent(current2, workInProgress2, Component3, nextProps, renderLanes2) {
             {
               switch (shouldError(workInProgress2)) {
                 case false: {
@@ -16041,25 +16041,25 @@
                   var error$1 = new Error("Simulated error coming from DevTools");
                   var lane = pickArbitraryLane(renderLanes2);
                   workInProgress2.lanes = mergeLanes(workInProgress2.lanes, lane);
-                  var update = createClassErrorUpdate(workInProgress2, createCapturedValueAtFiber(error$1, workInProgress2), lane);
-                  enqueueCapturedUpdate(workInProgress2, update);
+                  var update2 = createClassErrorUpdate(workInProgress2, createCapturedValueAtFiber(error$1, workInProgress2), lane);
+                  enqueueCapturedUpdate(workInProgress2, update2);
                   break;
                 }
               }
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component2.propTypes;
+                var innerPropTypes = Component3.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     "prop",
-                    getComponentNameFromType(Component2)
+                    getComponentNameFromType(Component3)
                   );
                 }
               }
             }
             var hasContext;
-            if (isContextProvider(Component2)) {
+            if (isContextProvider(Component3)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
@@ -16070,15 +16070,15 @@
             var shouldUpdate;
             if (instance === null) {
               resetSuspendedCurrentOnMountInLegacyMode(current2, workInProgress2);
-              constructClassInstance(workInProgress2, Component2, nextProps);
-              mountClassInstance(workInProgress2, Component2, nextProps, renderLanes2);
+              constructClassInstance(workInProgress2, Component3, nextProps);
+              mountClassInstance(workInProgress2, Component3, nextProps, renderLanes2);
               shouldUpdate = true;
             } else if (current2 === null) {
-              shouldUpdate = resumeMountClassInstance(workInProgress2, Component2, nextProps, renderLanes2);
+              shouldUpdate = resumeMountClassInstance(workInProgress2, Component3, nextProps, renderLanes2);
             } else {
-              shouldUpdate = updateClassInstance(current2, workInProgress2, Component2, nextProps, renderLanes2);
+              shouldUpdate = updateClassInstance(current2, workInProgress2, Component3, nextProps, renderLanes2);
             }
-            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component2, shouldUpdate, hasContext, renderLanes2);
+            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component3, shouldUpdate, hasContext, renderLanes2);
             {
               var inst = workInProgress2.stateNode;
               if (shouldUpdate && inst.props !== nextProps) {
@@ -16090,19 +16090,19 @@
             }
             return nextUnitOfWork;
           }
-          function finishClassComponent(current2, workInProgress2, Component2, shouldUpdate, hasContext, renderLanes2) {
+          function finishClassComponent(current2, workInProgress2, Component3, shouldUpdate, hasContext, renderLanes2) {
             markRef(current2, workInProgress2);
             var didCaptureError = (workInProgress2.flags & DidCapture) !== NoFlags;
             if (!shouldUpdate && !didCaptureError) {
               if (hasContext) {
-                invalidateContextProvider(workInProgress2, Component2, false);
+                invalidateContextProvider(workInProgress2, Component3, false);
               }
               return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
             }
             var instance = workInProgress2.stateNode;
             ReactCurrentOwner$1.current = workInProgress2;
             var nextChildren;
-            if (didCaptureError && typeof Component2.getDerivedStateFromError !== "function") {
+            if (didCaptureError && typeof Component3.getDerivedStateFromError !== "function") {
               nextChildren = null;
               {
                 stopProfilerTimerIfRunning();
@@ -16136,7 +16136,7 @@
             }
             workInProgress2.memoizedState = instance.state;
             if (hasContext) {
-              invalidateContextProvider(workInProgress2, Component2, true);
+              invalidateContextProvider(workInProgress2, Component3, true);
             }
             return workInProgress2.child;
           }
@@ -16236,44 +16236,44 @@
             var lazyComponent = elementType;
             var payload = lazyComponent._payload;
             var init = lazyComponent._init;
-            var Component2 = init(payload);
-            workInProgress2.type = Component2;
-            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component2);
-            var resolvedProps = resolveDefaultProps(Component2, props);
+            var Component3 = init(payload);
+            workInProgress2.type = Component3;
+            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component3);
+            var resolvedProps = resolveDefaultProps(Component3, props);
             var child;
             switch (resolvedTag) {
               case FunctionComponent: {
                 {
-                  validateFunctionComponentInDev(workInProgress2, Component2);
-                  workInProgress2.type = Component2 = resolveFunctionForHotReloading(Component2);
+                  validateFunctionComponentInDev(workInProgress2, Component3);
+                  workInProgress2.type = Component3 = resolveFunctionForHotReloading(Component3);
                 }
-                child = updateFunctionComponent(null, workInProgress2, Component2, resolvedProps, renderLanes2);
+                child = updateFunctionComponent(null, workInProgress2, Component3, resolvedProps, renderLanes2);
                 return child;
               }
               case ClassComponent: {
                 {
-                  workInProgress2.type = Component2 = resolveClassForHotReloading(Component2);
+                  workInProgress2.type = Component3 = resolveClassForHotReloading(Component3);
                 }
-                child = updateClassComponent(null, workInProgress2, Component2, resolvedProps, renderLanes2);
+                child = updateClassComponent(null, workInProgress2, Component3, resolvedProps, renderLanes2);
                 return child;
               }
               case ForwardRef: {
                 {
-                  workInProgress2.type = Component2 = resolveForwardRefForHotReloading(Component2);
+                  workInProgress2.type = Component3 = resolveForwardRefForHotReloading(Component3);
                 }
-                child = updateForwardRef(null, workInProgress2, Component2, resolvedProps, renderLanes2);
+                child = updateForwardRef(null, workInProgress2, Component3, resolvedProps, renderLanes2);
                 return child;
               }
               case MemoComponent: {
                 {
                   if (workInProgress2.type !== workInProgress2.elementType) {
-                    var outerPropTypes = Component2.propTypes;
+                    var outerPropTypes = Component3.propTypes;
                     if (outerPropTypes) {
                       checkPropTypes(
                         outerPropTypes,
                         resolvedProps,
                         "prop",
-                        getComponentNameFromType(Component2)
+                        getComponentNameFromType(Component3)
                       );
                     }
                   }
@@ -16281,8 +16281,8 @@
                 child = updateMemoComponent(
                   null,
                   workInProgress2,
-                  Component2,
-                  resolveDefaultProps(Component2.type, resolvedProps),
+                  Component3,
+                  resolveDefaultProps(Component3.type, resolvedProps),
                   renderLanes2
                 );
                 return child;
@@ -16290,33 +16290,33 @@
             }
             var hint = "";
             {
-              if (Component2 !== null && typeof Component2 === "object" && Component2.$$typeof === REACT_LAZY_TYPE) {
+              if (Component3 !== null && typeof Component3 === "object" && Component3.$$typeof === REACT_LAZY_TYPE) {
                 hint = " Did you wrap a component in React.lazy() more than once?";
               }
             }
-            throw new Error("Element type is invalid. Received a promise that resolves to: " + Component2 + ". " + ("Lazy element type must resolve to a class or function." + hint));
+            throw new Error("Element type is invalid. Received a promise that resolves to: " + Component3 + ". " + ("Lazy element type must resolve to a class or function." + hint));
           }
-          function mountIncompleteClassComponent(_current, workInProgress2, Component2, nextProps, renderLanes2) {
+          function mountIncompleteClassComponent(_current, workInProgress2, Component3, nextProps, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             workInProgress2.tag = ClassComponent;
             var hasContext;
-            if (isContextProvider(Component2)) {
+            if (isContextProvider(Component3)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
               hasContext = false;
             }
             prepareToReadContext(workInProgress2, renderLanes2);
-            constructClassInstance(workInProgress2, Component2, nextProps);
-            mountClassInstance(workInProgress2, Component2, nextProps, renderLanes2);
-            return finishClassComponent(null, workInProgress2, Component2, true, hasContext, renderLanes2);
+            constructClassInstance(workInProgress2, Component3, nextProps);
+            mountClassInstance(workInProgress2, Component3, nextProps, renderLanes2);
+            return finishClassComponent(null, workInProgress2, Component3, true, hasContext, renderLanes2);
           }
-          function mountIndeterminateComponent(_current, workInProgress2, Component2, renderLanes2) {
+          function mountIndeterminateComponent(_current, workInProgress2, Component3, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             var props = workInProgress2.pendingProps;
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component2, false);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component3, false);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             prepareToReadContext(workInProgress2, renderLanes2);
@@ -16326,8 +16326,8 @@
               markComponentRenderStarted(workInProgress2);
             }
             {
-              if (Component2.prototype && typeof Component2.prototype.render === "function") {
-                var componentName = getComponentNameFromType(Component2) || "Unknown";
+              if (Component3.prototype && typeof Component3.prototype.render === "function") {
+                var componentName = getComponentNameFromType(Component3) || "Unknown";
                 if (!didWarnAboutBadClass[componentName]) {
                   error("The <%s /> component appears to have a render method, but doesn't extend React.Component. This is likely to cause errors. Change %s to extend React.Component instead.", componentName, componentName);
                   didWarnAboutBadClass[componentName] = true;
@@ -16338,7 +16338,7 @@
               }
               setIsRendering(true);
               ReactCurrentOwner$1.current = workInProgress2;
-              value = renderWithHooks(null, workInProgress2, Component2, props, context, renderLanes2);
+              value = renderWithHooks(null, workInProgress2, Component3, props, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               setIsRendering(false);
             }
@@ -16348,7 +16348,7 @@
             workInProgress2.flags |= PerformedWork;
             {
               if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
-                var _componentName = getComponentNameFromType(Component2) || "Unknown";
+                var _componentName = getComponentNameFromType(Component3) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName, _componentName, _componentName);
                   didWarnAboutModulePatternComponent[_componentName] = true;
@@ -16357,7 +16357,7 @@
             }
             if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
               {
-                var _componentName2 = getComponentNameFromType(Component2) || "Unknown";
+                var _componentName2 = getComponentNameFromType(Component3) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName2]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName2, _componentName2, _componentName2);
                   didWarnAboutModulePatternComponent[_componentName2] = true;
@@ -16367,7 +16367,7 @@
               workInProgress2.memoizedState = null;
               workInProgress2.updateQueue = null;
               var hasContext = false;
-              if (isContextProvider(Component2)) {
+              if (isContextProvider(Component3)) {
                 hasContext = true;
                 pushContextProvider(workInProgress2);
               } else {
@@ -16376,15 +16376,15 @@
               workInProgress2.memoizedState = value.state !== null && value.state !== void 0 ? value.state : null;
               initializeUpdateQueue(workInProgress2);
               adoptClassInstance(workInProgress2, value);
-              mountClassInstance(workInProgress2, Component2, props, renderLanes2);
-              return finishClassComponent(null, workInProgress2, Component2, true, hasContext, renderLanes2);
+              mountClassInstance(workInProgress2, Component3, props, renderLanes2);
+              return finishClassComponent(null, workInProgress2, Component3, true, hasContext, renderLanes2);
             } else {
               workInProgress2.tag = FunctionComponent;
               {
                 if (workInProgress2.mode & StrictLegacyMode) {
                   setIsStrictModeForDevtools(true);
                   try {
-                    value = renderWithHooks(null, workInProgress2, Component2, props, context, renderLanes2);
+                    value = renderWithHooks(null, workInProgress2, Component3, props, context, renderLanes2);
                     hasId = checkDidRenderIdHook();
                   } finally {
                     setIsStrictModeForDevtools(false);
@@ -16396,16 +16396,16 @@
               }
               reconcileChildren(null, workInProgress2, value, renderLanes2);
               {
-                validateFunctionComponentInDev(workInProgress2, Component2);
+                validateFunctionComponentInDev(workInProgress2, Component3);
               }
               return workInProgress2.child;
             }
           }
-          function validateFunctionComponentInDev(workInProgress2, Component2) {
+          function validateFunctionComponentInDev(workInProgress2, Component3) {
             {
-              if (Component2) {
-                if (Component2.childContextTypes) {
-                  error("%s(...): childContextTypes cannot be defined on a function component.", Component2.displayName || Component2.name || "Component");
+              if (Component3) {
+                if (Component3.childContextTypes) {
+                  error("%s(...): childContextTypes cannot be defined on a function component.", Component3.displayName || Component3.name || "Component");
                 }
               }
               if (workInProgress2.ref !== null) {
@@ -16424,15 +16424,15 @@
                   error("Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s", info);
                 }
               }
-              if (typeof Component2.getDerivedStateFromProps === "function") {
-                var _componentName3 = getComponentNameFromType(Component2) || "Unknown";
+              if (typeof Component3.getDerivedStateFromProps === "function") {
+                var _componentName3 = getComponentNameFromType(Component3) || "Unknown";
                 if (!didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3]) {
                   error("%s: Function components do not support getDerivedStateFromProps.", _componentName3);
                   didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3] = true;
                 }
               }
-              if (typeof Component2.contextType === "object" && Component2.contextType !== null) {
-                var _componentName4 = getComponentNameFromType(Component2) || "Unknown";
+              if (typeof Component3.contextType === "object" && Component3.contextType !== null) {
+                var _componentName4 = getComponentNameFromType(Component3) || "Unknown";
                 if (!didWarnAboutContextTypeOnFunctionComponent[_componentName4]) {
                   error("%s: Function components do not support contextType.", _componentName4);
                   didWarnAboutContextTypeOnFunctionComponent[_componentName4] = true;
@@ -17175,8 +17175,8 @@
                 pushHostContext(workInProgress2);
                 break;
               case ClassComponent: {
-                var Component2 = workInProgress2.type;
-                if (isContextProvider(Component2)) {
+                var Component3 = workInProgress2.type;
+                if (isContextProvider(Component3)) {
                   pushContextProvider(workInProgress2);
                 }
                 break;
@@ -17300,10 +17300,10 @@
                 return mountLazyComponent(current2, workInProgress2, elementType, renderLanes2);
               }
               case FunctionComponent: {
-                var Component2 = workInProgress2.type;
+                var Component3 = workInProgress2.type;
                 var unresolvedProps = workInProgress2.pendingProps;
-                var resolvedProps = workInProgress2.elementType === Component2 ? unresolvedProps : resolveDefaultProps(Component2, unresolvedProps);
-                return updateFunctionComponent(current2, workInProgress2, Component2, resolvedProps, renderLanes2);
+                var resolvedProps = workInProgress2.elementType === Component3 ? unresolvedProps : resolveDefaultProps(Component3, unresolvedProps);
+                return updateFunctionComponent(current2, workInProgress2, Component3, resolvedProps, renderLanes2);
               }
               case ClassComponent: {
                 var _Component = workInProgress2.type;
@@ -17607,8 +17607,8 @@
                 bubbleProperties(workInProgress2);
                 return null;
               case ClassComponent: {
-                var Component2 = workInProgress2.type;
-                if (isContextProvider(Component2)) {
+                var Component3 = workInProgress2.type;
+                if (isContextProvider(Component3)) {
                   popContext(workInProgress2);
                 }
                 bubbleProperties(workInProgress2);
@@ -17916,8 +17916,8 @@
             popTreeContext(workInProgress2);
             switch (workInProgress2.tag) {
               case ClassComponent: {
-                var Component2 = workInProgress2.type;
-                if (isContextProvider(Component2)) {
+                var Component3 = workInProgress2.type;
+                if (isContextProvider(Component3)) {
                   popContext(workInProgress2);
                 }
                 var flags = workInProgress2.flags;
@@ -20889,8 +20889,8 @@
           var onUncaughtError = prepareToThrowUncaughtError;
           function captureCommitPhaseErrorOnRoot(rootFiber, sourceFiber, error2) {
             var errorInfo = createCapturedValueAtFiber(error2, sourceFiber);
-            var update = createRootErrorUpdate(rootFiber, errorInfo, SyncLane);
-            var root3 = enqueueUpdate(rootFiber, update, SyncLane);
+            var update2 = createRootErrorUpdate(rootFiber, errorInfo, SyncLane);
+            var root3 = enqueueUpdate(rootFiber, update2, SyncLane);
             var eventTime = requestEventTime();
             if (root3 !== null) {
               markRootUpdated(root3, SyncLane, eventTime);
@@ -20919,8 +20919,8 @@
                 var instance = fiber.stateNode;
                 if (typeof ctor.getDerivedStateFromError === "function" || typeof instance.componentDidCatch === "function" && !isAlreadyFailedLegacyErrorBoundary(instance)) {
                   var errorInfo = createCapturedValueAtFiber(error$1, sourceFiber);
-                  var update = createClassErrorUpdate(fiber, errorInfo, SyncLane);
-                  var root3 = enqueueUpdate(fiber, update, SyncLane);
+                  var update2 = createClassErrorUpdate(fiber, errorInfo, SyncLane);
+                  var root3 = enqueueUpdate(fiber, update2, SyncLane);
                   var eventTime = requestEventTime();
                   if (root3 !== null) {
                     markRootUpdated(root3, SyncLane, eventTime);
@@ -21338,12 +21338,12 @@
               failedBoundaries.add(fiber);
             }
           }
-          var scheduleRefresh = function(root3, update) {
+          var scheduleRefresh = function(root3, update2) {
             {
               if (resolveFamily === null) {
                 return;
               }
-              var staleFamilies = update.staleFamilies, updatedFamilies = update.updatedFamilies;
+              var staleFamilies = update2.staleFamilies, updatedFamilies = update2.updatedFamilies;
               flushPassiveEffects();
               flushSync(function() {
                 scheduleFibersWithFamiliesRecursively(root3.current, updatedFamilies, staleFamilies);
@@ -21569,18 +21569,18 @@
           var createFiber = function(tag, pendingProps, key, mode) {
             return new FiberNode(tag, pendingProps, key, mode);
           };
-          function shouldConstruct$1(Component2) {
-            var prototype = Component2.prototype;
+          function shouldConstruct$1(Component3) {
+            var prototype = Component3.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function isSimpleFunctionComponent(type) {
             return typeof type === "function" && !shouldConstruct$1(type) && type.defaultProps === void 0;
           }
-          function resolveLazyComponentTag(Component2) {
-            if (typeof Component2 === "function") {
-              return shouldConstruct$1(Component2) ? ClassComponent : FunctionComponent;
-            } else if (Component2 !== void 0 && Component2 !== null) {
-              var $$typeof = Component2.$$typeof;
+          function resolveLazyComponentTag(Component3) {
+            if (typeof Component3 === "function") {
+              return shouldConstruct$1(Component3) ? ClassComponent : FunctionComponent;
+            } else if (Component3 !== void 0 && Component3 !== null) {
+              var $$typeof = Component3.$$typeof;
               if ($$typeof === REACT_FORWARD_REF_TYPE) {
                 return ForwardRef;
               }
@@ -22014,9 +22014,9 @@
             var fiber = get(parentComponent);
             var parentContext = findCurrentUnmaskedContext(fiber);
             if (fiber.tag === ClassComponent) {
-              var Component2 = fiber.type;
-              if (isContextProvider(Component2)) {
-                return processChildContext(fiber, Component2, parentContext);
+              var Component3 = fiber.type;
+              if (isContextProvider(Component3)) {
+                return processChildContext(fiber, Component3, parentContext);
               }
             }
             return parentContext;
@@ -22072,9 +22072,9 @@
             var current2 = root3.current;
             var eventTime = requestEventTime();
             var lane = requestUpdateLane(current2);
-            var update = createUpdate(eventTime, lane);
-            update.callback = callback !== void 0 && callback !== null ? callback : null;
-            enqueueUpdate(current2, update, lane);
+            var update2 = createUpdate(eventTime, lane);
+            update2.callback = callback !== void 0 && callback !== null ? callback : null;
+            enqueueUpdate(current2, update2, lane);
             scheduleInitialHydrationOnRoot(root3, lane, eventTime);
             return root3;
           }
@@ -22100,8 +22100,8 @@
                 error("Render methods should be a pure function of props and state; triggering nested component updates from render is not allowed. If necessary, trigger nested updates in componentDidUpdate.\n\nCheck the render method of %s.", getComponentNameFromFiber(current) || "Unknown");
               }
             }
-            var update = createUpdate(eventTime, lane);
-            update.payload = {
+            var update2 = createUpdate(eventTime, lane);
+            update2.payload = {
               element
             };
             callback = callback === void 0 ? null : callback;
@@ -22111,9 +22111,9 @@
                   error("render(...): Expected the last optional `callback` argument to be a function. Instead received: %s.", callback);
                 }
               }
-              update.callback = callback;
+              update2.callback = callback;
             }
-            var root3 = enqueueUpdate(current$1, update, lane);
+            var root3 = enqueueUpdate(current$1, update2, lane);
             if (root3 !== null) {
               scheduleUpdateOnFiber(root3, current$1, lane, eventTime);
               entangleTransitions(root3, current$1, lane);
@@ -23159,7 +23159,7 @@
           }
           var ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher;
           var prefix;
-          function describeBuiltInComponentFrame(name, source, ownerFn) {
+          function describeBuiltInComponentFrame(name5, source, ownerFn) {
             {
               if (prefix === void 0) {
                 try {
@@ -23169,7 +23169,7 @@
                   prefix = match && match[1] || "";
                 }
               }
-              return "\n" + prefix + name;
+              return "\n" + prefix + name5;
             }
           }
           var reentry = false;
@@ -23272,8 +23272,8 @@
               }
               Error.prepareStackTrace = previousPrepareStackTrace;
             }
-            var name = fn ? fn.displayName || fn.name : "";
-            var syntheticFrame = name ? describeBuiltInComponentFrame(name) : "";
+            var name5 = fn ? fn.displayName || fn.name : "";
+            var syntheticFrame = name5 ? describeBuiltInComponentFrame(name5) : "";
             {
               if (typeof fn === "function") {
                 componentFrameCache.set(fn, syntheticFrame);
@@ -23286,8 +23286,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component2) {
-            var prototype = Component2.prototype;
+          function shouldConstruct(Component3) {
+            var prototype = Component3.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -23439,9 +23439,9 @@
             }
             return config.key !== void 0;
           }
-          function warnIfStringRefCannotBeAutoConverted(config, self) {
+          function warnIfStringRefCannotBeAutoConverted(config, self2) {
             {
-              if (typeof config.ref === "string" && ReactCurrentOwner.current && self && ReactCurrentOwner.current.stateNode !== self) {
+              if (typeof config.ref === "string" && ReactCurrentOwner.current && self2 && ReactCurrentOwner.current.stateNode !== self2) {
                 var componentName = getComponentNameFromType(ReactCurrentOwner.current.type);
                 if (!didWarnAboutStringRefs[componentName]) {
                   error('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', getComponentNameFromType(ReactCurrentOwner.current.type), config.ref);
@@ -23480,7 +23480,7 @@
               });
             }
           }
-          var ReactElement = function(type, key, ref, self, source, owner, props) {
+          var ReactElement = function(type, key, ref, self2, source, owner, props) {
             var element = {
               $$typeof: REACT_ELEMENT_TYPE,
               type,
@@ -23501,7 +23501,7 @@
                 configurable: false,
                 enumerable: false,
                 writable: false,
-                value: self
+                value: self2
               });
               Object.defineProperty(element, "_source", {
                 configurable: false,
@@ -23516,7 +23516,7 @@
             }
             return element;
           };
-          function jsxDEV(type, config, maybeKey, source, self) {
+          function jsxDEV(type, config, maybeKey, source, self2) {
             {
               var propName;
               var props = {};
@@ -23536,7 +23536,7 @@
               }
               if (hasValidRef(config)) {
                 ref = config.ref;
-                warnIfStringRefCannotBeAutoConverted(config, self);
+                warnIfStringRefCannotBeAutoConverted(config, self2);
               }
               for (propName in config) {
                 if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
@@ -23560,7 +23560,7 @@
                   defineRefPropWarningGetter(props, displayName);
                 }
               }
-              return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
+              return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
             }
           }
           var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
@@ -23588,9 +23588,9 @@
           function getDeclarationErrorAddendum() {
             {
               if (ReactCurrentOwner$1.current) {
-                var name = getComponentNameFromType(ReactCurrentOwner$1.current.type);
-                if (name) {
-                  return "\n\nCheck the render method of `" + name + "`.";
+                var name5 = getComponentNameFromType(ReactCurrentOwner$1.current.type);
+                if (name5) {
+                  return "\n\nCheck the render method of `" + name5 + "`.";
                 }
               }
               return "";
@@ -23686,8 +23686,8 @@
                 return;
               }
               if (propTypes) {
-                var name = getComponentNameFromType(type);
-                checkPropTypes(propTypes, element.props, "prop", name, element);
+                var name5 = getComponentNameFromType(type);
+                checkPropTypes(propTypes, element.props, "prop", name5, element);
               } else if (type.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
                 propTypesMisspellWarningShown = true;
                 var _name = getComponentNameFromType(type);
@@ -23717,7 +23717,7 @@
               }
             }
           }
-          function jsxWithValidation(type, props, key, isStaticChildren, source, self) {
+          function jsxWithValidation(type, props, key, isStaticChildren, source, self2) {
             {
               var validType = isValidElementType(type);
               if (!validType) {
@@ -23744,7 +23744,7 @@
                 }
                 error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
-              var element = jsxDEV(type, props, key, source, self);
+              var element = jsxDEV(type, props, key, source, self2);
               if (element == null) {
                 return element;
               }
@@ -24770,11 +24770,11 @@
     Map2.prototype.setHash = function(hash2, key, value) {
       return setHash(hash2, key, value, this);
     };
-    var set = hamt.set = function(key, value, map) {
+    var set2 = hamt.set = function(key, value, map) {
       return setHash(map._config.hash(key), key, value, map);
     };
     Map2.prototype.set = function(key, value) {
-      return set(key, value, this);
+      return set2(key, value, this);
     };
     var del = constant(nothing);
     var removeHash = hamt.removeHash = function(hash2, key, map) {
@@ -24783,11 +24783,11 @@
     Map2.prototype.removeHash = Map2.prototype.deleteHash = function(hash2, key) {
       return removeHash(hash2, key, this);
     };
-    var remove = hamt.remove = function(key, map) {
+    var remove2 = hamt.remove = function(key, map) {
       return removeHash(map._config.hash(key), key, map);
     };
     Map2.prototype.remove = Map2.prototype.delete = function(key) {
-      return remove(key, this);
+      return remove2(key, this);
     };
     var beginMutation = hamt.beginMutation = function(map) {
       return new Map2(map._editable + 1, map._edit + 1, map._config, map._root, map._size);
@@ -25015,10 +25015,10 @@
     __proto__: null,
     persistentMap: Recoil_PersistentMap_1
   });
-  function differenceSets(set, ...setsWithValuesToRemove) {
+  function differenceSets(set2, ...setsWithValuesToRemove) {
     const ret = /* @__PURE__ */ new Set();
     FIRST:
-      for (const value of set) {
+      for (const value of set2) {
         for (const otherSet of setsWithValuesToRemove) {
           if (otherSet.has(value)) {
             continue FIRST;
@@ -25081,19 +25081,19 @@
       }
     }
   }
-  function saveDepsToStore(key, deps, store, version) {
+  function saveDepsToStore(key, deps, store, version4) {
     var _storeState$nextTree, _storeState$previousT, _storeState$previousT2, _storeState$previousT3;
     const storeState = store.getState();
-    if (!(version === storeState.currentTree.version || version === ((_storeState$nextTree = storeState.nextTree) === null || _storeState$nextTree === void 0 ? void 0 : _storeState$nextTree.version) || version === ((_storeState$previousT = storeState.previousTree) === null || _storeState$previousT === void 0 ? void 0 : _storeState$previousT.version))) {
+    if (!(version4 === storeState.currentTree.version || version4 === ((_storeState$nextTree = storeState.nextTree) === null || _storeState$nextTree === void 0 ? void 0 : _storeState$nextTree.version) || version4 === ((_storeState$previousT = storeState.previousTree) === null || _storeState$previousT === void 0 ? void 0 : _storeState$previousT.version))) {
       Recoil_recoverableViolation("Tried to save dependencies to a discarded tree");
     }
-    const graph2 = store.getGraph(version);
+    const graph2 = store.getGraph(version4);
     mergeDepsIntoGraph(key, deps, graph2);
-    if (version === ((_storeState$previousT2 = storeState.previousTree) === null || _storeState$previousT2 === void 0 ? void 0 : _storeState$previousT2.version)) {
+    if (version4 === ((_storeState$previousT2 = storeState.previousTree) === null || _storeState$previousT2 === void 0 ? void 0 : _storeState$previousT2.version)) {
       const currentGraph = store.getGraph(storeState.currentTree.version);
       mergeDepsIntoGraph(key, deps, currentGraph, graph2);
     }
-    if (version === ((_storeState$previousT3 = storeState.previousTree) === null || _storeState$previousT3 === void 0 ? void 0 : _storeState$previousT3.version) || version === storeState.currentTree.version) {
+    if (version4 === ((_storeState$previousT3 = storeState.previousTree) === null || _storeState$previousT3 === void 0 ? void 0 : _storeState$previousT3.version) || version4 === storeState.currentTree.version) {
       var _storeState$nextTree2;
       const nextVersion = (_storeState$nextTree2 = storeState.nextTree) === null || _storeState$nextTree2 === void 0 ? void 0 : _storeState$nextTree2.version;
       if (nextVersion !== void 0) {
@@ -25128,10 +25128,10 @@
     getNextTreeStateVersion: getNextTreeStateVersion$1
   } = Recoil_Keys;
   function makeEmptyTreeState() {
-    const version = getNextTreeStateVersion$1();
+    const version4 = getNextTreeStateVersion$1();
     return {
-      version,
-      stateID: version,
+      version: version4,
+      stateID: version4,
       transactionMetadata: {},
       dirtyAtoms: /* @__PURE__ */ new Set(),
       atomValues: persistentMap$1(),
@@ -25175,13 +25175,13 @@
     RetentionZone,
     retentionZone
   };
-  function setByAddingToSet(set, v) {
-    const next = new Set(set);
+  function setByAddingToSet(set2, v) {
+    const next = new Set(set2);
     next.add(v);
     return next;
   }
-  function setByDeletingFromSet(set, v) {
-    const next = new Set(set);
+  function setByDeletingFromSet(set2, v) {
+    const next = new Set(set2);
     next.delete(v);
     return next;
   }
@@ -25259,11 +25259,11 @@
       nodesRetainedByZone: nodesRetainedByZone2
     } = store.getState().retention;
     function addToZone(zone) {
-      let set = nodesRetainedByZone2.get(zone);
-      if (!set) {
-        nodesRetainedByZone2.set(zone, set = /* @__PURE__ */ new Set());
+      let set2 = nodesRetainedByZone2.get(zone);
+      if (!set2) {
+        nodesRetainedByZone2.set(zone, set2 = /* @__PURE__ */ new Set());
       }
-      set.add(nodeKey);
+      set2.add(nodeKey);
     }
     if (retainedBy instanceof RetentionZone$1) {
       addToZone(retainedBy);
@@ -25280,9 +25280,9 @@
         retention
       } = store.getState();
       function deleteFromZone(zone) {
-        const set = retention.nodesRetainedByZone.get(zone);
-        set === null || set === void 0 ? void 0 : set.delete(nodeKey);
-        if (set && set.size === 0) {
+        const set2 = retention.nodesRetainedByZone.get(zone);
+        set2 === null || set2 === void 0 ? void 0 : set2.delete(nodeKey);
+        if (set2 && set2.size === 0) {
           retention.nodesRetainedByZone.delete(zone);
         }
       }
@@ -25339,9 +25339,9 @@
     if (node.set == null) {
       throw new ReadOnlyRecoilValueError(`Attempt to set read-only RecoilValue: ${key}`);
     }
-    const set = node.set;
+    const set2 = node.set;
     initializeNodeIfNewToStore(store, state, key, "set");
-    return set(store, state, newValue);
+    return set2(store, state, newValue);
   }
   function peekNodeInfo(store, state, key) {
     const storeState = store.getState();
@@ -25362,8 +25362,8 @@
         var _storeState$nodeToCom, _storeState$nodeToCom2;
         return {
           nodes: recoilValuesForKeys$1(Recoil_filterIterable(getDownstreamNodes(store, state, /* @__PURE__ */ new Set([key])), (nodeKey) => nodeKey !== key)),
-          components: Recoil_mapIterable((_storeState$nodeToCom = (_storeState$nodeToCom2 = storeState.nodeToComponentSubscriptions.get(key)) === null || _storeState$nodeToCom2 === void 0 ? void 0 : _storeState$nodeToCom2.values()) !== null && _storeState$nodeToCom !== void 0 ? _storeState$nodeToCom : [], ([name]) => ({
-            name
+          components: Recoil_mapIterable((_storeState$nodeToCom = (_storeState$nodeToCom2 = storeState.nodeToComponentSubscriptions.get(key)) === null || _storeState$nodeToCom2 === void 0 ? void 0 : _storeState$nodeToCom2.values()) !== null && _storeState$nodeToCom !== void 0 ? _storeState$nodeToCom : [], ([name5]) => ({
+            name: name5
           }))
         };
       }
@@ -25668,12 +25668,12 @@
     copyTreeState,
     refreshRecoilValue
   };
-  function someSet(set, callback, context) {
-    const iterator = set.entries();
+  function someSet(set2, callback, context) {
+    const iterator = set2.entries();
     let current = iterator.next();
     while (!current.done) {
       const entry = current.value;
-      if (callback.call(context, entry[1], entry[0], set)) {
+      if (callback.call(context, entry[1], entry[0], set2)) {
         return true;
       }
       current = iterator.next();
@@ -26099,13 +26099,13 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         replaceState: (replacer) => {
           storeState.currentTree = replacer(storeState.currentTree);
         },
-        getGraph: (version) => {
+        getGraph: (version4) => {
           const graphs = storeState.graphsByVersion;
-          if (graphs.has(version)) {
-            return Recoil_nullthrows(graphs.get(version));
+          if (graphs.has(version4)) {
+            return Recoil_nullthrows(graphs.get(version4));
           }
           const newGraph = graph$1();
-          graphs.set(version, newGraph);
+          graphs.set(version4, newGraph);
           return newGraph;
         },
         subscribeToTransactions: () => ({
@@ -26183,11 +26183,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   };
   function cloneStoreState(store, treeState, bumpVersion = false) {
     const storeState = store.getState();
-    const version = bumpVersion ? getNextTreeStateVersion$2() : treeState.version;
+    const version4 = bumpVersion ? getNextTreeStateVersion$2() : treeState.version;
     return {
       currentTree: {
-        version: bumpVersion ? version : treeState.version,
-        stateID: bumpVersion ? version : treeState.stateID,
+        version: bumpVersion ? version4 : treeState.version,
+        stateID: bumpVersion ? version4 : treeState.stateID,
         transactionMetadata: __spreadValues({}, treeState.transactionMetadata),
         dirtyAtoms: new Set(treeState.dirtyAtoms),
         atomValues: treeState.atomValues.clone(),
@@ -26203,7 +26203,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       nodeToComponentSubscriptions: /* @__PURE__ */ new Map(),
       queuedComponentCallbacks_DEPRECATED: [],
       suspendedComponentResolvers: /* @__PURE__ */ new Set(),
-      graphsByVersion: (/* @__PURE__ */ new Map()).set(version, store.getGraph(treeState.version)),
+      graphsByVersion: (/* @__PURE__ */ new Map()).set(version4, store.getGraph(treeState.version)),
       retention: {
         referenceCounts: /* @__PURE__ */ new Map(),
         nodesRetainedByZone: /* @__PURE__ */ new Map(),
@@ -26217,21 +26217,21 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     const snapshot = new Snapshot(makeEmptyStoreState$1());
     return initializeState != null ? snapshot.map(initializeState) : snapshot;
   }
-  var [memoizedCloneSnapshot, invalidateMemoizedSnapshot$2] = memoizeOneWithArgsHashAndInvalidation$1((store, version) => {
+  var [memoizedCloneSnapshot, invalidateMemoizedSnapshot$2] = memoizeOneWithArgsHashAndInvalidation$1((store, version4) => {
     var _storeState$nextTree;
     const storeState = store.getState();
-    const treeState = version === "latest" ? (_storeState$nextTree = storeState.nextTree) !== null && _storeState$nextTree !== void 0 ? _storeState$nextTree : storeState.currentTree : Recoil_nullthrows(storeState.previousTree);
+    const treeState = version4 === "latest" ? (_storeState$nextTree = storeState.nextTree) !== null && _storeState$nextTree !== void 0 ? _storeState$nextTree : storeState.currentTree : Recoil_nullthrows(storeState.previousTree);
     return new Snapshot(cloneStoreState(store, treeState), store.storeID);
-  }, (store, version) => {
+  }, (store, version4) => {
     var _store$getState$nextT, _store$getState$previ;
-    return String(version) + String(store.storeID) + String((_store$getState$nextT = store.getState().nextTree) === null || _store$getState$nextT === void 0 ? void 0 : _store$getState$nextT.version) + String(store.getState().currentTree.version) + String((_store$getState$previ = store.getState().previousTree) === null || _store$getState$previ === void 0 ? void 0 : _store$getState$previ.version);
+    return String(version4) + String(store.storeID) + String((_store$getState$nextT = store.getState().nextTree) === null || _store$getState$nextT === void 0 ? void 0 : _store$getState$nextT.version) + String(store.getState().currentTree.version) + String((_store$getState$previ = store.getState().previousTree) === null || _store$getState$previ === void 0 ? void 0 : _store$getState$previ.version);
   });
   setInvalidateMemoizedSnapshot$1(invalidateMemoizedSnapshot$2);
-  function cloneSnapshot(store, version = "latest") {
-    const snapshot = memoizedCloneSnapshot(store, version);
+  function cloneSnapshot(store, version4 = "latest") {
+    const snapshot = memoizedCloneSnapshot(store, version4);
     if (!snapshot.isRetained()) {
       invalidateMemoizedSnapshot$2();
-      return memoizedCloneSnapshot(store, version);
+      return memoizedCloneSnapshot(store, version4);
     }
     return snapshot;
   }
@@ -26287,8 +26287,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   });
   function unionSets(...sets) {
     const result = /* @__PURE__ */ new Set();
-    for (const set of sets) {
-      for (const value of set) {
+    for (const set2 of sets) {
+      for (const value of set2) {
         result.add(value);
       }
     }
@@ -26370,7 +26370,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
           releaseScheduledRetainablesNow$1(store);
         }
       }
-      const version = storeState.currentTree.version;
+      const version4 = storeState.currentTree.version;
       const nextVersion = getNextTreeStateVersion$3();
       storeState.nextTree = __spreadProps(__spreadValues({}, storeState.currentTree), {
         version: nextVersion,
@@ -26378,7 +26378,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         dirtyAtoms: /* @__PURE__ */ new Set(),
         transactionMetadata: {}
       });
-      storeState.graphsByVersion.set(nextVersion, cloneGraph$1(Recoil_nullthrows(storeState.graphsByVersion.get(version))));
+      storeState.graphsByVersion.set(nextVersion, cloneGraph$1(Recoil_nullthrows(storeState.graphsByVersion.get(version4))));
     }
   }
   var AppContext = import_react.default.createContext({
@@ -26523,13 +26523,13 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     children
   }) {
     let storeStateRef;
-    const getGraph = (version) => {
+    const getGraph = (version4) => {
       const graphs = storeStateRef.current.graphsByVersion;
-      if (graphs.has(version)) {
-        return Recoil_nullthrows(graphs.get(version));
+      if (graphs.has(version4)) {
+        return Recoil_nullthrows(graphs.get(version4));
       }
       const newGraph = graph$2();
-      graphs.set(version, newGraph);
+      graphs.set(version4, newGraph);
       return newGraph;
     };
     const subscribeToTransactions = (callback, key) => {
@@ -27199,9 +27199,9 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     return result;
   }
   var Recoil_filterMap = filterMap;
-  function filterSet(set, callback) {
+  function filterSet(set2, callback) {
     const result = /* @__PURE__ */ new Set();
-    for (const value of set) {
+    for (const value of set2) {
       if (callback(value)) {
         result.add(value);
       }
@@ -27926,7 +27926,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     TreeCache: TreeCache$1
   } = Recoil_TreeCache$1;
   function treeCacheLRU({
-    name,
+    name: name5,
     maxSize,
     mapNodeValue = (v) => v
   }) {
@@ -27934,7 +27934,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       maxSize
     });
     const cache = new TreeCache$1({
-      name,
+      name: name5,
       mapNodeValue,
       onHit: (node) => {
         lruCache.set(node, true);
@@ -28033,9 +28033,9 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     equality = defaultPolicy.equality,
     eviction = defaultPolicy.eviction,
     maxSize = defaultPolicy.maxSize
-  } = defaultPolicy, name) {
+  } = defaultPolicy, name5) {
     const valueMapper = getValueMapper(equality);
-    return getTreeCache(eviction, maxSize, valueMapper, name);
+    return getTreeCache(eviction, maxSize, valueMapper, name5);
   }
   function getValueMapper(equality) {
     switch (equality) {
@@ -28046,22 +28046,22 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     }
     throw Recoil_err(`Unrecognized equality policy ${equality}`);
   }
-  function getTreeCache(eviction, maxSize, mapNodeValue, name) {
+  function getTreeCache(eviction, maxSize, mapNodeValue, name5) {
     switch (eviction) {
       case "keep-all":
         return new TreeCache$2({
-          name,
+          name: name5,
           mapNodeValue
         });
       case "lru":
         return Recoil_treeCacheLRU({
-          name,
+          name: name5,
           maxSize: Recoil_nullthrows(maxSize),
           mapNodeValue
         });
       case "most-recent":
         return Recoil_treeCacheLRU({
-          name,
+          name: name5,
           maxSize: 1,
           mapNodeValue
         });
@@ -28189,7 +28189,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       get,
       cachePolicy_UNSTABLE: cachePolicy
     } = options;
-    const set = options.set != null ? options.set : void 0;
+    const set2 = options.set != null ? options.set : void 0;
     if (true) {
       if (typeof key !== "string") {
         throw Recoil_err("A key option with a unique string value must be provided when creating a selector.");
@@ -28584,7 +28584,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       cache.clear();
       markRecoilValueModified$1(store, recoilValue);
     }
-    if (set != null) {
+    if (set2 != null) {
       const selectorSet = (store, state, newValue) => {
         let syncSelectorSetFinished = false;
         const writes = /* @__PURE__ */ new Map();
@@ -28618,7 +28618,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         function resetRecoilState(recoilState) {
           setRecoilState(recoilState, DEFAULT_VALUE$6);
         }
-        const ret = set({
+        const ret = set2({
           set: setRecoilState,
           get: getRecoilValue,
           reset: resetRecoilState
@@ -28988,8 +28988,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         return baseValue instanceof DefaultValue$2 ? options.default : baseValue;
       },
       set: ({
-        set
-      }, newValue) => set(base, newValue),
+        set: set2
+      }, newValue) => set2(base, newValue),
       cachePolicy_UNSTABLE: {
         eviction: "most-recent"
       },
@@ -29149,8 +29149,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       const retainedBy = typeof options.retainedBy_UNSTABLE === "function" ? options.retainedBy_UNSTABLE(params) : options.retainedBy_UNSTABLE;
       let newSelector;
       if (options.set != null) {
-        const set = options.set;
-        const mySet = (callbacks, newValue) => set(params)(callbacks, newValue);
+        const set2 = options.set;
+        const mySet = (callbacks, newValue) => set2(params)(callbacks, newValue);
         newSelector = Recoil_selector({
           key: myKey,
           get: myGet,
@@ -30678,12 +30678,12 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       } else {
         formData = new FormData();
         if (target instanceof URLSearchParams) {
-          for (let [name, value] of target) {
-            formData.append(name, value);
+          for (let [name5, value] of target) {
+            formData.append(name5, value);
           }
         } else if (target != null) {
-          for (let name of Object.keys(target)) {
-            formData.append(name, target[name]);
+          for (let name5 of Object.keys(target)) {
+            formData.append(name5, target[name5]);
           }
         }
       }
@@ -30894,11 +30894,11 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   }
   function ScrollRestoration(_ref7) {
     let {
-      getKey,
+      getKey: getKey2,
       storageKey
     } = _ref7;
     useScrollRestoration({
-      getKey,
+      getKey: getKey2,
       storageKey
     });
     return null;
@@ -31025,7 +31025,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   var savedScrollPositions = {};
   function useScrollRestoration(_temp3) {
     let {
-      getKey,
+      getKey: getKey2,
       storageKey
     } = _temp3 === void 0 ? {} : _temp3;
     let {
@@ -31046,12 +31046,12 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     }, []);
     useBeforeUnload(React2.useCallback(() => {
       if (navigation.state === "idle") {
-        let key = (getKey ? getKey(location, matches) : null) || location.key;
+        let key = (getKey2 ? getKey2(location, matches) : null) || location.key;
         savedScrollPositions[key] = window.scrollY;
       }
       sessionStorage.setItem(storageKey || SCROLL_RESTORATION_STORAGE_KEY, JSON.stringify(savedScrollPositions));
       window.history.scrollRestoration = "auto";
-    }, [storageKey, getKey, navigation.state, location, matches]));
+    }, [storageKey, getKey2, navigation.state, location, matches]));
     React2.useLayoutEffect(() => {
       try {
         let sessionPositions = sessionStorage.getItem(storageKey || SCROLL_RESTORATION_STORAGE_KEY);
@@ -31062,9 +31062,9 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       }
     }, [storageKey]);
     React2.useLayoutEffect(() => {
-      let disableScrollRestoration = router == null ? void 0 : router.enableScrollRestoration(savedScrollPositions, () => window.scrollY, getKey);
+      let disableScrollRestoration = router == null ? void 0 : router.enableScrollRestoration(savedScrollPositions, () => window.scrollY, getKey2);
       return () => disableScrollRestoration && disableScrollRestoration();
-    }, [router, getKey]);
+    }, [router, getKey2]);
     React2.useLayoutEffect(() => {
       if (restoreScrollPosition === false) {
         return;
@@ -31150,6 +31150,2362 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   var Document = () => {
     return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Recoil_index_5, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(RoutingContent, {}) }) });
   };
+
+  // node_modules/.pnpm/@firebase+util@1.9.0/node_modules/@firebase/util/dist/index.esm2017.js
+  var stringToByteArray$1 = function(str) {
+    const out = [];
+    let p = 0;
+    for (let i = 0; i < str.length; i++) {
+      let c = str.charCodeAt(i);
+      if (c < 128) {
+        out[p++] = c;
+      } else if (c < 2048) {
+        out[p++] = c >> 6 | 192;
+        out[p++] = c & 63 | 128;
+      } else if ((c & 64512) === 55296 && i + 1 < str.length && (str.charCodeAt(i + 1) & 64512) === 56320) {
+        c = 65536 + ((c & 1023) << 10) + (str.charCodeAt(++i) & 1023);
+        out[p++] = c >> 18 | 240;
+        out[p++] = c >> 12 & 63 | 128;
+        out[p++] = c >> 6 & 63 | 128;
+        out[p++] = c & 63 | 128;
+      } else {
+        out[p++] = c >> 12 | 224;
+        out[p++] = c >> 6 & 63 | 128;
+        out[p++] = c & 63 | 128;
+      }
+    }
+    return out;
+  };
+  var byteArrayToString = function(bytes) {
+    const out = [];
+    let pos = 0, c = 0;
+    while (pos < bytes.length) {
+      const c1 = bytes[pos++];
+      if (c1 < 128) {
+        out[c++] = String.fromCharCode(c1);
+      } else if (c1 > 191 && c1 < 224) {
+        const c2 = bytes[pos++];
+        out[c++] = String.fromCharCode((c1 & 31) << 6 | c2 & 63);
+      } else if (c1 > 239 && c1 < 365) {
+        const c2 = bytes[pos++];
+        const c3 = bytes[pos++];
+        const c4 = bytes[pos++];
+        const u = ((c1 & 7) << 18 | (c2 & 63) << 12 | (c3 & 63) << 6 | c4 & 63) - 65536;
+        out[c++] = String.fromCharCode(55296 + (u >> 10));
+        out[c++] = String.fromCharCode(56320 + (u & 1023));
+      } else {
+        const c2 = bytes[pos++];
+        const c3 = bytes[pos++];
+        out[c++] = String.fromCharCode((c1 & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
+      }
+    }
+    return out.join("");
+  };
+  var base64 = {
+    byteToCharMap_: null,
+    charToByteMap_: null,
+    byteToCharMapWebSafe_: null,
+    charToByteMapWebSafe_: null,
+    ENCODED_VALS_BASE: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    get ENCODED_VALS() {
+      return this.ENCODED_VALS_BASE + "+/=";
+    },
+    get ENCODED_VALS_WEBSAFE() {
+      return this.ENCODED_VALS_BASE + "-_.";
+    },
+    HAS_NATIVE_SUPPORT: typeof atob === "function",
+    encodeByteArray(input, webSafe) {
+      if (!Array.isArray(input)) {
+        throw Error("encodeByteArray takes an array as a parameter");
+      }
+      this.init_();
+      const byteToCharMap = webSafe ? this.byteToCharMapWebSafe_ : this.byteToCharMap_;
+      const output = [];
+      for (let i = 0; i < input.length; i += 3) {
+        const byte1 = input[i];
+        const haveByte2 = i + 1 < input.length;
+        const byte2 = haveByte2 ? input[i + 1] : 0;
+        const haveByte3 = i + 2 < input.length;
+        const byte3 = haveByte3 ? input[i + 2] : 0;
+        const outByte1 = byte1 >> 2;
+        const outByte2 = (byte1 & 3) << 4 | byte2 >> 4;
+        let outByte3 = (byte2 & 15) << 2 | byte3 >> 6;
+        let outByte4 = byte3 & 63;
+        if (!haveByte3) {
+          outByte4 = 64;
+          if (!haveByte2) {
+            outByte3 = 64;
+          }
+        }
+        output.push(byteToCharMap[outByte1], byteToCharMap[outByte2], byteToCharMap[outByte3], byteToCharMap[outByte4]);
+      }
+      return output.join("");
+    },
+    encodeString(input, webSafe) {
+      if (this.HAS_NATIVE_SUPPORT && !webSafe) {
+        return btoa(input);
+      }
+      return this.encodeByteArray(stringToByteArray$1(input), webSafe);
+    },
+    decodeString(input, webSafe) {
+      if (this.HAS_NATIVE_SUPPORT && !webSafe) {
+        return atob(input);
+      }
+      return byteArrayToString(this.decodeStringToByteArray(input, webSafe));
+    },
+    decodeStringToByteArray(input, webSafe) {
+      this.init_();
+      const charToByteMap = webSafe ? this.charToByteMapWebSafe_ : this.charToByteMap_;
+      const output = [];
+      for (let i = 0; i < input.length; ) {
+        const byte1 = charToByteMap[input.charAt(i++)];
+        const haveByte2 = i < input.length;
+        const byte2 = haveByte2 ? charToByteMap[input.charAt(i)] : 0;
+        ++i;
+        const haveByte3 = i < input.length;
+        const byte3 = haveByte3 ? charToByteMap[input.charAt(i)] : 64;
+        ++i;
+        const haveByte4 = i < input.length;
+        const byte4 = haveByte4 ? charToByteMap[input.charAt(i)] : 64;
+        ++i;
+        if (byte1 == null || byte2 == null || byte3 == null || byte4 == null) {
+          throw Error();
+        }
+        const outByte1 = byte1 << 2 | byte2 >> 4;
+        output.push(outByte1);
+        if (byte3 !== 64) {
+          const outByte2 = byte2 << 4 & 240 | byte3 >> 2;
+          output.push(outByte2);
+          if (byte4 !== 64) {
+            const outByte3 = byte3 << 6 & 192 | byte4;
+            output.push(outByte3);
+          }
+        }
+      }
+      return output;
+    },
+    init_() {
+      if (!this.byteToCharMap_) {
+        this.byteToCharMap_ = {};
+        this.charToByteMap_ = {};
+        this.byteToCharMapWebSafe_ = {};
+        this.charToByteMapWebSafe_ = {};
+        for (let i = 0; i < this.ENCODED_VALS.length; i++) {
+          this.byteToCharMap_[i] = this.ENCODED_VALS.charAt(i);
+          this.charToByteMap_[this.byteToCharMap_[i]] = i;
+          this.byteToCharMapWebSafe_[i] = this.ENCODED_VALS_WEBSAFE.charAt(i);
+          this.charToByteMapWebSafe_[this.byteToCharMapWebSafe_[i]] = i;
+          if (i >= this.ENCODED_VALS_BASE.length) {
+            this.charToByteMap_[this.ENCODED_VALS_WEBSAFE.charAt(i)] = i;
+            this.charToByteMapWebSafe_[this.ENCODED_VALS.charAt(i)] = i;
+          }
+        }
+      }
+    }
+  };
+  var base64Encode = function(str) {
+    const utf8Bytes = stringToByteArray$1(str);
+    return base64.encodeByteArray(utf8Bytes, true);
+  };
+  var base64urlEncodeWithoutPadding = function(str) {
+    return base64Encode(str).replace(/\./g, "");
+  };
+  var base64Decode = function(str) {
+    try {
+      return base64.decodeString(str, true);
+    } catch (e) {
+      console.error("base64Decode failed: ", e);
+    }
+    return null;
+  };
+  function getGlobal() {
+    if (typeof self !== "undefined") {
+      return self;
+    }
+    if (typeof window !== "undefined") {
+      return window;
+    }
+    if (typeof window !== "undefined") {
+      return window;
+    }
+    throw new Error("Unable to locate global object.");
+  }
+  var getDefaultsFromGlobal = () => getGlobal().__FIREBASE_DEFAULTS__;
+  var getDefaultsFromEnvVariable = () => {
+    if (typeof process === "undefined" || typeof process.env === "undefined") {
+      return;
+    }
+    const defaultsJsonString = process.env.__FIREBASE_DEFAULTS__;
+    if (defaultsJsonString) {
+      return JSON.parse(defaultsJsonString);
+    }
+  };
+  var getDefaultsFromCookie = () => {
+    if (typeof document === "undefined") {
+      return;
+    }
+    let match;
+    try {
+      match = document.cookie.match(/__FIREBASE_DEFAULTS__=([^;]+)/);
+    } catch (e) {
+      return;
+    }
+    const decoded = match && base64Decode(match[1]);
+    return decoded && JSON.parse(decoded);
+  };
+  var getDefaults = () => {
+    try {
+      return getDefaultsFromGlobal() || getDefaultsFromEnvVariable() || getDefaultsFromCookie();
+    } catch (e) {
+      console.info(`Unable to get __FIREBASE_DEFAULTS__ due to: ${e}`);
+      return;
+    }
+  };
+  var getDefaultAppConfig = () => {
+    var _a;
+    return (_a = getDefaults()) === null || _a === void 0 ? void 0 : _a.config;
+  };
+  var Deferred = class {
+    constructor() {
+      this.reject = () => {
+      };
+      this.resolve = () => {
+      };
+      this.promise = new Promise((resolve, reject) => {
+        this.resolve = resolve;
+        this.reject = reject;
+      });
+    }
+    wrapCallback(callback) {
+      return (error, value) => {
+        if (error) {
+          this.reject(error);
+        } else {
+          this.resolve(value);
+        }
+        if (typeof callback === "function") {
+          this.promise.catch(() => {
+          });
+          if (callback.length === 1) {
+            callback(error);
+          } else {
+            callback(error, value);
+          }
+        }
+      };
+    }
+  };
+  function isBrowserExtension() {
+    const runtime = typeof chrome === "object" ? chrome.runtime : typeof browser === "object" ? browser.runtime : void 0;
+    return typeof runtime === "object" && runtime.id !== void 0;
+  }
+  function isIndexedDBAvailable() {
+    try {
+      return typeof indexedDB === "object";
+    } catch (e) {
+      return false;
+    }
+  }
+  function validateIndexedDBOpenable() {
+    return new Promise((resolve, reject) => {
+      try {
+        let preExist = true;
+        const DB_CHECK_NAME = "validate-browser-context-for-indexeddb-analytics-module";
+        const request = self.indexedDB.open(DB_CHECK_NAME);
+        request.onsuccess = () => {
+          request.result.close();
+          if (!preExist) {
+            self.indexedDB.deleteDatabase(DB_CHECK_NAME);
+          }
+          resolve(true);
+        };
+        request.onupgradeneeded = () => {
+          preExist = false;
+        };
+        request.onerror = () => {
+          var _a;
+          reject(((_a = request.error) === null || _a === void 0 ? void 0 : _a.message) || "");
+        };
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+  function areCookiesEnabled() {
+    if (typeof navigator === "undefined" || !navigator.cookieEnabled) {
+      return false;
+    }
+    return true;
+  }
+  var ERROR_NAME = "FirebaseError";
+  var FirebaseError = class extends Error {
+    constructor(code, message, customData) {
+      super(message);
+      this.code = code;
+      this.customData = customData;
+      this.name = ERROR_NAME;
+      Object.setPrototypeOf(this, FirebaseError.prototype);
+      if (Error.captureStackTrace) {
+        Error.captureStackTrace(this, ErrorFactory.prototype.create);
+      }
+    }
+  };
+  var ErrorFactory = class {
+    constructor(service, serviceName, errors) {
+      this.service = service;
+      this.serviceName = serviceName;
+      this.errors = errors;
+    }
+    create(code, ...data) {
+      const customData = data[0] || {};
+      const fullCode = `${this.service}/${code}`;
+      const template = this.errors[code];
+      const message = template ? replaceTemplate(template, customData) : "Error";
+      const fullMessage = `${this.serviceName}: ${message} (${fullCode}).`;
+      const error = new FirebaseError(fullCode, fullMessage, customData);
+      return error;
+    }
+  };
+  function replaceTemplate(template, data) {
+    return template.replace(PATTERN, (_, key) => {
+      const value = data[key];
+      return value != null ? String(value) : `<${key}?>`;
+    });
+  }
+  var PATTERN = /\{\$([^}]+)}/g;
+  function deepEqual(a, b) {
+    if (a === b) {
+      return true;
+    }
+    const aKeys = Object.keys(a);
+    const bKeys = Object.keys(b);
+    for (const k of aKeys) {
+      if (!bKeys.includes(k)) {
+        return false;
+      }
+      const aProp = a[k];
+      const bProp = b[k];
+      if (isObject(aProp) && isObject(bProp)) {
+        if (!deepEqual(aProp, bProp)) {
+          return false;
+        }
+      } else if (aProp !== bProp) {
+        return false;
+      }
+    }
+    for (const k of bKeys) {
+      if (!aKeys.includes(k)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function isObject(thing) {
+    return thing !== null && typeof thing === "object";
+  }
+  var DEFAULT_INTERVAL_MILLIS = 1e3;
+  var DEFAULT_BACKOFF_FACTOR = 2;
+  var MAX_VALUE_MILLIS = 4 * 60 * 60 * 1e3;
+  var RANDOM_FACTOR = 0.5;
+  function calculateBackoffMillis(backoffCount, intervalMillis = DEFAULT_INTERVAL_MILLIS, backoffFactor = DEFAULT_BACKOFF_FACTOR) {
+    const currBaseValue = intervalMillis * Math.pow(backoffFactor, backoffCount);
+    const randomWait = Math.round(
+      RANDOM_FACTOR * currBaseValue * (Math.random() - 0.5) * 2
+    );
+    return Math.min(MAX_VALUE_MILLIS, currBaseValue + randomWait);
+  }
+  function getModularInstance(service) {
+    if (service && service._delegate) {
+      return service._delegate;
+    } else {
+      return service;
+    }
+  }
+
+  // node_modules/.pnpm/@firebase+component@0.6.1/node_modules/@firebase/component/dist/esm/index.esm2017.js
+  var Component2 = class {
+    constructor(name5, instanceFactory, type) {
+      this.name = name5;
+      this.instanceFactory = instanceFactory;
+      this.type = type;
+      this.multipleInstances = false;
+      this.serviceProps = {};
+      this.instantiationMode = "LAZY";
+      this.onInstanceCreated = null;
+    }
+    setInstantiationMode(mode) {
+      this.instantiationMode = mode;
+      return this;
+    }
+    setMultipleInstances(multipleInstances) {
+      this.multipleInstances = multipleInstances;
+      return this;
+    }
+    setServiceProps(props) {
+      this.serviceProps = props;
+      return this;
+    }
+    setInstanceCreatedCallback(callback) {
+      this.onInstanceCreated = callback;
+      return this;
+    }
+  };
+  var DEFAULT_ENTRY_NAME = "[DEFAULT]";
+  var Provider = class {
+    constructor(name5, container) {
+      this.name = name5;
+      this.container = container;
+      this.component = null;
+      this.instances = /* @__PURE__ */ new Map();
+      this.instancesDeferred = /* @__PURE__ */ new Map();
+      this.instancesOptions = /* @__PURE__ */ new Map();
+      this.onInitCallbacks = /* @__PURE__ */ new Map();
+    }
+    get(identifier) {
+      const normalizedIdentifier = this.normalizeInstanceIdentifier(identifier);
+      if (!this.instancesDeferred.has(normalizedIdentifier)) {
+        const deferred = new Deferred();
+        this.instancesDeferred.set(normalizedIdentifier, deferred);
+        if (this.isInitialized(normalizedIdentifier) || this.shouldAutoInitialize()) {
+          try {
+            const instance = this.getOrInitializeService({
+              instanceIdentifier: normalizedIdentifier
+            });
+            if (instance) {
+              deferred.resolve(instance);
+            }
+          } catch (e) {
+          }
+        }
+      }
+      return this.instancesDeferred.get(normalizedIdentifier).promise;
+    }
+    getImmediate(options) {
+      var _a;
+      const normalizedIdentifier = this.normalizeInstanceIdentifier(options === null || options === void 0 ? void 0 : options.identifier);
+      const optional = (_a = options === null || options === void 0 ? void 0 : options.optional) !== null && _a !== void 0 ? _a : false;
+      if (this.isInitialized(normalizedIdentifier) || this.shouldAutoInitialize()) {
+        try {
+          return this.getOrInitializeService({
+            instanceIdentifier: normalizedIdentifier
+          });
+        } catch (e) {
+          if (optional) {
+            return null;
+          } else {
+            throw e;
+          }
+        }
+      } else {
+        if (optional) {
+          return null;
+        } else {
+          throw Error(`Service ${this.name} is not available`);
+        }
+      }
+    }
+    getComponent() {
+      return this.component;
+    }
+    setComponent(component) {
+      if (component.name !== this.name) {
+        throw Error(`Mismatching Component ${component.name} for Provider ${this.name}.`);
+      }
+      if (this.component) {
+        throw Error(`Component for ${this.name} has already been provided`);
+      }
+      this.component = component;
+      if (!this.shouldAutoInitialize()) {
+        return;
+      }
+      if (isComponentEager(component)) {
+        try {
+          this.getOrInitializeService({ instanceIdentifier: DEFAULT_ENTRY_NAME });
+        } catch (e) {
+        }
+      }
+      for (const [instanceIdentifier, instanceDeferred] of this.instancesDeferred.entries()) {
+        const normalizedIdentifier = this.normalizeInstanceIdentifier(instanceIdentifier);
+        try {
+          const instance = this.getOrInitializeService({
+            instanceIdentifier: normalizedIdentifier
+          });
+          instanceDeferred.resolve(instance);
+        } catch (e) {
+        }
+      }
+    }
+    clearInstance(identifier = DEFAULT_ENTRY_NAME) {
+      this.instancesDeferred.delete(identifier);
+      this.instancesOptions.delete(identifier);
+      this.instances.delete(identifier);
+    }
+    async delete() {
+      const services = Array.from(this.instances.values());
+      await Promise.all([
+        ...services.filter((service) => "INTERNAL" in service).map((service) => service.INTERNAL.delete()),
+        ...services.filter((service) => "_delete" in service).map((service) => service._delete())
+      ]);
+    }
+    isComponentSet() {
+      return this.component != null;
+    }
+    isInitialized(identifier = DEFAULT_ENTRY_NAME) {
+      return this.instances.has(identifier);
+    }
+    getOptions(identifier = DEFAULT_ENTRY_NAME) {
+      return this.instancesOptions.get(identifier) || {};
+    }
+    initialize(opts = {}) {
+      const { options = {} } = opts;
+      const normalizedIdentifier = this.normalizeInstanceIdentifier(opts.instanceIdentifier);
+      if (this.isInitialized(normalizedIdentifier)) {
+        throw Error(`${this.name}(${normalizedIdentifier}) has already been initialized`);
+      }
+      if (!this.isComponentSet()) {
+        throw Error(`Component ${this.name} has not been registered yet`);
+      }
+      const instance = this.getOrInitializeService({
+        instanceIdentifier: normalizedIdentifier,
+        options
+      });
+      for (const [instanceIdentifier, instanceDeferred] of this.instancesDeferred.entries()) {
+        const normalizedDeferredIdentifier = this.normalizeInstanceIdentifier(instanceIdentifier);
+        if (normalizedIdentifier === normalizedDeferredIdentifier) {
+          instanceDeferred.resolve(instance);
+        }
+      }
+      return instance;
+    }
+    onInit(callback, identifier) {
+      var _a;
+      const normalizedIdentifier = this.normalizeInstanceIdentifier(identifier);
+      const existingCallbacks = (_a = this.onInitCallbacks.get(normalizedIdentifier)) !== null && _a !== void 0 ? _a : /* @__PURE__ */ new Set();
+      existingCallbacks.add(callback);
+      this.onInitCallbacks.set(normalizedIdentifier, existingCallbacks);
+      const existingInstance = this.instances.get(normalizedIdentifier);
+      if (existingInstance) {
+        callback(existingInstance, normalizedIdentifier);
+      }
+      return () => {
+        existingCallbacks.delete(callback);
+      };
+    }
+    invokeOnInitCallbacks(instance, identifier) {
+      const callbacks = this.onInitCallbacks.get(identifier);
+      if (!callbacks) {
+        return;
+      }
+      for (const callback of callbacks) {
+        try {
+          callback(instance, identifier);
+        } catch (_a) {
+        }
+      }
+    }
+    getOrInitializeService({ instanceIdentifier, options = {} }) {
+      let instance = this.instances.get(instanceIdentifier);
+      if (!instance && this.component) {
+        instance = this.component.instanceFactory(this.container, {
+          instanceIdentifier: normalizeIdentifierForFactory(instanceIdentifier),
+          options
+        });
+        this.instances.set(instanceIdentifier, instance);
+        this.instancesOptions.set(instanceIdentifier, options);
+        this.invokeOnInitCallbacks(instance, instanceIdentifier);
+        if (this.component.onInstanceCreated) {
+          try {
+            this.component.onInstanceCreated(this.container, instanceIdentifier, instance);
+          } catch (_a) {
+          }
+        }
+      }
+      return instance || null;
+    }
+    normalizeInstanceIdentifier(identifier = DEFAULT_ENTRY_NAME) {
+      if (this.component) {
+        return this.component.multipleInstances ? identifier : DEFAULT_ENTRY_NAME;
+      } else {
+        return identifier;
+      }
+    }
+    shouldAutoInitialize() {
+      return !!this.component && this.component.instantiationMode !== "EXPLICIT";
+    }
+  };
+  function normalizeIdentifierForFactory(identifier) {
+    return identifier === DEFAULT_ENTRY_NAME ? void 0 : identifier;
+  }
+  function isComponentEager(component) {
+    return component.instantiationMode === "EAGER";
+  }
+  var ComponentContainer = class {
+    constructor(name5) {
+      this.name = name5;
+      this.providers = /* @__PURE__ */ new Map();
+    }
+    addComponent(component) {
+      const provider = this.getProvider(component.name);
+      if (provider.isComponentSet()) {
+        throw new Error(`Component ${component.name} has already been registered with ${this.name}`);
+      }
+      provider.setComponent(component);
+    }
+    addOrOverwriteComponent(component) {
+      const provider = this.getProvider(component.name);
+      if (provider.isComponentSet()) {
+        this.providers.delete(component.name);
+      }
+      this.addComponent(component);
+    }
+    getProvider(name5) {
+      if (this.providers.has(name5)) {
+        return this.providers.get(name5);
+      }
+      const provider = new Provider(name5, this);
+      this.providers.set(name5, provider);
+      return provider;
+    }
+    getProviders() {
+      return Array.from(this.providers.values());
+    }
+  };
+
+  // node_modules/.pnpm/@firebase+logger@0.4.0/node_modules/@firebase/logger/dist/esm/index.esm2017.js
+  var instances = [];
+  var LogLevel;
+  (function(LogLevel2) {
+    LogLevel2[LogLevel2["DEBUG"] = 0] = "DEBUG";
+    LogLevel2[LogLevel2["VERBOSE"] = 1] = "VERBOSE";
+    LogLevel2[LogLevel2["INFO"] = 2] = "INFO";
+    LogLevel2[LogLevel2["WARN"] = 3] = "WARN";
+    LogLevel2[LogLevel2["ERROR"] = 4] = "ERROR";
+    LogLevel2[LogLevel2["SILENT"] = 5] = "SILENT";
+  })(LogLevel || (LogLevel = {}));
+  var levelStringToEnum = {
+    "debug": LogLevel.DEBUG,
+    "verbose": LogLevel.VERBOSE,
+    "info": LogLevel.INFO,
+    "warn": LogLevel.WARN,
+    "error": LogLevel.ERROR,
+    "silent": LogLevel.SILENT
+  };
+  var defaultLogLevel = LogLevel.INFO;
+  var ConsoleMethod = {
+    [LogLevel.DEBUG]: "log",
+    [LogLevel.VERBOSE]: "log",
+    [LogLevel.INFO]: "info",
+    [LogLevel.WARN]: "warn",
+    [LogLevel.ERROR]: "error"
+  };
+  var defaultLogHandler = (instance, logType, ...args) => {
+    if (logType < instance.logLevel) {
+      return;
+    }
+    const now = new Date().toISOString();
+    const method = ConsoleMethod[logType];
+    if (method) {
+      console[method](`[${now}]  ${instance.name}:`, ...args);
+    } else {
+      throw new Error(`Attempted to log a message with an invalid logType (value: ${logType})`);
+    }
+  };
+  var Logger = class {
+    constructor(name5) {
+      this.name = name5;
+      this._logLevel = defaultLogLevel;
+      this._logHandler = defaultLogHandler;
+      this._userLogHandler = null;
+      instances.push(this);
+    }
+    get logLevel() {
+      return this._logLevel;
+    }
+    set logLevel(val) {
+      if (!(val in LogLevel)) {
+        throw new TypeError(`Invalid value "${val}" assigned to \`logLevel\``);
+      }
+      this._logLevel = val;
+    }
+    setLogLevel(val) {
+      this._logLevel = typeof val === "string" ? levelStringToEnum[val] : val;
+    }
+    get logHandler() {
+      return this._logHandler;
+    }
+    set logHandler(val) {
+      if (typeof val !== "function") {
+        throw new TypeError("Value assigned to `logHandler` must be a function");
+      }
+      this._logHandler = val;
+    }
+    get userLogHandler() {
+      return this._userLogHandler;
+    }
+    set userLogHandler(val) {
+      this._userLogHandler = val;
+    }
+    debug(...args) {
+      this._userLogHandler && this._userLogHandler(this, LogLevel.DEBUG, ...args);
+      this._logHandler(this, LogLevel.DEBUG, ...args);
+    }
+    log(...args) {
+      this._userLogHandler && this._userLogHandler(this, LogLevel.VERBOSE, ...args);
+      this._logHandler(this, LogLevel.VERBOSE, ...args);
+    }
+    info(...args) {
+      this._userLogHandler && this._userLogHandler(this, LogLevel.INFO, ...args);
+      this._logHandler(this, LogLevel.INFO, ...args);
+    }
+    warn(...args) {
+      this._userLogHandler && this._userLogHandler(this, LogLevel.WARN, ...args);
+      this._logHandler(this, LogLevel.WARN, ...args);
+    }
+    error(...args) {
+      this._userLogHandler && this._userLogHandler(this, LogLevel.ERROR, ...args);
+      this._logHandler(this, LogLevel.ERROR, ...args);
+    }
+  };
+
+  // node_modules/.pnpm/idb@7.0.1/node_modules/idb/build/wrap-idb-value.js
+  var instanceOfAny = (object, constructors) => constructors.some((c) => object instanceof c);
+  var idbProxyableTypes;
+  var cursorAdvanceMethods;
+  function getIdbProxyableTypes() {
+    return idbProxyableTypes || (idbProxyableTypes = [
+      IDBDatabase,
+      IDBObjectStore,
+      IDBIndex,
+      IDBCursor,
+      IDBTransaction
+    ]);
+  }
+  function getCursorAdvanceMethods() {
+    return cursorAdvanceMethods || (cursorAdvanceMethods = [
+      IDBCursor.prototype.advance,
+      IDBCursor.prototype.continue,
+      IDBCursor.prototype.continuePrimaryKey
+    ]);
+  }
+  var cursorRequestMap = /* @__PURE__ */ new WeakMap();
+  var transactionDoneMap = /* @__PURE__ */ new WeakMap();
+  var transactionStoreNamesMap = /* @__PURE__ */ new WeakMap();
+  var transformCache = /* @__PURE__ */ new WeakMap();
+  var reverseTransformCache = /* @__PURE__ */ new WeakMap();
+  function promisifyRequest(request) {
+    const promise = new Promise((resolve, reject) => {
+      const unlisten = () => {
+        request.removeEventListener("success", success);
+        request.removeEventListener("error", error);
+      };
+      const success = () => {
+        resolve(wrap(request.result));
+        unlisten();
+      };
+      const error = () => {
+        reject(request.error);
+        unlisten();
+      };
+      request.addEventListener("success", success);
+      request.addEventListener("error", error);
+    });
+    promise.then((value) => {
+      if (value instanceof IDBCursor) {
+        cursorRequestMap.set(value, request);
+      }
+    }).catch(() => {
+    });
+    reverseTransformCache.set(promise, request);
+    return promise;
+  }
+  function cacheDonePromiseForTransaction(tx) {
+    if (transactionDoneMap.has(tx))
+      return;
+    const done = new Promise((resolve, reject) => {
+      const unlisten = () => {
+        tx.removeEventListener("complete", complete);
+        tx.removeEventListener("error", error);
+        tx.removeEventListener("abort", error);
+      };
+      const complete = () => {
+        resolve();
+        unlisten();
+      };
+      const error = () => {
+        reject(tx.error || new DOMException("AbortError", "AbortError"));
+        unlisten();
+      };
+      tx.addEventListener("complete", complete);
+      tx.addEventListener("error", error);
+      tx.addEventListener("abort", error);
+    });
+    transactionDoneMap.set(tx, done);
+  }
+  var idbProxyTraps = {
+    get(target, prop, receiver) {
+      if (target instanceof IDBTransaction) {
+        if (prop === "done")
+          return transactionDoneMap.get(target);
+        if (prop === "objectStoreNames") {
+          return target.objectStoreNames || transactionStoreNamesMap.get(target);
+        }
+        if (prop === "store") {
+          return receiver.objectStoreNames[1] ? void 0 : receiver.objectStore(receiver.objectStoreNames[0]);
+        }
+      }
+      return wrap(target[prop]);
+    },
+    set(target, prop, value) {
+      target[prop] = value;
+      return true;
+    },
+    has(target, prop) {
+      if (target instanceof IDBTransaction && (prop === "done" || prop === "store")) {
+        return true;
+      }
+      return prop in target;
+    }
+  };
+  function replaceTraps(callback) {
+    idbProxyTraps = callback(idbProxyTraps);
+  }
+  function wrapFunction(func) {
+    if (func === IDBDatabase.prototype.transaction && !("objectStoreNames" in IDBTransaction.prototype)) {
+      return function(storeNames, ...args) {
+        const tx = func.call(unwrap2(this), storeNames, ...args);
+        transactionStoreNamesMap.set(tx, storeNames.sort ? storeNames.sort() : [storeNames]);
+        return wrap(tx);
+      };
+    }
+    if (getCursorAdvanceMethods().includes(func)) {
+      return function(...args) {
+        func.apply(unwrap2(this), args);
+        return wrap(cursorRequestMap.get(this));
+      };
+    }
+    return function(...args) {
+      return wrap(func.apply(unwrap2(this), args));
+    };
+  }
+  function transformCachableValue(value) {
+    if (typeof value === "function")
+      return wrapFunction(value);
+    if (value instanceof IDBTransaction)
+      cacheDonePromiseForTransaction(value);
+    if (instanceOfAny(value, getIdbProxyableTypes()))
+      return new Proxy(value, idbProxyTraps);
+    return value;
+  }
+  function wrap(value) {
+    if (value instanceof IDBRequest)
+      return promisifyRequest(value);
+    if (transformCache.has(value))
+      return transformCache.get(value);
+    const newValue = transformCachableValue(value);
+    if (newValue !== value) {
+      transformCache.set(value, newValue);
+      reverseTransformCache.set(newValue, value);
+    }
+    return newValue;
+  }
+  var unwrap2 = (value) => reverseTransformCache.get(value);
+
+  // node_modules/.pnpm/idb@7.0.1/node_modules/idb/build/index.js
+  function openDB(name5, version4, { blocked, upgrade, blocking, terminated } = {}) {
+    const request = indexedDB.open(name5, version4);
+    const openPromise = wrap(request);
+    if (upgrade) {
+      request.addEventListener("upgradeneeded", (event) => {
+        upgrade(wrap(request.result), event.oldVersion, event.newVersion, wrap(request.transaction));
+      });
+    }
+    if (blocked)
+      request.addEventListener("blocked", () => blocked());
+    openPromise.then((db) => {
+      if (terminated)
+        db.addEventListener("close", () => terminated());
+      if (blocking)
+        db.addEventListener("versionchange", () => blocking());
+    }).catch(() => {
+    });
+    return openPromise;
+  }
+  var readMethods = ["get", "getKey", "getAll", "getAllKeys", "count"];
+  var writeMethods = ["put", "add", "delete", "clear"];
+  var cachedMethods = /* @__PURE__ */ new Map();
+  function getMethod(target, prop) {
+    if (!(target instanceof IDBDatabase && !(prop in target) && typeof prop === "string")) {
+      return;
+    }
+    if (cachedMethods.get(prop))
+      return cachedMethods.get(prop);
+    const targetFuncName = prop.replace(/FromIndex$/, "");
+    const useIndex = prop !== targetFuncName;
+    const isWrite = writeMethods.includes(targetFuncName);
+    if (!(targetFuncName in (useIndex ? IDBIndex : IDBObjectStore).prototype) || !(isWrite || readMethods.includes(targetFuncName))) {
+      return;
+    }
+    const method = async function(storeName, ...args) {
+      const tx = this.transaction(storeName, isWrite ? "readwrite" : "readonly");
+      let target2 = tx.store;
+      if (useIndex)
+        target2 = target2.index(args.shift());
+      return (await Promise.all([
+        target2[targetFuncName](...args),
+        isWrite && tx.done
+      ]))[0];
+    };
+    cachedMethods.set(prop, method);
+    return method;
+  }
+  replaceTraps((oldTraps) => __spreadProps(__spreadValues({}, oldTraps), {
+    get: (target, prop, receiver) => getMethod(target, prop) || oldTraps.get(target, prop, receiver),
+    has: (target, prop) => !!getMethod(target, prop) || oldTraps.has(target, prop)
+  }));
+
+  // node_modules/.pnpm/@firebase+app@0.9.1/node_modules/@firebase/app/dist/esm/index.esm2017.js
+  var PlatformLoggerServiceImpl = class {
+    constructor(container) {
+      this.container = container;
+    }
+    getPlatformInfoString() {
+      const providers = this.container.getProviders();
+      return providers.map((provider) => {
+        if (isVersionServiceProvider(provider)) {
+          const service = provider.getImmediate();
+          return `${service.library}/${service.version}`;
+        } else {
+          return null;
+        }
+      }).filter((logString) => logString).join(" ");
+    }
+  };
+  function isVersionServiceProvider(provider) {
+    const component = provider.getComponent();
+    return (component === null || component === void 0 ? void 0 : component.type) === "VERSION";
+  }
+  var name$o = "@firebase/app";
+  var version$1 = "0.9.1";
+  var logger = new Logger("@firebase/app");
+  var name$n = "@firebase/app-compat";
+  var name$m = "@firebase/analytics-compat";
+  var name$l = "@firebase/analytics";
+  var name$k = "@firebase/app-check-compat";
+  var name$j = "@firebase/app-check";
+  var name$i = "@firebase/auth";
+  var name$h = "@firebase/auth-compat";
+  var name$g = "@firebase/database";
+  var name$f = "@firebase/database-compat";
+  var name$e = "@firebase/functions";
+  var name$d = "@firebase/functions-compat";
+  var name$c = "@firebase/installations";
+  var name$b = "@firebase/installations-compat";
+  var name$a = "@firebase/messaging";
+  var name$9 = "@firebase/messaging-compat";
+  var name$8 = "@firebase/performance";
+  var name$7 = "@firebase/performance-compat";
+  var name$6 = "@firebase/remote-config";
+  var name$5 = "@firebase/remote-config-compat";
+  var name$4 = "@firebase/storage";
+  var name$3 = "@firebase/storage-compat";
+  var name$2 = "@firebase/firestore";
+  var name$1 = "@firebase/firestore-compat";
+  var name = "firebase";
+  var DEFAULT_ENTRY_NAME2 = "[DEFAULT]";
+  var PLATFORM_LOG_STRING = {
+    [name$o]: "fire-core",
+    [name$n]: "fire-core-compat",
+    [name$l]: "fire-analytics",
+    [name$m]: "fire-analytics-compat",
+    [name$j]: "fire-app-check",
+    [name$k]: "fire-app-check-compat",
+    [name$i]: "fire-auth",
+    [name$h]: "fire-auth-compat",
+    [name$g]: "fire-rtdb",
+    [name$f]: "fire-rtdb-compat",
+    [name$e]: "fire-fn",
+    [name$d]: "fire-fn-compat",
+    [name$c]: "fire-iid",
+    [name$b]: "fire-iid-compat",
+    [name$a]: "fire-fcm",
+    [name$9]: "fire-fcm-compat",
+    [name$8]: "fire-perf",
+    [name$7]: "fire-perf-compat",
+    [name$6]: "fire-rc",
+    [name$5]: "fire-rc-compat",
+    [name$4]: "fire-gcs",
+    [name$3]: "fire-gcs-compat",
+    [name$2]: "fire-fst",
+    [name$1]: "fire-fst-compat",
+    "fire-js": "fire-js",
+    [name]: "fire-js-all"
+  };
+  var _apps = /* @__PURE__ */ new Map();
+  var _components = /* @__PURE__ */ new Map();
+  function _addComponent(app2, component) {
+    try {
+      app2.container.addComponent(component);
+    } catch (e) {
+      logger.debug(`Component ${component.name} failed to register with FirebaseApp ${app2.name}`, e);
+    }
+  }
+  function _registerComponent(component) {
+    const componentName = component.name;
+    if (_components.has(componentName)) {
+      logger.debug(`There were multiple attempts to register component ${componentName}.`);
+      return false;
+    }
+    _components.set(componentName, component);
+    for (const app2 of _apps.values()) {
+      _addComponent(app2, component);
+    }
+    return true;
+  }
+  function _getProvider(app2, name5) {
+    const heartbeatController = app2.container.getProvider("heartbeat").getImmediate({ optional: true });
+    if (heartbeatController) {
+      void heartbeatController.triggerHeartbeat();
+    }
+    return app2.container.getProvider(name5);
+  }
+  var ERRORS = {
+    ["no-app"]: "No Firebase App '{$appName}' has been created - call Firebase App.initializeApp()",
+    ["bad-app-name"]: "Illegal App name: '{$appName}",
+    ["duplicate-app"]: "Firebase App named '{$appName}' already exists with different options or config",
+    ["app-deleted"]: "Firebase App named '{$appName}' already deleted",
+    ["no-options"]: "Need to provide options, when not being deployed to hosting via source.",
+    ["invalid-app-argument"]: "firebase.{$appName}() takes either no argument or a Firebase App instance.",
+    ["invalid-log-argument"]: "First argument to `onLog` must be null or a function.",
+    ["idb-open"]: "Error thrown when opening IndexedDB. Original error: {$originalErrorMessage}.",
+    ["idb-get"]: "Error thrown when reading from IndexedDB. Original error: {$originalErrorMessage}.",
+    ["idb-set"]: "Error thrown when writing to IndexedDB. Original error: {$originalErrorMessage}.",
+    ["idb-delete"]: "Error thrown when deleting from IndexedDB. Original error: {$originalErrorMessage}."
+  };
+  var ERROR_FACTORY = new ErrorFactory("app", "Firebase", ERRORS);
+  var FirebaseAppImpl = class {
+    constructor(options, config, container) {
+      this._isDeleted = false;
+      this._options = Object.assign({}, options);
+      this._config = Object.assign({}, config);
+      this._name = config.name;
+      this._automaticDataCollectionEnabled = config.automaticDataCollectionEnabled;
+      this._container = container;
+      this.container.addComponent(new Component2("app", () => this, "PUBLIC"));
+    }
+    get automaticDataCollectionEnabled() {
+      this.checkDestroyed();
+      return this._automaticDataCollectionEnabled;
+    }
+    set automaticDataCollectionEnabled(val) {
+      this.checkDestroyed();
+      this._automaticDataCollectionEnabled = val;
+    }
+    get name() {
+      this.checkDestroyed();
+      return this._name;
+    }
+    get options() {
+      this.checkDestroyed();
+      return this._options;
+    }
+    get config() {
+      this.checkDestroyed();
+      return this._config;
+    }
+    get container() {
+      return this._container;
+    }
+    get isDeleted() {
+      return this._isDeleted;
+    }
+    set isDeleted(val) {
+      this._isDeleted = val;
+    }
+    checkDestroyed() {
+      if (this.isDeleted) {
+        throw ERROR_FACTORY.create("app-deleted", { appName: this._name });
+      }
+    }
+  };
+  function initializeApp(_options, rawConfig = {}) {
+    let options = _options;
+    if (typeof rawConfig !== "object") {
+      const name6 = rawConfig;
+      rawConfig = { name: name6 };
+    }
+    const config = Object.assign({ name: DEFAULT_ENTRY_NAME2, automaticDataCollectionEnabled: false }, rawConfig);
+    const name5 = config.name;
+    if (typeof name5 !== "string" || !name5) {
+      throw ERROR_FACTORY.create("bad-app-name", {
+        appName: String(name5)
+      });
+    }
+    options || (options = getDefaultAppConfig());
+    if (!options) {
+      throw ERROR_FACTORY.create("no-options");
+    }
+    const existingApp = _apps.get(name5);
+    if (existingApp) {
+      if (deepEqual(options, existingApp.options) && deepEqual(config, existingApp.config)) {
+        return existingApp;
+      } else {
+        throw ERROR_FACTORY.create("duplicate-app", { appName: name5 });
+      }
+    }
+    const container = new ComponentContainer(name5);
+    for (const component of _components.values()) {
+      container.addComponent(component);
+    }
+    const newApp = new FirebaseAppImpl(options, config, container);
+    _apps.set(name5, newApp);
+    return newApp;
+  }
+  function getApp(name5 = DEFAULT_ENTRY_NAME2) {
+    const app2 = _apps.get(name5);
+    if (!app2 && name5 === DEFAULT_ENTRY_NAME2) {
+      return initializeApp();
+    }
+    if (!app2) {
+      throw ERROR_FACTORY.create("no-app", { appName: name5 });
+    }
+    return app2;
+  }
+  function registerVersion(libraryKeyOrName, version4, variant) {
+    var _a;
+    let library = (_a = PLATFORM_LOG_STRING[libraryKeyOrName]) !== null && _a !== void 0 ? _a : libraryKeyOrName;
+    if (variant) {
+      library += `-${variant}`;
+    }
+    const libraryMismatch = library.match(/\s|\//);
+    const versionMismatch = version4.match(/\s|\//);
+    if (libraryMismatch || versionMismatch) {
+      const warning2 = [
+        `Unable to register library "${library}" with version "${version4}":`
+      ];
+      if (libraryMismatch) {
+        warning2.push(`library name "${library}" contains illegal characters (whitespace or "/")`);
+      }
+      if (libraryMismatch && versionMismatch) {
+        warning2.push("and");
+      }
+      if (versionMismatch) {
+        warning2.push(`version name "${version4}" contains illegal characters (whitespace or "/")`);
+      }
+      logger.warn(warning2.join(" "));
+      return;
+    }
+    _registerComponent(new Component2(`${library}-version`, () => ({ library, version: version4 }), "VERSION"));
+  }
+  var DB_NAME = "firebase-heartbeat-database";
+  var DB_VERSION = 1;
+  var STORE_NAME = "firebase-heartbeat-store";
+  var dbPromise = null;
+  function getDbPromise() {
+    if (!dbPromise) {
+      dbPromise = openDB(DB_NAME, DB_VERSION, {
+        upgrade: (db, oldVersion) => {
+          switch (oldVersion) {
+            case 0:
+              db.createObjectStore(STORE_NAME);
+          }
+        }
+      }).catch((e) => {
+        throw ERROR_FACTORY.create("idb-open", {
+          originalErrorMessage: e.message
+        });
+      });
+    }
+    return dbPromise;
+  }
+  async function readHeartbeatsFromIndexedDB(app2) {
+    try {
+      const db = await getDbPromise();
+      return db.transaction(STORE_NAME).objectStore(STORE_NAME).get(computeKey(app2));
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        logger.warn(e.message);
+      } else {
+        const idbGetError = ERROR_FACTORY.create("idb-get", {
+          originalErrorMessage: e === null || e === void 0 ? void 0 : e.message
+        });
+        logger.warn(idbGetError.message);
+      }
+    }
+  }
+  async function writeHeartbeatsToIndexedDB(app2, heartbeatObject) {
+    try {
+      const db = await getDbPromise();
+      const tx = db.transaction(STORE_NAME, "readwrite");
+      const objectStore = tx.objectStore(STORE_NAME);
+      await objectStore.put(heartbeatObject, computeKey(app2));
+      return tx.done;
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        logger.warn(e.message);
+      } else {
+        const idbGetError = ERROR_FACTORY.create("idb-set", {
+          originalErrorMessage: e === null || e === void 0 ? void 0 : e.message
+        });
+        logger.warn(idbGetError.message);
+      }
+    }
+  }
+  function computeKey(app2) {
+    return `${app2.name}!${app2.options.appId}`;
+  }
+  var MAX_HEADER_BYTES = 1024;
+  var STORED_HEARTBEAT_RETENTION_MAX_MILLIS = 30 * 24 * 60 * 60 * 1e3;
+  var HeartbeatServiceImpl = class {
+    constructor(container) {
+      this.container = container;
+      this._heartbeatsCache = null;
+      const app2 = this.container.getProvider("app").getImmediate();
+      this._storage = new HeartbeatStorageImpl(app2);
+      this._heartbeatsCachePromise = this._storage.read().then((result) => {
+        this._heartbeatsCache = result;
+        return result;
+      });
+    }
+    async triggerHeartbeat() {
+      const platformLogger = this.container.getProvider("platform-logger").getImmediate();
+      const agent = platformLogger.getPlatformInfoString();
+      const date = getUTCDateString();
+      if (this._heartbeatsCache === null) {
+        this._heartbeatsCache = await this._heartbeatsCachePromise;
+      }
+      if (this._heartbeatsCache.lastSentHeartbeatDate === date || this._heartbeatsCache.heartbeats.some((singleDateHeartbeat) => singleDateHeartbeat.date === date)) {
+        return;
+      } else {
+        this._heartbeatsCache.heartbeats.push({ date, agent });
+      }
+      this._heartbeatsCache.heartbeats = this._heartbeatsCache.heartbeats.filter((singleDateHeartbeat) => {
+        const hbTimestamp = new Date(singleDateHeartbeat.date).valueOf();
+        const now = Date.now();
+        return now - hbTimestamp <= STORED_HEARTBEAT_RETENTION_MAX_MILLIS;
+      });
+      return this._storage.overwrite(this._heartbeatsCache);
+    }
+    async getHeartbeatsHeader() {
+      if (this._heartbeatsCache === null) {
+        await this._heartbeatsCachePromise;
+      }
+      if (this._heartbeatsCache === null || this._heartbeatsCache.heartbeats.length === 0) {
+        return "";
+      }
+      const date = getUTCDateString();
+      const { heartbeatsToSend, unsentEntries } = extractHeartbeatsForHeader(this._heartbeatsCache.heartbeats);
+      const headerString = base64urlEncodeWithoutPadding(JSON.stringify({ version: 2, heartbeats: heartbeatsToSend }));
+      this._heartbeatsCache.lastSentHeartbeatDate = date;
+      if (unsentEntries.length > 0) {
+        this._heartbeatsCache.heartbeats = unsentEntries;
+        await this._storage.overwrite(this._heartbeatsCache);
+      } else {
+        this._heartbeatsCache.heartbeats = [];
+        void this._storage.overwrite(this._heartbeatsCache);
+      }
+      return headerString;
+    }
+  };
+  function getUTCDateString() {
+    const today = new Date();
+    return today.toISOString().substring(0, 10);
+  }
+  function extractHeartbeatsForHeader(heartbeatsCache, maxSize = MAX_HEADER_BYTES) {
+    const heartbeatsToSend = [];
+    let unsentEntries = heartbeatsCache.slice();
+    for (const singleDateHeartbeat of heartbeatsCache) {
+      const heartbeatEntry = heartbeatsToSend.find((hb) => hb.agent === singleDateHeartbeat.agent);
+      if (!heartbeatEntry) {
+        heartbeatsToSend.push({
+          agent: singleDateHeartbeat.agent,
+          dates: [singleDateHeartbeat.date]
+        });
+        if (countBytes(heartbeatsToSend) > maxSize) {
+          heartbeatsToSend.pop();
+          break;
+        }
+      } else {
+        heartbeatEntry.dates.push(singleDateHeartbeat.date);
+        if (countBytes(heartbeatsToSend) > maxSize) {
+          heartbeatEntry.dates.pop();
+          break;
+        }
+      }
+      unsentEntries = unsentEntries.slice(1);
+    }
+    return {
+      heartbeatsToSend,
+      unsentEntries
+    };
+  }
+  var HeartbeatStorageImpl = class {
+    constructor(app2) {
+      this.app = app2;
+      this._canUseIndexedDBPromise = this.runIndexedDBEnvironmentCheck();
+    }
+    async runIndexedDBEnvironmentCheck() {
+      if (!isIndexedDBAvailable()) {
+        return false;
+      } else {
+        return validateIndexedDBOpenable().then(() => true).catch(() => false);
+      }
+    }
+    async read() {
+      const canUseIndexedDB = await this._canUseIndexedDBPromise;
+      if (!canUseIndexedDB) {
+        return { heartbeats: [] };
+      } else {
+        const idbHeartbeatObject = await readHeartbeatsFromIndexedDB(this.app);
+        return idbHeartbeatObject || { heartbeats: [] };
+      }
+    }
+    async overwrite(heartbeatsObject) {
+      var _a;
+      const canUseIndexedDB = await this._canUseIndexedDBPromise;
+      if (!canUseIndexedDB) {
+        return;
+      } else {
+        const existingHeartbeatsObject = await this.read();
+        return writeHeartbeatsToIndexedDB(this.app, {
+          lastSentHeartbeatDate: (_a = heartbeatsObject.lastSentHeartbeatDate) !== null && _a !== void 0 ? _a : existingHeartbeatsObject.lastSentHeartbeatDate,
+          heartbeats: heartbeatsObject.heartbeats
+        });
+      }
+    }
+    async add(heartbeatsObject) {
+      var _a;
+      const canUseIndexedDB = await this._canUseIndexedDBPromise;
+      if (!canUseIndexedDB) {
+        return;
+      } else {
+        const existingHeartbeatsObject = await this.read();
+        return writeHeartbeatsToIndexedDB(this.app, {
+          lastSentHeartbeatDate: (_a = heartbeatsObject.lastSentHeartbeatDate) !== null && _a !== void 0 ? _a : existingHeartbeatsObject.lastSentHeartbeatDate,
+          heartbeats: [
+            ...existingHeartbeatsObject.heartbeats,
+            ...heartbeatsObject.heartbeats
+          ]
+        });
+      }
+    }
+  };
+  function countBytes(heartbeatsCache) {
+    return base64urlEncodeWithoutPadding(
+      JSON.stringify({ version: 2, heartbeats: heartbeatsCache })
+    ).length;
+  }
+  function registerCoreComponents(variant) {
+    _registerComponent(new Component2("platform-logger", (container) => new PlatformLoggerServiceImpl(container), "PRIVATE"));
+    _registerComponent(new Component2("heartbeat", (container) => new HeartbeatServiceImpl(container), "PRIVATE"));
+    registerVersion(name$o, version$1, variant);
+    registerVersion(name$o, version$1, "esm2017");
+    registerVersion("fire-js", "");
+  }
+  registerCoreComponents("");
+
+  // node_modules/.pnpm/firebase@9.16.0/node_modules/firebase/app/dist/esm/index.esm.js
+  var name2 = "firebase";
+  var version = "9.16.0";
+  registerVersion(name2, version, "app");
+
+  // node_modules/.pnpm/@firebase+installations@0.6.1_@firebase+app@0.9.1/node_modules/@firebase/installations/dist/esm/index.esm2017.js
+  var name3 = "@firebase/installations";
+  var version2 = "0.6.1";
+  var PENDING_TIMEOUT_MS = 1e4;
+  var PACKAGE_VERSION = `w:${version2}`;
+  var INTERNAL_AUTH_VERSION = "FIS_v2";
+  var INSTALLATIONS_API_URL = "https://firebaseinstallations.googleapis.com/v1";
+  var TOKEN_EXPIRATION_BUFFER = 60 * 60 * 1e3;
+  var SERVICE = "installations";
+  var SERVICE_NAME = "Installations";
+  var ERROR_DESCRIPTION_MAP = {
+    ["missing-app-config-values"]: 'Missing App configuration value: "{$valueName}"',
+    ["not-registered"]: "Firebase Installation is not registered.",
+    ["installation-not-found"]: "Firebase Installation not found.",
+    ["request-failed"]: '{$requestName} request failed with error "{$serverCode} {$serverStatus}: {$serverMessage}"',
+    ["app-offline"]: "Could not process request. Application offline.",
+    ["delete-pending-registration"]: "Can't delete installation while there is a pending registration request."
+  };
+  var ERROR_FACTORY2 = new ErrorFactory(SERVICE, SERVICE_NAME, ERROR_DESCRIPTION_MAP);
+  function isServerError(error) {
+    return error instanceof FirebaseError && error.code.includes("request-failed");
+  }
+  function getInstallationsEndpoint({ projectId }) {
+    return `${INSTALLATIONS_API_URL}/projects/${projectId}/installations`;
+  }
+  function extractAuthTokenInfoFromResponse(response) {
+    return {
+      token: response.token,
+      requestStatus: 2,
+      expiresIn: getExpiresInFromResponseExpiresIn(response.expiresIn),
+      creationTime: Date.now()
+    };
+  }
+  async function getErrorFromResponse(requestName, response) {
+    const responseJson = await response.json();
+    const errorData = responseJson.error;
+    return ERROR_FACTORY2.create("request-failed", {
+      requestName,
+      serverCode: errorData.code,
+      serverMessage: errorData.message,
+      serverStatus: errorData.status
+    });
+  }
+  function getHeaders({ apiKey }) {
+    return new Headers({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "x-goog-api-key": apiKey
+    });
+  }
+  function getHeadersWithAuth(appConfig, { refreshToken }) {
+    const headers = getHeaders(appConfig);
+    headers.append("Authorization", getAuthorizationHeader(refreshToken));
+    return headers;
+  }
+  async function retryIfServerError(fn) {
+    const result = await fn();
+    if (result.status >= 500 && result.status < 600) {
+      return fn();
+    }
+    return result;
+  }
+  function getExpiresInFromResponseExpiresIn(responseExpiresIn) {
+    return Number(responseExpiresIn.replace("s", "000"));
+  }
+  function getAuthorizationHeader(refreshToken) {
+    return `${INTERNAL_AUTH_VERSION} ${refreshToken}`;
+  }
+  async function createInstallationRequest({ appConfig, heartbeatServiceProvider }, { fid }) {
+    const endpoint = getInstallationsEndpoint(appConfig);
+    const headers = getHeaders(appConfig);
+    const heartbeatService = heartbeatServiceProvider.getImmediate({
+      optional: true
+    });
+    if (heartbeatService) {
+      const heartbeatsHeader = await heartbeatService.getHeartbeatsHeader();
+      if (heartbeatsHeader) {
+        headers.append("x-firebase-client", heartbeatsHeader);
+      }
+    }
+    const body = {
+      fid,
+      authVersion: INTERNAL_AUTH_VERSION,
+      appId: appConfig.appId,
+      sdkVersion: PACKAGE_VERSION
+    };
+    const request = {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body)
+    };
+    const response = await retryIfServerError(() => fetch(endpoint, request));
+    if (response.ok) {
+      const responseValue = await response.json();
+      const registeredInstallationEntry = {
+        fid: responseValue.fid || fid,
+        registrationStatus: 2,
+        refreshToken: responseValue.refreshToken,
+        authToken: extractAuthTokenInfoFromResponse(responseValue.authToken)
+      };
+      return registeredInstallationEntry;
+    } else {
+      throw await getErrorFromResponse("Create Installation", response);
+    }
+  }
+  function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+  function bufferToBase64UrlSafe(array) {
+    const b64 = btoa(String.fromCharCode(...array));
+    return b64.replace(/\+/g, "-").replace(/\//g, "_");
+  }
+  var VALID_FID_PATTERN = /^[cdef][\w-]{21}$/;
+  var INVALID_FID = "";
+  function generateFid() {
+    try {
+      const fidByteArray = new Uint8Array(17);
+      const crypto = self.crypto || self.msCrypto;
+      crypto.getRandomValues(fidByteArray);
+      fidByteArray[0] = 112 + fidByteArray[0] % 16;
+      const fid = encode(fidByteArray);
+      return VALID_FID_PATTERN.test(fid) ? fid : INVALID_FID;
+    } catch (_a) {
+      return INVALID_FID;
+    }
+  }
+  function encode(fidByteArray) {
+    const b64String = bufferToBase64UrlSafe(fidByteArray);
+    return b64String.substr(0, 22);
+  }
+  function getKey(appConfig) {
+    return `${appConfig.appName}!${appConfig.appId}`;
+  }
+  var fidChangeCallbacks = /* @__PURE__ */ new Map();
+  function fidChanged(appConfig, fid) {
+    const key = getKey(appConfig);
+    callFidChangeCallbacks(key, fid);
+    broadcastFidChange(key, fid);
+  }
+  function callFidChangeCallbacks(key, fid) {
+    const callbacks = fidChangeCallbacks.get(key);
+    if (!callbacks) {
+      return;
+    }
+    for (const callback of callbacks) {
+      callback(fid);
+    }
+  }
+  function broadcastFidChange(key, fid) {
+    const channel = getBroadcastChannel();
+    if (channel) {
+      channel.postMessage({ key, fid });
+    }
+    closeBroadcastChannel();
+  }
+  var broadcastChannel = null;
+  function getBroadcastChannel() {
+    if (!broadcastChannel && "BroadcastChannel" in self) {
+      broadcastChannel = new BroadcastChannel("[Firebase] FID Change");
+      broadcastChannel.onmessage = (e) => {
+        callFidChangeCallbacks(e.data.key, e.data.fid);
+      };
+    }
+    return broadcastChannel;
+  }
+  function closeBroadcastChannel() {
+    if (fidChangeCallbacks.size === 0 && broadcastChannel) {
+      broadcastChannel.close();
+      broadcastChannel = null;
+    }
+  }
+  var DATABASE_NAME = "firebase-installations-database";
+  var DATABASE_VERSION = 1;
+  var OBJECT_STORE_NAME = "firebase-installations-store";
+  var dbPromise2 = null;
+  function getDbPromise2() {
+    if (!dbPromise2) {
+      dbPromise2 = openDB(DATABASE_NAME, DATABASE_VERSION, {
+        upgrade: (db, oldVersion) => {
+          switch (oldVersion) {
+            case 0:
+              db.createObjectStore(OBJECT_STORE_NAME);
+          }
+        }
+      });
+    }
+    return dbPromise2;
+  }
+  async function set(appConfig, value) {
+    const key = getKey(appConfig);
+    const db = await getDbPromise2();
+    const tx = db.transaction(OBJECT_STORE_NAME, "readwrite");
+    const objectStore = tx.objectStore(OBJECT_STORE_NAME);
+    const oldValue = await objectStore.get(key);
+    await objectStore.put(value, key);
+    await tx.done;
+    if (!oldValue || oldValue.fid !== value.fid) {
+      fidChanged(appConfig, value.fid);
+    }
+    return value;
+  }
+  async function remove(appConfig) {
+    const key = getKey(appConfig);
+    const db = await getDbPromise2();
+    const tx = db.transaction(OBJECT_STORE_NAME, "readwrite");
+    await tx.objectStore(OBJECT_STORE_NAME).delete(key);
+    await tx.done;
+  }
+  async function update(appConfig, updateFn) {
+    const key = getKey(appConfig);
+    const db = await getDbPromise2();
+    const tx = db.transaction(OBJECT_STORE_NAME, "readwrite");
+    const store = tx.objectStore(OBJECT_STORE_NAME);
+    const oldValue = await store.get(key);
+    const newValue = updateFn(oldValue);
+    if (newValue === void 0) {
+      await store.delete(key);
+    } else {
+      await store.put(newValue, key);
+    }
+    await tx.done;
+    if (newValue && (!oldValue || oldValue.fid !== newValue.fid)) {
+      fidChanged(appConfig, newValue.fid);
+    }
+    return newValue;
+  }
+  async function getInstallationEntry(installations) {
+    let registrationPromise;
+    const installationEntry = await update(installations.appConfig, (oldEntry) => {
+      const installationEntry2 = updateOrCreateInstallationEntry(oldEntry);
+      const entryWithPromise = triggerRegistrationIfNecessary(installations, installationEntry2);
+      registrationPromise = entryWithPromise.registrationPromise;
+      return entryWithPromise.installationEntry;
+    });
+    if (installationEntry.fid === INVALID_FID) {
+      return { installationEntry: await registrationPromise };
+    }
+    return {
+      installationEntry,
+      registrationPromise
+    };
+  }
+  function updateOrCreateInstallationEntry(oldEntry) {
+    const entry = oldEntry || {
+      fid: generateFid(),
+      registrationStatus: 0
+    };
+    return clearTimedOutRequest(entry);
+  }
+  function triggerRegistrationIfNecessary(installations, installationEntry) {
+    if (installationEntry.registrationStatus === 0) {
+      if (!navigator.onLine) {
+        const registrationPromiseWithError = Promise.reject(ERROR_FACTORY2.create("app-offline"));
+        return {
+          installationEntry,
+          registrationPromise: registrationPromiseWithError
+        };
+      }
+      const inProgressEntry = {
+        fid: installationEntry.fid,
+        registrationStatus: 1,
+        registrationTime: Date.now()
+      };
+      const registrationPromise = registerInstallation(installations, inProgressEntry);
+      return { installationEntry: inProgressEntry, registrationPromise };
+    } else if (installationEntry.registrationStatus === 1) {
+      return {
+        installationEntry,
+        registrationPromise: waitUntilFidRegistration(installations)
+      };
+    } else {
+      return { installationEntry };
+    }
+  }
+  async function registerInstallation(installations, installationEntry) {
+    try {
+      const registeredInstallationEntry = await createInstallationRequest(installations, installationEntry);
+      return set(installations.appConfig, registeredInstallationEntry);
+    } catch (e) {
+      if (isServerError(e) && e.customData.serverCode === 409) {
+        await remove(installations.appConfig);
+      } else {
+        await set(installations.appConfig, {
+          fid: installationEntry.fid,
+          registrationStatus: 0
+        });
+      }
+      throw e;
+    }
+  }
+  async function waitUntilFidRegistration(installations) {
+    let entry = await updateInstallationRequest(installations.appConfig);
+    while (entry.registrationStatus === 1) {
+      await sleep(100);
+      entry = await updateInstallationRequest(installations.appConfig);
+    }
+    if (entry.registrationStatus === 0) {
+      const { installationEntry, registrationPromise } = await getInstallationEntry(installations);
+      if (registrationPromise) {
+        return registrationPromise;
+      } else {
+        return installationEntry;
+      }
+    }
+    return entry;
+  }
+  function updateInstallationRequest(appConfig) {
+    return update(appConfig, (oldEntry) => {
+      if (!oldEntry) {
+        throw ERROR_FACTORY2.create("installation-not-found");
+      }
+      return clearTimedOutRequest(oldEntry);
+    });
+  }
+  function clearTimedOutRequest(entry) {
+    if (hasInstallationRequestTimedOut(entry)) {
+      return {
+        fid: entry.fid,
+        registrationStatus: 0
+      };
+    }
+    return entry;
+  }
+  function hasInstallationRequestTimedOut(installationEntry) {
+    return installationEntry.registrationStatus === 1 && installationEntry.registrationTime + PENDING_TIMEOUT_MS < Date.now();
+  }
+  async function generateAuthTokenRequest({ appConfig, heartbeatServiceProvider }, installationEntry) {
+    const endpoint = getGenerateAuthTokenEndpoint(appConfig, installationEntry);
+    const headers = getHeadersWithAuth(appConfig, installationEntry);
+    const heartbeatService = heartbeatServiceProvider.getImmediate({
+      optional: true
+    });
+    if (heartbeatService) {
+      const heartbeatsHeader = await heartbeatService.getHeartbeatsHeader();
+      if (heartbeatsHeader) {
+        headers.append("x-firebase-client", heartbeatsHeader);
+      }
+    }
+    const body = {
+      installation: {
+        sdkVersion: PACKAGE_VERSION,
+        appId: appConfig.appId
+      }
+    };
+    const request = {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body)
+    };
+    const response = await retryIfServerError(() => fetch(endpoint, request));
+    if (response.ok) {
+      const responseValue = await response.json();
+      const completedAuthToken = extractAuthTokenInfoFromResponse(responseValue);
+      return completedAuthToken;
+    } else {
+      throw await getErrorFromResponse("Generate Auth Token", response);
+    }
+  }
+  function getGenerateAuthTokenEndpoint(appConfig, { fid }) {
+    return `${getInstallationsEndpoint(appConfig)}/${fid}/authTokens:generate`;
+  }
+  async function refreshAuthToken(installations, forceRefresh = false) {
+    let tokenPromise;
+    const entry = await update(installations.appConfig, (oldEntry) => {
+      if (!isEntryRegistered(oldEntry)) {
+        throw ERROR_FACTORY2.create("not-registered");
+      }
+      const oldAuthToken = oldEntry.authToken;
+      if (!forceRefresh && isAuthTokenValid(oldAuthToken)) {
+        return oldEntry;
+      } else if (oldAuthToken.requestStatus === 1) {
+        tokenPromise = waitUntilAuthTokenRequest(installations, forceRefresh);
+        return oldEntry;
+      } else {
+        if (!navigator.onLine) {
+          throw ERROR_FACTORY2.create("app-offline");
+        }
+        const inProgressEntry = makeAuthTokenRequestInProgressEntry(oldEntry);
+        tokenPromise = fetchAuthTokenFromServer(installations, inProgressEntry);
+        return inProgressEntry;
+      }
+    });
+    const authToken = tokenPromise ? await tokenPromise : entry.authToken;
+    return authToken;
+  }
+  async function waitUntilAuthTokenRequest(installations, forceRefresh) {
+    let entry = await updateAuthTokenRequest(installations.appConfig);
+    while (entry.authToken.requestStatus === 1) {
+      await sleep(100);
+      entry = await updateAuthTokenRequest(installations.appConfig);
+    }
+    const authToken = entry.authToken;
+    if (authToken.requestStatus === 0) {
+      return refreshAuthToken(installations, forceRefresh);
+    } else {
+      return authToken;
+    }
+  }
+  function updateAuthTokenRequest(appConfig) {
+    return update(appConfig, (oldEntry) => {
+      if (!isEntryRegistered(oldEntry)) {
+        throw ERROR_FACTORY2.create("not-registered");
+      }
+      const oldAuthToken = oldEntry.authToken;
+      if (hasAuthTokenRequestTimedOut(oldAuthToken)) {
+        return Object.assign(Object.assign({}, oldEntry), { authToken: { requestStatus: 0 } });
+      }
+      return oldEntry;
+    });
+  }
+  async function fetchAuthTokenFromServer(installations, installationEntry) {
+    try {
+      const authToken = await generateAuthTokenRequest(installations, installationEntry);
+      const updatedInstallationEntry = Object.assign(Object.assign({}, installationEntry), { authToken });
+      await set(installations.appConfig, updatedInstallationEntry);
+      return authToken;
+    } catch (e) {
+      if (isServerError(e) && (e.customData.serverCode === 401 || e.customData.serverCode === 404)) {
+        await remove(installations.appConfig);
+      } else {
+        const updatedInstallationEntry = Object.assign(Object.assign({}, installationEntry), { authToken: { requestStatus: 0 } });
+        await set(installations.appConfig, updatedInstallationEntry);
+      }
+      throw e;
+    }
+  }
+  function isEntryRegistered(installationEntry) {
+    return installationEntry !== void 0 && installationEntry.registrationStatus === 2;
+  }
+  function isAuthTokenValid(authToken) {
+    return authToken.requestStatus === 2 && !isAuthTokenExpired(authToken);
+  }
+  function isAuthTokenExpired(authToken) {
+    const now = Date.now();
+    return now < authToken.creationTime || authToken.creationTime + authToken.expiresIn < now + TOKEN_EXPIRATION_BUFFER;
+  }
+  function makeAuthTokenRequestInProgressEntry(oldEntry) {
+    const inProgressAuthToken = {
+      requestStatus: 1,
+      requestTime: Date.now()
+    };
+    return Object.assign(Object.assign({}, oldEntry), { authToken: inProgressAuthToken });
+  }
+  function hasAuthTokenRequestTimedOut(authToken) {
+    return authToken.requestStatus === 1 && authToken.requestTime + PENDING_TIMEOUT_MS < Date.now();
+  }
+  async function getId(installations) {
+    const installationsImpl = installations;
+    const { installationEntry, registrationPromise } = await getInstallationEntry(installationsImpl);
+    if (registrationPromise) {
+      registrationPromise.catch(console.error);
+    } else {
+      refreshAuthToken(installationsImpl).catch(console.error);
+    }
+    return installationEntry.fid;
+  }
+  async function getToken(installations, forceRefresh = false) {
+    const installationsImpl = installations;
+    await completeInstallationRegistration(installationsImpl);
+    const authToken = await refreshAuthToken(installationsImpl, forceRefresh);
+    return authToken.token;
+  }
+  async function completeInstallationRegistration(installations) {
+    const { registrationPromise } = await getInstallationEntry(installations);
+    if (registrationPromise) {
+      await registrationPromise;
+    }
+  }
+  function extractAppConfig(app2) {
+    if (!app2 || !app2.options) {
+      throw getMissingValueError("App Configuration");
+    }
+    if (!app2.name) {
+      throw getMissingValueError("App Name");
+    }
+    const configKeys = [
+      "projectId",
+      "apiKey",
+      "appId"
+    ];
+    for (const keyName of configKeys) {
+      if (!app2.options[keyName]) {
+        throw getMissingValueError(keyName);
+      }
+    }
+    return {
+      appName: app2.name,
+      projectId: app2.options.projectId,
+      apiKey: app2.options.apiKey,
+      appId: app2.options.appId
+    };
+  }
+  function getMissingValueError(valueName) {
+    return ERROR_FACTORY2.create("missing-app-config-values", {
+      valueName
+    });
+  }
+  var INSTALLATIONS_NAME = "installations";
+  var INSTALLATIONS_NAME_INTERNAL = "installations-internal";
+  var publicFactory = (container) => {
+    const app2 = container.getProvider("app").getImmediate();
+    const appConfig = extractAppConfig(app2);
+    const heartbeatServiceProvider = _getProvider(app2, "heartbeat");
+    const installationsImpl = {
+      app: app2,
+      appConfig,
+      heartbeatServiceProvider,
+      _delete: () => Promise.resolve()
+    };
+    return installationsImpl;
+  };
+  var internalFactory = (container) => {
+    const app2 = container.getProvider("app").getImmediate();
+    const installations = _getProvider(app2, INSTALLATIONS_NAME).getImmediate();
+    const installationsInternal = {
+      getId: () => getId(installations),
+      getToken: (forceRefresh) => getToken(installations, forceRefresh)
+    };
+    return installationsInternal;
+  };
+  function registerInstallations() {
+    _registerComponent(new Component2(INSTALLATIONS_NAME, publicFactory, "PUBLIC"));
+    _registerComponent(new Component2(INSTALLATIONS_NAME_INTERNAL, internalFactory, "PRIVATE"));
+  }
+  registerInstallations();
+  registerVersion(name3, version2);
+  registerVersion(name3, version2, "esm2017");
+
+  // node_modules/.pnpm/@firebase+analytics@0.9.1_@firebase+app@0.9.1/node_modules/@firebase/analytics/dist/esm/index.esm2017.js
+  var ANALYTICS_TYPE = "analytics";
+  var GA_FID_KEY = "firebase_id";
+  var ORIGIN_KEY = "origin";
+  var FETCH_TIMEOUT_MILLIS = 60 * 1e3;
+  var DYNAMIC_CONFIG_URL = "https://firebase.googleapis.com/v1alpha/projects/-/apps/{app-id}/webConfig";
+  var GTAG_URL = "https://www.googletagmanager.com/gtag/js";
+  var logger2 = new Logger("@firebase/analytics");
+  function promiseAllSettled(promises) {
+    return Promise.all(promises.map((promise) => promise.catch((e) => e)));
+  }
+  function insertScriptTag(dataLayerName2, measurementId) {
+    const script = document.createElement("script");
+    script.src = `${GTAG_URL}?l=${dataLayerName2}&id=${measurementId}`;
+    script.async = true;
+    document.head.appendChild(script);
+  }
+  function getOrCreateDataLayer(dataLayerName2) {
+    let dataLayer = [];
+    if (Array.isArray(window[dataLayerName2])) {
+      dataLayer = window[dataLayerName2];
+    } else {
+      window[dataLayerName2] = dataLayer;
+    }
+    return dataLayer;
+  }
+  async function gtagOnConfig(gtagCore, initializationPromisesMap2, dynamicConfigPromisesList2, measurementIdToAppId2, measurementId, gtagParams) {
+    const correspondingAppId = measurementIdToAppId2[measurementId];
+    try {
+      if (correspondingAppId) {
+        await initializationPromisesMap2[correspondingAppId];
+      } else {
+        const dynamicConfigResults = await promiseAllSettled(dynamicConfigPromisesList2);
+        const foundConfig = dynamicConfigResults.find((config) => config.measurementId === measurementId);
+        if (foundConfig) {
+          await initializationPromisesMap2[foundConfig.appId];
+        }
+      }
+    } catch (e) {
+      logger2.error(e);
+    }
+    gtagCore("config", measurementId, gtagParams);
+  }
+  async function gtagOnEvent(gtagCore, initializationPromisesMap2, dynamicConfigPromisesList2, measurementId, gtagParams) {
+    try {
+      let initializationPromisesToWaitFor = [];
+      if (gtagParams && gtagParams["send_to"]) {
+        let gaSendToList = gtagParams["send_to"];
+        if (!Array.isArray(gaSendToList)) {
+          gaSendToList = [gaSendToList];
+        }
+        const dynamicConfigResults = await promiseAllSettled(dynamicConfigPromisesList2);
+        for (const sendToId of gaSendToList) {
+          const foundConfig = dynamicConfigResults.find((config) => config.measurementId === sendToId);
+          const initializationPromise = foundConfig && initializationPromisesMap2[foundConfig.appId];
+          if (initializationPromise) {
+            initializationPromisesToWaitFor.push(initializationPromise);
+          } else {
+            initializationPromisesToWaitFor = [];
+            break;
+          }
+        }
+      }
+      if (initializationPromisesToWaitFor.length === 0) {
+        initializationPromisesToWaitFor = Object.values(initializationPromisesMap2);
+      }
+      await Promise.all(initializationPromisesToWaitFor);
+      gtagCore("event", measurementId, gtagParams || {});
+    } catch (e) {
+      logger2.error(e);
+    }
+  }
+  function wrapGtag(gtagCore, initializationPromisesMap2, dynamicConfigPromisesList2, measurementIdToAppId2) {
+    async function gtagWrapper(command, idOrNameOrParams, gtagParams) {
+      try {
+        if (command === "event") {
+          await gtagOnEvent(gtagCore, initializationPromisesMap2, dynamicConfigPromisesList2, idOrNameOrParams, gtagParams);
+        } else if (command === "config") {
+          await gtagOnConfig(gtagCore, initializationPromisesMap2, dynamicConfigPromisesList2, measurementIdToAppId2, idOrNameOrParams, gtagParams);
+        } else if (command === "consent") {
+          gtagCore("consent", "update", gtagParams);
+        } else {
+          gtagCore("set", idOrNameOrParams);
+        }
+      } catch (e) {
+        logger2.error(e);
+      }
+    }
+    return gtagWrapper;
+  }
+  function wrapOrCreateGtag(initializationPromisesMap2, dynamicConfigPromisesList2, measurementIdToAppId2, dataLayerName2, gtagFunctionName) {
+    let gtagCore = function(..._args) {
+      window[dataLayerName2].push(arguments);
+    };
+    if (window[gtagFunctionName] && typeof window[gtagFunctionName] === "function") {
+      gtagCore = window[gtagFunctionName];
+    }
+    window[gtagFunctionName] = wrapGtag(gtagCore, initializationPromisesMap2, dynamicConfigPromisesList2, measurementIdToAppId2);
+    return {
+      gtagCore,
+      wrappedGtag: window[gtagFunctionName]
+    };
+  }
+  function findGtagScriptOnPage(dataLayerName2) {
+    const scriptTags = window.document.getElementsByTagName("script");
+    for (const tag of Object.values(scriptTags)) {
+      if (tag.src && tag.src.includes(GTAG_URL) && tag.src.includes(dataLayerName2)) {
+        return tag;
+      }
+    }
+    return null;
+  }
+  var ERRORS2 = {
+    ["already-exists"]: "A Firebase Analytics instance with the appId {$id}  already exists. Only one Firebase Analytics instance can be created for each appId.",
+    ["already-initialized"]: "initializeAnalytics() cannot be called again with different options than those it was initially called with. It can be called again with the same options to return the existing instance, or getAnalytics() can be used to get a reference to the already-intialized instance.",
+    ["already-initialized-settings"]: "Firebase Analytics has already been initialized.settings() must be called before initializing any Analytics instanceor it will have no effect.",
+    ["interop-component-reg-failed"]: "Firebase Analytics Interop Component failed to instantiate: {$reason}",
+    ["invalid-analytics-context"]: "Firebase Analytics is not supported in this environment. Wrap initialization of analytics in analytics.isSupported() to prevent initialization in unsupported environments. Details: {$errorInfo}",
+    ["indexeddb-unavailable"]: "IndexedDB unavailable or restricted in this environment. Wrap initialization of analytics in analytics.isSupported() to prevent initialization in unsupported environments. Details: {$errorInfo}",
+    ["fetch-throttle"]: "The config fetch request timed out while in an exponential backoff state. Unix timestamp in milliseconds when fetch request throttling ends: {$throttleEndTimeMillis}.",
+    ["config-fetch-failed"]: "Dynamic config fetch failed: [{$httpStatus}] {$responseMessage}",
+    ["no-api-key"]: 'The "apiKey" field is empty in the local Firebase config. Firebase Analytics requires this field tocontain a valid API key.',
+    ["no-app-id"]: 'The "appId" field is empty in the local Firebase config. Firebase Analytics requires this field tocontain a valid app ID.'
+  };
+  var ERROR_FACTORY3 = new ErrorFactory("analytics", "Analytics", ERRORS2);
+  var LONG_RETRY_FACTOR = 30;
+  var BASE_INTERVAL_MILLIS = 1e3;
+  var RetryData = class {
+    constructor(throttleMetadata = {}, intervalMillis = BASE_INTERVAL_MILLIS) {
+      this.throttleMetadata = throttleMetadata;
+      this.intervalMillis = intervalMillis;
+    }
+    getThrottleMetadata(appId) {
+      return this.throttleMetadata[appId];
+    }
+    setThrottleMetadata(appId, metadata) {
+      this.throttleMetadata[appId] = metadata;
+    }
+    deleteThrottleMetadata(appId) {
+      delete this.throttleMetadata[appId];
+    }
+  };
+  var defaultRetryData = new RetryData();
+  function getHeaders2(apiKey) {
+    return new Headers({
+      Accept: "application/json",
+      "x-goog-api-key": apiKey
+    });
+  }
+  async function fetchDynamicConfig(appFields) {
+    var _a;
+    const { appId, apiKey } = appFields;
+    const request = {
+      method: "GET",
+      headers: getHeaders2(apiKey)
+    };
+    const appUrl = DYNAMIC_CONFIG_URL.replace("{app-id}", appId);
+    const response = await fetch(appUrl, request);
+    if (response.status !== 200 && response.status !== 304) {
+      let errorMessage = "";
+      try {
+        const jsonResponse = await response.json();
+        if ((_a = jsonResponse.error) === null || _a === void 0 ? void 0 : _a.message) {
+          errorMessage = jsonResponse.error.message;
+        }
+      } catch (_ignored) {
+      }
+      throw ERROR_FACTORY3.create("config-fetch-failed", {
+        httpStatus: response.status,
+        responseMessage: errorMessage
+      });
+    }
+    return response.json();
+  }
+  async function fetchDynamicConfigWithRetry(app2, retryData = defaultRetryData, timeoutMillis) {
+    const { appId, apiKey, measurementId } = app2.options;
+    if (!appId) {
+      throw ERROR_FACTORY3.create("no-app-id");
+    }
+    if (!apiKey) {
+      if (measurementId) {
+        return {
+          measurementId,
+          appId
+        };
+      }
+      throw ERROR_FACTORY3.create("no-api-key");
+    }
+    const throttleMetadata = retryData.getThrottleMetadata(appId) || {
+      backoffCount: 0,
+      throttleEndTimeMillis: Date.now()
+    };
+    const signal = new AnalyticsAbortSignal();
+    setTimeout(async () => {
+      signal.abort();
+    }, timeoutMillis !== void 0 ? timeoutMillis : FETCH_TIMEOUT_MILLIS);
+    return attemptFetchDynamicConfigWithRetry({ appId, apiKey, measurementId }, throttleMetadata, signal, retryData);
+  }
+  async function attemptFetchDynamicConfigWithRetry(appFields, { throttleEndTimeMillis, backoffCount }, signal, retryData = defaultRetryData) {
+    var _a;
+    const { appId, measurementId } = appFields;
+    try {
+      await setAbortableTimeout(signal, throttleEndTimeMillis);
+    } catch (e) {
+      if (measurementId) {
+        logger2.warn(`Timed out fetching this Firebase app's measurement ID from the server. Falling back to the measurement ID ${measurementId} provided in the "measurementId" field in the local Firebase config. [${e === null || e === void 0 ? void 0 : e.message}]`);
+        return { appId, measurementId };
+      }
+      throw e;
+    }
+    try {
+      const response = await fetchDynamicConfig(appFields);
+      retryData.deleteThrottleMetadata(appId);
+      return response;
+    } catch (e) {
+      const error = e;
+      if (!isRetriableError(error)) {
+        retryData.deleteThrottleMetadata(appId);
+        if (measurementId) {
+          logger2.warn(`Failed to fetch this Firebase app's measurement ID from the server. Falling back to the measurement ID ${measurementId} provided in the "measurementId" field in the local Firebase config. [${error === null || error === void 0 ? void 0 : error.message}]`);
+          return { appId, measurementId };
+        } else {
+          throw e;
+        }
+      }
+      const backoffMillis = Number((_a = error === null || error === void 0 ? void 0 : error.customData) === null || _a === void 0 ? void 0 : _a.httpStatus) === 503 ? calculateBackoffMillis(backoffCount, retryData.intervalMillis, LONG_RETRY_FACTOR) : calculateBackoffMillis(backoffCount, retryData.intervalMillis);
+      const throttleMetadata = {
+        throttleEndTimeMillis: Date.now() + backoffMillis,
+        backoffCount: backoffCount + 1
+      };
+      retryData.setThrottleMetadata(appId, throttleMetadata);
+      logger2.debug(`Calling attemptFetch again in ${backoffMillis} millis`);
+      return attemptFetchDynamicConfigWithRetry(appFields, throttleMetadata, signal, retryData);
+    }
+  }
+  function setAbortableTimeout(signal, throttleEndTimeMillis) {
+    return new Promise((resolve, reject) => {
+      const backoffMillis = Math.max(throttleEndTimeMillis - Date.now(), 0);
+      const timeout = setTimeout(resolve, backoffMillis);
+      signal.addEventListener(() => {
+        clearTimeout(timeout);
+        reject(ERROR_FACTORY3.create("fetch-throttle", {
+          throttleEndTimeMillis
+        }));
+      });
+    });
+  }
+  function isRetriableError(e) {
+    if (!(e instanceof FirebaseError) || !e.customData) {
+      return false;
+    }
+    const httpStatus = Number(e.customData["httpStatus"]);
+    return httpStatus === 429 || httpStatus === 500 || httpStatus === 503 || httpStatus === 504;
+  }
+  var AnalyticsAbortSignal = class {
+    constructor() {
+      this.listeners = [];
+    }
+    addEventListener(listener) {
+      this.listeners.push(listener);
+    }
+    abort() {
+      this.listeners.forEach((listener) => listener());
+    }
+  };
+  var defaultEventParametersForInit;
+  async function logEvent$1(gtagFunction, initializationPromise, eventName, eventParams, options) {
+    if (options && options.global) {
+      gtagFunction("event", eventName, eventParams);
+      return;
+    } else {
+      const measurementId = await initializationPromise;
+      const params = Object.assign(Object.assign({}, eventParams), { "send_to": measurementId });
+      gtagFunction("event", eventName, params);
+    }
+  }
+  var defaultConsentSettingsForInit;
+  function _setConsentDefaultForInit(consentSettings) {
+    defaultConsentSettingsForInit = consentSettings;
+  }
+  function _setDefaultEventParametersForInit(customParams) {
+    defaultEventParametersForInit = customParams;
+  }
+  async function validateIndexedDB() {
+    if (!isIndexedDBAvailable()) {
+      logger2.warn(ERROR_FACTORY3.create("indexeddb-unavailable", {
+        errorInfo: "IndexedDB is not available in this environment."
+      }).message);
+      return false;
+    } else {
+      try {
+        await validateIndexedDBOpenable();
+      } catch (e) {
+        logger2.warn(ERROR_FACTORY3.create("indexeddb-unavailable", {
+          errorInfo: e === null || e === void 0 ? void 0 : e.toString()
+        }).message);
+        return false;
+      }
+    }
+    return true;
+  }
+  async function _initializeAnalytics(app2, dynamicConfigPromisesList2, measurementIdToAppId2, installations, gtagCore, dataLayerName2, options) {
+    var _a;
+    const dynamicConfigPromise = fetchDynamicConfigWithRetry(app2);
+    dynamicConfigPromise.then((config) => {
+      measurementIdToAppId2[config.measurementId] = config.appId;
+      if (app2.options.measurementId && config.measurementId !== app2.options.measurementId) {
+        logger2.warn(`The measurement ID in the local Firebase config (${app2.options.measurementId}) does not match the measurement ID fetched from the server (${config.measurementId}). To ensure analytics events are always sent to the correct Analytics property, update the measurement ID field in the local config or remove it from the local config.`);
+      }
+    }).catch((e) => logger2.error(e));
+    dynamicConfigPromisesList2.push(dynamicConfigPromise);
+    const fidPromise = validateIndexedDB().then((envIsValid) => {
+      if (envIsValid) {
+        return installations.getId();
+      } else {
+        return void 0;
+      }
+    });
+    const [dynamicConfig, fid] = await Promise.all([
+      dynamicConfigPromise,
+      fidPromise
+    ]);
+    if (!findGtagScriptOnPage(dataLayerName2)) {
+      insertScriptTag(dataLayerName2, dynamicConfig.measurementId);
+    }
+    if (defaultConsentSettingsForInit) {
+      gtagCore("consent", "default", defaultConsentSettingsForInit);
+      _setConsentDefaultForInit(void 0);
+    }
+    gtagCore("js", new Date());
+    const configProperties = (_a = options === null || options === void 0 ? void 0 : options.config) !== null && _a !== void 0 ? _a : {};
+    configProperties[ORIGIN_KEY] = "firebase";
+    configProperties.update = true;
+    if (fid != null) {
+      configProperties[GA_FID_KEY] = fid;
+    }
+    gtagCore("config", dynamicConfig.measurementId, configProperties);
+    if (defaultEventParametersForInit) {
+      gtagCore("set", defaultEventParametersForInit);
+      _setDefaultEventParametersForInit(void 0);
+    }
+    return dynamicConfig.measurementId;
+  }
+  var AnalyticsService = class {
+    constructor(app2) {
+      this.app = app2;
+    }
+    _delete() {
+      delete initializationPromisesMap[this.app.options.appId];
+      return Promise.resolve();
+    }
+  };
+  var initializationPromisesMap = {};
+  var dynamicConfigPromisesList = [];
+  var measurementIdToAppId = {};
+  var dataLayerName = "dataLayer";
+  var gtagName = "gtag";
+  var gtagCoreFunction;
+  var wrappedGtagFunction;
+  var globalInitDone = false;
+  function warnOnBrowserContextMismatch() {
+    const mismatchedEnvMessages = [];
+    if (isBrowserExtension()) {
+      mismatchedEnvMessages.push("This is a browser extension environment.");
+    }
+    if (!areCookiesEnabled()) {
+      mismatchedEnvMessages.push("Cookies are not available.");
+    }
+    if (mismatchedEnvMessages.length > 0) {
+      const details = mismatchedEnvMessages.map((message, index) => `(${index + 1}) ${message}`).join(" ");
+      const err2 = ERROR_FACTORY3.create("invalid-analytics-context", {
+        errorInfo: details
+      });
+      logger2.warn(err2.message);
+    }
+  }
+  function factory(app2, installations, options) {
+    warnOnBrowserContextMismatch();
+    const appId = app2.options.appId;
+    if (!appId) {
+      throw ERROR_FACTORY3.create("no-app-id");
+    }
+    if (!app2.options.apiKey) {
+      if (app2.options.measurementId) {
+        logger2.warn(`The "apiKey" field is empty in the local Firebase config. This is needed to fetch the latest measurement ID for this Firebase app. Falling back to the measurement ID ${app2.options.measurementId} provided in the "measurementId" field in the local Firebase config.`);
+      } else {
+        throw ERROR_FACTORY3.create("no-api-key");
+      }
+    }
+    if (initializationPromisesMap[appId] != null) {
+      throw ERROR_FACTORY3.create("already-exists", {
+        id: appId
+      });
+    }
+    if (!globalInitDone) {
+      getOrCreateDataLayer(dataLayerName);
+      const { wrappedGtag, gtagCore } = wrapOrCreateGtag(initializationPromisesMap, dynamicConfigPromisesList, measurementIdToAppId, dataLayerName, gtagName);
+      wrappedGtagFunction = wrappedGtag;
+      gtagCoreFunction = gtagCore;
+      globalInitDone = true;
+    }
+    initializationPromisesMap[appId] = _initializeAnalytics(app2, dynamicConfigPromisesList, measurementIdToAppId, installations, gtagCoreFunction, dataLayerName, options);
+    const analyticsInstance = new AnalyticsService(app2);
+    return analyticsInstance;
+  }
+  function getAnalytics(app2 = getApp()) {
+    app2 = getModularInstance(app2);
+    const analyticsProvider = _getProvider(app2, ANALYTICS_TYPE);
+    if (analyticsProvider.isInitialized()) {
+      return analyticsProvider.getImmediate();
+    }
+    return initializeAnalytics(app2);
+  }
+  function initializeAnalytics(app2, options = {}) {
+    const analyticsProvider = _getProvider(app2, ANALYTICS_TYPE);
+    if (analyticsProvider.isInitialized()) {
+      const existingInstance = analyticsProvider.getImmediate();
+      if (deepEqual(options, analyticsProvider.getOptions())) {
+        return existingInstance;
+      } else {
+        throw ERROR_FACTORY3.create("already-initialized");
+      }
+    }
+    const analyticsInstance = analyticsProvider.initialize({ options });
+    return analyticsInstance;
+  }
+  function logEvent(analyticsInstance, eventName, eventParams, options) {
+    analyticsInstance = getModularInstance(analyticsInstance);
+    logEvent$1(wrappedGtagFunction, initializationPromisesMap[analyticsInstance.app.options.appId], eventName, eventParams, options).catch((e) => logger2.error(e));
+  }
+  var name4 = "@firebase/analytics";
+  var version3 = "0.9.1";
+  function registerAnalytics() {
+    _registerComponent(new Component2(ANALYTICS_TYPE, (container, { options: analyticsOptions }) => {
+      const app2 = container.getProvider("app").getImmediate();
+      const installations = container.getProvider("installations-internal").getImmediate();
+      return factory(app2, installations, analyticsOptions);
+    }, "PUBLIC"));
+    _registerComponent(new Component2("analytics-internal", internalFactory2, "PRIVATE"));
+    registerVersion(name4, version3);
+    registerVersion(name4, version3, "esm2017");
+    function internalFactory2(container) {
+      try {
+        const analytics2 = container.getProvider(ANALYTICS_TYPE).getImmediate();
+        return {
+          logEvent: (eventName, eventParams, options) => logEvent(analytics2, eventName, eventParams, options)
+        };
+      } catch (e) {
+        throw ERROR_FACTORY3.create("interop-component-reg-failed", {
+          reason: e
+        });
+      }
+    }
+  }
+  registerAnalytics();
+
+  // src/domain/repository/firebase/setUp.ts
+  var firebaseConfig = {
+    apiKey: "AIzaSyAypxEAahk0VDCfXSZ1bZ90vomSIUO3kLA",
+    authDomain: "shusuien-dee8f.firebaseapp.com",
+    projectId: "shusuien-dee8f",
+    storageBucket: "shusuien-dee8f.appspot.com",
+    messagingSenderId: "234514318576",
+    appId: "1:234514318576:web:e8292ddad1a5194f75ee35",
+    measurementId: "G-0D55JDLH58"
+  };
+  var app = initializeApp(firebaseConfig);
+  var analytics = getAnalytics(app);
 
   // src/App.tsx
   var import_jsx_runtime5 = __toESM(require_jsx_runtime());
