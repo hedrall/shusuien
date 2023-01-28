@@ -1,32 +1,20 @@
-/* you can write some variables here */
-.Top {
+@charset "UTF-8";
+.Layout {
   padding: 32px;
 }
-.Top .Title {
-  margin-bottom: 16px;
+/* you can write some variables here */
+.Top .棚を作成 {
+  padding: 8px;
+  border: dimgrey solid 1px;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
 }
-.Top .Counter {
-  padding: 16px;
-  border: #929292 solid 1px;
-  border-radius: 7px;
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-.Top .Counter > div {
-  text-align: center;
-}
-.Top .Counter button {
-  width: 120px;
-  background: #3ABDB5;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  padding: 2px 8px;
+.Top .棚を作成:hover {
+  background: lightgrey;
 }
 
 body {
+  margin: 0;
   background: #f1f3f5;
 }
