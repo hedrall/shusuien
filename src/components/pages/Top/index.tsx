@@ -14,7 +14,7 @@ export const Top: React.FC<TopProps> = props => {
     <div className="Top">
       topPage
       <div>
-        <div className="棚を作成" onClick={棚の作成モーダルを開く}>
+        <div className="棚を作成" onClick={棚の作成モーダルを開く} role="button">
           ⨁ 棚を作成する
         </div>
       </div>

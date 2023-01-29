@@ -43983,7 +43983,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     };
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "Top", children: [
       "topPage",
-      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "\u68DA\u3092\u4F5C\u6210", onClick: \u68DA\u306E\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F, children: "\u2A01 \u68DA\u3092\u4F5C\u6210\u3059\u308B" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "\u68DA\u3092\u4F5C\u6210", onClick: \u68DA\u306E\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F, role: "button", children: "\u2A01 \u68DA\u3092\u4F5C\u6210\u3059\u308B" }) }),
       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(\u68DA\u3092\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB, { ref: \u68DA\u3092\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef })
     ] });
   };
