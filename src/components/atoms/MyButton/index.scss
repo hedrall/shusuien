@@ -1,0 +1,10 @@
+@use '../../../assets/variables' as v;
+
+.MyButton {
+  color: white;
+  background-color: v.$background-grey;
+
+  &.Active {
+    background: v.$primary-color !important;
+  }
+}

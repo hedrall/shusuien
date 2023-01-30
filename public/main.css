@@ -1,8 +1,66 @@
 @charset "UTF-8";
+/* you can write some variables here */
+.MyButton {
+  color: white;
+  background-color: #929292;
+}
+.MyButton.Active {
+  background: #0ACF84 !important;
+}
+
+.PasswordInput button {
+  padding: 0 4px;
+  width: auto !important;
+}
+
 .Layout {
   padding: 32px;
 }
-/* you can write some variables here */
+.LoginPage .Content {
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+}
+.LoginPage .Content .Step > * {
+  margin: 32px 16px;
+}
+.LoginPage .Content .Step hr {
+  width: calc(100% - 32px);
+}
+.LoginPage .Content .Step button, .LoginPage .Content .Step .MyAlert {
+  width: calc(100% - 32px);
+}
+.LoginPage .Content .Step button {
+  display: block;
+}
+.LoginPage .Content .Step .GoogleSignInButtonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.LoginPage .Content .Step.FirstStep .EmailPasswordSignIn > div input {
+  font-size: 14px;
+}
+.LoginPage .Content .Step.FirstStep .GoogleIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+.LoginPage .Content .Step .chakra-input__group {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.LoginPage .Content .Step .Desc {
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+.LoginPage .Content .Step .Desc .Icon {
+  margin-right: 4px;
+}
+
 .Top .棚を作成 {
   padding: 8px;
   border: dimgrey solid 1px;

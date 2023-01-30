@@ -38,3 +38,6 @@ next-env.d.ts
 firebase-debug.log
 .firebase
 .idea
+
+public/index.css*
+public/index.js*

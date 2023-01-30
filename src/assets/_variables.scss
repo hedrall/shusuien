@@ -1,4 +1,44 @@
 /* you can write some variables here */
 
+// background color
 $background-color: #f1f3f5;
-$button-color: #3ABDB5;
+$background-grey: #929292;
+$background-grey-dim: #525252;
+$background-grey-mid: #dadada;
+$background-grey-thin: #EDEDED;
+
+// font color
+$color-white: white;
+$color-black: #021945;
+$color-blue: #0063F8;
+$color-grey: #6E7076;
+$color-grey-thin: #CBD5E0;
+
+// border color
+$border-grey: #929292;
+$border-grey-thin: #d7d7d7;
+
+// accent color
+//$primary-color: #3ABDB5;
+$primary-color: #0ACF84;
+$button-color: #0ACF84;
+
+// spacing
+$padding-tiny: 2px;
+$padding-small: 4px;
+$padding: 8px;
+$padding-large: 16px;
+$padding-xlarge: 32px;
+
+// font size
+
+$font-size-tiny: 10px;
+$font-size-small: 11px;
+$font-size-normal: 12px;
+$font-size-mid: 14px;
+$font-size-large: 16px;
+$font-size-title: 24px;
+
+// for responsive breakpoints
+$tab: 900px;
+$sp: 400px;

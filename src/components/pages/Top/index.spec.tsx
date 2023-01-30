@@ -1,22 +1,22 @@
-import React from "react";
-import { render, screen } from "@testing-library/react/pure";
-import { Top, TopProps } from "@frontend/components/pages/Top/index";
-import { RecoilRoot } from "recoil";
+import React from 'react';
+import { render, screen } from '@testing-library/react/pure';
+import { TopPage, TopPageProps } from '@frontend/components/pages/Top/index';
+import { RecoilRoot } from 'recoil';
 
-describe("Top", () => {
+describe('Top', () => {
   let container: HTMLElement;
-  const props: TopProps = {};
+  const props: TopPageProps = {};
 
   beforeAll(() => {
     const tree = render(
       <RecoilRoot>
-        <Top {...props} />
-      </RecoilRoot>
+        <TopPage {...props} />
+      </RecoilRoot>,
     );
     container = tree.container;
   });
 
-  test("snapshot", () => {
+  test('snapshot', () => {
     expect(container).toMatchSnapshot();
   });
 });

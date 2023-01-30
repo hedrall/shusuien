@@ -1,8 +1,16 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
+    // match /{document=**} {
+    //   allow read, write: if false;
+    // }
+
+    match /user/{userId} {
+      allow read: if true;
+      allow create: if true;
+      allow write: if request.auth != null && resource.data.id == request.auth.uid;
+      // permitted to update only goodReviews of other user
+      allow update: if request.auth != null && resource != null && (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['goodReviews']));
     }
   }
 }

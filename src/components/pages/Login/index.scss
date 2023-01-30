@@ -1,0 +1,59 @@
+@use '../../../assets/variables' as v;
+
+.LoginPage {
+  .Content {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    .Step {
+
+      > * {
+        margin: v.$padding-xlarge v.$padding-large;
+      }
+
+      hr {
+        width: calc(100% - 32px);
+      }
+
+      button, .MyAlert {
+        width: calc(100% - 16px * 2);
+      }
+      button {
+        display: block;
+      }
+      .GoogleSignInButtonContent {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &.FirstStep  {
+        .EmailPasswordSignIn > div /* input group */ {
+          input {
+            font-size: v.$font-size-mid;
+          }
+        }
+
+        .GoogleIcon {
+          width: 24px;
+          height: 24px;
+          margin-right: v.$padding;
+        }
+      }
+      .chakra-input__group {
+        display: flex;
+        flex-direction: column;
+        gap: v.$padding-xlarge;
+      }
+      .Desc {
+        min-height: 20px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+        .Icon {
+          margin-right: v.$padding-small;
+        }
+      }
+    }
+  }
+}

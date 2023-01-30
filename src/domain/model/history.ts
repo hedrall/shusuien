@@ -91,7 +91,7 @@ export type 履歴の内容 = 履歴の内容.一覧;
 export class 履歴 {
   id: 履歴ID;
   userId: UserId;
-  日時: Dayjs;
+  datetime: Dayjs;
   対象の棚のID: 棚ID | undefined;
   対象の鉢のID: 鉢Id | undefined;
   内容: 履歴の内容;
@@ -99,7 +99,7 @@ export class 履歴 {
   constructor(props: 履歴) {
     this.id = props.id;
     this.userId = props.userId;
-    this.日時 = props.日時;
+    this.datetime = props.datetime;
     this.対象の棚のID = props.対象の棚のID;
     this.対象の鉢のID = props.対象の鉢のID;
     this.内容 = props.内容;

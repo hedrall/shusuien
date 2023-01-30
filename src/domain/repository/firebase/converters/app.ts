@@ -3,6 +3,7 @@ import { 履歴 } from '@frontend/domain/model/history';
 import { 鉢 } from '@frontend/domain/model/item';
 import { 棚 } from '@frontend/domain/model/tana';
 import type fs from 'firebase/firestore';
+import { User } from '@frontend/domain/model/user';
 
 export const dropUndefined = (obj: { [key: string]: any }) => {
   Object.keys(obj).map(key => {
@@ -42,4 +43,5 @@ export const appConverters = {
   棚: basicConverter(棚),
   鉢: basicConverter(鉢),
   履歴: basicConverter(履歴),
+  User: basicConverter(User),
 } as const;

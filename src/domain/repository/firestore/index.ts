@@ -1,5 +1,4 @@
 import * as fs from 'firebase/firestore';
-import '@frontend/repository/firebase';
 import { Entity } from '@frontend/domain/model';
 import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
 import { RefValue } from '@frontend/domain/repository/firestore/type';

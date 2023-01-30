@@ -22,4 +22,9 @@ export namespace FsAppManager {
       super(appConverters.履歴);
     }
   }
+  export class User extends FsManager.User<typeof appConverters.User> {
+    constructor() {
+      super(appConverters.User);
+    }
+  }
 }
