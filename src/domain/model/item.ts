@@ -3,7 +3,6 @@ import { UserId } from '@frontend/domain/model/user';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 export class 鉢 {
-  id: 鉢Id;
   userId: UserId;
   画像のURL: string;
   科?: string;
@@ -12,7 +11,6 @@ export class 鉢 {
   補足名?: string;
 
   constructor(props: 鉢) {
-    this.id = props.id;
     this.userId = props.userId;
     this.画像のURL = props.画像のURL;
     this.科 = props.科;

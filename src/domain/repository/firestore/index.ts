@@ -3,6 +3,7 @@ import { Entity } from '@frontend/domain/model';
 import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { MayBeArray, toArray } from '@frontend/supports/array';
+import { _FsApp棚Repository } from '@frontend/domain/repository/firestore/tana';
 
 export namespace FSAppRepository {
   type DocumentSnapshot<T> = fs.DocumentSnapshot<T>;
@@ -37,19 +38,17 @@ export namespace FSAppRepository {
     };
   };
 
-  type GetItemsOptions = {
+  type QueryCondition = {
     limit?: number;
     offset?: number;
     wheres?: fs.QueryConstraint[];
     orderBy?: MayBeArray<{ key: string; dir: 'asc' | 'desc' }>;
     startAfter?: fs.DocumentSnapshot<unknown>;
   };
-  export const getItems = async <T extends Entity>(
-    manager: FsAppManager<T>,
-    { limit, wheres, orderBy, startAfter }: GetItemsOptions,
+  const getQuery = <T extends Entity>(
+    collection: fs.CollectionReference<T>,
+    { limit, wheres, orderBy, startAfter }: QueryCondition,
   ) => {
-    const collection = getCollection<T>(manager);
-
     const conditions: fs.QueryConstraint[] = [];
 
     if (orderBy) {
@@ -60,7 +59,11 @@ export namespace FSAppRepository {
     if (startAfter) conditions.push(fs.startAfter(startAfter));
     if (limit) conditions.push(fs.limit(limit));
 
-    const query = fs.query(collection, ...(wheres || []), ...conditions);
+    return fs.query(collection, ...(wheres || []), ...conditions);
+  };
+  export const getItems = async <T extends Entity>(manager: FsAppManager<T>, conditions: QueryCondition) => {
+    const collection = getCollection<T>(manager);
+    const query = getQuery(collection, conditions);
     const res = querySnapshotToRefValues(await fs.getDocs(query));
     return {
       items: res.refValue,
@@ -68,7 +71,7 @@ export namespace FSAppRepository {
     };
   };
 
-  export const getItem = async <T extends Entity>(manager: FsAppManager<T>, id: T['id']): Promise<RefValue<T>> => {
+  export const getItem = async <T extends Entity>(manager: FsAppManager<T>, id: string): Promise<RefValue<T>> => {
     const collection = getCollection(manager);
     const doc = fs.doc(collection, id);
     const res = await fs.getDoc(doc);
@@ -86,7 +89,7 @@ export namespace FSAppRepository {
     await fs.addDoc(collection, entity);
   };
 
-  export const addItemWithId = async <T extends Entity>(manager: FsAppManager<T>, entity: T) => {
+  export const addItemWithId = async <T extends Entity & { id: string }>(manager: FsAppManager<T>, entity: T) => {
     const collection = getCollection(manager);
     const doc = fs.doc(collection, entity.id);
     await fs.setDoc(doc, entity);
@@ -105,7 +108,7 @@ export namespace FSAppRepository {
     await fs.updateDoc(doc, attrs);
   };
 
-  export const deleteItem = async <T extends Entity>(manager: FsAppManager<T>, id: T['id']) => {
+  export const deleteItem = async <T extends Entity>(manager: FsAppManager<T>, id: string) => {
     const collection = getCollection(manager);
     const doc = fs.doc(collection, id);
     await fs.deleteDoc(doc);
@@ -113,7 +116,7 @@ export namespace FSAppRepository {
 
   export const listenById = <T extends Entity>(
     manager: FsAppManager<T>,
-    id: T['id'],
+    id: string,
     onListen: (value: RefValue<T>) => void,
   ): { unsubscribe: () => void } => {
     const collection = getCollection(manager);
@@ -123,4 +126,18 @@ export namespace FSAppRepository {
     });
     return { unsubscribe };
   };
+  export const listenList = <T extends Entity>(
+    manager: FsAppManager<T>,
+    condition: QueryCondition,
+    onListen: (value: RefValue<T>[]) => void,
+  ): { unsubscribe: () => void } => {
+    const collection = getCollection(manager);
+    const query = getQuery(collection, condition);
+    const unsubscribe = fs.onSnapshot(query, querySnapshot => {
+      const parsed = querySnapshotToRefValues(querySnapshot);
+      onListen(parsed.refValue);
+    });
+    return { unsubscribe };
+  };
+  export import 棚 = _FsApp棚Repository;
 }

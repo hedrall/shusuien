@@ -13,9 +13,30 @@
   width: auto !important;
 }
 
-.Layout {
-  padding: 32px;
+.Layout .Header {
+  background: #0ACF84;
+  color: white;
+  height: 32px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
+.Layout .Main {
+  padding: 32px;
+  min-height: calc(100vh - 32px - 32px);
+}
+.Layout .Footer {
+  background: #525252;
+  color: white;
+  height: 32px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
 .LoginPage .Content {
   max-width: 600px;
   width: 100%;

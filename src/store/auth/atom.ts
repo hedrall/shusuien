@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { User } from '@common/domain/entity/user';
+import { User } from '@frontend/domain/model/user';
 
 type AuthState = {
   user: User | undefined;

@@ -3,13 +3,11 @@ import { UserId } from '@frontend/domain/model/user';
 
 export type 棚ID = Opaque<string, '棚ID'>;
 export class 棚 {
-  id: 棚ID;
   name: string;
   userId: UserId;
   // ルーム
 
   constructor(props: 棚) {
-    this.id = props.id;
     this.name = props.name;
     this.userId = props.userId;
   }
