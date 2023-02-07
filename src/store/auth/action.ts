@@ -8,7 +8,6 @@ import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
 let unsubscribe: null | (() => void) = null;
 export const useAuthState = () => {
   const [state, setState] = useRecoilState(AUTH_STATE);
-
   const isAuthed = !!state.user?.name;
 
   const setUser = (user?: User) => {
@@ -21,7 +20,7 @@ export const useAuthState = () => {
   };
 
   const authStateChangeSubscriber = async (authUser: AuthUser | null) => {
-    console.log('auth status change', { authUser });
+    console.log('認証状態が変化しました！', { authUser });
 
     if (!authUser) {
       // detect sign out

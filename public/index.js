@@ -477,7 +477,7 @@
             }
             return element;
           };
-          function createElement56(type4, config, children) {
+          function createElement57(type4, config, children) {
             var propName;
             var props = {};
             var key = null;
@@ -921,7 +921,7 @@
             }
             return lazyType;
           }
-          function forwardRef27(render2) {
+          function forwardRef28(render2) {
             {
               if (render2 != null && render2.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1042,7 +1042,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect33(create, deps) {
+          function useEffect34(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1553,7 +1553,7 @@
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
             }
-            var element = createElement56.apply(this, arguments);
+            var element = createElement57.apply(this, arguments);
             if (element == null) {
               return element;
             }
@@ -1812,7 +1812,7 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef3;
-          exports.forwardRef = forwardRef27;
+          exports.forwardRef = forwardRef28;
           exports.isValidElement = isValidElement8;
           exports.lazy = lazy;
           exports.memo = memo3;
@@ -1822,7 +1822,7 @@
           exports.useContext = useContext36;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect33;
+          exports.useEffect = useEffect34;
           exports.useId = useId2;
           exports.useImperativeHandle = useImperativeHandle8;
           exports.useInsertionEffect = useInsertionEffect;
@@ -2326,9 +2326,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React100 = require_react();
+          var React102 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React100.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React102.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3849,7 +3849,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React100.Children.forEach(props.children, function(child) {
+                  React102.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -8982,7 +8982,7 @@
               }
             }
           }
-          function createElement56(type4, props, rootContainerElement, parentNamespace) {
+          function createElement57(type4, props, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
@@ -9834,7 +9834,7 @@
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement56(type4, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement57(type4, props, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
             updateFiberProps(domElement, props);
             return domElement;
@@ -12010,7 +12010,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React100.Component().refs;
+          var emptyRefsObject = new React102.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23150,7 +23150,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React100 = require_react();
+          var React102 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -23176,7 +23176,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React100.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React102.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format2) {
             {
               {
@@ -50210,6 +50210,23 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   CheckCircleOutlined2.displayName = "CheckCircleOutlined";
   var CheckCircleOutlined_default2 = /* @__PURE__ */ React91.forwardRef(CheckCircleOutlined2);
 
+  // node_modules/.pnpm/@ant-design+icons@5.0.1_biqbaboplfbrettd7655fr4n2y/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js
+  var React92 = __toESM(require_react());
+
+  // node_modules/.pnpm/@ant-design+icons-svg@4.2.1/node_modules/@ant-design/icons-svg/es/asn/LogoutOutlined.js
+  var LogoutOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 01-112.7 75.9A352.8 352.8 0 01512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 01-112.7-75.9 353.28 353.28 0 01-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 000-12.6z" } }] }, "name": "logout", "theme": "outlined" };
+  var LogoutOutlined_default = LogoutOutlined;
+
+  // node_modules/.pnpm/@ant-design+icons@5.0.1_biqbaboplfbrettd7655fr4n2y/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js
+  var LogoutOutlined2 = function LogoutOutlined3(props, ref) {
+    return /* @__PURE__ */ React92.createElement(AntdIcon_default, _objectSpread2(_objectSpread2({}, props), {}, {
+      ref,
+      icon: LogoutOutlined_default
+    }));
+  };
+  LogoutOutlined2.displayName = "LogoutOutlined";
+  var LogoutOutlined_default2 = /* @__PURE__ */ React92.forwardRef(LogoutOutlined2);
+
   // node_modules/.pnpm/react-hook-form@7.42.1_react@18.2.0/node_modules/react-hook-form/dist/index.esm.mjs
   var import_react26 = __toESM(require_react(), 1);
   var isCheckBoxInput = (element) => element.type === "checkbox";
@@ -61523,7 +61540,7 @@ This typically indicates that your device does not have a healthy Internet conne
       });
     };
     const authStateChangeSubscriber = async (authUser) => {
-      console.log("auth status change", { authUser });
+      console.log("\u8A8D\u8A3C\u72B6\u614B\u304C\u5909\u5316\u3057\u307E\u3057\u305F\uFF01", { authUser });
       if (!authUser) {
         unsubscribe == null ? void 0 : unsubscribe();
         setUser(void 0);
@@ -65944,20 +65961,46 @@ This typically indicates that your device does not have a healthy Internet conne
   };
 
   // src/components/common/Layout.tsx
+  var import_react33 = __toESM(require_react());
   var import_jsx_runtime15 = __toESM(require_jsx_runtime());
   var Layout = ({ children }) => {
+    const { user } = useAuthState();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const signOut2 = AuthRepository.signOut;
+    (0, import_react33.useEffect)(() => {
+      setTimeout(() => {
+        if (location.pathname === ROUTES.LOGIN.PATH && user) {
+          const params = new URLSearchParams(location.search);
+          const from2 = params.get("from");
+          const to = from2 ? decodeURIComponent(from2) : ROUTES.TOP.PATH;
+          console.log("\u30ED\u30B0\u30A4\u30F3\u6E08\u307F\u306E\u305F\u3081\u3001\u5143\u306EURL\u3078\u8FD4\u3057\u307E\u3059");
+          console.log({ user });
+          navigate(to);
+          return;
+        }
+        if (location.pathname !== ROUTES.LOGIN.PATH && !user) {
+          console.log("\u672A\u30ED\u30B0\u30A4\u30F3\u72B6\u614B\u306E\u305F\u3081\u3001LOGIN\u3078\u9077\u79FB\u3057\u307E\u3059");
+          const from2 = encodeURIComponent(location.pathname + location.search);
+          navigate(ROUTES.LOGIN.PATH + `?from=${from2}`);
+        }
+      }, 500);
+    }, [user == null ? void 0 : user.id]);
     return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "Layout", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "Header", children: "\u8DA3\u6C34\u5712" }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "Header", children: [
+        "\u8DA3\u6C34\u5712",
+        user && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(LogoutOutlined_default2, { onClick: signOut2 })
+      ] }),
       /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "Main", children }),
       /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "Footer", children: "Created by Hedrall" })
     ] });
   };
 
   // src/components/common/Utils.tsx
-  var import_react33 = __toESM(require_react());
+  var import_react34 = __toESM(require_react());
   var Utils = () => {
     const { authStateChangeSubscriber } = useAuthState();
-    (0, import_react33.useEffect)(() => {
+    (0, import_react34.useEffect)(() => {
       AuthRepository.listen.authStateChanged(authStateChangeSubscriber);
     }, []);
     return null;

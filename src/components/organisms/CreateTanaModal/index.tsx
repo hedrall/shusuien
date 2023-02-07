@@ -2,7 +2,6 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Modal, ModalProps } from 'antd';
 import { useController, useForm } from 'react-hook-form';
 import { MyInput } from '@frontend/components/atoms/MyInput';
-import { MyAlert } from '@frontend/components/atoms/MyAlert';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { useAuthState } from '@frontend/store/auth/action';
 
