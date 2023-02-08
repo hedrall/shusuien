@@ -92,6 +92,9 @@
 .Top .棚を作成:hover {
   background: lightgrey;
 }
+.Top .Section {
+  margin: 16px 0;
+}
 
 body {
   margin: 0;

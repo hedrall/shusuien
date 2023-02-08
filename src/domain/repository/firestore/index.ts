@@ -4,6 +4,8 @@ import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { MayBeArray, toArray } from '@frontend/supports/array';
 import { _FsApp棚Repository } from '@frontend/domain/repository/firestore/tana';
+import { _FsApp鉢Repository } from '@frontend/domain/repository/firestore/item';
+import { _FsApp履歴Repository } from '@frontend/domain/repository/firestore/history';
 
 export namespace FSAppRepository {
   type DocumentSnapshot<T> = fs.DocumentSnapshot<T>;
@@ -86,7 +88,7 @@ export namespace FSAppRepository {
 
   export const addItem = async <T extends Entity>(manager: FsAppManager<T>, entity: T) => {
     const collection = getCollection(manager);
-    await fs.addDoc(collection, entity);
+    return await fs.addDoc(collection, entity);
   };
 
   export const addItemWithId = async <T extends Entity & { id: string }>(manager: FsAppManager<T>, entity: T) => {
@@ -140,4 +142,6 @@ export namespace FSAppRepository {
     return { unsubscribe };
   };
   export import 棚 = _FsApp棚Repository;
+  export import 鉢 = _FsApp鉢Repository;
+  export import 履歴 = _FsApp履歴Repository;
 }

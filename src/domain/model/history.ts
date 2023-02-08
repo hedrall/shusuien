@@ -1,10 +1,11 @@
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { 棚ID } from '@frontend/domain/model/tana';
 import { 鉢Id } from '@frontend/domain/model/item';
 import { Opaque, ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
+import { FSAppRepository } from '@frontend/domain/repository/firestore';
 
-type 履歴ID = Opaque<string, '履歴ID'>;
+export type 履歴ID = Opaque<string, '履歴ID'>;
 
 type 鉢サイズのKey = `${2 | 3 | 4 | 5}${'号' | '号 L' | '.5号' | '.5号 L'}`;
 type 鉢サイズの型 = { name: 鉢サイズのKey; 表示名: string };
@@ -66,14 +67,14 @@ export namespace 履歴の内容 {
   // 画像の撮影
   export type 画像を更新 = {
     type: '画像を更新';
-    画像のURL: string;
+    画像のPATH: string;
   };
 
   // 成長の記録
   export type 成長の記録 = {
     type: '成長の記録';
     memo: string;
-    画像のURL: string;
+    画像のPATH: string;
   };
 
   // 植替え
@@ -88,19 +89,26 @@ export namespace 履歴の内容 {
 }
 export type 履歴の内容 = 履歴の内容.一覧;
 
-export class 履歴 {
+export class 履歴のBase {
+  id: 履歴ID | undefined;
   userId: UserId;
-  datetime: Dayjs;
   対象の棚のID: 棚ID | undefined;
   対象の鉢のID: 鉢Id | undefined;
   内容: 履歴の内容;
+  作成日時: Dayjs;
 
-  constructor(props: 履歴) {
+  constructor(props: 履歴のBase) {
+    this.id = props.id;
     this.userId = props.userId;
-    this.datetime = props.datetime;
+    this.作成日時 = props.作成日時;
     this.対象の棚のID = props.対象の棚のID;
     this.対象の鉢のID = props.対象の鉢のID;
     this.内容 = props.内容;
+  }
+}
+export class 履歴 extends 履歴のBase {
+  constructor(props: 履歴のBase) {
+    super(props);
   }
 
   is灌水(this: 履歴): this is 履歴.灌水 {
@@ -115,6 +123,25 @@ export class 履歴 {
   is植替え(this: 履歴): this is 履歴.植替え {
     return this.内容.type === '植替え';
   }
+
+  static 新規作成 = {
+    画像の更新歴: async (params: { userId: UserId; 鉢ID: 鉢Id; 画像のPATH: string }) => {
+      const { userId, 鉢ID, 画像のPATH } = params;
+      const 新規履歴 = new 履歴({
+        id: undefined,
+        userId,
+        作成日時: dayjs(),
+        対象の棚のID: undefined,
+        対象の鉢のID: 鉢ID,
+        内容: {
+          type: '画像を更新',
+          画像のPATH,
+        },
+      });
+      const { id } = await FSAppRepository.履歴.作成(新規履歴);
+      return new 履歴({ ...新規履歴, id });
+    },
+  };
 }
 export namespace 履歴 {
   export type 灌水 = 履歴 & { 内容: 履歴の内容.灌水 };

@@ -66,6 +66,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "antd": "^5.1.6",
+    "browser-image-compression": "^2.0.0",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.7",
     "firebase": "^9.16.0",

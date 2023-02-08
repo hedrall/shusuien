@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { 棚を作成モーダル } from '@frontend/components/organisms/CreateTanaModal';
+import React, { useEffect, useRef } from 'react';
+import { 棚作成モーダル } from '@frontend/components/organisms/CreateTanaModal';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useNavigate } from 'react-router-dom';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { ROUTES } from '@frontend/settings/routes';
-import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { useDataState } from '@frontend/store/data/action';
+import { 棚一覧表示 } from '@frontend/components/organisms/TanaList';
 
 export type TopPageProps = {};
 
@@ -22,10 +22,10 @@ export const TopPage: React.FC<TopPageProps> = props => {
 
   const navigator = useNavigate();
 
-  const 棚を作成モーダルのRef = useRef<棚を作成モーダル.Ref | null>(null);
+  const 棚作成モーダルのRef = useRef<棚作成モーダル.Ref | null>(null);
 
-  const 棚の作成モーダルを開く = () => {
-    棚を作成モーダルのRef.current?.open();
+  const 棚作成モーダルを開く = () => {
+    棚作成モーダルのRef.current?.open();
   };
 
   if (!user) {
@@ -38,11 +38,14 @@ export const TopPage: React.FC<TopPageProps> = props => {
   return (
     <div className="Top">
       <h2>topPage </h2>
-      <pre>{JSON.stringify(棚一覧, null, 2)}</pre>
-      <div>
-        <MyButton title={'⨁ 棚を作成する'} onClick={棚の作成モーダルを開く} />
+      <div className="Section">
+        <棚一覧表示 棚一覧={棚一覧} />
       </div>
-      <棚を作成モーダル ref={棚を作成モーダルのRef} />
+      <div className="Section">
+        <MyButton title={'⨁ 棚を作成する'} onClick={棚作成モーダルを開く} />
+      </div>
+
+      <棚作成モーダル ref={棚作成モーダルのRef} />
     </div>
   );
 };

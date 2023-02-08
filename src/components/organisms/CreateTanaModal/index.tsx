@@ -2,10 +2,11 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Modal, ModalProps } from 'antd';
 import { useController, useForm } from 'react-hook-form';
 import { MyInput } from '@frontend/components/atoms/MyInput';
-import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { useAuthState } from '@frontend/store/auth/action';
+import { useWithLoading } from '@frontend/supports/ui';
+import { 棚 } from '@frontend/domain/model/tana';
 
-export namespace 棚を作成モーダル {
+export namespace 棚作成モーダル {
   export type Props = {};
   export type Ref = {
     open: () => void;
@@ -16,8 +17,9 @@ type InputType = {
   name: string;
 };
 
-export const 棚を作成モーダル = forwardRef<棚を作成モーダル.Ref, 棚を作成モーダル.Props>((props, ref) => {
+export const 棚作成モーダル = forwardRef<棚作成モーダル.Ref, 棚作成モーダル.Props>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isLoading, withLoading } = useWithLoading();
   const { user } = useAuthState();
   const { control, getValues } = useForm<InputType>({
     mode: 'onChange',
@@ -44,11 +46,15 @@ export const 棚を作成モーダル = forwardRef<棚を作成モーダル.Ref,
     },
     okText: '作成',
     cancelText: 'キャンセル',
+    confirmLoading: isLoading,
   };
 
   const 棚の作成を実行する = async () => {
     if (!user) return;
-    await FSAppRepository.棚.作成(getValues().name, user?.id);
+    await withLoading(async () => {
+      await 棚.新規作成({ name: getValues().name, userId: user?.id });
+    });
+    setIsOpen(false);
   };
 
   useImperativeHandle(ref, () => {

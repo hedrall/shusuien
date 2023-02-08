@@ -4,29 +4,52 @@ import { 鉢 } from '@frontend/domain/model/item';
 import { 棚 } from '@frontend/domain/model/tana';
 import type fs from 'firebase/firestore';
 import { User } from '@frontend/domain/model/user';
+import dayjs, { Dayjs } from 'dayjs';
 
 export const dropUndefined = (obj: { [key: string]: any }) => {
   Object.keys(obj).map(key => {
     const value = obj[key];
     if (value === undefined) {
       obj[key] = null;
+      return;
     }
     if (typeof value === 'object' && !Array.isArray(value)) {
       obj[key] = dropUndefined(value);
+      return;
     }
   });
   return obj;
 };
 
+export const dateToFirestore = (obj: { [key: string]: any }) => {
+  Object.keys(obj).map(key => {
+    const value = obj[key];
+    console.log('value', value);
+    if (value instanceof dayjs) {
+      obj[key] = (value as Dayjs).format();
+      return;
+    }
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      obj[key] = dateToFirestore(value);
+      return;
+    }
+  });
+  return obj;
+};
+export const removeId = (obj: { [key: string]: any }) => {
+  const { id, ...rest } = obj;
+  return rest;
+};
+
 export const basicToFirestore = <T extends object>(item: T): fs.DocumentData => {
-  return dropUndefined({ ...item });
+  return dateToFirestore(dropUndefined(removeId({ ...item })));
 };
 
 export const basicFromFirestore = <T extends Entity>(construct: new (...args: any[]) => T) => {
   return (snapshot: fs.QueryDocumentSnapshot<fs.DocumentData>): T => {
     const data = snapshot.data() as T;
-
-    return new construct(data);
+    const id = snapshot.ref.id;
+    return new construct({ ...data, id });
   };
 };
 

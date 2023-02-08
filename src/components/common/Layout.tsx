@@ -12,22 +12,20 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const signOut = AuthRepository.signOut;
 
   useEffect(() => {
-    setTimeout(() => {
-      if (location.pathname === ROUTES.LOGIN.PATH && user) {
-        const params = new URLSearchParams(location.search);
-        const from = params.get('from');
-        const to = from ? decodeURIComponent(from) : ROUTES.TOP.PATH;
-        console.log('ログイン済みのため、元のURLへ返します');
-        console.log({ user });
-        navigate(to);
-        return;
-      }
-      if (location.pathname !== ROUTES.LOGIN.PATH && !user) {
-        console.log('未ログイン状態のため、LOGINへ遷移します');
-        const from = encodeURIComponent(location.pathname + location.search);
-        navigate(ROUTES.LOGIN.PATH + `?from=${from}`);
-      }
-    }, 500);
+    if (location.pathname === ROUTES.LOGIN.PATH && user) {
+      const params = new URLSearchParams(location.search);
+      const from = params.get('from');
+      const to = from ? decodeURIComponent(from) : ROUTES.TOP.PATH;
+      console.log('ログイン済みのため、元のURLへ返します');
+      console.log({ user });
+      navigate(to);
+      return;
+    }
+    if (location.pathname !== ROUTES.LOGIN.PATH && !user) {
+      console.log('未ログイン状態のため、LOGINへ遷移します');
+      const from = encodeURIComponent(location.pathname + location.search);
+      navigate(ROUTES.LOGIN.PATH + `?from=${from}`);
+    }
   }, [user?.id]);
   return (
     <div className="Layout">
