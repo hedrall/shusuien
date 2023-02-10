@@ -6,14 +6,24 @@ import {
   deleteObject,
   getDownloadURL,
   listAll,
+  uploadString,
 } from 'firebase/storage';
 import { ValueOf } from 'type-fest';
+import { UserId } from '@frontend/domain/model/user';
 
 export namespace StorageRepository {
-  export const 画像のPATH = {
-    鉢: '鉢',
+  type StorageDirPathParams = {
+    userId: UserId;
+    type: '鉢';
+    itemId: string;
+    index?: number;
   };
-  export type T画像のPATH = ValueOf<typeof 画像のPATH>;
+  export const storagePath = (params: StorageDirPathParams) => {
+    const { userId, type, itemId, index } = params;
+    const postfix = index ? `_${index}` : '';
+    const fileName = `${itemId}${postfix}`;
+    return [userId, type, fileName].join('/');
+  };
 
   const getStorageRef = (): StorageReference => {
     const s = _getStorage();
@@ -35,10 +45,17 @@ export namespace StorageRepository {
     );
   };
 
-  export const uploadImage = async (params: { filePath: T画像のPATH; file: File }) => {
-    const { filePath, file } = params;
-    const itemRef = getStorageItemRef(filePath);
-    const res = await uploadBytes(itemRef, file);
+  // export const uploadImage = async (params: { filePath: T画像のPATH; file: File }) => {
+  //   const { filePath, file } = params;
+  //   const itemRef = getStorageItemRef(filePath);
+  //   const res = await uploadBytes(itemRef, file);
+  //   return { 画像のPATH: res.ref.fullPath };
+  // };
+
+  export const uploadImageByBase64String = async (params: { path: string; dataUrl: string }) => {
+    const { path, dataUrl } = params;
+    const itemRef = getStorageItemRef(path);
+    const res = await uploadString(itemRef, dataUrl, 'data_url');
     return { 画像のPATH: res.ref.fullPath };
   };
 

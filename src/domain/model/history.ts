@@ -89,6 +89,12 @@ export namespace 履歴の内容 {
 }
 export type 履歴の内容 = 履歴の内容.一覧;
 
+type NewBaseProps = Omit<履歴のBase, 'id' | '作成日時' | '内容'>;
+type New内容Props<T extends 履歴の内容> = Omit<T, 'type'>;
+type NewProps<T extends 履歴の内容> = {
+  props: NewBaseProps;
+  内容: New内容Props<T>;
+};
 export class 履歴のBase {
   id: 履歴ID | undefined;
   userId: UserId;
@@ -125,17 +131,15 @@ export class 履歴 extends 履歴のBase {
   }
 
   static 新規作成 = {
-    画像の更新歴: async (params: { userId: UserId; 鉢ID: 鉢Id; 画像のPATH: string }) => {
-      const { userId, 鉢ID, 画像のPATH } = params;
+    画像の更新歴: async (params: NewProps<履歴の内容.画像を更新>) => {
+      const { props, 内容 } = params;
       const 新規履歴 = new 履歴({
         id: undefined,
-        userId,
         作成日時: dayjs(),
-        対象の棚のID: undefined,
-        対象の鉢のID: 鉢ID,
+        ...props,
         内容: {
           type: '画像を更新',
-          画像のPATH,
+          ...内容,
         },
       });
       const { id } = await FSAppRepository.履歴.作成(新規履歴);

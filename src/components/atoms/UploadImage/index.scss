@@ -1,0 +1,15 @@
+@use '../../../assets/variables' as v;
+
+.UploadImage {
+
+  .UploadButton {
+    border: 1px solid v.$border-grey;
+    border-radius: 5px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    background: v.$background-grey-thin;
+  }
+}

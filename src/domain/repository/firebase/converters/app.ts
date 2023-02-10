@@ -24,11 +24,11 @@ export const dropUndefined = (obj: { [key: string]: any }) => {
 export const dateToFirestore = (obj: { [key: string]: any }) => {
   Object.keys(obj).map(key => {
     const value = obj[key];
-    console.log('value', value);
     if (value instanceof dayjs) {
       obj[key] = (value as Dayjs).format();
       return;
     }
+    if (value === null) return value;
     if (typeof value === 'object' && !Array.isArray(value)) {
       obj[key] = dateToFirestore(value);
       return;

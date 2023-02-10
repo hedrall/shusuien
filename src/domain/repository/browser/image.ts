@@ -16,13 +16,13 @@ export namespace _BrowserRepository_Image {
     file: File,
     maxFileSizeMb = 0.8 /* 800kB */,
   ): Promise<{ file: File; dataUrl: string }> => {
-    console.warn('compress');
-
-    if (file.size < maxFileSizeMb * (10 ^ 6)) {
+    const limitSize = maxFileSizeMb * 10 ** 6;
+    if (file.size < limitSize) {
       // 100kb未満はそのまま
       const dataUrl = await loadFileAsDataUrl(file);
       return { file, dataUrl };
     } else {
+      console.warn(`compress ${file.size} to ${limitSize}`);
       // 100kb以上は圧縮する
       const newFileBlob = await imageCompression(file, {
         // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)

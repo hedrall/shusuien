@@ -1,10 +1,13 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Modal, ModalProps } from 'antd';
 import { useController, useForm } from 'react-hook-form';
-import { MyInput } from '@frontend/components/atoms/MyInput';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useWithLoading } from '@frontend/supports/ui';
+import { UploadImage } from '@frontend/components/atoms/UploadImage';
+import { MyInput } from '@frontend/components/atoms/MyInput';
 import { 鉢 } from '@frontend/domain/model/item';
+import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
+import { ValidationRule } from 'react-hook-form/dist/types/validator';
 
 export namespace 鉢作成モーダル {
   export type Props = {};
@@ -14,35 +17,59 @@ export namespace 鉢作成モーダル {
 }
 
 type InputType = {
-  name: string;
+  name: string | undefined;
+  imageDataUrl: string | undefined;
+  科: string | undefined;
+  属: string | undefined;
+  種名: string | undefined;
+  補足: string | undefined;
+};
+
+const DEFAULT_VALUES = {
+  name: undefined,
+  imageDataUrl: undefined,
+  科: undefined,
+  属: undefined,
+  種名: undefined,
+  補足: undefined,
 };
 
 export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢作成モーダル.Props>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoading, withLoading } = useWithLoading();
   const { user } = useAuthState();
-  const { control, getValues } = useForm<InputType>({
+
+  const { control, getValues, formState } = useForm<InputType>({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    defaultValues: {
-      name: '',
-    },
+    defaultValues: DEFAULT_VALUES,
   });
 
+  const maxLength: ValidationRule<number> = { value: 40, message: '最大40文字までです。' };
+  const imageDataUrl = useController({
+    control,
+    name: 'imageDataUrl',
+    rules: { required: '必須です。' },
+  });
   const name = useController({
     control,
     name: 'name',
-    rules: { required: '必須です。' },
+    rules: { maxLength },
   });
-
-  const isValid = !!getValues().name;
+  const [科, 属, 種名, 補足] = (['科', '属', '種名', '補足'] as const).map(key => {
+    return useController({
+      control,
+      name: key,
+      rules: { maxLength },
+    });
+  });
 
   const modalProps: ModalProps = {
     open: isOpen,
     onCancel: () => setIsOpen(false),
     onOk: () => 鉢の作成を実行する(),
     okButtonProps: {
-      disabled: !isValid,
+      disabled: !formState.isValid,
     },
     okText: '作成',
     cancelText: 'キャンセル',
@@ -51,9 +78,19 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
 
   const 鉢の作成を実行する = async () => {
     if (!user) return;
-    // await withLoading(async () => {
-    //   await 鉢.新規作成({ name: getValues().name, userId: user?.id });
-    // });
+    await withLoading(async () => {
+      const { imageDataUrl, name, ...詳細 } = getValues();
+      console.warn({ getValues: getValues() });
+      if (!imageDataUrl) return;
+      await 鉢.新規作成({
+        imageDataUrl,
+        props: {
+          userId: user?.id,
+          name,
+          詳細,
+        },
+      });
+    });
     setIsOpen(false);
   };
 
@@ -64,11 +101,25 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
   });
 
   return (
-    <div className="鉢を作成モーダル">
-      <Modal {...modalProps}>
-        <h1>鉢を作成</h1>
-        <MyInput controller={name} placeholder="鉢の名前" autoFocus={true} />
-      </Modal>
-    </div>
+    <Modal {...modalProps} className="鉢を作成モーダル">
+      <h1>鉢を作成</h1>
+      <div className="FormItem">
+        <label>画像を選択</label>
+        <UploadImage field={imageDataUrl.field} />
+      </div>
+      <div className="FormItem">
+        <label>鉢の名前</label>
+        <MyInputWithAlert controller={name} inputProps={{ placeholder: '鉢の名前' }} />
+      </div>
+      <div className="FormItem">
+        <label>詳細な情報</label>
+        <div>
+          <MyInputWithAlert controller={科} inputProps={{ placeholder: '科' }} />
+          <MyInputWithAlert controller={属} inputProps={{ placeholder: '属' }} />
+          <MyInputWithAlert controller={種名} inputProps={{ placeholder: '種名' }} />
+          <MyInputWithAlert controller={補足} inputProps={{ placeholder: '補足' }} />
+        </div>
+      </div>
+    </Modal>
   );
 });

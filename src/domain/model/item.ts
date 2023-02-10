@@ -5,72 +5,89 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import dayjs, { Dayjs } from 'dayjs';
 import { 履歴 } from '@frontend/domain/model/history';
 
-export type 新規作成のProps = {
-  file: File;
-  userId: UserId;
-  詳細: 鉢['詳細'];
-};
 export type 鉢Id = Opaque<string, '鉢ID'>;
-export class 鉢 {
+export class 鉢のBase {
   id: 鉢Id | undefined;
   userId: UserId;
+  name: string | undefined;
   詳細: {
     科?: string;
     属?: string;
     種名?: string;
-    補足名?: string;
   };
+  補足?: string;
   // 履歴を畳み込んで得られるもの
   snapshot: {
     画像のPATH?: string;
   };
   作成日時: Dayjs;
 
-  static async 新規作成(props: 新規作成のProps) {
-    const { file, userId, 詳細 } = props;
-
-    // 1. 画像をUpload
-    const { 画像のPATH } = await StorageRepository.uploadImage({
-      file,
-      filePath: StorageRepository.画像のPATH.鉢,
-    });
-
-    // 2. 鉢を作成する
-    const 新規鉢 = new 鉢({
-      id: undefined,
-      userId,
-      /* 初回作成なので、snapshot情報もここで入れてしまう */
-      snapshot: { 画像のPATH },
-      詳細: {
-        科: 詳細.科,
-        属: 詳細.属,
-        種名: 詳細.種名,
-        補足名: 詳細.補足名,
-      },
-      作成日時: dayjs(),
-    });
-    const { 鉢ID } = await FSAppRepository.鉢.作成(新規鉢);
-
-    // 3. 画像の変更履歴を作成する
-    await 履歴.新規作成.画像の更新歴({
-      userId,
-      鉢ID,
-      画像のPATH,
-    });
-  }
-
-  constructor(props: 鉢) {
+  constructor(props: 鉢のBase) {
     this.id = props.id;
     this.userId = props.userId;
+    this.name = props.name;
     this.snapshot = {
       画像のPATH: props.snapshot.画像のPATH,
     };
     this.詳細 = {
       科: props.詳細.科,
       属: props.詳細.属,
-      補足名: props.詳細.補足名,
+      種名: props.詳細.種名,
     };
+    this.補足 = props.補足;
     this.作成日時 = dayjs(props.作成日時);
+  }
+}
+
+export type 新規作成のParams = {
+  imageDataUrl: string;
+  props: Omit<鉢のBase, 'id' | 'snapshot' | '作成日時'>;
+};
+
+const _新規作成 = async (params: 新規作成のParams) => {
+  const { imageDataUrl, props } = params;
+  const { userId } = props;
+
+  console.log('1. 鉢を作成する');
+  const 新規鉢 = new 鉢({
+    ...props,
+    id: undefined,
+    snapshot: {},
+    作成日時: dayjs(),
+  });
+  const { 鉢ID } = await FSAppRepository.鉢.作成(新規鉢);
+
+  console.log('2. 画像をUpload');
+  const { 画像のPATH } = await StorageRepository.uploadImageByBase64String({
+    dataUrl: imageDataUrl,
+    path: StorageRepository.storagePath({
+      type: '鉢',
+      userId,
+      itemId: 鉢ID,
+    }),
+  });
+
+  console.log('3. 画像の変更履歴を作成する');
+  await 履歴.新規作成.画像の更新歴({
+    props: {
+      userId,
+      対象の鉢のID: 鉢ID,
+      対象の棚のID: undefined,
+    },
+    内容: {
+      画像のPATH,
+    },
+  });
+
+  console.log('4. 鉢を更新する');
+  await FSAppRepository.鉢.画像を更新(鉢ID, 画像のPATH);
+};
+
+export class 鉢 extends 鉢のBase {
+  static 新規作成 = _新規作成;
+
+  constructor(props: 鉢のBase) {
+    super(props);
   }
 
   static create = () => {

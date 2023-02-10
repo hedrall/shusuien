@@ -1,2 +1,13 @@
-.CreateItemModal {
+.鉢を作成モーダル {
+  .FormItem {
+    margin-bottom: 16px;
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    .MyInputWithAlert {
+      margin-bottom: 8px;
+    }
+  }
+
 }

@@ -12,6 +12,13 @@ export namespace _FsApp鉢Repository {
     return { 鉢ID: ref.id as 鉢Id };
   };
 
+  export const 画像を更新 = async (鉢Id: 鉢Id, 画像のPATH: string) => {
+    const manager = new FsAppManager.鉢();
+    await FSAppRepository.update(manager, 鉢Id, {
+      'snapshot.画像のPATH': 画像のPATH,
+    });
+  };
+
   export const 購読 = (userId: UserId, onListen: (items: RefValue<鉢>[]) => void) => {
     const manager = new FsAppManager.鉢();
     const { unsubscribe } = FSAppRepository.listenList(
