@@ -4,13 +4,15 @@ import { useController, useForm } from 'react-hook-form';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useWithLoading } from '@frontend/supports/ui';
 import { UploadImage } from '@frontend/components/atoms/UploadImage';
-import { MyInput } from '@frontend/components/atoms/MyInput';
 import { 鉢 } from '@frontend/domain/model/item';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
+import { 棚ID } from '@frontend/domain/model/tana';
 
 export namespace 鉢作成モーダル {
-  export type Props = {};
+  export type Props = {
+    棚Id: 棚ID | undefined;
+  };
   export type Ref = {
     open: () => void;
   };
@@ -35,6 +37,7 @@ const DEFAULT_VALUES = {
 };
 
 export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢作成モーダル.Props>((props, ref) => {
+  const { 棚Id } = props;
   const [isOpen, setIsOpen] = useState(false);
   const { isLoading, withLoading } = useWithLoading();
   const { user } = useAuthState();
@@ -81,13 +84,14 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
     await withLoading(async () => {
       const { imageDataUrl, name, ...詳細 } = getValues();
       console.warn({ getValues: getValues() });
-      if (!imageDataUrl) return;
+      if (!棚Id || !imageDataUrl) return;
       await 鉢.新規作成({
         imageDataUrl,
         props: {
           userId: user?.id,
           name,
           詳細,
+          棚Id,
         },
       });
     });

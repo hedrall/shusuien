@@ -4,12 +4,14 @@ import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import dayjs, { Dayjs } from 'dayjs';
 import { 履歴 } from '@frontend/domain/model/history';
+import { 棚ID } from '@frontend/domain/model/tana';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 export class 鉢のBase {
   id: 鉢Id | undefined;
   userId: UserId;
   name: string | undefined;
+  棚Id: 棚ID;
   詳細: {
     科?: string;
     属?: string;
@@ -26,6 +28,7 @@ export class 鉢のBase {
     this.id = props.id;
     this.userId = props.userId;
     this.name = props.name;
+    this.棚Id = props.棚Id;
     this.snapshot = {
       画像のPATH: props.snapshot.画像のPATH,
     };

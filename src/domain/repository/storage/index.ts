@@ -35,14 +35,9 @@ export namespace StorageRepository {
     return ref(storageRef, filePath);
   };
 
-  export const getDownloadUrls = async (dirPath: string): Promise<string[]> => {
-    const dirRef = getStorageItemRef(dirPath);
-    const items = await listAll(dirRef);
-    return await Promise.all(
-      items.items.map(item => {
-        return getDownloadURL(getStorageItemRef(item.fullPath));
-      }),
-    );
+  export const getDownloadUrls = async (path: string): Promise<string> => {
+    const ref = getStorageItemRef(path);
+    return getDownloadURL(ref);
   };
 
   // export const uploadImage = async (params: { filePath: T画像のPATH; file: File }) => {

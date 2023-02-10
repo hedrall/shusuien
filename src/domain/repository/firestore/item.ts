@@ -4,6 +4,7 @@ import { UserId } from '@frontend/domain/model/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { 鉢, 鉢Id } from '@frontend/domain/model/item';
+import { 棚ID } from '@frontend/domain/model/tana';
 
 export namespace _FsApp鉢Repository {
   export const 作成 = async (新規鉢: 鉢) => {
@@ -19,12 +20,14 @@ export namespace _FsApp鉢Repository {
     });
   };
 
-  export const 購読 = (userId: UserId, onListen: (items: RefValue<鉢>[]) => void) => {
+  type 購読Params = { userId: UserId; 棚Id: 棚ID };
+  export const 購読 = (params: 購読Params, onListen: (items: RefValue<鉢>[]) => void) => {
+    const { userId, 棚Id } = params;
     const manager = new FsAppManager.鉢();
     const { unsubscribe } = FSAppRepository.listenList(
       manager,
       {
-        wheres: [fs.where('userId', '==', userId)],
+        wheres: [fs.where('userId', '==', userId), fs.where('棚Id', '==', 棚Id)],
         orderBy: { key: '作成日時', dir: 'asc' },
       },
       items => onListen(items),
