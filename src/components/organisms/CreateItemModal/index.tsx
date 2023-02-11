@@ -108,7 +108,7 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
     <Modal {...modalProps} className="鉢を作成モーダル">
       <h1>鉢を作成</h1>
       <div className="FormItem">
-        <label>画像を選択</label>
+        <label>画像を撮影📸</label>
         <UploadImage field={imageDataUrl.field} />
       </div>
       <div className="FormItem">

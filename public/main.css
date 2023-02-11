@@ -52,6 +52,29 @@
   font-size: 12px;
 }
 
+.MyFormLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.MyFormLayout .Item > label {
+  margin-bottom: 8px;
+  display: block;
+}
+.MyFormLayout .Item.OneLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.MyFormLayout .Item.OneLine > label {
+  margin: 0;
+}
+.MyFormLayout .Item.Right {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
 .鉢を作成モーダル .FormItem {
   margin-bottom: 16px;
 }
@@ -61,6 +84,11 @@
 }
 .鉢を作成モーダル .FormItem .MyInputWithAlert {
   margin-bottom: 8px;
+}
+
+.鉢管理モーダル .管理ボタン {
+  display: flex;
+  gap: 8px;
 }
 
 .LoginPage .Content {

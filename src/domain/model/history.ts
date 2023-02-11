@@ -7,29 +7,17 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore';
 
 export type 履歴ID = Opaque<string, '履歴ID'>;
 
-type 鉢サイズのKey = `${2 | 3 | 4 | 5}${'号' | '号 L' | '.5号' | '.5号 L'}`;
-type 鉢サイズの型 = { name: 鉢サイズのKey; 表示名: string };
-export const 鉢のサイズ = [2, 3, 4, 5].reduce<{ [key in 鉢サイズのKey]: 鉢サイズの型 }>((pre, num) => {
-  return {
-    ...pre,
-    [`${num}号`]: {
-      name: `${num}号`,
-      表示名: `${num}号`,
-    },
-    [`${num}号 L`]: {
-      name: `${num}号 L`,
-      表示名: `${num}号 L`,
-    },
-    [`${num}.5号`]: {
-      name: `${num}.5号`,
-      表示名: `${num}.5号`,
-    },
-    [`${num}.5号 L`]: {
-      name: `${num}.5号 L`,
-      表示名: `${num}.5号 L`,
-    },
-  } as const;
-}, {} as any);
+export namespace 鉢サイズ {
+  export const 番号 = ['2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5'];
+  export type 番号 = typeof 番号[number];
+
+  export const タイプ = ['通常', 'L'];
+  export type タイプ = typeof タイプ[number];
+}
+export type 鉢サイズ = {
+  番号: 鉢サイズ.番号;
+  タイプ: 鉢サイズ.タイプ;
+};
 
 export namespace 履歴の内容 {
   // 灌水履歴
@@ -80,8 +68,10 @@ export namespace 履歴の内容 {
   // 植替え
   export type 植替え = {
     type: '植替え';
-    memo: string;
-    鉢のサイズのKey: 鉢サイズのKey;
+    植替え日時: Dayjs;
+    鉢のサイズ: 鉢サイズ;
+    植替え後の画像のPATH: string;
+    memo?: string;
   };
 
   export type 一覧 = 灌水 | 画像を更新 | 成長の記録 | 植替え;
