@@ -54,7 +54,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
 
   return (
     <Modal {...modalProps}>
-      <h1>鉢のお手入れ</h1>z 鉢名: {item?.name}
+      <h1>鉢のお手入れ</h1>鉢名: {item?.name}
       <h2>管理</h2>
       <div className="管理ボタン">
         <MyButton title={'灌水'} onClick={灌水モーダルを開く} />

@@ -10,19 +10,21 @@ import {
 } from 'firebase/storage';
 import { ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
+import { Dayjs } from 'dayjs';
 
 export namespace StorageRepository {
   type StorageDirPathParams = {
     userId: UserId;
     type: '鉢';
+    datetime: Dayjs;
     itemId: string;
     index?: number;
   };
   export const storagePath = (params: StorageDirPathParams) => {
-    const { userId, type, itemId, index } = params;
+    const { userId, type, datetime, itemId, index } = params;
     const postfix = index ? `_${index}` : '';
-    const fileName = `${itemId}${postfix}`;
-    return [userId, type, fileName].join('/');
+    const fileName = `${datetime.format()}${postfix}`;
+    return [userId, type, itemId, fileName].join('/');
   };
 
   const getStorageRef = (): StorageReference => {

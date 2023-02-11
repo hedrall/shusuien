@@ -5,6 +5,8 @@ import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { 棚ID } from '@frontend/domain/model/tana';
+import { Dayjs } from 'dayjs';
+import { basicToFirestore } from '@frontend/domain/repository/firebase/converters/app';
 
 export namespace _FsApp鉢Repository {
   export const 作成 = async (新規鉢: 鉢) => {
@@ -13,11 +15,25 @@ export namespace _FsApp鉢Repository {
     return { 鉢ID: ref.id as 鉢Id };
   };
 
-  export const 画像を更新 = async (鉢Id: 鉢Id, 画像のPATH: string) => {
+  export const snapshotを更新 = async (id: 鉢Id, 更新後のsnapshot: Partial<鉢['snapshot']>, date: Dayjs) => {
     const manager = new FsAppManager.鉢();
-    await FSAppRepository.update(manager, 鉢Id, {
-      'snapshot.画像のPATH': 画像のPATH,
-    });
+    const rawUpdateParams = Object.entries(更新後のsnapshot).reduce(
+      (p, [key, value]) => {
+        return {
+          ...p,
+          [`snapshot.${key}`]: value,
+        };
+      },
+      {
+        'snapshot.更新日時': date.format(),
+      },
+    );
+    const updateParams = basicToFirestore(rawUpdateParams);
+    await FSAppRepository.update(manager, id, updateParams);
+  };
+
+  export const 画像を更新 = async (id: 鉢Id, 画像のPATH: string, date: Dayjs) => {
+    await snapshotを更新(id, { 画像のPATH }, date);
   };
 
   type 購読Params = { userId: UserId; 棚Id: 棚ID };

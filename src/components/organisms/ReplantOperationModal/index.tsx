@@ -1,9 +1,8 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
 import { 鉢 } from '@frontend/domain/model/item';
-import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 履歴の内容, 鉢サイズ } from '@frontend/domain/model/history';
 import dayjs from 'dayjs';
 import { Control, useController, useForm } from 'react-hook-form';
@@ -29,7 +28,7 @@ type Input = {
   memo: 履歴の内容.植替え['memo'];
 };
 
-const DATE_FORMAT = 'YYYY年DD月MM日';
+const DATE_FORMAT = 'YYYY/DD/MM HH:mm:ss';
 const DEFAULT_VALUES: Partial<Input> = {
   size: '3',
   isLong: false,
@@ -48,7 +47,6 @@ const createController = (control: Control<Input, any>) => {
   const isLong = useController({
     control,
     name: 'isLong',
-    rules: { required: true },
   });
   const imageDataUrl = useController({
     control,
@@ -63,7 +61,7 @@ const createController = (control: Control<Input, any>) => {
   const memo = useController({
     control,
     name: 'memo',
-    rule: { maxLength },
+    rules: { maxLength },
   });
   return { size, isLong, imageDataUrl, date, memo };
 };
@@ -88,15 +86,36 @@ export const 植替え操作モーダル = forwardRef<植替え操作モーダ�
 
   const { size, isLong, imageDataUrl, date, memo } = createController(control);
 
+  const 植替えを実行する = async () => {
+    if (!user || !item) return;
+    await withLoading(async () => {
+      const { imageDataUrl, size, isLong, date, memo } = getValues();
+
+      console.log({ v: getValues() });
+      await 鉢.管理.植替え({
+        imageDataUrl,
+        userId: user.id,
+        item,
+        date: dayjs(date),
+        鉢のサイズ: {
+          番号: size,
+          タイプ: isLong ? 'L' : '',
+        },
+        memo,
+      });
+      setIsOpen(false);
+    });
+  };
+
   const modalProps: ModalProps = {
     className: '植替え操作モーダル',
     open: isOpen,
     onCancel: () => setIsOpen(false),
-    // onOk: () => 棚の作成を実行する(),
+    onOk: () => 植替えを実行する(),
     okButtonProps: {
       disabled: !formState.isValid,
     },
-    okText: '作成',
+    okText: '植替えを記録する',
     cancelText: '閉じる',
     confirmLoading: isLoading,
     destroyOnClose: true,

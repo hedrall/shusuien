@@ -9,7 +9,7 @@ export namespace _FsApp履歴Repository {
   export const 作成 = async (新規履歴: 履歴) => {
     const manager = new FsAppManager.履歴();
     const ref = await FSAppRepository.addItem(manager, 新規履歴);
-    return { id: ref.id as 履歴ID };
+    return { id: ref.id as 履歴ID, ref };
   };
 
   export const 購読 = (userId: UserId, onListen: (items: RefValue<履歴>[]) => void) => {

@@ -7,7 +7,7 @@ type Option<T extends D> = {
   name: string;
   value: T;
 };
-export type RadioGroupOption<T extends D> = Option;
+export type RadioGroupOption<T extends D> = Option<T>;
 
 export type RadioGroupProps<T extends D> = {
   field: ControllerRenderProps<any, any>;

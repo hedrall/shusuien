@@ -79,11 +79,46 @@ export namespace 履歴の内容 {
 }
 export type 履歴の内容 = 履歴の内容.一覧;
 
-type NewBaseProps = Omit<履歴のBase, 'id' | '作成日時' | '内容'>;
-type New内容Props<T extends 履歴の内容> = Omit<T, 'type'>;
+type NewBaseProps = Omit<履歴のBase, 'id' | '内容'>;
+export type New内容Props<T extends 履歴の内容> = Omit<T, 'type'>;
 type NewProps<T extends 履歴の内容> = {
   props: NewBaseProps;
   内容: New内容Props<T>;
+};
+
+const 作成 = async (新規履歴: 履歴) => {
+  const { id } = await FSAppRepository.履歴.作成(新規履歴);
+  return new 履歴({ ...新規履歴, id });
+};
+
+const _画像の更新歴を作成 = async (params: NewProps<履歴の内容.画像を更新>) => {
+  const { props, 内容 } = params;
+  const 新規履歴 = new 履歴({
+    id: undefined,
+    ...props,
+    内容: {
+      type: '画像を更新',
+      ...内容,
+    },
+  });
+  return await 作成(新規履歴);
+};
+
+const _植替え履歴を作成 = async (params: NewProps<履歴の内容.植替え>) => {
+  const { props, 内容 } = params;
+  const { 植替え日時, 鉢のサイズ, 植替え後の画像のPATH, memo } = 内容;
+  const 新規履歴 = new 履歴({
+    id: undefined,
+    ...props,
+    内容: {
+      type: '植替え',
+      植替え日時,
+      鉢のサイズ,
+      植替え後の画像のPATH,
+      memo,
+    },
+  });
+  return await 作成(新規履歴);
 };
 export class 履歴のBase {
   id: 履歴ID | undefined;
@@ -121,20 +156,8 @@ export class 履歴 extends 履歴のBase {
   }
 
   static 新規作成 = {
-    画像の更新歴: async (params: NewProps<履歴の内容.画像を更新>) => {
-      const { props, 内容 } = params;
-      const 新規履歴 = new 履歴({
-        id: undefined,
-        作成日時: dayjs(),
-        ...props,
-        内容: {
-          type: '画像を更新',
-          ...内容,
-        },
-      });
-      const { id } = await FSAppRepository.履歴.作成(新規履歴);
-      return new 履歴({ ...新規履歴, id });
-    },
+    画像の更新歴: _画像の更新歴を作成,
+    植替え: _植替え履歴を作成,
   };
 }
 export namespace 履歴 {

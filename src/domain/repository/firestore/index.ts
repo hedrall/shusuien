@@ -79,6 +79,10 @@ export namespace FSAppRepository {
     const res = await fs.getDoc(doc);
     return documentSnapshotToRefValue(res);
   };
+  export const getByRef = async <T extends Entity>(ref: fs.DocumentReference<T>): Promise<RefValue<T>> => {
+    const snapshot = await fs.getDoc(ref);
+    return documentSnapshotToRefValue(snapshot);
+  };
 
   export const count = async <T extends Entity>(manager: FsAppManager<T>) => {
     const collection = getCollection(manager);
