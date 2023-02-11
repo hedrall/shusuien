@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Collapse, Image, List } from 'antd';
+import { Avatar, Col, Collapse, Image, List, Row } from 'antd';
 import { 棚 } from '@frontend/domain/model/tana';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 鉢作成モーダル } from '@frontend/components/organisms/CreateItemModal';
@@ -25,9 +25,9 @@ const ListItem: React.FC<{ 鉢: 鉢 }> = props => {
   }, [鉢]);
 
   return (
-    <List.Item>
-      <Image src={imageUrl} />
-    </List.Item>
+    <Col lg={2} sm={4} xs={6}>
+      <Image preview={false} src={imageUrl} style={{ borderRadius: 7 }} />
+    </Col>
   );
 };
 export const 鉢一覧: React.FC<ItemListProps> = props => {
@@ -48,7 +48,11 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
   return (
     <div className="鉢一覧">
-      <List size="small" bordered dataSource={鉢一覧} renderItem={鉢 => <ListItem 鉢={鉢} />} />
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        {鉢一覧.map(鉢 => {
+          return <ListItem key={鉢.id} 鉢={鉢} />;
+        })}
+      </Row>
 
       {/* 新規作成ボタン */}
       <div className="Section">

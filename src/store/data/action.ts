@@ -11,7 +11,7 @@ const 鉢Selector = selectorFamily<鉢[], 棚ID>({
     棚ID =>
     ({ get }) => {
       // return get(DATA_STATE_ATOM).鉢一覧;
-      return get(DATA_STATE_ATOM).鉢一覧[棚ID];
+      return get(DATA_STATE_ATOM).鉢一覧[棚ID] || [];
     },
   set:
     棚Id =>
