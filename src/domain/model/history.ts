@@ -16,7 +16,7 @@ export namespace 鉢サイズ {
 
   export const toString = (size: 鉢サイズ) => {
     const postfix = size.タイプ === '通常' ? '' : ` ${size.タイプ}`;
-    return `${size.番号}${postfix}`;
+    return `${size.番号}号${postfix}`;
   };
 }
 export type 鉢サイズ = {

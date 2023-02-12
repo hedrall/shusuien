@@ -24215,10 +24215,10 @@
             }
           }
           var jsx36 = jsxWithValidationDynamic;
-          var jsxs22 = jsxWithValidationStatic;
+          var jsxs23 = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.jsx = jsx36;
-          exports.jsxs = jsxs22;
+          exports.jsxs = jsxs23;
         })();
       }
     }
@@ -72075,10 +72075,10 @@ This typically indicates that your device does not have a healthy Internet conne
         this.path = _\u5C65\u6B74.createPath();
       }
     };
-    let \u5C65\u6B742 = _\u5C65\u6B74;
-    \u5C65\u6B742._name = "\u5C65\u6B74";
-    \u5C65\u6B742.createPath = () => _\u5C65\u6B74._name;
-    FsManager2.\u5C65\u6B74 = \u5C65\u6B742;
+    let \u5C65\u6B743 = _\u5C65\u6B74;
+    \u5C65\u6B743._name = "\u5C65\u6B74";
+    \u5C65\u6B743.createPath = () => _\u5C65\u6B74._name;
+    FsManager2.\u5C65\u6B74 = \u5C65\u6B743;
     const _User2 = class {
       constructor(converter) {
         this.converter = converter;
@@ -72099,11 +72099,11 @@ This typically indicates that your device does not have a healthy Internet conne
     \u9262\u30B5\u30A4\u30BA4.\u30BF\u30A4\u30D7 = ["\u901A\u5E38", "L"];
     \u9262\u30B5\u30A4\u30BA4.toString = (size) => {
       const postfix = size.\u30BF\u30A4\u30D7 === "\u901A\u5E38" ? "" : ` ${size.\u30BF\u30A4\u30D7}`;
-      return `${size.\u756A\u53F7}${postfix}`;
+      return `${size.\u756A\u53F7}\u53F7${postfix}`;
     };
   })(\u9262\u30B5\u30A4\u30BA || (\u9262\u30B5\u30A4\u30BA = {}));
   var \u5C65\u6B74\u306E\u5185\u5BB9;
-  ((\u5C65\u6B74\u306E\u5185\u5BB94) => {
+  ((\u5C65\u6B74\u306E\u5185\u5BB95) => {
     let \u704C\u6C342;
     ((\u704C\u6C343) => {
       \u704C\u6C343.\u91CF\u306E\u5B9A\u7FA9 = {
@@ -72129,7 +72129,7 @@ This typically indicates that your device does not have a healthy Internet conne
         }
       };
       \u704C\u6C343.\u91CF\u306EKey = Object.values(\u704C\u6C343.\u91CF\u306E\u5B9A\u7FA9).map((i) => i.key);
-    })(\u704C\u6C342 = \u5C65\u6B74\u306E\u5185\u5BB94.\u704C\u6C34 || (\u5C65\u6B74\u306E\u5185\u5BB94.\u704C\u6C34 = {}));
+    })(\u704C\u6C342 = \u5C65\u6B74\u306E\u5185\u5BB95.\u704C\u6C34 || (\u5C65\u6B74\u306E\u5185\u5BB95.\u704C\u6C34 = {}));
   })(\u5C65\u6B74\u306E\u5185\u5BB9 || (\u5C65\u6B74\u306E\u5185\u5BB9 = {}));
   var \u4F5C\u6210 = async (\u65B0\u898F\u5C65\u6B74) => {
     const { id: id2 } = await FSAppRepository.\u5C65\u6B74.\u4F5C\u6210(\u65B0\u898F\u5C65\u6B74);
@@ -73951,29 +73951,29 @@ ${this.customData.serverResponse}`;
       })
     }));
   };
-  function _\u5C65\u6B74\u3092\u9069\u7528(\u5C65\u6B742) {
-    const type4 = \u5C65\u6B742.\u5185\u5BB9.type;
+  function _\u5C65\u6B74\u3092\u9069\u7528(\u5C65\u6B743) {
+    const type4 = \u5C65\u6B743.\u5185\u5BB9.type;
     switch (type4) {
       case "\u690D\u66FF\u3048":
         return update2(
           this,
           {
-            \u9262\u306E\u30B5\u30A4\u30BA: \u5C65\u6B742.\u5185\u5BB9.\u9262\u306E\u30B5\u30A4\u30BA,
-            \u6700\u5F8C\u306E\u690D\u66FF\u3048: \u5C65\u6B742.\u5185\u5BB9.\u690D\u66FF\u3048\u65E5\u6642,
-            \u753B\u50CF\u306EPATH: \u5C65\u6B742.\u5185\u5BB9.\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH
+            \u9262\u306E\u30B5\u30A4\u30BA: \u5C65\u6B743.\u5185\u5BB9.\u9262\u306E\u30B5\u30A4\u30BA,
+            \u6700\u5F8C\u306E\u690D\u66FF\u3048: \u5C65\u6B743.\u5185\u5BB9.\u690D\u66FF\u3048\u65E5\u6642,
+            \u753B\u50CF\u306EPATH: \u5C65\u6B743.\u5185\u5BB9.\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH
           },
-          \u5C65\u6B742.\u4F5C\u6210\u65E5\u6642
+          \u5C65\u6B743.\u4F5C\u6210\u65E5\u6642
         );
       case "\u704C\u6C34":
         return update2(
           this,
           {
             \u6700\u5F8C\u306E\u704C\u6C34: {
-              \u65E5\u6642: \u5C65\u6B742.\u4F5C\u6210\u65E5\u6642,
-              \u91CF: \u5C65\u6B742.\u5185\u5BB9.\u704C\u6C34\u91CF
+              \u65E5\u6642: \u5C65\u6B743.\u4F5C\u6210\u65E5\u6642,
+              \u91CF: \u5C65\u6B743.\u5185\u5BB9.\u704C\u6C34\u91CF
             }
           },
-          \u5C65\u6B742.\u4F5C\u6210\u65E5\u6642
+          \u5C65\u6B743.\u4F5C\u6210\u65E5\u6642
         );
       default:
         throw new Error(`\u5B9F\u88C5\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002type: ${type4}`);
@@ -74101,12 +74101,12 @@ ${this.customData.serverResponse}`;
       }
     }
     FsAppManager2.\u68DA = \u68DA2;
-    class \u5C65\u6B742 extends FsManager.\u5C65\u6B74 {
+    class \u5C65\u6B743 extends FsManager.\u5C65\u6B74 {
       constructor() {
         super(appConverters.\u5C65\u6B74);
       }
     }
-    FsAppManager2.\u5C65\u6B74 = \u5C65\u6B742;
+    FsAppManager2.\u5C65\u6B74 = \u5C65\u6B743;
     class User2 extends FsManager.User {
       constructor() {
         super(appConverters.User);
@@ -79675,11 +79675,32 @@ ${this.customData.serverResponse}`;
 
   // src/components/molecules/HistoryTimeline/index.tsx
   var import_jsx_runtime15 = __toESM(require_jsx_runtime());
+  var \u5C65\u6B74\u3054\u3068\u306E\u8868\u793A\u5185\u5BB9 = (i) => {
+    const \u4E00\u884C\u76EE = `[${i.\u4F5C\u6210\u65E5\u6642.format(F2)}]: ${i.\u5185\u5BB9.type}`;
+    switch (i.\u5185\u5BB9.type) {
+      case "\u753B\u50CF\u3092\u66F4\u65B0":
+      case "\u6210\u9577\u306E\u8A18\u9332":
+        return \u4E00\u884C\u76EE;
+      case "\u704C\u6C34":
+        return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { className: "ItemP", children: \u4E00\u884C\u76EE }),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { className: "ItemP", children: i.\u5185\u5BB9.\u704C\u6C34\u91CF })
+        ] });
+      case "\u690D\u66FF\u3048":
+        return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { className: "ItemP", children: \u4E00\u884C\u76EE }),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("p", { className: "ItemP", children: [
+            "\u30B5\u30A4\u30BA: ",
+            \u9262\u30B5\u30A4\u30BA.toString(i.\u5185\u5BB9.\u9262\u306E\u30B5\u30A4\u30BA)
+          ] })
+        ] });
+    }
+  };
   var F2 = "YYYY/MM/DD HH\u6642";
   var Timeline\u306E\u30A2\u30A4\u30C6\u30E0\u3078\u5909\u63DB = (i) => {
     const Icon2 = ICONS[i.\u5185\u5BB9.type];
     return {
-      children: `[${i.\u4F5C\u6210\u65E5\u6642.format(F2)}]: ${i.\u5185\u5BB9.type}`,
+      children: \u5C65\u6B74\u3054\u3068\u306E\u8868\u793A\u5185\u5BB9(i),
       dot: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Icon2, {}),
       color: "grey"
     };
@@ -79689,7 +79710,7 @@ ${this.customData.serverResponse}`;
     const { user } = useAuthState();
     const \u5C65\u6B74\u4E00\u89A7 = use\u9262\u306E\u5C65\u6B74\u4E00\u89A7(\u92622 == null ? void 0 : \u92622.id, user == null ? void 0 : user.id);
     const timeLineProps = {
-      className: "",
+      className: "\u9262\u306E\u5C65\u6B74",
       items: \u5C65\u6B74\u4E00\u89A7.map(Timeline\u306E\u30A2\u30A4\u30C6\u30E0\u3078\u5909\u63DB)
     };
     return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(timeline_default, __spreadValues({}, timeLineProps));

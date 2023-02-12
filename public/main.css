@@ -59,6 +59,10 @@
   font-size: 12px;
 }
 
+.鉢の履歴 .ItemP {
+  margin: 0;
+}
+
 .MyFormLayout {
   display: flex;
   flex-direction: column;
