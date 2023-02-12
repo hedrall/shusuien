@@ -42,7 +42,8 @@ export const removeId = (obj: { [key: string]: any }) => {
 };
 
 export const basicToFirestore = <T extends object>(item: T): fs.DocumentData => {
-  return dateToFirestore(dropUndefined(removeId({ ...item })));
+  const mod = dateToFirestore(dropUndefined(removeId({ ...item })));
+  return JSON.parse(JSON.stringify(mod));
 };
 
 export const basicFromFirestore = <T extends Entity>(construct: new (...args: any[]) => T) => {

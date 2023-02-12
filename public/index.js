@@ -1042,7 +1042,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect50(create, deps) {
+          function useEffect51(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1822,7 +1822,7 @@
           exports.useContext = useContext54;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect50;
+          exports.useEffect = useEffect51;
           exports.useId = useId2;
           exports.useImperativeHandle = useImperativeHandle17;
           exports.useInsertionEffect = useInsertionEffect;
@@ -34186,7 +34186,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   }
 
   // src/components/pages/Top/index.tsx
-  var import_react52 = __toESM(require_react());
+  var import_react53 = __toESM(require_react());
 
   // src/components/organisms/CreateTanaModal/index.tsx
   var import_react46 = __toESM(require_react());
@@ -72670,16 +72670,8 @@ ${this.customData.serverResponse}`;
     const { imageDataUrl, props } = params;
     const { userId } = props;
     const now2 = (0, import_dayjs.default)();
-    console.log("1. \u9262\u3092\u4F5C\u6210\u3059\u308B");
-    const \u65B0\u898F\u9262 = new \u9262(__spreadProps(__spreadValues({}, props), {
-      id: void 0,
-      snapshot: {
-        \u66F4\u65B0\u65E5\u6642: now2
-      },
-      \u4F5C\u6210\u65E5\u6642: now2
-    }));
-    const { \u9262ID } = await FSAppRepository.\u9262.\u4F5C\u6210(\u65B0\u898F\u9262);
-    console.log("2. \u753B\u50CF\u3092Upload");
+    console.log("1. \u753B\u50CF\u3092Upload");
+    const \u9262ID = await FSAppRepository.\u9262.getId();
     const { \u753B\u50CF\u306EPATH } = await StorageRepository.uploadImageByBase64String({
       dataUrl: imageDataUrl,
       path: StorageRepository.storagePath({
@@ -72689,7 +72681,17 @@ ${this.customData.serverResponse}`;
         itemId: \u9262ID
       })
     });
-    console.log("3. \u753B\u50CF\u306E\u5909\u66F4\u5C65\u6B74\u3092\u4F5C\u6210\u3059\u308B");
+    console.log("2. \u9262\u3092\u4F5C\u6210\u3059\u308B");
+    const \u65B0\u898F\u9262 = new \u9262(__spreadProps(__spreadValues({}, props), {
+      id: void 0,
+      snapshot: {
+        \u66F4\u65B0\u65E5\u6642: now2,
+        \u753B\u50CF\u306EPATH
+      },
+      \u4F5C\u6210\u65E5\u6642: now2
+    }));
+    await FSAppRepository.\u9262.\u4F5C\u6210(\u65B0\u898F\u9262, \u9262ID);
+    console.log("3. \u753B\u50CF\u66F4\u65B0\u5C65\u6B74\u3092\u4F5C\u6210");
     await \u5C65\u6B74.\u65B0\u898F\u4F5C\u6210.\u753B\u50CF\u306E\u66F4\u65B0\u6B74({
       props: {
         \u4F5C\u6210\u65E5\u6642: now2,
@@ -72701,8 +72703,6 @@ ${this.customData.serverResponse}`;
         \u753B\u50CF\u306EPATH
       }
     });
-    console.log("4. \u9262\u3092\u66F4\u65B0\u3059\u308B");
-    await FSAppRepository.\u9262.\u753B\u50CF\u3092\u66F4\u65B0(\u9262ID, \u753B\u50CF\u306EPATH, now2);
   };
 
   // src/domain/model/item/index.ts
@@ -72834,7 +72834,8 @@ ${this.customData.serverResponse}`;
     return rest;
   };
   var basicToFirestore = (item) => {
-    return dateToFirestore(dropUndefined(removeId(__spreadValues({}, item))));
+    const mod = dateToFirestore(dropUndefined(removeId(__spreadValues({}, item))));
+    return JSON.parse(JSON.stringify(mod));
   };
   var basicFromFirestore = (construct) => {
     return (snapshot) => {
@@ -72909,10 +72910,13 @@ ${this.customData.serverResponse}`;
   // src/domain/repository/firestore/item.ts
   var _FsApp\u9262Repository;
   ((_FsApp\u9262Repository2) => {
-    _FsApp\u9262Repository2.\u4F5C\u6210 = async (\u65B0\u898F\u9262) => {
+    _FsApp\u9262Repository2.getId = () => {
       const manager = new FsAppManager.\u9262();
-      const ref2 = await FSAppRepository.addItem(manager, \u65B0\u898F\u9262);
-      return { \u9262ID: ref2.id };
+      return FSAppRepository.getId(manager);
+    };
+    _FsApp\u9262Repository2.\u4F5C\u6210 = async (\u65B0\u898F\u9262, id2) => {
+      const manager = new FsAppManager.\u9262();
+      await FSAppRepository.addItemWithId(manager, \u65B0\u898F\u9262, id2);
     };
     _FsApp\u9262Repository2.snapshot\u3092\u66F4\u65B0 = async (id2, \u66F4\u65B0\u5F8C\u306Esnapshot, date4) => {
       const manager = new FsAppManager.\u9262();
@@ -72977,6 +72981,10 @@ ${this.customData.serverResponse}`;
       const collection = Ta2(db2(), manager.path);
       return collection.withConverter(manager.converter);
     };
+    FSAppRepository2.getId = (manager) => {
+      const collection = (0, FSAppRepository2.getCollection)(manager);
+      return Aa2(collection, manager.path).id;
+    };
     FSAppRepository2.querySnapshotToRefValues = (snapshot) => {
       const refValue = [];
       let lastDocSnapshot = void 0;
@@ -73036,9 +73044,9 @@ ${this.customData.serverResponse}`;
       const collection = (0, FSAppRepository2.getCollection)(manager);
       return await Ql(collection, entity);
     };
-    FSAppRepository2.addItemWithId = async (manager, entity) => {
+    FSAppRepository2.addItemWithId = async (manager, entity, id2) => {
       const collection = (0, FSAppRepository2.getCollection)(manager);
-      const doc = Aa2(collection, entity.id);
+      const doc = Aa2(collection, id2);
       await Ul(doc, entity);
     };
     FSAppRepository2.isExist = async (manager, id2) => {
@@ -73210,29 +73218,40 @@ ${this.customData.serverResponse}`;
   });
 
   // src/store/data/action.ts
+  var import_react47 = __toESM(require_react());
   var \u9262Selector = Recoil_index_11({
     key: "\u9262Selector",
     get: (\u68DAID) => ({ get: get3 }) => {
+      console.log("get");
       return get3(DATA_STATE_ATOM).\u9262\u4E00\u89A7[\u68DAID] || [];
     },
     set: (\u68DAId) => ({ set: set4 }, items) => {
-      set4(DATA_STATE_ATOM, (pre) => __spreadProps(__spreadValues({}, pre), {
-        \u9262\u4E00\u89A7: __spreadProps(__spreadValues({}, pre.\u9262\u4E00\u89A7), {
-          [\u68DAId]: items
-        })
-      }));
+      set4(DATA_STATE_ATOM, (pre) => {
+        console.log("update state");
+        return __spreadProps(__spreadValues({}, pre), {
+          \u9262\u4E00\u89A7: __spreadProps(__spreadValues({}, pre.\u9262\u4E00\u89A7), {
+            [\u68DAId]: items
+          })
+        });
+      });
     }
   });
-  var use\u9262 = (\u68DAId) => {
+  var use\u9262 = (\u68DAId, user) => {
     const [state, set4] = Recoil_index_22(\u9262Selector(\u68DAId));
     const \u9262\u3092\u8CFC\u8AAD = (userId, \u68DAId2) => {
       return FSAppRepository.\u9262.\u8CFC\u8AAD({ userId, \u68DAId: \u68DAId2 }, (items) => {
+        console.log("\u9262\u3092listen", items);
         set4(items.map((i) => i.value));
       });
     };
+    (0, import_react47.useEffect)(() => {
+      if (!(user == null ? void 0 : user.id))
+        return;
+      const { unsubscribe: unsubscribe2 } = \u9262\u3092\u8CFC\u8AAD(user.id, \u68DAId);
+      return () => unsubscribe2();
+    }, [user == null ? void 0 : user.id, \u68DAId]);
     return {
-      \u9262\u4E00\u89A7: state,
-      \u9262\u3092\u8CFC\u8AAD
+      \u9262\u4E00\u89A7: state
     };
   };
   var useDataState = () => {
@@ -73261,16 +73280,15 @@ ${this.customData.serverResponse}`;
     return {
       \u68DA\u4E00\u89A7: state.\u68DA\u4E00\u89A7,
       \u68DA\u3092Set: set4.\u68DA,
-      \u9262\u3092Set: set4.\u9262,
       \u68DA\u3092\u8CFC\u8AAD
     };
   };
 
   // src/components/molecules/ItemList/index.tsx
-  var import_react51 = __toESM(require_react());
+  var import_react52 = __toESM(require_react());
 
   // src/components/organisms/CreateItemModal/index.tsx
-  var import_react47 = __toESM(require_react());
+  var import_react48 = __toESM(require_react());
 
   // node_modules/.pnpm/browser-image-compression@2.0.0/node_modules/browser-image-compression/dist/browser-image-compression.mjs
   function _mergeNamespaces(e, r) {
@@ -75220,9 +75238,9 @@ ${this.customData.serverResponse}`;
     \u7A2E\u540D: void 0,
     \u88DC\u8DB3: void 0
   };
-  var \u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB = (0, import_react47.forwardRef)((props, ref2) => {
+  var \u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB = (0, import_react48.forwardRef)((props, ref2) => {
     const { \u68DAId } = props;
-    const [isOpen, setIsOpen] = (0, import_react47.useState)(false);
+    const [isOpen, setIsOpen] = (0, import_react48.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
     const { user } = useAuthState();
     const { control, getValues, formState } = useForm2({
@@ -75279,7 +75297,7 @@ ${this.customData.serverResponse}`;
         setIsOpen(false);
       });
     };
-    (0, import_react47.useImperativeHandle)(ref2, () => {
+    (0, import_react48.useImperativeHandle)(ref2, () => {
       return {
         open: () => setIsOpen(true)
       };
@@ -75307,12 +75325,13 @@ ${this.customData.serverResponse}`;
   });
 
   // src/components/atoms/ItemListCell/index.tsx
-  var import_react48 = __toESM(require_react());
+  var import_react49 = __toESM(require_react());
   var import_jsx_runtime7 = __toESM(require_jsx_runtime());
   var \u9262\u4E00\u89A7\u306E\u8981\u7D20 = (props) => {
     const { item, \u9262\u3092\u9078\u629E } = props;
-    const [imageUrl, setImageUrl] = (0, import_react48.useState)("");
-    (0, import_react48.useEffect)(() => {
+    const [imageUrl, setImageUrl] = (0, import_react49.useState)("");
+    (0, import_react49.useEffect)(() => {
+      console.log("ue", item.snapshot);
       const path = item.snapshot.\u753B\u50CF\u306EPATH;
       if (!path)
         return;
@@ -75329,10 +75348,10 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/organisms/OperateItemModal/index.tsx
-  var import_react50 = __toESM(require_react());
+  var import_react51 = __toESM(require_react());
 
   // src/components/organisms/ReplantOperationModal/index.tsx
-  var import_react49 = __toESM(require_react());
+  var import_react50 = __toESM(require_react());
   var import_dayjs5 = __toESM(require_dayjs_min());
 
   // src/components/atoms/RadioGroup/index.tsx
@@ -75418,10 +75437,10 @@ ${this.customData.serverResponse}`;
       value: num
     };
   });
-  var \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EB = (0, import_react49.forwardRef)((props, ref2) => {
-    const [isOpen, setIsOpen] = (0, import_react49.useState)(false);
+  var \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EB = (0, import_react50.forwardRef)((props, ref2) => {
+    const [isOpen, setIsOpen] = (0, import_react50.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
-    const [item, setItem] = (0, import_react49.useState)(null);
+    const [item, setItem] = (0, import_react50.useState)(null);
     const { user } = useAuthState();
     const { control, getValues, formState } = useForm2({
       mode: "onChange",
@@ -75462,7 +75481,7 @@ ${this.customData.serverResponse}`;
       confirmLoading: isLoading,
       destroyOnClose: true
     };
-    (0, import_react49.useImperativeHandle)(ref2, () => {
+    (0, import_react50.useImperativeHandle)(ref2, () => {
       return {
         open: (\u92622) => {
           setItem(\u92622);
@@ -75509,23 +75528,25 @@ ${this.customData.serverResponse}`;
 
   // src/components/organisms/OperateItemModal/index.tsx
   var import_jsx_runtime12 = __toESM(require_jsx_runtime());
-  var \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB = (0, import_react50.forwardRef)((props, ref2) => {
-    const [isOpen, setIsOpen] = (0, import_react50.useState)(false);
+  var \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB = (0, import_react51.forwardRef)((props, ref2) => {
+    const [isOpen, setIsOpen] = (0, import_react51.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
-    const [item, setItem] = (0, import_react50.useState)(null);
+    const [item, setItem] = (0, import_react51.useState)(null);
     const { user } = useAuthState();
-    const \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react50.useRef)(null);
+    const \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react51.useRef)(null);
     const modalProps = {
       className: "\u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB",
       open: isOpen,
       onCancel: () => setIsOpen(false),
-      okButtonProps: {},
+      okButtonProps: {
+        style: { display: "none" }
+      },
       okText: "\u4F5C\u6210",
       cancelText: "\u9589\u3058\u308B",
       confirmLoading: isLoading,
       destroyOnClose: true
     };
-    (0, import_react50.useImperativeHandle)(ref2, () => {
+    (0, import_react51.useImperativeHandle)(ref2, () => {
       return {
         open: (\u92622) => {
           setItem(\u92622);
@@ -75564,17 +75585,11 @@ ${this.customData.serverResponse}`;
   };
   var \u9262\u4E00\u89A7 = (props) => {
     const { \u68DA: \u68DA2 } = props;
-    const \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react51.useRef)(null);
-    const \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef = (0, import_react51.useRef)(null);
+    const \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react52.useRef)(null);
+    const \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef = (0, import_react52.useRef)(null);
     const { user } = useAuthState();
     const \u68DAId = \u68DA2.id;
-    const { \u9262\u4E00\u89A7: \u9262\u4E00\u89A72, \u9262\u3092\u8CFC\u8AAD } = use\u9262(\u68DAId);
-    (0, import_react51.useEffect)(() => {
-      if (!(user == null ? void 0 : user.id))
-        return;
-      const { unsubscribe: unsubscribe2 } = \u9262\u3092\u8CFC\u8AAD(user.id, \u68DAId);
-      return () => unsubscribe2();
-    }, [user == null ? void 0 : user.id, \u68DAId]);
+    const { \u9262\u4E00\u89A7: \u9262\u4E00\u89A72 } = use\u9262(\u68DAId, user);
     const \u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F = () => {
       var _a2;
       return (_a2 = \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef.current) == null ? void 0 : _a2.open();
@@ -75606,14 +75621,14 @@ ${this.customData.serverResponse}`;
   var TopPage = (props) => {
     const { user } = useAuthState();
     const { \u68DA\u3092\u8CFC\u8AAD, \u68DA\u4E00\u89A7 } = useDataState();
-    (0, import_react52.useEffect)(() => {
+    (0, import_react53.useEffect)(() => {
       if (!(user == null ? void 0 : user.id))
         return;
       const { unsubscribe: unsubscribe2 } = \u68DA\u3092\u8CFC\u8AAD(user.id);
       return () => unsubscribe2();
     }, [user == null ? void 0 : user.id]);
     const navigator2 = useNavigate();
-    const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef = (0, import_react52.useRef)(null);
+    const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef = (0, import_react53.useRef)(null);
     const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F = () => {
       var _a2;
       (_a2 = \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef.current) == null ? void 0 : _a2.open();
@@ -75636,7 +75651,7 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/pages/Login/index.tsx
-  var import_react56 = __toESM(require_react());
+  var import_react57 = __toESM(require_react());
   var import_classnames65 = __toESM(require_classnames());
 
   // src/components/atoms/MyAlert/index.tsx
@@ -79663,13 +79678,13 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/pages/Login/steps/setUserName.tsx
-  var import_react53 = __toESM(require_react());
+  var import_react54 = __toESM(require_react());
   var import_jsx_runtime20 = __toESM(require_jsx_runtime());
   var InputGroup3 = input_default.Group;
   var SetUserNameStep = (props) => {
     var _a2, _b, _c2;
     const { setStep } = props;
-    const [isLoading, setIsLoading] = (0, import_react53.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react54.useState)(false);
     const { setUser } = useAuthState();
     const navigate = useNavigate();
     const { control, getValues, setError, formState } = useForm2({
@@ -79726,7 +79741,7 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/pages/Login/steps/registerNewAccount.tsx
-  var import_react54 = __toESM(require_react());
+  var import_react55 = __toESM(require_react());
 
   // src/components/atoms/PasswordInput/index.tsx
   var import_classnames64 = __toESM(require_classnames());
@@ -79742,7 +79757,7 @@ ${this.customData.serverResponse}`;
   var RegisterNewAccountStep = (props) => {
     var _a2, _b;
     const { setStep, email: email2 } = props;
-    const [isLoading, setIsLoading] = (0, import_react54.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react55.useState)(false);
     const { setUser } = useAuthState();
     const { control, getValues, setError, formState } = useForm2({
       mode: "onChange",
@@ -79802,14 +79817,14 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/pages/Login/steps/inputPassword.tsx
-  var import_react55 = __toESM(require_react());
+  var import_react56 = __toESM(require_react());
   var import_jsx_runtime23 = __toESM(require_jsx_runtime());
   var InputGroup5 = input_default.Group;
   var InputPasswordStep = (props) => {
     var _a2, _b;
     const { email: email2 } = props;
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = (0, import_react55.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react56.useState)(false);
     const { control, getValues, setError, formState } = useForm2({
       mode: "onChange",
       reValidateMode: "onChange",
@@ -79867,7 +79882,7 @@ ${this.customData.serverResponse}`;
   };
   var LoginPage = (props) => {
     const { className } = props;
-    const [state, setState] = (0, import_react56.useState)({
+    const [state, setState] = (0, import_react57.useState)({
       step: "first",
       email: ""
     });
@@ -79911,14 +79926,14 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/common/Layout.tsx
-  var import_react57 = __toESM(require_react());
+  var import_react58 = __toESM(require_react());
   var import_jsx_runtime26 = __toESM(require_jsx_runtime());
   var Layout = ({ children }) => {
     const { user } = useAuthState();
     const navigate = useNavigate();
     const location = useLocation();
     const signOut2 = AuthRepository.signOut;
-    (0, import_react57.useEffect)(() => {
+    (0, import_react58.useEffect)(() => {
       if (location.pathname === ROUTES.LOGIN.PATH && user) {
         const params = new URLSearchParams(location.search);
         const from2 = params.get("from");
@@ -79945,10 +79960,10 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/common/Utils.tsx
-  var import_react58 = __toESM(require_react());
+  var import_react59 = __toESM(require_react());
   var Utils = () => {
     const { authStateChangeSubscriber } = useAuthState();
-    (0, import_react58.useEffect)(() => {
+    (0, import_react59.useEffect)(() => {
       AuthRepository.listen.authStateChanged(authStateChangeSubscriber);
     }, []);
     return null;

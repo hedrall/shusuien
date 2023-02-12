@@ -52,7 +52,7 @@ export namespace 履歴の内容 {
     灌水量: 灌水.量のKey型;
   };
 
-  // 画像の撮影
+  // 新規作成
   export type 画像を更新 = {
     type: '画像を更新';
     画像のPATH: string;

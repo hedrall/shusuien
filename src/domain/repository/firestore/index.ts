@@ -19,6 +19,12 @@ export namespace FSAppRepository {
     return collection.withConverter<T>(manager.converter);
   };
 
+  type Id<T extends Entity> = NonNullable<T['id']>;
+  export const getId = <T extends Entity>(manager: FsAppManager<T>): Id<T> => {
+    const collection = getCollection(manager);
+    return fs.doc(collection, manager.path).id as Id<T>;
+  };
+
   export const querySnapshotToRefValues = <T>(snapshot: QuerySnapshot<T>) => {
     const refValue: RefValue<T>[] = [];
 
@@ -95,9 +101,13 @@ export namespace FSAppRepository {
     return await fs.addDoc(collection, entity);
   };
 
-  export const addItemWithId = async <T extends Entity & { id: string }>(manager: FsAppManager<T>, entity: T) => {
+  export const addItemWithId = async <T extends Entity>(
+    manager: FsAppManager<T>,
+    entity: T,
+    id: NonNullable<T['id']>,
+  ) => {
     const collection = getCollection(manager);
-    const doc = fs.doc(collection, entity.id);
+    const doc = fs.doc(collection, id);
     await fs.setDoc(doc, entity);
   };
 

@@ -13,6 +13,7 @@ export const 鉢一覧の要素: React.FC<HachiProps> = props => {
   const [imageUrl, setImageUrl] = useState<string>('');
 
   useEffect(() => {
+    console.log('ue', item.snapshot);
     const path = item.snapshot.画像のPATH;
     if (!path) return;
     StorageRepository.getDownloadUrls(path).then(setImageUrl);

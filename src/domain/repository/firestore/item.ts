@@ -9,10 +9,14 @@ import { Dayjs } from 'dayjs';
 import { basicToFirestore } from '@frontend/domain/repository/firebase/converters/app';
 
 export namespace _FsApp鉢Repository {
-  export const 作成 = async (新規鉢: 鉢) => {
+  export const getId = (): 鉢Id => {
     const manager = new FsAppManager.鉢();
-    const ref = await FSAppRepository.addItem(manager, 新規鉢);
-    return { 鉢ID: ref.id as 鉢Id };
+    return FSAppRepository.getId(manager);
+  };
+
+  export const 作成 = async (新規鉢: 鉢, id: 鉢Id) => {
+    const manager = new FsAppManager.鉢();
+    await FSAppRepository.addItemWithId(manager, 新規鉢, id);
   };
 
   export const snapshotを更新 = async (id: 鉢Id, 更新後のsnapshot: Partial<鉢['snapshot']>, date: Dayjs) => {

@@ -29,6 +29,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
     // onOk: () => 棚の作成を実行する(),
     okButtonProps: {
       // disabled: !isValid,
+      style: { display: 'none' },
     },
     okText: '作成',
     cancelText: '閉じる',

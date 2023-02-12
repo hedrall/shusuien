@@ -31,13 +31,7 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
   const { user } = useAuthState();
 
   const 棚Id = 棚.id!;
-  const { 鉢一覧, 鉢を購読 } = use鉢(棚Id);
-
-  useEffect(() => {
-    if (!user?.id) return;
-    const { unsubscribe } = 鉢を購読(user.id, 棚Id);
-    return () => unsubscribe();
-  }, [user?.id, 棚Id]);
+  const { 鉢一覧 } = use鉢(棚Id, user);
 
   const 鉢作成モーダルを開く = () => 鉢操作モーダルRef.current?.open();
 
