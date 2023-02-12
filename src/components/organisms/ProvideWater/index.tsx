@@ -84,7 +84,7 @@ export const 灌水モーダル = forwardRef<灌水モーダル.Ref, 灌水モ�
     okButtonProps: {
       disabled: !formState.isValid,
     },
-    okText: '植替えを記録する',
+    okText: '灌水する',
     cancelText: '閉じる',
     confirmLoading: isLoading,
     destroyOnClose: true,

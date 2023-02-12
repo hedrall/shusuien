@@ -11,6 +11,7 @@ import { use鉢単体 } from '@frontend/store/data/action';
 import { 鉢の履歴 } from '@frontend/components/molecules/HistoryTimeline';
 import { 灌水モーダル } from '@frontend/components/organisms/ProvideWater';
 import { ICONS } from '@frontend/supports/icons';
+import { 成長記録モーダル } from '@frontend/components/organisms/DocGrowthModal';
 
 export namespace 鉢管理モーダル {
   export type Ref = {
@@ -25,8 +26,13 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
   const { user } = useAuthState();
   const { item, setItem } = use鉢単体(id, user?.id);
   const { imageUrl, setImageUrl } = StorageRepository.鉢.use画像(item?.snapshot.画像のPATH);
+  console.log({
+    path: item?.snapshot.画像のPATH,
+    imageUrl,
+  });
   const 植替え操作モーダルRef = useRef<植替え操作モーダル.Ref | null>(null);
   const 灌水操作モーダルRef = useRef<灌水モーダル.Ref | null>(null);
+  const 成長記録操作モーダルRef = useRef<成長記録モーダル.Ref | null>(null);
 
   const modalProps: ModalProps = {
     className: '鉢管理モーダル',
@@ -61,6 +67,10 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
     if (!item) return;
     植替え操作モーダルRef.current?.open(item);
   };
+  const 成長記録モーダルを開く = () => {
+    if (!item) return;
+    成長記録操作モーダルRef.current?.open(item);
+  };
 
   return (
     <Modal {...modalProps}>
@@ -88,6 +98,14 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
           }
           onClick={植替えモーダルを開く}
         />
+        <MyButton
+          title={
+            <div>
+              <ICONS.成長の記録 /> 成長記録
+            </div>
+          }
+          onClick={成長記録モーダルを開く}
+        />
       </div>
 
       {item && <鉢の情報 鉢={item} />}
@@ -97,6 +115,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
 
       <植替え操作モーダル ref={植替え操作モーダルRef} />
       <灌水モーダル ref={灌水操作モーダルRef} />
+      <成長記録モーダル ref={成長記録操作モーダルRef} />
     </Modal>
   );
 });

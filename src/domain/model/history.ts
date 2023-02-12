@@ -66,8 +66,8 @@ export namespace 履歴の内容 {
   // 成長の記録
   export type 成長の記録 = {
     type: '成長の記録';
-    画像のPATH: string;
-    memo: string;
+    画像のPATH: string | undefined;
+    memo: string | undefined;
   };
 
   // 植替え
@@ -182,7 +182,7 @@ export class 履歴 extends 履歴のBase {
   }
 
   static 新規作成 = {
-    画像の更新歴: _成長の記録履歴を作成,
+    成長記録: _成長の記録履歴を作成,
     植替え: _植替え履歴を作成,
     灌水: _灌水履歴を作成,
   };

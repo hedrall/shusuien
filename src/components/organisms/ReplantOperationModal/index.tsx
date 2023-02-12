@@ -98,7 +98,6 @@ export const 植替え操作モーダル = forwardRef<植替え操作モーダ�
     await withLoading(async () => {
       const { imageDataUrl, size, isLong, date, memo } = getValues();
 
-      console.log({ v: getValues() });
       await 鉢.管理.植替え({
         imageDataUrl,
         userId: user.id,

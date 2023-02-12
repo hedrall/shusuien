@@ -921,7 +921,7 @@
             }
             return lazyType;
           }
-          function forwardRef64(render6) {
+          function forwardRef65(render6) {
             {
               if (render6 != null && render6.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1030,7 +1030,7 @@
             }
             return dispatcher.useContext(Context2);
           }
-          function useState52(initialState) {
+          function useState53(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1062,7 +1062,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
-          function useImperativeHandle19(ref2, create, deps) {
+          function useImperativeHandle20(ref2, create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useImperativeHandle(ref2, create, deps);
           }
@@ -1812,7 +1812,7 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef4;
-          exports.forwardRef = forwardRef64;
+          exports.forwardRef = forwardRef65;
           exports.isValidElement = isValidElement9;
           exports.lazy = lazy;
           exports.memo = memo4;
@@ -1824,13 +1824,13 @@
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect52;
           exports.useId = useId2;
-          exports.useImperativeHandle = useImperativeHandle19;
+          exports.useImperativeHandle = useImperativeHandle20;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect7;
           exports.useMemo = useMemo31;
           exports.useReducer = useReducer2;
           exports.useRef = useRef55;
-          exports.useState = useState52;
+          exports.useState = useState53;
           exports.useSyncExternalStore = useSyncExternalStore3;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2326,9 +2326,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React177 = require_react();
+          var React178 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React177.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React178.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3849,7 +3849,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React177.Children.forEach(props.children, function(child2) {
+                  React178.Children.forEach(props.children, function(child2) {
                     if (child2 == null) {
                       return;
                     }
@@ -12010,7 +12010,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React177.Component().refs;
+          var emptyRefsObject = new React178.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23362,7 +23362,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React177 = require_react();
+          var React178 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -23388,7 +23388,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React177.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React178.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format2) {
             {
               {
@@ -24214,11 +24214,11 @@
               return jsxWithValidation(type4, props, key2, false);
             }
           }
-          var jsx37 = jsxWithValidationDynamic;
-          var jsxs23 = jsxWithValidationStatic;
+          var jsx38 = jsxWithValidationDynamic;
+          var jsxs24 = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
-          exports.jsx = jsx37;
-          exports.jsxs = jsxs23;
+          exports.jsx = jsx38;
+          exports.jsxs = jsxs24;
         })();
       }
     }
@@ -34758,7 +34758,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   }
 
   // src/components/pages/Top/index.tsx
-  var import_react61 = __toESM(require_react());
+  var import_react62 = __toESM(require_react());
 
   // src/components/organisms/CreateTanaModal/index.tsx
   var import_react52 = __toESM(require_react());
@@ -55640,7 +55640,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   var import_classnames42 = __toESM(require_classnames());
   var _excluded16 = ["autoComplete", "onChange", "onFocus", "onBlur", "onPressEnter", "onKeyDown", "prefixCls", "disabled", "htmlSize", "className", "maxLength", "suffix", "showCount", "type", "inputClassName", "classes"];
   var Input = /* @__PURE__ */ (0, import_react39.forwardRef)(function(props, ref2) {
-    var autoComplete = props.autoComplete, onChange3 = props.onChange, onFocus2 = props.onFocus, onBlur2 = props.onBlur, onPressEnter = props.onPressEnter, onKeyDown2 = props.onKeyDown, _props$prefixCls = props.prefixCls, prefixCls = _props$prefixCls === void 0 ? "rc-input" : _props$prefixCls, disabled2 = props.disabled, htmlSize = props.htmlSize, className = props.className, maxLength2 = props.maxLength, suffix = props.suffix, showCount = props.showCount, _props$type = props.type, type4 = _props$type === void 0 ? "text" : _props$type, inputClassName = props.inputClassName, classes = props.classes, rest = _objectWithoutProperties(props, _excluded16);
+    var autoComplete = props.autoComplete, onChange3 = props.onChange, onFocus2 = props.onFocus, onBlur2 = props.onBlur, onPressEnter = props.onPressEnter, onKeyDown2 = props.onKeyDown, _props$prefixCls = props.prefixCls, prefixCls = _props$prefixCls === void 0 ? "rc-input" : _props$prefixCls, disabled2 = props.disabled, htmlSize = props.htmlSize, className = props.className, maxLength3 = props.maxLength, suffix = props.suffix, showCount = props.showCount, _props$type = props.type, type4 = _props$type === void 0 ? "text" : _props$type, inputClassName = props.inputClassName, classes = props.classes, rest = _objectWithoutProperties(props, _excluded16);
     var _useMergedState = useMergedState(props.defaultValue, {
       value: props.value
     }), _useMergedState2 = _slicedToArray(_useMergedState, 2), value2 = _useMergedState2[0], setValue2 = _useMergedState2[1];
@@ -55735,15 +55735,15 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       }));
     };
     var getSuffix = function getSuffix2() {
-      var hasMaxLength = Number(maxLength2) > 0;
+      var hasMaxLength = Number(maxLength3) > 0;
       if (suffix || showCount) {
         var val = fixControlledValue(value2);
         var valueLength = _toConsumableArray(val).length;
         var dataCount = _typeof(showCount) === "object" ? showCount.formatter({
           value: val,
           count: valueLength,
-          maxLength: maxLength2
-        }) : "".concat(valueLength).concat(hasMaxLength ? " / ".concat(maxLength2) : "");
+          maxLength: maxLength3
+        }) : "".concat(valueLength).concat(hasMaxLength ? " / ".concat(maxLength3) : "");
         return /* @__PURE__ */ import_react39.default.createElement(import_react39.default.Fragment, null, !!showCount && /* @__PURE__ */ import_react39.default.createElement("span", {
           className: (0, import_classnames42.default)("".concat(prefixCls, "-show-count-suffix"), _defineProperty2({}, "".concat(prefixCls, "-show-count-has-suffix"), !!suffix))
         }, dataCount), suffix);
@@ -56420,20 +56420,20 @@ This is currently a DEV-only warning but will become a thrown exception in the n
 
   // node_modules/.pnpm/rc-textarea@1.0.1_biqbaboplfbrettd7655fr4n2y/node_modules/rc-textarea/es/TextArea.js
   var _excluded18 = ["defaultValue", "value", "onChange", "allowClear", "maxLength", "onCompositionStart", "onCompositionEnd", "suffix", "prefixCls", "classes", "showCount", "className", "style", "disabled"];
-  function fixEmojiLength(value2, maxLength2) {
-    return _toConsumableArray(value2 || "").slice(0, maxLength2).join("");
+  function fixEmojiLength(value2, maxLength3) {
+    return _toConsumableArray(value2 || "").slice(0, maxLength3).join("");
   }
-  function setTriggerValue(isCursorInEnd, preValue, triggerValue, maxLength2) {
+  function setTriggerValue(isCursorInEnd, preValue, triggerValue, maxLength3) {
     var newTriggerValue = triggerValue;
     if (isCursorInEnd) {
-      newTriggerValue = fixEmojiLength(triggerValue, maxLength2);
-    } else if (_toConsumableArray(preValue || "").length < triggerValue.length && _toConsumableArray(triggerValue || "").length > maxLength2) {
+      newTriggerValue = fixEmojiLength(triggerValue, maxLength3);
+    } else if (_toConsumableArray(preValue || "").length < triggerValue.length && _toConsumableArray(triggerValue || "").length > maxLength3) {
       newTriggerValue = preValue;
     }
     return newTriggerValue;
   }
   var TextArea = /* @__PURE__ */ import_react43.default.forwardRef(function(_ref4, ref2) {
-    var defaultValue = _ref4.defaultValue, customValue = _ref4.value, onChange3 = _ref4.onChange, allowClear = _ref4.allowClear, maxLength2 = _ref4.maxLength, onCompositionStart = _ref4.onCompositionStart, onCompositionEnd = _ref4.onCompositionEnd, suffix = _ref4.suffix, _ref$prefixCls = _ref4.prefixCls, prefixCls = _ref$prefixCls === void 0 ? "rc-textarea" : _ref$prefixCls, classes = _ref4.classes, showCount = _ref4.showCount, className = _ref4.className, style2 = _ref4.style, disabled2 = _ref4.disabled, rest = _objectWithoutProperties(_ref4, _excluded18);
+    var defaultValue = _ref4.defaultValue, customValue = _ref4.value, onChange3 = _ref4.onChange, allowClear = _ref4.allowClear, maxLength3 = _ref4.maxLength, onCompositionStart = _ref4.onCompositionStart, onCompositionEnd = _ref4.onCompositionEnd, suffix = _ref4.suffix, _ref$prefixCls = _ref4.prefixCls, prefixCls = _ref$prefixCls === void 0 ? "rc-textarea" : _ref$prefixCls, classes = _ref4.classes, showCount = _ref4.showCount, className = _ref4.className, style2 = _ref4.style, disabled2 = _ref4.disabled, rest = _objectWithoutProperties(_ref4, _excluded18);
     var _useMergedState = useMergedState(defaultValue, {
       value: customValue,
       defaultValue
@@ -56454,7 +56454,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         }
       };
     });
-    var hasMaxLength = Number(maxLength2) > 0;
+    var hasMaxLength = Number(maxLength3) > 0;
     var onInternalCompositionStart = function onInternalCompositionStart2(e) {
       setCompositing(true);
       oldCompositionValueRef.current = value2;
@@ -56466,8 +56466,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
       var triggerValue = e.currentTarget.value;
       if (hasMaxLength) {
         var _oldCompositionValueR;
-        var isCursorInEnd = oldSelectionStartRef.current >= maxLength2 + 1 || oldSelectionStartRef.current === ((_oldCompositionValueR = oldCompositionValueRef.current) === null || _oldCompositionValueR === void 0 ? void 0 : _oldCompositionValueR.length);
-        triggerValue = setTriggerValue(isCursorInEnd, oldCompositionValueRef.current, triggerValue, maxLength2);
+        var isCursorInEnd = oldSelectionStartRef.current >= maxLength3 + 1 || oldSelectionStartRef.current === ((_oldCompositionValueR = oldCompositionValueRef.current) === null || _oldCompositionValueR === void 0 ? void 0 : _oldCompositionValueR.length);
+        triggerValue = setTriggerValue(isCursorInEnd, oldCompositionValueRef.current, triggerValue, maxLength3);
       }
       if (triggerValue !== value2) {
         setValue2(triggerValue);
@@ -56478,8 +56478,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     var handleChange = function handleChange2(e) {
       var triggerValue = e.target.value;
       if (!compositing && hasMaxLength) {
-        var isCursorInEnd = e.target.selectionStart >= maxLength2 + 1 || e.target.selectionStart === triggerValue.length || !e.target.selectionStart;
-        triggerValue = setTriggerValue(isCursorInEnd, value2, triggerValue, maxLength2);
+        var isCursorInEnd = e.target.selectionStart >= maxLength3 + 1 || e.target.selectionStart === triggerValue.length || !e.target.selectionStart;
+        triggerValue = setTriggerValue(isCursorInEnd, value2, triggerValue, maxLength3);
       }
       setValue2(triggerValue);
       resolveOnChange(e.currentTarget, e, onChange3, triggerValue);
@@ -56498,7 +56498,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     };
     var val = fixControlledValue(value2);
     if (!compositing && hasMaxLength && (customValue === null || customValue === void 0)) {
-      val = fixEmojiLength(val, maxLength2);
+      val = fixEmojiLength(val, maxLength3);
     }
     var textarea = /* @__PURE__ */ import_react43.default.createElement(BaseInput_default, {
       value: val,
@@ -56533,10 +56533,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         dataCount = showCount.formatter({
           value: val,
           count: valueLength,
-          maxLength: maxLength2
+          maxLength: maxLength3
         });
       } else {
-        dataCount = "".concat(valueLength).concat(hasMaxLength ? " / ".concat(maxLength2) : "");
+        dataCount = "".concat(valueLength).concat(hasMaxLength ? " / ".concat(maxLength3) : "");
       }
       return /* @__PURE__ */ import_react43.default.createElement("div", {
         hidden: rest.hidden,
@@ -61454,7 +61454,7 @@ This is currently a DEV-only warning but will become a thrown exception in the n
     message: ""
   };
   var validateField = async (field, formValues, validateAllFieldCriteria, shouldUseNativeValidation, isFieldArray) => {
-    const { ref: ref2, refs, required: required4, maxLength: maxLength2, minLength, min, max, pattern: pattern4, validate, name: name7, valueAsNumber, mount, disabled: disabled2 } = field._f;
+    const { ref: ref2, refs, required: required4, maxLength: maxLength3, minLength, min, max, pattern: pattern4, validate, name: name7, valueAsNumber, mount, disabled: disabled2 } = field._f;
     const inputValue = get2(formValues, name7);
     if (!mount || disabled2) {
       return {};
@@ -61527,8 +61527,8 @@ This is currently a DEV-only warning but will become a thrown exception in the n
         }
       }
     }
-    if ((maxLength2 || minLength) && !isEmpty2 && (isString2(inputValue) || isFieldArray && Array.isArray(inputValue))) {
-      const maxLengthOutput = getValueAndMessage(maxLength2);
+    if ((maxLength3 || minLength) && !isEmpty2 && (isString2(inputValue) || isFieldArray && Array.isArray(inputValue))) {
+      const maxLengthOutput = getValueAndMessage(maxLength3);
       const minLengthOutput = getValueAndMessage(minLength);
       const exceedMax = !isNullOrUndefined(maxLengthOutput.value) && inputValue.length > maxLengthOutput.value;
       const exceedMin = !isNullOrUndefined(minLengthOutput.value) && inputValue.length < minLengthOutput.value;
@@ -72109,10 +72109,10 @@ This typically indicates that your device does not have a healthy Internet conne
 
   // src/domain/model/history.ts
   var \u9262\u30B5\u30A4\u30BA;
-  ((\u9262\u30B5\u30A4\u30BA4) => {
-    \u9262\u30B5\u30A4\u30BA4.\u756A\u53F7 = ["2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5"];
-    \u9262\u30B5\u30A4\u30BA4.\u30BF\u30A4\u30D7 = ["\u901A\u5E38", "L"];
-    \u9262\u30B5\u30A4\u30BA4.toString = (size) => {
+  ((\u9262\u30B5\u30A4\u30BA5) => {
+    \u9262\u30B5\u30A4\u30BA5.\u756A\u53F7 = ["2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5"];
+    \u9262\u30B5\u30A4\u30BA5.\u30BF\u30A4\u30D7 = ["\u901A\u5E38", "L"];
+    \u9262\u30B5\u30A4\u30BA5.toString = (size) => {
       const postfix = size.\u30BF\u30A4\u30D7 === "\u901A\u5E38" ? "" : ` ${size.\u30BF\u30A4\u30D7}`;
       return `${size.\u756A\u53F7}\u53F7${postfix}`;
     };
@@ -72223,13 +72223,13 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   };
   \u5C65\u6B74.\u65B0\u898F\u4F5C\u6210 = {
-    \u753B\u50CF\u306E\u66F4\u65B0\u6B74: _\u6210\u9577\u306E\u8A18\u9332\u5C65\u6B74\u3092\u4F5C\u6210,
+    \u6210\u9577\u8A18\u9332: _\u6210\u9577\u306E\u8A18\u9332\u5C65\u6B74\u3092\u4F5C\u6210,
     \u690D\u66FF\u3048: _\u690D\u66FF\u3048\u5C65\u6B74\u3092\u4F5C\u6210,
     \u704C\u6C34: _\u704C\u6C34\u5C65\u6B74\u3092\u4F5C\u6210
   };
 
   // src/domain/model/item/index.ts
-  var import_dayjs4 = __toESM(require_dayjs_min());
+  var import_dayjs5 = __toESM(require_dayjs_min());
 
   // node_modules/.pnpm/@firebase+storage@0.10.1_@firebase+app@0.9.1/node_modules/@firebase/storage/dist/index.esm2017.js
   var DEFAULT_HOST = "firebasestorage.googleapis.com";
@@ -73862,10 +73862,10 @@ ${this.customData.serverResponse}`;
     await FSAppRepository.\u9262.snapshot\u3092\u66F4\u65B0(\u9262Id, \u66F4\u65B0\u5F8C\u306E\u9262.snapshot, date4);
   };
 
-  // src/domain/model/item/operation/docGrowth.ts
+  // src/domain/model/item/operation/newItem.ts
   var import_dayjs2 = __toESM(require_dayjs_min());
-  var _\u6210\u9577\u3092\u8A18\u9332\u3059\u308B = async (params) => {
-    const { imageDataUrl, memo: memo4, props } = params;
+  var _\u65B0\u898F\u4F5C\u6210\u3059\u308B = async (params) => {
+    const { imageDataUrl, props } = params;
     const { userId } = props;
     const now2 = (0, import_dayjs2.default)();
     console.log("1. \u753B\u50CF\u3092Upload");
@@ -73890,8 +73890,8 @@ ${this.customData.serverResponse}`;
       \u4F5C\u6210\u65E5\u6642: now2
     }));
     await FSAppRepository.\u9262.\u4F5C\u6210(\u65B0\u898F\u9262, \u9262ID);
-    console.log("3. \u753B\u50CF\u66F4\u65B0\u5C65\u6B74\u3092\u4F5C\u6210");
-    await \u5C65\u6B74.\u65B0\u898F\u4F5C\u6210.\u753B\u50CF\u306E\u66F4\u65B0\u6B74({
+    console.log("3. \u6210\u9577\u8A18\u9332\u5C65\u6B74\u3092\u4F5C\u6210");
+    await \u5C65\u6B74.\u65B0\u898F\u4F5C\u6210.\u6210\u9577\u8A18\u9332({
       props: {
         \u4F5C\u6210\u65E5\u6642: now2,
         userId,
@@ -73899,19 +73899,9 @@ ${this.customData.serverResponse}`;
         \u5BFE\u8C61\u306E\u68DA\u306EID: void 0
       },
       \u5185\u5BB9: {
-        memo: memo4,
+        memo: "[\u81EA\u52D5\u8A18\u8F09]: \u65B0\u898F\u306B\u9262\u3092\u8FFD\u52A0\u3057\u307E\u3057\u305F\u3002",
         \u753B\u50CF\u306EPATH
       }
-    });
-  };
-
-  // src/domain/model/item/operation/newItem.ts
-  var _\u65B0\u898F\u4F5C\u6210\u3059\u308B = async (params) => {
-    const { imageDataUrl, props } = params;
-    return await _\u6210\u9577\u3092\u8A18\u9332\u3059\u308B({
-      imageDataUrl,
-      memo: "[\u81EA\u52D5\u8A18\u9332]: \u9262\u3092\u65B0\u898F\u306B\u3064\u3044\u304B\u3057\u307E\u3057\u305F\u3002",
-      props
     });
   };
 
@@ -73936,6 +73926,44 @@ ${this.customData.serverResponse}`;
     await FSAppRepository.\u9262.snapshot\u3092\u66F4\u65B0(\u9262Id, \u66F4\u65B0\u5F8C\u306E\u9262.snapshot, date4);
   };
 
+  // src/domain/model/item/operation/docGrowth.ts
+  var import_dayjs4 = __toESM(require_dayjs_min());
+  var _\u6210\u9577\u3092\u8A18\u9332\u3059\u308B = async (params) => {
+    const { item, userId, imageDataUrl, memo: memo4 } = params;
+    const \u9262Id = item.id;
+    const date4 = (0, import_dayjs4.default)();
+    let \u753B\u50CF\u306EPATH = void 0;
+    console.log("1. \u3042\u308C\u3070\u753B\u50CF\u3092upload\u3059\u308B");
+    if (imageDataUrl) {
+      const { \u753B\u50CF\u306EPATH: path } = await StorageRepository.uploadImageByBase64String({
+        dataUrl: imageDataUrl,
+        path: StorageRepository.storagePath({
+          type: "\u9262",
+          userId,
+          datetime: date4,
+          itemId: \u9262Id
+        })
+      });
+      \u753B\u50CF\u306EPATH = path;
+    }
+    console.log("2. \u6210\u9577\u8A18\u9332\u5C65\u6B74\u3092\u4F5C\u6210");
+    const \u690D\u66FF\u3048\u5C65\u6B74 = await \u5C65\u6B74.\u65B0\u898F\u4F5C\u6210.\u6210\u9577\u8A18\u9332({
+      props: {
+        userId,
+        \u4F5C\u6210\u65E5\u6642: date4,
+        \u5BFE\u8C61\u306E\u68DA\u306EID: void 0,
+        \u5BFE\u8C61\u306E\u9262\u306EID: \u9262Id
+      },
+      \u5185\u5BB9: {
+        \u753B\u50CF\u306EPATH,
+        memo: memo4
+      }
+    });
+    console.log("3. \u9262\u306E\u60C5\u5831\u3092\u66F4\u65B0\u3059\u308B");
+    const \u66F4\u65B0\u5F8C\u306E\u9262 = item.\u5C65\u6B74\u3092\u9069\u7528(\u690D\u66FF\u3048\u5C65\u6B74);
+    await FSAppRepository.\u9262.snapshot\u3092\u66F4\u65B0(\u9262Id, \u66F4\u65B0\u5F8C\u306E\u9262.snapshot, date4);
+  };
+
   // src/domain/model/item/index.ts
   var \u9262\u306EBase2 = class {
     constructor(props) {
@@ -73945,14 +73973,14 @@ ${this.customData.serverResponse}`;
       this.\u68DAId = props.\u68DAId;
       this.snapshot = {
         \u9262\u306E\u30B5\u30A4\u30BA: props.snapshot.\u9262\u306E\u30B5\u30A4\u30BA,
-        \u6700\u5F8C\u306E\u690D\u66FF\u3048: optionalCall(props.snapshot.\u6700\u5F8C\u306E\u690D\u66FF\u3048, import_dayjs4.default),
+        \u6700\u5F8C\u306E\u690D\u66FF\u3048: optionalCall(props.snapshot.\u6700\u5F8C\u306E\u690D\u66FF\u3048, import_dayjs5.default),
         \u753B\u50CF\u306EPATH: props.snapshot.\u753B\u50CF\u306EPATH,
-        \u66F4\u65B0\u65E5\u6642: (0, import_dayjs4.default)(props.snapshot.\u66F4\u65B0\u65E5\u6642)
+        \u66F4\u65B0\u65E5\u6642: (0, import_dayjs5.default)(props.snapshot.\u66F4\u65B0\u65E5\u6642)
       };
       const snapshot = this.snapshot;
       if ("\u6700\u5F8C\u306E\u704C\u6C34" in snapshot) {
         this.snapshot.\u6700\u5F8C\u306E\u704C\u6C34 = {
-          \u65E5\u6642: (0, import_dayjs4.default)(snapshot.\u6700\u5F8C\u306E\u704C\u6C34.\u65E5\u6642),
+          \u65E5\u6642: (0, import_dayjs5.default)(snapshot.\u6700\u5F8C\u306E\u704C\u6C34.\u65E5\u6642),
           \u91CF: snapshot.\u6700\u5F8C\u306E\u704C\u6C34.\u91CF
         };
       }
@@ -73962,7 +73990,7 @@ ${this.customData.serverResponse}`;
         \u7A2E\u540D: props.\u8A73\u7D30.\u7A2E\u540D
       };
       this.\u88DC\u8DB3 = props.\u88DC\u8DB3;
-      this.\u4F5C\u6210\u65E5\u6642 = (0, import_dayjs4.default)(props.\u4F5C\u6210\u65E5\u6642);
+      this.\u4F5C\u6210\u65E5\u6642 = (0, import_dayjs5.default)(props.\u4F5C\u6210\u65E5\u6642);
     }
   };
   var update2 = (cur, \u66F4\u65B0\u3059\u308Bsnapshot\u306E\u9805\u76EE, \u5C65\u6B74\u306E\u4F5C\u6210\u65E5\u6642) => {
@@ -73996,6 +74024,12 @@ ${this.customData.serverResponse}`;
           },
           \u5C65\u6B743.\u4F5C\u6210\u65E5\u6642
         );
+      case "\u6210\u9577\u306E\u8A18\u9332":
+        return update2(
+          this,
+          __spreadValues({}, \u5C65\u6B743.\u5185\u5BB9.\u753B\u50CF\u306EPATH ? { \u753B\u50CF\u306EPATH: \u5C65\u6B743.\u5185\u5BB9.\u753B\u50CF\u306EPATH } : {}),
+          \u5C65\u6B743.\u4F5C\u6210\u65E5\u6642
+        );
       default:
         throw new Error(`\u5B9F\u88C5\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002type: ${type4}`);
     }
@@ -74016,12 +74050,12 @@ ${this.customData.serverResponse}`;
   };
 
   // src/domain/model/tana.ts
-  var import_dayjs5 = __toESM(require_dayjs_min());
+  var import_dayjs6 = __toESM(require_dayjs_min());
   var \u68DA = class {
     static async \u65B0\u898F\u4F5C\u6210(v3) {
       const \u65B0\u898F\u68DA = new \u68DA(__spreadValues({
         id: void 0,
-        \u4F5C\u6210\u65E5\u6642: (0, import_dayjs5.default)()
+        \u4F5C\u6210\u65E5\u6642: (0, import_dayjs6.default)()
       }, v3));
       await FSAppRepository.\u68DA.\u4F5C\u6210(\u65B0\u898F\u68DA);
     }
@@ -74029,7 +74063,7 @@ ${this.customData.serverResponse}`;
       this.id = props.id;
       this.name = props.name;
       this.userId = props.userId;
-      this.\u4F5C\u6210\u65E5\u6642 = (0, import_dayjs5.default)(props.\u4F5C\u6210\u65E5\u6642);
+      this.\u4F5C\u6210\u65E5\u6642 = (0, import_dayjs6.default)(props.\u4F5C\u6210\u65E5\u6642);
     }
   };
 
@@ -74049,7 +74083,7 @@ ${this.customData.serverResponse}`;
   };
 
   // src/domain/repository/firebase/converters/app.ts
-  var import_dayjs6 = __toESM(require_dayjs_min());
+  var import_dayjs7 = __toESM(require_dayjs_min());
   var dropUndefined = (obj) => {
     Object.keys(obj).map((key2) => {
       const value2 = obj[key2];
@@ -74069,7 +74103,7 @@ ${this.customData.serverResponse}`;
   var dateToFirestore = (obj) => {
     Object.keys(obj).map((key2) => {
       const value2 = obj[key2];
-      if (value2 instanceof import_dayjs6.default) {
+      if (value2 instanceof import_dayjs7.default) {
         obj[key2] = value2.format();
         return;
       }
@@ -74560,7 +74594,7 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/molecules/ItemList/index.tsx
-  var import_react60 = __toESM(require_react());
+  var import_react61 = __toESM(require_react());
 
   // src/components/organisms/CreateItemModal/index.tsx
   var import_react54 = __toESM(require_react());
@@ -76523,7 +76557,7 @@ ${this.customData.serverResponse}`;
       reValidateMode: "onChange",
       defaultValues: DEFAULT_VALUES
     });
-    const maxLength2 = { value: 40, message: "\u6700\u592740\u6587\u5B57\u307E\u3067\u3067\u3059\u3002" };
+    const maxLength3 = { value: 40, message: "\u6700\u592740\u6587\u5B57\u307E\u3067\u3067\u3059\u3002" };
     const imageDataUrl = useController({
       control,
       name: "imageDataUrl",
@@ -76532,13 +76566,13 @@ ${this.customData.serverResponse}`;
     const name7 = useController({
       control,
       name: "name",
-      rules: { maxLength: maxLength2 }
+      rules: { maxLength: maxLength3 }
     });
     const [\u79D1, \u5C5E, \u7A2E\u540D, \u88DC\u8DB3] = ["\u79D1", "\u5C5E", "\u7A2E\u540D", "\u88DC\u8DB3"].map((key2) => {
       return useController({
         control,
         name: key2,
-        rules: { maxLength: maxLength2 }
+        rules: { maxLength: maxLength3 }
       });
     });
     const modalProps = {
@@ -76623,11 +76657,11 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/organisms/OperateItemModal/index.tsx
-  var import_react59 = __toESM(require_react());
+  var import_react60 = __toESM(require_react());
 
   // src/components/organisms/ReplantOperationModal/index.tsx
   var import_react56 = __toESM(require_react());
-  var import_dayjs7 = __toESM(require_dayjs_min());
+  var import_dayjs8 = __toESM(require_dayjs_min());
 
   // src/components/atoms/RadioGroup/index.tsx
   var import_jsx_runtime8 = __toESM(require_jsx_runtime());
@@ -79511,6 +79545,12 @@ ${this.customData.serverResponse}`;
       "\u690D\u66FF\u3048\u3092\u8A18\u9332"
     ] });
   };
+  var \u6210\u9577\u8A18\u9332 = () => {
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("h1", { className: "\u30E2\u30FC\u30C0\u30EB\u306E\u898B\u51FA\u3057", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(ICONS.\u6210\u9577\u306E\u8A18\u9332, {}),
+      "\u6210\u9577\u3092\u8A18\u9332"
+    ] });
+  };
   var \u30E2\u30FC\u30C0\u30EB\u306E\u898B\u51FA\u3057 = (props) => {
     const { type: type4 } = props;
     switch (type4) {
@@ -79518,6 +79558,8 @@ ${this.customData.serverResponse}`;
         return \u704C\u6C34();
       case "\u690D\u66FF\u3048":
         return \u690D\u66FF\u3048();
+      case "\u6210\u9577\u306E\u8A18\u9332":
+        return \u6210\u9577\u8A18\u9332();
     }
   };
 
@@ -79527,7 +79569,7 @@ ${this.customData.serverResponse}`;
     size: "3",
     isLong: false,
     imageDataUrl: void 0,
-    date: (0, import_dayjs7.default)().format(DATE_TIME_FORMAT),
+    date: (0, import_dayjs8.default)().format(DATE_TIME_FORMAT),
     memo: void 0
   });
   var maxLength = { value: 400, message: "\u6700\u5927400\u6587\u5B57\u307E\u3067\u3067\u3059\u3002" };
@@ -79585,12 +79627,11 @@ ${this.customData.serverResponse}`;
         return;
       await withLoading(async () => {
         const { imageDataUrl: imageDataUrl2, size: size2, isLong: isLong2, date: date5, memo: memo5 } = getValues();
-        console.log({ v: getValues() });
         await \u9262.\u7BA1\u7406.\u690D\u66FF\u3048({
           imageDataUrl: imageDataUrl2,
           userId: user.id,
           item,
-          date: (0, import_dayjs7.default)(date5),
+          date: (0, import_dayjs8.default)(date5),
           \u9262\u306E\u30B5\u30A4\u30BA: {
             \u756A\u53F7: size2,
             \u30BF\u30A4\u30D7: isLong2 ? "L" : ""
@@ -79732,7 +79773,7 @@ ${this.customData.serverResponse}`;
 
   // src/components/molecules/HistoryTimeline/index.tsx
   var import_jsx_runtime16 = __toESM(require_jsx_runtime());
-  function \u753B\u50CF\u3068\u8868\u793A(props) {
+  var \u753B\u50CF\u3068\u8868\u793A = (props) => {
     const { \u4E00\u884C\u76EE, \u4E8C\u884C\u76EE, \u753B\u50CF\u306EPATH } = props;
     const { imageUrl } = StorageRepository.\u9262.use\u753B\u50CF(\u753B\u50CF\u306EPATH);
     return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { children: [
@@ -79740,27 +79781,41 @@ ${this.customData.serverResponse}`;
       \u4E8C\u884C\u76EE ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E8C\u884C\u76EE }) : null,
       /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(image_default, { style: { maxWidth: "100%", maxHeight: 80, minHeight: 80 }, src: imageUrl || NO_IMAGE })
     ] });
-  }
+  };
   var \u5C65\u6B74\u3054\u3068\u306E\u8868\u793A\u5185\u5BB9 = (i) => {
     const \u4E00\u884C\u76EE = `[${i.\u4F5C\u6210\u65E5\u6642.format(F2)}]: ${i.\u5185\u5BB9.type}`;
     switch (i.\u5185\u5BB9.type) {
       case "\u6210\u9577\u306E\u8A18\u9332": {
-        return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(\u753B\u50CF\u3068\u8868\u793A, { \u4E00\u884C\u76EE, \u753B\u50CF\u306EPATH: i.\u5185\u5BB9.\u753B\u50CF\u306EPATH });
+        const { \u753B\u50CF\u306EPATH, memo: memo4 } = i.\u5185\u5BB9;
+        return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          \u753B\u50CF\u3068\u8868\u793A,
+          {
+            \u4E00\u884C\u76EE,
+            \u4E8C\u884C\u76EE: memo4 ? /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("span", { className: "Memo", children: [
+              "\u30E1\u30E2: ",
+              memo4
+            ] }) : void 0,
+            \u753B\u50CF\u306EPATH
+          }
+        );
       }
       case "\u704C\u6C34":
         return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { children: [
           /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E00\u884C\u76EE }),
           /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: i.\u5185\u5BB9.\u704C\u6C34\u91CF })
         ] });
-      case "\u690D\u66FF\u3048":
+      case "\u690D\u66FF\u3048": {
+        const size = \u9262\u30B5\u30A4\u30BA.toString(i.\u5185\u5BB9.\u9262\u306E\u30B5\u30A4\u30BA);
+        const memo4 = i.\u5185\u5BB9.memo;
         return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
           \u753B\u50CF\u3068\u8868\u793A,
           {
             \u4E00\u884C\u76EE,
-            \u4E8C\u884C\u76EE: \u9262\u30B5\u30A4\u30BA.toString(i.\u5185\u5BB9.\u9262\u306E\u30B5\u30A4\u30BA),
+            \u4E8C\u884C\u76EE: [size, memo4 ? `\u30E1\u30E2: ${memo4}` : void 0].filter(Boolean).join(", "),
             \u753B\u50CF\u306EPATH: i.\u5185\u5BB9.\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH
           }
         );
+      }
     }
   };
   var F2 = "YYYY/MM/DD HH\u6642";
@@ -79869,7 +79924,7 @@ ${this.customData.serverResponse}`;
       okButtonProps: {
         disabled: !formState.isValid
       },
-      okText: "\u690D\u66FF\u3048\u3092\u8A18\u9332\u3059\u308B",
+      okText: "\u704C\u6C34\u3059\u308B",
       cancelText: "\u9589\u3058\u308B",
       confirmLoading: isLoading,
       destroyOnClose: true
@@ -79899,16 +79954,117 @@ ${this.customData.serverResponse}`;
     ] }));
   });
 
-  // src/components/organisms/OperateItemModal/index.tsx
+  // src/components/organisms/DocGrowthModal/index.tsx
+  var import_react59 = __toESM(require_react());
   var import_jsx_runtime19 = __toESM(require_jsx_runtime());
-  var \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB = (0, import_react59.forwardRef)((props, ref2) => {
+  var DEFAULT_VALUES5 = () => ({
+    imageDataUrl: void 0,
+    memo: void 0
+  });
+  var maxLength2 = { value: 400, message: "\u6700\u5927400\u6587\u5B57\u307E\u3067\u3067\u3059\u3002" };
+  var createController3 = (control) => {
+    const imageDataUrl = useController({
+      control,
+      name: "imageDataUrl",
+      rules: { required: "\u5FC5\u9808\u3067\u3059\u3002" }
+    });
+    const memo4 = useController({
+      control,
+      name: "memo",
+      rules: { maxLength: maxLength2 }
+    });
+    return { imageDataUrl, memo: memo4 };
+  };
+  var \u6210\u9577\u8A18\u9332\u30E2\u30FC\u30C0\u30EB = (0, import_react59.forwardRef)((props, ref2) => {
     const [isOpen, setIsOpen] = (0, import_react59.useState)(false);
-    const [id2, setId] = (0, import_react59.useState)(void 0);
+    const { isLoading, withLoading } = useWithLoading();
+    const [item, setItem] = (0, import_react59.useState)(null);
+    const { user } = useAuthState();
+    const { control, getValues, reset } = useForm2({
+      mode: "onChange",
+      reValidateMode: "onChange",
+      defaultValues: DEFAULT_VALUES5()
+    });
+    const value2 = getValues();
+    const isValid = value2.imageDataUrl || value2.memo;
+    const { imageDataUrl, memo: memo4 } = createController3(control);
+    const close = () => {
+      setIsOpen(false);
+      setItem(null);
+      reset();
+    };
+    const \u6210\u9577\u8A18\u9332\u3092\u5B9F\u884C\u3059\u308B = async () => {
+      if (!user || !item)
+        return;
+      await withLoading(async () => {
+        const { imageDataUrl: imageDataUrl2, memo: memo5 } = getValues();
+        console.log({ v: getValues() });
+        await \u9262.\u7BA1\u7406.\u6210\u9577\u3092\u8A18\u9332({
+          item,
+          userId: user.id,
+          imageDataUrl: imageDataUrl2,
+          memo: memo5
+        });
+        close();
+      });
+    };
+    const modalProps = {
+      className: "\u6210\u9577\u8A18\u9332\u30E2\u30FC\u30C0\u30EB",
+      open: isOpen,
+      onCancel: () => setIsOpen(false),
+      onOk: () => \u6210\u9577\u8A18\u9332\u3092\u5B9F\u884C\u3059\u308B(),
+      okButtonProps: {
+        disabled: !isValid
+      },
+      okText: "\u6210\u9577\u3092\u8A18\u9332",
+      cancelText: "\u9589\u3058\u308B",
+      confirmLoading: isLoading,
+      destroyOnClose: true
+    };
+    (0, import_react59.useImperativeHandle)(ref2, () => {
+      return {
+        open: (\u92622) => {
+          setItem(\u92622);
+          console.log(\u92622);
+          setIsOpen(true);
+        }
+      };
+    });
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(modal_default, __spreadProps(__spreadValues({}, modalProps), { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(\u30E2\u30FC\u30C0\u30EB\u306E\u898B\u51FA\u3057, { type: "\u690D\u66FF\u3048" }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+        MyFormLayout,
+        {
+          items: [
+            {
+              label: "\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u3092\u64AE\u5F71\u{1F4F8}",
+              input: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(UploadImage, { field: imageDataUrl.field })
+            },
+            {
+              label: "\u30E1\u30E2 (\u4EFB\u610F)",
+              input: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(MyInputWithAlert, { controller: memo4 })
+            }
+          ]
+        }
+      )
+    ] }));
+  });
+
+  // src/components/organisms/OperateItemModal/index.tsx
+  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
+  var \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB = (0, import_react60.forwardRef)((props, ref2) => {
+    const [isOpen, setIsOpen] = (0, import_react60.useState)(false);
+    const [id2, setId] = (0, import_react60.useState)(void 0);
     const { user } = useAuthState();
     const { item, setItem } = use\u9262\u5358\u4F53(id2, user == null ? void 0 : user.id);
     const { imageUrl, setImageUrl } = StorageRepository.\u9262.use\u753B\u50CF(item == null ? void 0 : item.snapshot.\u753B\u50CF\u306EPATH);
-    const \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react59.useRef)(null);
-    const \u704C\u6C34\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react59.useRef)(null);
+    console.log({
+      path: item == null ? void 0 : item.snapshot.\u753B\u50CF\u306EPATH,
+      imageUrl
+    });
+    const \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
+    const \u704C\u6C34\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
+    const \u6210\u9577\u8A18\u9332\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
     const modalProps = {
       className: "\u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB",
       open: isOpen,
@@ -79920,7 +80076,7 @@ ${this.customData.serverResponse}`;
       cancelText: "\u9589\u3058\u308B",
       destroyOnClose: true
     };
-    (0, import_react59.useImperativeHandle)(ref2, () => {
+    (0, import_react60.useImperativeHandle)(ref2, () => {
       return {
         open: (\u92622, imageUrl2) => {
           setItem(\u92622);
@@ -79942,51 +80098,68 @@ ${this.customData.serverResponse}`;
         return;
       (_a2 = \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef.current) == null ? void 0 : _a2.open(item);
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(modal_default, __spreadProps(__spreadValues({}, modalProps), { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h1", { children: "\u9262\u306E\u304A\u624B\u5165\u308C" }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(image_default, { style: { maxWidth: "100%", maxHeight: 250, minHeight: 174 }, src: imageUrl || NO_IMAGE }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h2", { className: "\u898B\u51FA\u3057", children: "\u7BA1\u7406" }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "\u7BA1\u7406\u30DC\u30BF\u30F3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    const \u6210\u9577\u8A18\u9332\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F = () => {
+      var _a2;
+      if (!item)
+        return;
+      (_a2 = \u6210\u9577\u8A18\u9332\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef.current) == null ? void 0 : _a2.open(item);
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(modal_default, __spreadProps(__spreadValues({}, modalProps), { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h1", { children: "\u9262\u306E\u304A\u624B\u5165\u308C" }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(image_default, { style: { maxWidth: "100%", maxHeight: 250, minHeight: 174 }, src: imageUrl || NO_IMAGE }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h2", { className: "\u898B\u51FA\u3057", children: "\u7BA1\u7406" }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "\u7BA1\u7406\u30DC\u30BF\u30F3", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
           MyButton,
           {
-            title: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(ICONS.\u704C\u6C34, {}),
+            title: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ICONS.\u704C\u6C34, {}),
               " \u704C\u6C34"
             ] }),
             onClick: \u704C\u6C34\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
           MyButton,
           {
-            title: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(ICONS.\u690D\u66FF\u3048, {}),
+            title: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ICONS.\u690D\u66FF\u3048, {}),
               " \u690D\u66FF\u3048"
             ] }),
             onClick: \u690D\u66FF\u3048\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F
           }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+          MyButton,
+          {
+            title: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ICONS.\u6210\u9577\u306E\u8A18\u9332, {}),
+              " \u6210\u9577\u8A18\u9332"
+            ] }),
+            onClick: \u6210\u9577\u8A18\u9332\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F
+          }
         )
       ] }),
-      item && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(\u9262\u306E\u60C5\u5831, { \u9262: item }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("h2", { className: "\u898B\u51FA\u3057", children: "\u5C65\u6B74" }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(\u9262\u306E\u5C65\u6B74, { \u9262: item }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(\u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EB, { ref: \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(\u704C\u6C34\u30E2\u30FC\u30C0\u30EB, { ref: \u704C\u6C34\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef })
+      item && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(\u9262\u306E\u60C5\u5831, { \u9262: item }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h2", { className: "\u898B\u51FA\u3057", children: "\u5C65\u6B74" }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(\u9262\u306E\u5C65\u6B74, { \u9262: item }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(\u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EB, { ref: \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(\u704C\u6C34\u30E2\u30FC\u30C0\u30EB, { ref: \u704C\u6C34\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(\u6210\u9577\u8A18\u9332\u30E2\u30FC\u30C0\u30EB, { ref: \u6210\u9577\u8A18\u9332\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef })
     ] }));
   });
 
   // src/components/molecules/ItemList/index.tsx
-  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
   var { Panel: Panel3 } = collapse_default2;
   var ListItem2 = (props) => {
     const { \u9262: \u92622, \u9262\u3092\u9078\u629E } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(col_default2, { lg: 2, sm: 4, xs: 6, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(\u9262\u4E00\u89A7\u306E\u8981\u7D20, { item: \u92622, \u9262\u3092\u9078\u629E }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(col_default2, { lg: 2, sm: 4, xs: 6, children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(\u9262\u4E00\u89A7\u306E\u8981\u7D20, { item: \u92622, \u9262\u3092\u9078\u629E }) });
   };
   var \u9262\u4E00\u89A7 = (props) => {
     const { \u68DA: \u68DA2 } = props;
-    const \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
-    const \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
+    const \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react61.useRef)(null);
+    const \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef = (0, import_react61.useRef)(null);
     const { user } = useAuthState();
     const \u68DAId = \u68DA2.id;
     const { \u9262\u4E00\u89A7: \u9262\u4E00\u89A72 } = use\u9262\u4E00\u89A7(\u68DAId, user);
@@ -79998,64 +80171,64 @@ ${this.customData.serverResponse}`;
       var _a2;
       (_a2 = \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef.current) == null ? void 0 : _a2.open(\u92622, imageUrl);
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "\u9262\u4E00\u89A7", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(row_default2, { gutter: { xs: 8, sm: 16, md: 24, lg: 32 }, children: \u9262\u4E00\u89A72.map((\u92622) => {
-        return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ListItem2, { \u9262: \u92622, \u9262\u3092\u9078\u629E }, \u92622.id);
+    return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "\u9262\u4E00\u89A7", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(row_default2, { gutter: { xs: 8, sm: 16, md: 24, lg: 32 }, children: \u9262\u4E00\u89A72.map((\u92622) => {
+        return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(ListItem2, { \u9262: \u92622, \u9262\u3092\u9078\u629E }, \u92622.id);
       }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "Section", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(MyButton, { title: "\u2A01 \u9262\u3092\u8FFD\u52A0\u3059\u308B", onClick: \u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(\u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB, { ref: \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef, \u68DAId }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(\u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB, { ref: \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef })
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "Section", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(MyButton, { title: "\u2A01 \u9262\u3092\u8FFD\u52A0\u3059\u308B", onClick: \u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(\u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB, { ref: \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef, \u68DAId }),
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(\u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB, { ref: \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef })
     ] });
   };
 
   // src/components/organisms/TanaList/index.tsx
-  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
   var { Panel: Panel4 } = collapse_default2;
   var \u68DA\u4E00\u89A7\u8868\u793A = (props) => {
     const { \u68DA\u4E00\u89A7 } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(collapse_default2, { className: "\u68DA\u4E00\u89A7\u8868\u793A", defaultActiveKey: void 0, children: \u68DA\u4E00\u89A7.map((\u68DA2, index3) => /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Panel4, { header: \u68DA2.name, children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(\u9262\u4E00\u89A7, { \u68DA: \u68DA2 }, index3) }, index3)) });
+    return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(collapse_default2, { className: "\u68DA\u4E00\u89A7\u8868\u793A", defaultActiveKey: void 0, children: \u68DA\u4E00\u89A7.map((\u68DA2, index3) => /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Panel4, { header: \u68DA2.name, children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(\u9262\u4E00\u89A7, { \u68DA: \u68DA2 }, index3) }, index3)) });
   };
 
   // src/components/pages/Top/index.tsx
-  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
   var TopPage = (props) => {
     const { user } = useAuthState();
     const { \u68DA\u3092\u8CFC\u8AAD, \u68DA\u4E00\u89A7 } = useDataState();
-    (0, import_react61.useEffect)(() => {
+    (0, import_react62.useEffect)(() => {
       if (!(user == null ? void 0 : user.id))
         return;
       const { unsubscribe: unsubscribe2 } = \u68DA\u3092\u8CFC\u8AAD(user.id);
       return () => unsubscribe2();
     }, [user == null ? void 0 : user.id]);
     const navigator2 = useNavigate();
-    const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef = (0, import_react61.useRef)(null);
+    const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef = (0, import_react62.useRef)(null);
     const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F = () => {
       var _a2;
       (_a2 = \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef.current) == null ? void 0 : _a2.open();
     };
     if (!user) {
-      return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "Top", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(MyButton, { title: "\u30ED\u30B0\u30A4\u30F3\u30DA\u30FC\u30B8\u3078", onClick: () => navigator2(ROUTES.LOGIN.PATH) }) });
+      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "Top", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(MyButton, { title: "\u30ED\u30B0\u30A4\u30F3\u30DA\u30FC\u30B8\u3078", onClick: () => navigator2(ROUTES.LOGIN.PATH) }) });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "Top", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "Section", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(\u68DA\u4E00\u89A7\u8868\u793A, { \u68DA\u4E00\u89A7 }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "Section", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(MyButton, { title: "\u2A01 \u68DA\u3092\u4F5C\u6210\u3059\u308B", onClick: \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(\u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB, { ref: \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef })
+    return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "Top", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "Section", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(\u68DA\u4E00\u89A7\u8868\u793A, { \u68DA\u4E00\u89A7 }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "Section", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(MyButton, { title: "\u2A01 \u68DA\u3092\u4F5C\u6210\u3059\u308B", onClick: \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(\u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB, { ref: \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef })
     ] });
   };
 
   // src/components/pages/Error/index.tsx
-  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
   var Error2 = (props) => {
-    return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "Error", children: "Error page" });
+    return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "Error", children: "Error page" });
   };
 
   // src/components/pages/Login/index.tsx
-  var import_react65 = __toESM(require_react());
+  var import_react66 = __toESM(require_react());
   var import_classnames71 = __toESM(require_classnames());
 
   // src/components/atoms/MyAlert/index.tsx
   var import_classnames69 = __toESM(require_classnames());
-  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
   var MyAlert = (props) => {
     const { className, active, title, description } = props;
     if (!active)
@@ -80067,7 +80240,7 @@ ${this.customData.serverResponse}`;
       message: title,
       description
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(alert_default, __spreadValues({}, alertProps));
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(alert_default, __spreadValues({}, alertProps));
   };
 
   // node_modules/.pnpm/tslib@2.4.0/node_modules/tslib/tslib.es6.js
@@ -83959,14 +84132,14 @@ ${this.customData.serverResponse}`;
   })(AuthRepository || (AuthRepository = {}));
 
   // src/components/pages/Login/steps/firstStep.tsx
-  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
   var InputGroup = input_default.Group;
   var isValidEmail = (email2) => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email2
   );
   function GoogleLoginButton(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(button_default2, { onClick: props.onClick, children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "GoogleSignInButtonContent", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("img", { className: "GoogleIcon", src: "/images/googleIcon.svg" }),
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(button_default2, { onClick: props.onClick, children: /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "GoogleSignInButtonContent", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("img", { className: "GoogleIcon", src: "/images/googleIcon.svg" }),
       "Google\u30ED\u30B0\u30A4\u30F3"
     ] }) });
   }
@@ -84035,17 +84208,17 @@ ${this.customData.serverResponse}`;
         throw _error;
       }
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "Step FirstStep", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "EmailPasswordSignIn", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(InputGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(MyInput, { type: "email", controller: email2, placeholder: "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9", autoFocus: true }) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(MyButton, { onClick: signInWithEmail, active: formState.isValid, title: "\u7D9A\u884C" }),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(MyAlert, { active: !!((_a2 = formState.errors.result) == null ? void 0 : _a2.message), title: (_b = formState.errors.result) == null ? void 0 : _b.message }),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(divider_default, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(GoogleLoginButton, { onClick: signInWithGoogle })
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "Step FirstStep", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "EmailPasswordSignIn", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(InputGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(MyInput, { type: "email", controller: email2, placeholder: "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9", autoFocus: true }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(MyButton, { onClick: signInWithEmail, active: formState.isValid, title: "\u7D9A\u884C" }),
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(MyAlert, { active: !!((_a2 = formState.errors.result) == null ? void 0 : _a2.message), title: (_b = formState.errors.result) == null ? void 0 : _b.message }),
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(divider_default, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GoogleLoginButton, { onClick: signInWithGoogle })
     ] });
   };
 
   // src/components/pages/Login/steps/noAccount.tsx
-  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime27 = __toESM(require_jsx_runtime());
   var InputGroup2 = input_default.Group;
   var NoAccountStep = (props) => {
     const { setStep, email: email2 } = props;
@@ -84065,25 +84238,25 @@ ${this.customData.serverResponse}`;
     const createNewAccount = async () => {
       setStep("registerNewAccount", email2);
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "Step NoAccountStep", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "EmailPasswordSignIn", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(InputGroup2, { children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(MyInput, { controller, readOnly: true }) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "Desc", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "Step NoAccountStep", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "EmailPasswordSignIn", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(InputGroup2, { children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MyInput, { controller, readOnly: true }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "Desc", children: [
         "\u5165\u529B\u3055\u308C\u305F\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u306F\u767B\u9332\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002 ",
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("br", {}),
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("br", {}),
         "\u65B0\u898F\u306E\u30E6\u30FC\u30B6\u767B\u9332\u3092\u884C\u3044\u307E\u3059\u304B\uFF1F"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(MyButton, { autoFocus: true, onClick: createNewAccount, title: "\u7D9A\u884C" })
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MyButton, { autoFocus: true, onClick: createNewAccount, title: "\u7D9A\u884C" })
     ] });
   };
 
   // src/components/pages/Login/steps/setUserName.tsx
-  var import_react62 = __toESM(require_react());
-  var import_jsx_runtime27 = __toESM(require_jsx_runtime());
+  var import_react63 = __toESM(require_react());
+  var import_jsx_runtime28 = __toESM(require_jsx_runtime());
   var InputGroup3 = input_default.Group;
   var SetUserNameStep = (props) => {
     var _a2, _b, _c2;
     const { setStep } = props;
-    const [isLoading, setIsLoading] = (0, import_react62.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react63.useState)(false);
     const { setUser } = useAuthState();
     const navigate = useNavigate();
     const { control, getValues, setError, formState } = useForm2({
@@ -84126,37 +84299,37 @@ ${this.customData.serverResponse}`;
         setIsLoading(false);
       }
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "Step NoAccountStep", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "Desc", children: "\u767B\u9332\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F\uFF01" }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "Desc", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(CheckCircleOutlined_default2, { className: "Icon", color: "#929292" }),
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "Step NoAccountStep", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "Desc", children: "\u767B\u9332\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F\uFF01" }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "Desc", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(CheckCircleOutlined_default2, { className: "Icon", color: "#929292" }),
         "\u30E6\u30FC\u30B6\u540D\u3092\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(InputGroup3, { children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MyInput, { controller, placeholder: "\u30E6\u30FC\u30B6\u540D", autoFocus: true }) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MyAlert, { active: !!((_a2 = formState.errors.result) == null ? void 0 : _a2.message), title: (_b = formState.errors.result) == null ? void 0 : _b.message }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MyAlert, { active: ((_c2 = formState.errors.userName) == null ? void 0 : _c2.type) === "maxLength", title: "10\u6587\u5B57\u307E\u3067\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002" }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MyButton, { onClick: setUserName, title: "\u767B\u9332", active: !isLoading && formState.isValid, isLoading })
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(InputGroup3, { children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(MyInput, { controller, placeholder: "\u30E6\u30FC\u30B6\u540D", autoFocus: true }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(MyAlert, { active: !!((_a2 = formState.errors.result) == null ? void 0 : _a2.message), title: (_b = formState.errors.result) == null ? void 0 : _b.message }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(MyAlert, { active: ((_c2 = formState.errors.userName) == null ? void 0 : _c2.type) === "maxLength", title: "10\u6587\u5B57\u307E\u3067\u3067\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002" }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(MyButton, { onClick: setUserName, title: "\u767B\u9332", active: !isLoading && formState.isValid, isLoading })
     ] });
   };
 
   // src/components/pages/Login/steps/registerNewAccount.tsx
-  var import_react63 = __toESM(require_react());
+  var import_react64 = __toESM(require_react());
 
   // src/components/atoms/PasswordInput/index.tsx
   var import_classnames70 = __toESM(require_classnames());
-  var import_jsx_runtime28 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
   function PasswordInput(props) {
     const _a2 = props, { className, controller } = _a2, rest = __objRest(_a2, ["className", "controller"]);
-    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(input_default.Password, __spreadProps(__spreadValues(__spreadProps(__spreadValues({}, rest), { className: (0, import_classnames70.default)("MyInput", className) }), controller.field), { placeholder: "\u30D1\u30B9\u30EF\u30FC\u30C9" }));
+    return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(input_default.Password, __spreadProps(__spreadValues(__spreadProps(__spreadValues({}, rest), { className: (0, import_classnames70.default)("MyInput", className) }), controller.field), { placeholder: "\u30D1\u30B9\u30EF\u30FC\u30C9" }));
   }
 
   // src/components/pages/Login/steps/registerNewAccount.tsx
-  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
   var InputGroup4 = input_default.Group;
   var RegisterNewAccountStep = (props) => {
     var _a2, _b;
     const { setStep, email: email2 } = props;
-    const [isLoading, setIsLoading] = (0, import_react63.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react64.useState)(false);
     const { setUser } = useAuthState();
     const { control, getValues, setError, formState } = useForm2({
       mode: "onChange",
@@ -84203,27 +84376,27 @@ ${this.customData.serverResponse}`;
         setIsLoading(true);
       }
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "Step NoAccountStep", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(InputGroup4, { children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(MyInput, { controller: emailCntr, readOnly: true }) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "Desc", children: "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u8A2D\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "PasswordSettingForm", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(InputGroup4, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(PasswordInput, { controller: p1lCntr, placeholder: "\u30D1\u30B9\u30EF\u30FC\u30C9", autoFocus: true }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(PasswordInput, { controller: p2lCntr, placeholder: "\u78BA\u8A8D\u306E\u305F\u3081\u3082\u3046\u4E00\u5EA6\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002" })
+    return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "Step NoAccountStep", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(InputGroup4, { children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MyInput, { controller: emailCntr, readOnly: true }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "Desc", children: "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u8A2D\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\u3002" }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "PasswordSettingForm", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(InputGroup4, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(PasswordInput, { controller: p1lCntr, placeholder: "\u30D1\u30B9\u30EF\u30FC\u30C9", autoFocus: true }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(PasswordInput, { controller: p2lCntr, placeholder: "\u78BA\u8A8D\u306E\u305F\u3081\u3082\u3046\u4E00\u5EA6\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044\u3002" })
       ] }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(MyAlert, { active: !!((_a2 = formState.errors.result) == null ? void 0 : _a2.message), title: (_b = formState.errors.result) == null ? void 0 : _b.message }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(MyButton, { active: formState.isValid && !isLoading, onClick: create, title: "\u767B\u9332", isLoading })
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MyAlert, { active: !!((_a2 = formState.errors.result) == null ? void 0 : _a2.message), title: (_b = formState.errors.result) == null ? void 0 : _b.message }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MyButton, { active: formState.isValid && !isLoading, onClick: create, title: "\u767B\u9332", isLoading })
     ] });
   };
 
   // src/components/pages/Login/steps/inputPassword.tsx
-  var import_react64 = __toESM(require_react());
-  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
+  var import_react65 = __toESM(require_react());
+  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
   var InputGroup5 = input_default.Group;
   var InputPasswordStep = (props) => {
     var _a2, _b;
     const { email: email2 } = props;
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = (0, import_react64.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react65.useState)(false);
     const { control, getValues, setError, formState } = useForm2({
       mode: "onChange",
       reValidateMode: "onChange",
@@ -84260,18 +84433,18 @@ ${this.customData.serverResponse}`;
         setIsLoading(false);
       }
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "Step InputPasswordStep", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "Form", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(InputGroup5, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MyInput, { controller: emailCntr, readOnly: true }),
-        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(PasswordInput, { controller: passwordCntr, autoFocus: true })
+    return /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "Step InputPasswordStep", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "Form", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(InputGroup5, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(MyInput, { controller: emailCntr, readOnly: true }),
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(PasswordInput, { controller: passwordCntr, autoFocus: true })
       ] }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MyAlert, { active: !!((_a2 = formState.errors.result) == null ? void 0 : _a2.message), title: (_b = formState.errors.result) == null ? void 0 : _b.message }),
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MyButton, { active: formState.isValid && !isLoading, onClick: login, title: "\u30ED\u30B0\u30A4\u30F3", isLoading })
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(MyAlert, { active: !!((_a2 = formState.errors.result) == null ? void 0 : _a2.message), title: (_b = formState.errors.result) == null ? void 0 : _b.message }),
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(MyButton, { active: formState.isValid && !isLoading, onClick: login, title: "\u30ED\u30B0\u30A4\u30F3", isLoading })
     ] });
   };
 
   // src/components/pages/Login/index.tsx
-  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
   var steps = {
     first: FirstStep,
     inputPassword: InputPasswordStep,
@@ -84281,7 +84454,7 @@ ${this.customData.serverResponse}`;
   };
   var LoginPage = (props) => {
     const { className } = props;
-    const [state, setState] = (0, import_react65.useState)({
+    const [state, setState] = (0, import_react66.useState)({
       step: "first",
       email: ""
     });
@@ -84289,9 +84462,9 @@ ${this.customData.serverResponse}`;
     const setStepHandler = (step, email2) => {
       setState({ step, email: email2 });
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: (0, import_classnames71.default)("LoginPage", className), children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "Content", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h2", { children: "\u30ED\u30B0\u30A4\u30F3" }),
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Component12, { setStep: setStepHandler, email: state.email })
+    return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: (0, import_classnames71.default)("LoginPage", className), children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("div", { className: "Content", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("h2", { children: "\u30ED\u30B0\u30A4\u30F3" }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Component12, { setStep: setStepHandler, email: state.email })
     ] }) });
   };
 
@@ -84315,24 +84488,24 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/common/Routing.tsx
-  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
   var routes = Object.values(ROUTES);
   var RoutingContent = () => {
-    return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(Routes, { children: [
-      routes.map(({ PATH, COMPONENT }) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: PATH, element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(COMPONENT, {}) }, PATH)),
-      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Navigate, { to: "/error" }) })
+    return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(Routes, { children: [
+      routes.map(({ PATH, COMPONENT }) => /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Route, { path: PATH, element: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(COMPONENT, {}) }, PATH)),
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Navigate, { to: "/error" }) })
     ] }) });
   };
 
   // src/components/common/Layout.tsx
-  var import_react66 = __toESM(require_react());
-  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
+  var import_react67 = __toESM(require_react());
+  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
   var Layout = ({ children }) => {
     const { user } = useAuthState();
     const navigate = useNavigate();
     const location = useLocation();
     const signOut2 = AuthRepository.signOut;
-    (0, import_react66.useEffect)(() => {
+    (0, import_react67.useEffect)(() => {
       if (location.pathname === ROUTES.LOGIN.PATH && user) {
         const params = new URLSearchParams(location.search);
         const from2 = params.get("from");
@@ -84348,42 +84521,42 @@ ${this.customData.serverResponse}`;
         navigate(ROUTES.LOGIN.PATH + `?from=${from2}`);
       }
     }, [user == null ? void 0 : user.id]);
-    return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "Layout", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "Header", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "Layout", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "Header", children: [
         "\u8DA3\u6C34\u5712",
-        user && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(LogoutOutlined_default2, { onClick: signOut2 })
+        user && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(LogoutOutlined_default2, { onClick: signOut2 })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "Main", children }),
-      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "Footer", children: "Created by Hedrall" })
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "Main", children }),
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "Footer", children: "Created by Hedrall" })
     ] });
   };
 
   // src/components/common/Utils.tsx
-  var import_react67 = __toESM(require_react());
+  var import_react68 = __toESM(require_react());
   var Utils = () => {
     const { authStateChangeSubscriber } = useAuthState();
-    (0, import_react67.useEffect)(() => {
+    (0, import_react68.useEffect)(() => {
       AuthRepository.listen.authStateChanged(authStateChangeSubscriber);
     }, []);
     return null;
   };
 
   // src/components/common/Document.tsx
-  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
   var Document = () => {
-    return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(Recoil_index_5, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Utils, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Layout, { children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(RoutingContent, {}) })
+    return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(Recoil_index_5, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Utils, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Layout, { children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(RoutingContent, {}) })
     ] }) });
   };
 
   // src/App.tsx
-  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
-  var App = () => /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Document, {});
+  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
+  var App = () => /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Document, {});
 
   // src/index.tsx
-  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
   var root = (0, import_client.createRoot)(document.getElementById("root"));
-  root.render(/* @__PURE__ */ (0, import_jsx_runtime36.jsx)(App, {}));
+  root.render(/* @__PURE__ */ (0, import_jsx_runtime37.jsx)(App, {}));
 })();
 //# sourceMappingURL=index.js.map

@@ -30,7 +30,7 @@ const 履歴ごとの色 = (type: 履歴の内容.Type) => {
   }
 };
 
-function 画像と表示(props: { 一行目: string; 二行目?: string; 画像のPATH: string }) {
+const 画像と表示 = (props: { 一行目: React.ReactNode; 二行目?: React.ReactNode; 画像のPATH?: string }) => {
   const { 一行目, 二行目, 画像のPATH } = props;
   const { imageUrl } = StorageRepository.鉢.use画像(画像のPATH);
   return (
@@ -40,13 +40,20 @@ function 画像と表示(props: { 一行目: string; 二行目?: string; 画像�
       <Image style={{ maxWidth: '100%', maxHeight: 80, minHeight: 80 }} src={imageUrl || NO_IMAGE} />
     </div>
   );
-}
+};
 
 const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
   const 一行目 = `[${i.作成日時.format(F)}]: ${i.内容.type}`;
   switch (i.内容.type) {
     case '成長の記録': {
-      return <画像と表示 一行目={一行目} 画像のPATH={i.内容.画像のPATH} />;
+      const { 画像のPATH, memo } = i.内容;
+      return (
+        <画像と表示
+          一行目={一行目}
+          二行目={memo ? <span className="Memo">メモ: {memo}</span> : undefined}
+          画像のPATH={画像のPATH}
+        />
+      );
     }
     case '灌水':
       return (
@@ -55,14 +62,17 @@ const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
           <p className="Item行">{i.内容.灌水量}</p>
         </div>
       );
-    case '植替え':
+    case '植替え': {
+      const size = 鉢サイズ.toString(i.内容.鉢のサイズ);
+      const memo = i.内容.memo;
       return (
         <画像と表示
           一行目={一行目}
-          二行目={鉢サイズ.toString(i.内容.鉢のサイズ)}
+          二行目={[size, memo ? `メモ: ${memo}` : undefined].filter(Boolean).join(', ')}
           画像のPATH={i.内容.植替え後の画像のPATH}
         />
       );
+    }
   }
 };
 

@@ -102,6 +102,15 @@ function _履歴を適用(this: 鉢, 履歴: 履歴) {
         },
         履歴.作成日時,
       );
+    case '成長の記録':
+      // [更新項目] 画像?
+      return update(
+        this,
+        {
+          ...(履歴.内容.画像のPATH ? { 画像のPATH: 履歴.内容.画像のPATH } : {}),
+        },
+        履歴.作成日時,
+      );
     default:
       throw new Error(`実装されていません。type: ${type}`);
   }

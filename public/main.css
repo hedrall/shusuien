@@ -91,6 +91,9 @@
 .鉢の履歴 .Item行 {
   margin: 0;
 }
+.鉢の履歴 .Item行 .Memo {
+  font-size: 12px;
+}
 
 .MyFormLayout {
   display: flex;
