@@ -48,7 +48,12 @@ export namespace 履歴の内容 {
         key: '流れ出るくらい',
         表示名: '流れ出るくらい',
       },
-    } as const;
+    } as const satisfies {
+      [Key in string]: {
+        key: Key;
+        表示名: string;
+      };
+    };
     export type 量のKey型 = ValueOf<typeof 量の定義>['key'];
     export const 量のKey = Object.values(量の定義).map(i => i.key);
   }
@@ -125,6 +130,21 @@ const _植替え履歴を作成 = async (params: NewProps<履歴の内容.植替
   });
   return await 作成(新規履歴);
 };
+
+const _灌水履歴を作成 = async (params: NewProps<履歴の内容.灌水>) => {
+  const { props, 内容 } = params;
+  const { 灌水量 } = 内容;
+  const 新規履歴 = new 履歴({
+    id: undefined,
+    ...props,
+    内容: {
+      type: '灌水',
+      灌水量,
+    },
+  });
+  return await 作成(新規履歴);
+};
+
 export class 履歴のBase {
   id: 履歴ID | undefined;
   userId: UserId;
@@ -167,6 +187,7 @@ export class 履歴 extends 履歴のBase {
   static 新規作成 = {
     画像の更新歴: _画像の更新歴を作成,
     植替え: _植替え履歴を作成,
+    灌水: _灌水履歴を作成,
   };
 }
 export namespace 履歴 {

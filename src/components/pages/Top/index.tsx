@@ -37,7 +37,6 @@ export const TopPage: React.FC<TopPageProps> = props => {
   }
   return (
     <div className="Top">
-      <h2>topPage </h2>
       <div className="Section">
         <棚一覧表示 棚一覧={棚一覧} />
       </div>

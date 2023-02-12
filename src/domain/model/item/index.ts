@@ -1,17 +1,22 @@
 import { Opaque } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import dayjs, { Dayjs } from 'dayjs';
-import { 履歴, 鉢サイズ } from '@frontend/domain/model/history';
+import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/history';
 import { 棚ID } from '@frontend/domain/model/tana';
 import { optionalCall } from '@frontend/supports/functions';
 import { _植替えする } from '@frontend/domain/model/item/operation/replant';
 import { _新規作成する } from '@frontend/domain/model/item/operation/newItem';
+import { _灌水する } from '@frontend/domain/model/item/operation/provideWater';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 
 type Snapshot = {
   鉢のサイズ?: 鉢サイズ;
   最後の植替え?: Dayjs;
+  最後の灌水?: {
+    日時: Dayjs;
+    量: 履歴の内容.灌水.量のKey型;
+  };
   画像のPATH?: string;
   更新日時: Dayjs;
 };
@@ -42,6 +47,13 @@ export class 鉢のBase {
       画像のPATH: props.snapshot.画像のPATH,
       更新日時: dayjs(props.snapshot.更新日時),
     };
+    const snapshot = this.snapshot;
+    if ('最後の灌水' in snapshot) {
+      this.snapshot.最後の灌水 = {
+        日時: dayjs(snapshot.最後の灌水!.日時),
+        量: snapshot.最後の灌水!.量,
+      };
+    }
     this.詳細 = {
       科: props.詳細.科,
       属: props.詳細.属,
@@ -77,6 +89,18 @@ function _履歴を適用(this: 鉢, 履歴: 履歴) {
         },
         履歴.作成日時,
       );
+    case '灌水':
+      // [更新項目] 最後の灌水
+      return update(
+        this,
+        {
+          最後の灌水: {
+            日時: 履歴.作成日時,
+            量: 履歴.内容.灌水量,
+          },
+        },
+        履歴.作成日時,
+      );
     default:
       throw new Error(`実装されていません。type: ${type}`);
   }
@@ -88,6 +112,7 @@ export class 鉢 extends 鉢のBase {
   static 管理 = {
     新規作成: _新規作成する,
     植替え: _植替えする,
+    灌水: _灌水する,
   };
 
   constructor(props: 鉢のBase) {

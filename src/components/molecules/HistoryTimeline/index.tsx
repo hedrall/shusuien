@@ -4,14 +4,15 @@ import { 鉢 } from '@frontend/domain/model/item';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Timeline, TimelineProps } from 'antd';
 import { 履歴, 履歴の内容 } from '@frontend/domain/model/history';
-import { DATE_READONLY_FORMAT } from '@frontend/supports/date';
+import { ICONS } from '@frontend/supports/icons';
 
 export type 鉢の履歴Props = {
   鉢: 鉢 | undefined;
 };
 
 type TLItem = {
-  color: string;
+  color?: string;
+  dot?: React.ReactNode;
   children: React.ReactNode;
 };
 const 履歴ごとの色 = (type: 履歴の内容.Type) => {
@@ -25,11 +26,15 @@ const 履歴ごとの色 = (type: 履歴の内容.Type) => {
       return 'blue';
   }
 };
+
+const F = 'YYYY/MM/DD HH時';
 const Timelineのアイテムへ変換 = (i: 履歴): TLItem => {
-  console.log({ i });
+  const Icon = ICONS[i.内容.type];
   return {
-    children: `[${i.作成日時.format(DATE_READONLY_FORMAT)}]: ${i.内容.type}`,
-    color: 履歴ごとの色(i.内容.type),
+    children: `[${i.作成日時.format(F)}]: ${i.内容.type}`,
+    dot: <Icon />,
+    // color: 履歴ごとの色(i.内容.type),
+    color: 'grey',
   };
 };
 

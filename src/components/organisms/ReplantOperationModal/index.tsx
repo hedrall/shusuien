@@ -13,6 +13,8 @@ import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { UploadImage } from '@frontend/components/atoms/UploadImage';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
 import { DATE_TIME_FORMAT } from '@frontend/supports';
+import { ICONS } from '@frontend/supports/icons';
+import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 
 export namespace 植替え操作モーダル {
   export type Ref = {
@@ -78,13 +80,19 @@ export const 植替え操作モーダル = forwardRef<植替え操作モーダ�
   const [item, setItem] = useState<鉢 | null>(null);
   const { user } = useAuthState();
 
-  const { control, getValues, formState } = useForm<Input>({
+  const { control, getValues, formState, reset } = useForm<Input>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: DEFAULT_VALUES,
   });
 
   const { size, isLong, imageDataUrl, date, memo } = createController(control);
+
+  const close = () => {
+    setIsOpen(false);
+    setItem(null);
+    reset();
+  };
 
   const 植替えを実行する = async () => {
     if (!user || !item) return;
@@ -103,7 +111,7 @@ export const 植替え操作モーダル = forwardRef<植替え操作モーダ�
         },
         memo,
       });
-      setIsOpen(false);
+      close();
     });
   };
 
@@ -133,8 +141,7 @@ export const 植替え操作モーダル = forwardRef<植替え操作モーダ�
 
   return (
     <Modal {...modalProps}>
-      <h1>植替えを記録</h1>
-      鉢名: {item?.name}
+      <モーダルの見出し type="植替え" />
       <MyFormLayout
         items={[
           {

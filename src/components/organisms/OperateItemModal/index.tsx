@@ -9,6 +9,8 @@ import { StorageRepository } from '@frontend/domain/repository/storage';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { use鉢単体 } from '@frontend/store/data/action';
 import { 鉢の履歴 } from '@frontend/components/molecules/HistoryTimeline';
+import { 灌水モーダル } from '@frontend/components/organisms/ProvideWater';
+import { ICONS } from '@frontend/supports/icons';
 
 export namespace 鉢管理モーダル {
   export type Ref = {
@@ -24,6 +26,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
   const { item, setItem } = use鉢単体(id, user?.id);
   const { imageUrl, setImageUrl } = StorageRepository.鉢.use画像(item);
   const 植替え操作モーダルRef = useRef<植替え操作モーダル.Ref | null>(null);
+  const 灌水操作モーダルRef = useRef<灌水モーダル.Ref | null>(null);
 
   const modalProps: ModalProps = {
     className: '鉢管理モーダル',
@@ -50,7 +53,10 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
     };
   });
 
-  const 灌水モーダルを開く = () => {};
+  const 灌水モーダルを開く = () => {
+    if (!item) return;
+    灌水操作モーダルRef.current?.open(item);
+  };
   const 植替えモーダルを開く = () => {
     if (!item) return;
     植替え操作モーダルRef.current?.open(item);
@@ -66,8 +72,22 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
 
       <h2 className="見出し">管理</h2>
       <div className="管理ボタン">
-        <MyButton title={'灌水'} onClick={灌水モーダルを開く} />
-        <MyButton title={'植替え'} onClick={植替えモーダルを開く} />
+        <MyButton
+          title={
+            <div>
+              <ICONS.灌水 /> 灌水
+            </div>
+          }
+          onClick={灌水モーダルを開く}
+        />
+        <MyButton
+          title={
+            <div>
+              <ICONS.植替え /> 植替え
+            </div>
+          }
+          onClick={植替えモーダルを開く}
+        />
       </div>
 
       {item && <鉢の情報 鉢={item} />}
@@ -76,6 +96,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
       <鉢の履歴 鉢={item} />
 
       <植替え操作モーダル ref={植替え操作モーダルRef} />
+      <灌水モーダル ref={灌水操作モーダルRef} />
     </Modal>
   );
 });

@@ -1,4 +1,11 @@
 @charset "UTF-8";
+.モーダルの見出し {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+}
+
 /* you can write some variables here */
 .MyButton {
   color: white;

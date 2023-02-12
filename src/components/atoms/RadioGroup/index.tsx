@@ -16,6 +16,7 @@ export type RadioGroupProps<T extends D> = {
 
 export function RadioGroup<T extends D>(props: RadioGroupProps<T>) {
   const { field, options } = props;
+
   return (
     <Radio.Group className="RadioGroup" buttonStyle="solid" {...field}>
       {options.map(({ value, name }) => {
