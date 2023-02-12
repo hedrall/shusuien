@@ -28,3 +28,7 @@ export const sleep = async (time: number) => {
 export const tObjectValues = <T extends object>(item: T) => {
   return Object.values(item) as T[keyof T][];
 };
+
+export const tObjectKeys = <T extends object>(item: T) => {
+  return Object.keys(item) as (keyof T)[];
+};

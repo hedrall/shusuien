@@ -1,4 +1,29 @@
 @charset "UTF-8";
+/* you can write some variables here */
+.履歴のタイプでの絞り込みフィルターグループ {
+  display: flex;
+}
+.履歴のタイプでの絞り込みフィルターグループ .ボタン {
+  height: 28px;
+  width: 28px;
+  border: solid 1px #929292;
+  border-right: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.履歴のタイプでの絞り込みフィルターグループ .ボタン:nth-child(1) {
+  border-radius: 7px 0 0 7px;
+}
+.履歴のタイプでの絞り込みフィルターグループ .ボタン:last-child {
+  border-radius: 0 7px 7px 0;
+  border-right: solid 1px #929292;
+}
+.履歴のタイプでの絞り込みフィルターグループ .ボタン.Active {
+  background: #525252;
+  color: white;
+}
+
 .モーダルの見出し {
   display: flex;
   justify-content: start;
@@ -6,7 +31,6 @@
   gap: 8px;
 }
 
-/* you can write some variables here */
 .MyButton {
   color: white;
   background-color: #929292;
@@ -59,7 +83,12 @@
   font-size: 12px;
 }
 
-.鉢の履歴 .ItemP {
+.鉢の履歴 .FilterWrapper {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 16px;
+}
+.鉢の履歴 .Item行 {
   margin: 0;
 }
 

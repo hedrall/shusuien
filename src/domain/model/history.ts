@@ -4,6 +4,7 @@ import { 鉢Id } from '@frontend/domain/model/item';
 import { Opaque, ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
+import { tObjectKeys } from '@frontend/supports/functions';
 
 export type 履歴ID = Opaque<string, '履歴ID'>;
 
@@ -86,6 +87,12 @@ export namespace 履歴の内容 {
 
   export type 一覧 = 灌水 | 画像を更新 | 成長の記録 | 植替え;
   export type Type = 一覧['type'];
+  export const Type = tObjectKeys({
+    灌水: undefined,
+    画像を更新: undefined,
+    成長の記録: undefined,
+    植替え: undefined,
+  } as const satisfies { [Key in Type]: undefined });
 }
 export type 履歴の内容 = 履歴の内容.一覧;
 

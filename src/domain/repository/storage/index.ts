@@ -64,13 +64,15 @@ export namespace StorageRepository {
   };
 
   export namespace 鉢 {
-    export const use画像 = (鉢?: 鉢) => {
+    export const 画像を取得 = async (画像のPATH?: string) => {
+      if (!画像のPATH) return '';
+      return StorageRepository.getDownloadUrls(画像のPATH);
+    };
+    export const use画像 = (画像のPATH?: string) => {
       const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
       useEffect(() => {
         console.log('鉢のimageを取得');
-        if (!鉢?.snapshot.画像のPATH) return;
-        const path = 鉢.snapshot.画像のPATH;
-        StorageRepository.getDownloadUrls(path).then(setImageUrl);
+        画像を取得(画像のPATH).then(setImageUrl);
       }, [鉢]);
 
       return { imageUrl, setImageUrl };

@@ -1,5 +1,11 @@
 .鉢の履歴 {
-  .ItemP {
+  .FilterWrapper {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 16px;
+  }
+
+  .Item行 {
     margin: 0;
   }
 }

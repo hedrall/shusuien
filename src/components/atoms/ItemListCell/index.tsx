@@ -12,7 +12,7 @@ export type 鉢一覧の要素Props = {
 export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const { item, 鉢を選択 } = props;
 
-  const { imageUrl } = StorageRepository.鉢.use画像(item);
+  const { imageUrl } = StorageRepository.鉢.use画像(item.snapshot.画像のPATH);
 
   const imageProps: ImageProps = {
     className: '鉢一覧の要素',

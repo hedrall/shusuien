@@ -24,7 +24,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
   const [id, setId] = useState<鉢Id | undefined>(undefined);
   const { user } = useAuthState();
   const { item, setItem } = use鉢単体(id, user?.id);
-  const { imageUrl, setImageUrl } = StorageRepository.鉢.use画像(item);
+  const { imageUrl, setImageUrl } = StorageRepository.鉢.use画像(item?.snapshot.画像のPATH);
   const 植替え操作モーダルRef = useRef<植替え操作モーダル.Ref | null>(null);
   const 灌水操作モーダルRef = useRef<灌水モーダル.Ref | null>(null);
 

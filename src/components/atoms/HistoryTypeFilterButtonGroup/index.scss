@@ -1,0 +1,29 @@
+@use '../../../assets/variables' as v;
+
+.履歴のタイプでの絞り込みフィルターグループ {
+  display: flex;
+
+  .ボタン {
+    height: 28px;
+    width: 28px;
+    border: solid 1px v.$border-grey;
+    border-right: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:nth-child(1) {
+      border-radius: 7px 0 0 7px;
+    }
+
+    &:last-child {
+      border-radius: 0 7px 7px 0;
+      border-right: solid 1px v.$border-grey;
+    }
+
+    &.Active {
+      background: v.$background-grey-dim;
+      color: white;
+    }
+  }
+}

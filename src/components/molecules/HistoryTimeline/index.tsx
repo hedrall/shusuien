@@ -2,9 +2,13 @@ import React from 'react';
 import { use鉢の履歴一覧 } from '@frontend/hooks/itemHistory';
 import { 鉢 } from '@frontend/domain/model/item';
 import { useAuthState } from '@frontend/store/auth/action';
-import { Timeline, TimelineProps } from 'antd';
+import { Image, Timeline, TimelineProps } from 'antd';
 import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/history';
 import { ICONS } from '@frontend/supports/icons';
+import { useController, useForm } from 'react-hook-form';
+import { 履歴のタイプでの絞り込みフィルターグループ } from '@frontend/components/atoms/HistoryTypeFilterButtonGroup';
+import { StorageRepository } from '@frontend/domain/repository/storage';
+import { NO_IMAGE } from '@frontend/supports/image';
 
 export type 鉢の履歴Props = {
   鉢: 鉢 | undefined;
@@ -27,24 +31,36 @@ const 履歴ごとの色 = (type: 履歴の内容.Type) => {
   }
 };
 
+function 画像と表示(props: { 一行目: string; 画像のPATH: string }) {
+  const { 一行目, 画像のPATH } = props;
+  const { imageUrl } = StorageRepository.鉢.use画像(画像のPATH);
+  return (
+    <div>
+      <p className="Item行">{一行目}</p>
+      <Image style={{ maxWidth: '100%', maxHeight: 80, minHeight: 80 }} src={imageUrl || NO_IMAGE} />
+    </div>
+  );
+}
+
 const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
   const 一行目 = `[${i.作成日時.format(F)}]: ${i.内容.type}`;
   switch (i.内容.type) {
     case '画像を更新':
-    case '成長の記録':
-      return 一行目;
+    case '成長の記録': {
+      return <画像と表示 一行目={一行目} 画像のPATH={i.内容.画像のPATH} />;
+    }
     case '灌水':
       return (
         <div>
-          <p className="ItemP">{一行目}</p>
-          <p className="ItemP">{i.内容.灌水量}</p>
+          <p className="Item行">{一行目}</p>
+          <p className="Item行">{i.内容.灌水量}</p>
         </div>
       );
     case '植替え':
       return (
         <div>
-          <p className="ItemP">{一行目}</p>
-          <p className="ItemP">サイズ: {鉢サイズ.toString(i.内容.鉢のサイズ)}</p>
+          <p className="Item行">{一行目}</p>
+          <p className="Item行">サイズ: {鉢サイズ.toString(i.内容.鉢のサイズ)}</p>
         </div>
       );
   }
@@ -61,15 +77,40 @@ const Timelineのアイテムへ変換 = (i: 履歴): TLItem => {
   };
 };
 
+type Input = {
+  filter: 履歴の内容.Type[];
+};
+const DEFAULT_VALUES = (): Input => {
+  return { filter: [] };
+};
+
 export const 鉢の履歴: React.FC<鉢の履歴Props> = props => {
   const { 鉢 } = props;
   const { user } = useAuthState();
-  const 履歴一覧 = use鉢の履歴一覧(鉢?.id, user?.id);
+  const { control, getValues } = useForm({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    defaultValues: DEFAULT_VALUES(),
+  });
+  const 履歴一覧 = use鉢の履歴一覧(鉢?.id, user?.id, {
+    filter: getValues().filter,
+  });
+
+  const filter = useController({
+    control,
+    name: 'filter',
+  });
 
   const timeLineProps: TimelineProps = {
-    className: '鉢の履歴',
     items: 履歴一覧.map(Timelineのアイテムへ変換),
   };
 
-  return <Timeline {...timeLineProps} />;
+  return (
+    <div className="鉢の履歴">
+      <div className="FilterWrapper">
+        <履歴のタイプでの絞り込みフィルターグループ field={filter.field} />
+      </div>
+      <Timeline {...timeLineProps} />
+    </div>
+  );
 };
