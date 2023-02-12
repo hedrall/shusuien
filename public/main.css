@@ -94,6 +94,9 @@
   gap: 8px;
   margin: 16px 0;
 }
+.鉢管理モーダル .鉢の情報 {
+  margin-bottom: 16px;
+}
 
 .LoginPage .Content {
   max-width: 600px;

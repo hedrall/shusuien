@@ -136,10 +136,14 @@ export class 履歴のBase {
   constructor(props: 履歴のBase) {
     this.id = props.id;
     this.userId = props.userId;
-    this.作成日時 = props.作成日時;
+    this.作成日時 = dayjs(props.作成日時);
     this.対象の棚のID = props.対象の棚のID;
     this.対象の鉢のID = props.対象の鉢のID;
+
     this.内容 = props.内容;
+    if ('植替え日時' in this.内容) {
+      this.内容['植替え日時'] = dayjs(this.内容['植替え日時']);
+    }
   }
 }
 export class 履歴 extends 履歴のBase {
