@@ -22,7 +22,7 @@ export namespace FSAppRepository {
   type Id<T extends Entity> = NonNullable<T['id']>;
   export const getId = <T extends Entity>(manager: FsAppManager<T>): Id<T> => {
     const collection = getCollection(manager);
-    return fs.doc(collection, manager.path).id as Id<T>;
+    return fs.doc(collection).id as Id<T>;
   };
 
   export const querySnapshotToRefValues = <T>(snapshot: QuerySnapshot<T>) => {

@@ -67,6 +67,7 @@ export namespace StorageRepository {
     export const use画像 = (鉢?: 鉢) => {
       const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
       useEffect(() => {
+        console.log('鉢のimageを取得');
         if (!鉢?.snapshot.画像のPATH) return;
         const path = 鉢.snapshot.画像のPATH;
         StorageRepository.getDownloadUrls(path).then(setImageUrl);

@@ -42,7 +42,7 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
   const { isLoading, withLoading } = useWithLoading();
   const { user } = useAuthState();
 
-  const { control, getValues, formState } = useForm<InputType>({
+  const { control, getValues, formState, reset } = useForm<InputType>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: DEFAULT_VALUES,
@@ -77,6 +77,12 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
     okText: '作成',
     cancelText: 'キャンセル',
     confirmLoading: isLoading,
+    destroyOnClose: true,
+  };
+
+  const close = () => {
+    setIsOpen(false);
+    reset();
   };
 
   const 鉢の作成を実行する = async () => {
@@ -94,7 +100,7 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
           棚Id,
         },
       });
-      setIsOpen(false);
+      close(setIsOpen);
     });
   };
 

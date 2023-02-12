@@ -15,6 +15,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
   const now = dayjs();
   console.log('1. 画像をUpload');
   const 鉢ID = await FSAppRepository.鉢.getId();
+  console.log('鉢ID', 鉢ID);
   const { 画像のPATH } = await StorageRepository.uploadImageByBase64String({
     dataUrl: imageDataUrl,
     path: StorageRepository.storagePath({

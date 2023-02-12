@@ -22,9 +22,9 @@ type Input = {
   amount: 履歴の内容.灌水.量のKey型;
 };
 
-const DEFAULT_VALUES: Partial<Input> = {
+const DEFAULT_VALUES = (): Partial<Input> => ({
   amount: 履歴の内容.灌水.量の定義['流れ出るくらい'].key,
-};
+});
 
 const createController = (control: Control<Input, any>) => {
   const amount = useController({
@@ -52,7 +52,7 @@ export const 灌水モーダル = forwardRef<灌水モーダル.Ref, 灌水モ�
   const { control, getValues, formState, reset } = useForm<Input>({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: DEFAULT_VALUES(),
   });
 
   const { amount } = createController(control);

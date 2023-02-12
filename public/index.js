@@ -73809,6 +73809,7 @@ ${this.customData.serverResponse}`;
       \u92623.use\u753B\u50CF = (\u92624) => {
         const [imageUrl, setImageUrl] = (0, import_react50.useState)(void 0);
         (0, import_react50.useEffect)(() => {
+          console.log("\u9262\u306Eimage\u3092\u53D6\u5F97");
           if (!(\u92624 == null ? void 0 : \u92624.snapshot.\u753B\u50CF\u306EPATH))
             return;
           const path = \u92624.snapshot.\u753B\u50CF\u306EPATH;
@@ -73861,6 +73862,7 @@ ${this.customData.serverResponse}`;
     const now2 = (0, import_dayjs2.default)();
     console.log("1. \u753B\u50CF\u3092Upload");
     const \u9262ID = await FSAppRepository.\u9262.getId();
+    console.log("\u9262ID", \u9262ID);
     const { \u753B\u50CF\u306EPATH } = await StorageRepository.uploadImageByBase64String({
       dataUrl: imageDataUrl,
       path: StorageRepository.storagePath({
@@ -74035,6 +74037,8 @@ ${this.customData.serverResponse}`;
         obj[key2] = null;
         return;
       }
+      if (value2 === null)
+        return value2;
       if (typeof value2 === "object" && !Array.isArray(value2)) {
         obj[key2] = dropUndefined(value2);
         return;
@@ -74216,7 +74220,7 @@ ${this.customData.serverResponse}`;
     };
     FSAppRepository2.getId = (manager) => {
       const collection = (0, FSAppRepository2.getCollection)(manager);
-      return Aa2(collection, manager.path).id;
+      return Aa2(collection).id;
     };
     FSAppRepository2.querySnapshotToRefValues = (snapshot) => {
       const refValue = [];
@@ -74493,6 +74497,7 @@ ${this.customData.serverResponse}`;
       if (!userId || !id2)
         return;
       const { unsubscribe: unsubscribe2 } = FSAppRepository.\u9262.\u5358\u4F53\u8CFC\u8AAD(id2, (newItem) => {
+        console.log("[\u8CFC\u8AAD]: \u9262\u5358\u4F53");
         setItem(newItem.value);
       });
       return () => unsubscribe2();
@@ -76488,7 +76493,7 @@ ${this.customData.serverResponse}`;
     const [isOpen, setIsOpen] = (0, import_react54.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
     const { user } = useAuthState();
-    const { control, getValues, formState } = useForm2({
+    const { control, getValues, formState, reset } = useForm2({
       mode: "onChange",
       reValidateMode: "onChange",
       defaultValues: DEFAULT_VALUES
@@ -76520,7 +76525,12 @@ ${this.customData.serverResponse}`;
       },
       okText: "\u4F5C\u6210",
       cancelText: "\u30AD\u30E3\u30F3\u30BB\u30EB",
-      confirmLoading: isLoading
+      confirmLoading: isLoading,
+      destroyOnClose: true
+    };
+    const close = () => {
+      setIsOpen(false);
+      reset();
     };
     const \u9262\u306E\u4F5C\u6210\u3092\u5B9F\u884C\u3059\u308B = async () => {
       if (!user)
@@ -76539,7 +76549,7 @@ ${this.customData.serverResponse}`;
             \u68DAId
           }
         });
-        setIsOpen(false);
+        close(setIsOpen);
       });
     };
     (0, import_react54.useImperativeHandle)(ref2, () => {
@@ -79494,13 +79504,13 @@ ${this.customData.serverResponse}`;
 
   // src/components/organisms/ReplantOperationModal/index.tsx
   var import_jsx_runtime13 = __toESM(require_jsx_runtime());
-  var DEFAULT_VALUES2 = {
+  var DEFAULT_VALUES2 = () => ({
     size: "3",
     isLong: false,
     imageDataUrl: void 0,
     date: (0, import_dayjs7.default)().format(DATE_TIME_FORMAT),
     memo: void 0
-  };
+  });
   var maxLength = { value: 400, message: "\u6700\u5927400\u6587\u5B57\u307E\u3067\u3067\u3059\u3002" };
   var createController = (control) => {
     const size = useController({
@@ -79543,7 +79553,7 @@ ${this.customData.serverResponse}`;
     const { control, getValues, formState, reset } = useForm2({
       mode: "onChange",
       reValidateMode: "onChange",
-      defaultValues: DEFAULT_VALUES2
+      defaultValues: DEFAULT_VALUES2()
     });
     const { size, isLong, imageDataUrl, date: date4, memo: memo4 } = createController(control);
     const close = () => {
@@ -79730,9 +79740,9 @@ ${this.customData.serverResponse}`;
 
   // src/components/organisms/ProvideWater/index.tsx
   var import_jsx_runtime17 = __toESM(require_jsx_runtime());
-  var DEFAULT_VALUES3 = {
+  var DEFAULT_VALUES3 = () => ({
     amount: \u5C65\u6B74\u306E\u5185\u5BB9.\u704C\u6C34.\u91CF\u306E\u5B9A\u7FA9["\u6D41\u308C\u51FA\u308B\u304F\u3089\u3044"].key
-  };
+  });
   var createController2 = (control) => {
     const amount = useController({
       control,
@@ -79757,7 +79767,7 @@ ${this.customData.serverResponse}`;
     const { control, getValues, formState, reset } = useForm2({
       mode: "onChange",
       reValidateMode: "onChange",
-      defaultValues: DEFAULT_VALUES3
+      defaultValues: DEFAULT_VALUES3()
     });
     const { amount } = createController2(control);
     const close = () => {

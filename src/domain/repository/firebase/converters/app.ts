@@ -13,6 +13,7 @@ export const dropUndefined = (obj: { [key: string]: any }) => {
       obj[key] = null;
       return;
     }
+    if (value === null) return value;
     if (typeof value === 'object' && !Array.isArray(value)) {
       obj[key] = dropUndefined(value);
       return;

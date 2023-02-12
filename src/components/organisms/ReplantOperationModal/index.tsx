@@ -13,7 +13,6 @@ import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { UploadImage } from '@frontend/components/atoms/UploadImage';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
 import { DATE_TIME_FORMAT } from '@frontend/supports';
-import { ICONS } from '@frontend/supports/icons';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 
 export namespace 植替え操作モーダル {
@@ -31,13 +30,13 @@ type Input = {
   memo: 履歴の内容.植替え['memo'];
 };
 
-const DEFAULT_VALUES: Partial<Input> = {
+const DEFAULT_VALUES = (): Partial<Input> => ({
   size: '3',
   isLong: false,
   imageDataUrl: undefined,
   date: dayjs().format(DATE_TIME_FORMAT),
   memo: undefined,
-};
+});
 
 const maxLength: ValidationRule<number> = { value: 400, message: '最大400文字までです。' };
 const createController = (control: Control<Input, any>) => {
@@ -83,7 +82,7 @@ export const 植替え操作モーダル = forwardRef<植替え操作モーダ�
   const { control, getValues, formState, reset } = useForm<Input>({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: DEFAULT_VALUES(),
   });
 
   const { size, isLong, imageDataUrl, date, memo } = createController(control);
