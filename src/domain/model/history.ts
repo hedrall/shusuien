@@ -13,6 +13,11 @@ export namespace 鉢サイズ {
 
   export const タイプ = ['通常', 'L'];
   export type タイプ = typeof タイプ[number];
+
+  export const toString = (size: 鉢サイズ) => {
+    const postfix = size.タイプ === '通常' ? '' : ` ${size.タイプ}`;
+    return `${size.番号}${postfix}`;
+  };
 }
 export type 鉢サイズ = {
   番号: 鉢サイズ.番号;

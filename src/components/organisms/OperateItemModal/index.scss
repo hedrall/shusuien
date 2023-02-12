@@ -1,6 +1,10 @@
 .鉢管理モーダル {
+  .見出し {
+    font-size: 16px;
+  }
   .管理ボタン {
     display: flex;
     gap: 8px;
+    margin: 16px 0;
   }
 }

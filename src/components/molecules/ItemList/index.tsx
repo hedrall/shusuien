@@ -3,7 +3,7 @@ import { Col, Collapse, Row } from 'antd';
 import { 棚 } from '@frontend/domain/model/tana';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 鉢作成モーダル } from '@frontend/components/organisms/CreateItemModal';
-import { use鉢 } from '@frontend/store/data/action';
+import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢 } from '@frontend/domain/model/item';
 import { 鉢一覧の要素 } from '@frontend/components/atoms/ItemListCell';
@@ -15,7 +15,7 @@ export type ItemListProps = {
   棚: 棚;
 };
 
-const ListItem: React.FC<{ 鉢: 鉢; 鉢を選択: (鉢: 鉢) => void }> = props => {
+const ListItem: React.FC<{ 鉢: 鉢; 鉢を選択: (鉢: 鉢, imageUrl: string | undefined) => void }> = props => {
   const { 鉢, 鉢を選択 } = props;
 
   return (
@@ -31,12 +31,12 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
   const { user } = useAuthState();
 
   const 棚Id = 棚.id!;
-  const { 鉢一覧 } = use鉢(棚Id, user);
+  const { 鉢一覧 } = use鉢一覧(棚Id, user);
 
   const 鉢作成モーダルを開く = () => 鉢操作モーダルRef.current?.open();
 
-  const 鉢を選択 = (鉢: 鉢) => {
-    鉢管理モーダルRef.current?.open(鉢);
+  const 鉢を選択 = (鉢: 鉢, imageUrl: string | undefined) => {
+    鉢管理モーダルRef.current?.open(鉢, imageUrl);
   };
 
   return (

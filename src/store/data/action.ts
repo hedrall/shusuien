@@ -4,7 +4,7 @@ import { DATA_STATE_ATOM, DataState } from '@frontend/store/data/atom';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { User, UserId } from '@frontend/domain/model/user';
 import { 鉢, 鉢Id } from '@frontend/domain/model/item';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const 鉢Selector = selectorFamily<鉢[], 棚ID>({
   key: '鉢Selector',
@@ -29,11 +29,12 @@ const 鉢Selector = selectorFamily<鉢[], 棚ID>({
       });
     },
 });
-export const use鉢 = (棚Id: 棚ID, user: User | undefined) => {
+
+export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
   const [state, set] = useRecoilState(鉢Selector(棚Id));
 
   const 鉢を購読 = (userId: UserId, 棚Id: 棚ID) => {
-    return FSAppRepository.鉢.購読({ userId, 棚Id }, items => {
+    return FSAppRepository.鉢.一覧購読({ userId, 棚Id }, items => {
       console.log('鉢をlisten', items);
       set(items.map(i => i.value));
     });
@@ -49,6 +50,21 @@ export const use鉢 = (棚Id: 棚ID, user: User | undefined) => {
     鉢一覧: state,
   };
 };
+
+export const use鉢単体 = (id: 鉢Id | undefined, userId: UserId | undefined) => {
+  const [item, setItem] = useState<鉢 | undefined>(undefined);
+
+  useEffect(() => {
+    if (!userId || !id) return;
+    const { unsubscribe } = FSAppRepository.鉢.単体購読(id, newItem => {
+      setItem(newItem.value);
+    });
+    return () => unsubscribe();
+  }, [userId, id]);
+
+  return { item, setItem };
+};
+
 export const useDataState = () => {
   const [state, setState] = useRecoilState(DATA_STATE_ATOM);
 

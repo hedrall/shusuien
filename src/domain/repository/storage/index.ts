@@ -11,6 +11,8 @@ import {
 import { ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import { Dayjs } from 'dayjs';
+import { useEffect, useState } from 'react';
+import { 鉢 } from '@frontend/domain/model/item';
 
 export namespace StorageRepository {
   type StorageDirPathParams = {
@@ -42,13 +44,6 @@ export namespace StorageRepository {
     return getDownloadURL(ref);
   };
 
-  // export const uploadImage = async (params: { filePath: T画像のPATH; file: File }) => {
-  //   const { filePath, file } = params;
-  //   const itemRef = getStorageItemRef(filePath);
-  //   const res = await uploadBytes(itemRef, file);
-  //   return { 画像のPATH: res.ref.fullPath };
-  // };
-
   export const uploadImageByBase64String = async (params: { path: string; dataUrl: string }) => {
     const { path, dataUrl } = params;
     const itemRef = getStorageItemRef(path);
@@ -67,4 +62,17 @@ export namespace StorageRepository {
       await deleteObject(ref);
     }
   };
+
+  export namespace 鉢 {
+    export const use画像 = (鉢?: 鉢) => {
+      const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+      useEffect(() => {
+        if (!鉢?.snapshot.画像のPATH) return;
+        const path = 鉢.snapshot.画像のPATH;
+        StorageRepository.getDownloadUrls(path).then(setImageUrl);
+      }, [鉢]);
+
+      return { imageUrl, setImageUrl };
+    };
+  }
 }

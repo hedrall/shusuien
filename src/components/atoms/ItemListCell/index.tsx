@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StorageRepository } from '@frontend/domain/repository/storage';
-import { Col, Image, ImageProps } from 'antd';
+import { Image, ImageProps } from 'antd';
 import { 鉢 } from '@frontend/domain/model/item';
 
-export type HachiProps = {
+export type 鉢一覧の要素Props = {
   item: 鉢;
-  鉢を選択: (鉢: 鉢) => void;
+  鉢を選択: (鉢: 鉢, imageUrl: string | undefined) => void;
 };
 
-export const 鉢一覧の要素: React.FC<HachiProps> = props => {
+export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const { item, 鉢を選択 } = props;
-  const [imageUrl, setImageUrl] = useState<string>('');
 
-  useEffect(() => {
-    console.log('ue', item.snapshot);
-    const path = item.snapshot.画像のPATH;
-    if (!path) return;
-    StorageRepository.getDownloadUrls(path).then(setImageUrl);
-  }, [鉢]);
+  const { imageUrl } = StorageRepository.鉢.use画像(item);
 
   const imageProps: ImageProps = {
     className: '鉢一覧の要素',
     preview: false,
     src: imageUrl,
     style: { borderRadius: 7 },
-    onClick: () => 鉢を選択(item),
+    onClick: () => 鉢を選択(item, imageUrl),
   };
   return <Image {...imageProps} />;
 };

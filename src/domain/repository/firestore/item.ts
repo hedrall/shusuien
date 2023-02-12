@@ -41,7 +41,7 @@ export namespace _FsApp鉢Repository {
   };
 
   type 購読Params = { userId: UserId; 棚Id: 棚ID };
-  export const 購読 = (params: 購読Params, onListen: (items: RefValue<鉢>[]) => void) => {
+  export const 一覧購読 = (params: 購読Params, onListen: (items: RefValue<鉢>[]) => void) => {
     const { userId, 棚Id } = params;
     const manager = new FsAppManager.鉢();
     const { unsubscribe } = FSAppRepository.listenList(
@@ -53,5 +53,9 @@ export namespace _FsApp鉢Repository {
       items => onListen(items),
     );
     return { unsubscribe };
+  };
+  export const 単体購読 = (id: 鉢Id, onListen: (items: RefValue<鉢>) => void) => {
+    const manager = new FsAppManager.鉢();
+    return FSAppRepository.listenById(manager, id, items => onListen(items));
   };
 }

@@ -3,3 +3,4 @@ const sleep = async (d: number) => {
     setTimeout(resolve, d);
   });
 };
+export { DATE_TIME_FORMAT } from '@frontend/supports/date';
