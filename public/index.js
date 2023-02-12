@@ -72147,7 +72147,6 @@ This typically indicates that your device does not have a healthy Internet conne
     })(\u704C\u6C342 = \u5C65\u6B74\u306E\u5185\u5BB95.\u704C\u6C34 || (\u5C65\u6B74\u306E\u5185\u5BB95.\u704C\u6C34 = {}));
     \u5C65\u6B74\u306E\u5185\u5BB95.Type = tObjectKeys({
       \u704C\u6C34: void 0,
-      \u753B\u50CF\u3092\u66F4\u65B0: void 0,
       \u6210\u9577\u306E\u8A18\u9332: void 0,
       \u690D\u66FF\u3048: void 0
     });
@@ -72156,13 +72155,13 @@ This typically indicates that your device does not have a healthy Internet conne
     const { id: id2 } = await FSAppRepository.\u5C65\u6B74.\u4F5C\u6210(\u65B0\u898F\u5C65\u6B74);
     return new \u5C65\u6B74(__spreadProps(__spreadValues({}, \u65B0\u898F\u5C65\u6B74), { id: id2 }));
   };
-  var _\u753B\u50CF\u306E\u66F4\u65B0\u6B74\u3092\u4F5C\u6210 = async (params) => {
+  var _\u6210\u9577\u306E\u8A18\u9332\u5C65\u6B74\u3092\u4F5C\u6210 = async (params) => {
     const { props, \u5185\u5BB9 } = params;
     const \u65B0\u898F\u5C65\u6B74 = new \u5C65\u6B74(__spreadProps(__spreadValues({
       id: void 0
     }, props), {
       \u5185\u5BB9: __spreadValues({
-        type: "\u753B\u50CF\u3092\u66F4\u65B0"
+        type: "\u6210\u9577\u306E\u8A18\u9332"
       }, \u5185\u5BB9)
     }));
     return await \u4F5C\u6210(\u65B0\u898F\u5C65\u6B74);
@@ -72216,9 +72215,6 @@ This typically indicates that your device does not have a healthy Internet conne
     is\u704C\u6C34() {
       return this.\u5185\u5BB9.type === "\u704C\u6C34";
     }
-    is\u753B\u50CF\u3092\u66F4\u65B0() {
-      return this.\u5185\u5BB9.type === "\u753B\u50CF\u3092\u66F4\u65B0";
-    }
     is\u6210\u9577\u306E\u8A18\u9332() {
       return this.\u5185\u5BB9.type === "\u6210\u9577\u306E\u8A18\u9332";
     }
@@ -72227,7 +72223,7 @@ This typically indicates that your device does not have a healthy Internet conne
     }
   };
   \u5C65\u6B74.\u65B0\u898F\u4F5C\u6210 = {
-    \u753B\u50CF\u306E\u66F4\u65B0\u6B74: _\u753B\u50CF\u306E\u66F4\u65B0\u6B74\u3092\u4F5C\u6210,
+    \u753B\u50CF\u306E\u66F4\u65B0\u6B74: _\u6210\u9577\u306E\u8A18\u9332\u5C65\u6B74\u3092\u4F5C\u6210,
     \u690D\u66FF\u3048: _\u690D\u66FF\u3048\u5C65\u6B74\u3092\u4F5C\u6210,
     \u704C\u6C34: _\u704C\u6C34\u5C65\u6B74\u3092\u4F5C\u6210
   };
@@ -73825,7 +73821,6 @@ ${this.customData.serverResponse}`;
       \u92623.use\u753B\u50CF = (\u753B\u50CF\u306EPATH) => {
         const [imageUrl, setImageUrl] = (0, import_react50.useState)(void 0);
         (0, import_react50.useEffect)(() => {
-          console.log("\u9262\u306Eimage\u3092\u53D6\u5F97");
           (0, \u92623.\u753B\u50CF\u3092\u53D6\u5F97)(\u753B\u50CF\u306EPATH).then(setImageUrl);
         }, [\u92623]);
         return { imageUrl, setImageUrl };
@@ -73867,10 +73862,10 @@ ${this.customData.serverResponse}`;
     await FSAppRepository.\u9262.snapshot\u3092\u66F4\u65B0(\u9262Id, \u66F4\u65B0\u5F8C\u306E\u9262.snapshot, date4);
   };
 
-  // src/domain/model/item/operation/newItem.ts
+  // src/domain/model/item/operation/docGrowth.ts
   var import_dayjs2 = __toESM(require_dayjs_min());
-  var _\u65B0\u898F\u4F5C\u6210\u3059\u308B = async (params) => {
-    const { imageDataUrl, props } = params;
+  var _\u6210\u9577\u3092\u8A18\u9332\u3059\u308B = async (params) => {
+    const { imageDataUrl, memo: memo4, props } = params;
     const { userId } = props;
     const now2 = (0, import_dayjs2.default)();
     console.log("1. \u753B\u50CF\u3092Upload");
@@ -73904,8 +73899,19 @@ ${this.customData.serverResponse}`;
         \u5BFE\u8C61\u306E\u68DA\u306EID: void 0
       },
       \u5185\u5BB9: {
+        memo: memo4,
         \u753B\u50CF\u306EPATH
       }
+    });
+  };
+
+  // src/domain/model/item/operation/newItem.ts
+  var _\u65B0\u898F\u4F5C\u6210\u3059\u308B = async (params) => {
+    const { imageDataUrl, props } = params;
+    return await _\u6210\u9577\u3092\u8A18\u9332\u3059\u308B({
+      imageDataUrl,
+      memo: "[\u81EA\u52D5\u8A18\u9332]: \u9262\u3092\u65B0\u898F\u306B\u3064\u3044\u304B\u3057\u307E\u3057\u305F\u3002",
+      props
     });
   };
 
@@ -74003,7 +74009,8 @@ ${this.customData.serverResponse}`;
   \u9262.\u7BA1\u7406 = {
     \u65B0\u898F\u4F5C\u6210: _\u65B0\u898F\u4F5C\u6210\u3059\u308B,
     \u690D\u66FF\u3048: _\u690D\u66FF\u3048\u3059\u308B,
-    \u704C\u6C34: _\u704C\u6C34\u3059\u308B
+    \u704C\u6C34: _\u704C\u6C34\u3059\u308B,
+    \u6210\u9577\u3092\u8A18\u9332: _\u6210\u9577\u3092\u8A18\u9332\u3059\u308B
   };
   \u9262.create = () => {
   };
@@ -76567,7 +76574,7 @@ ${this.customData.serverResponse}`;
             \u68DAId
           }
         });
-        close(setIsOpen);
+        close();
       });
     };
     (0, import_react54.useImperativeHandle)(ref2, () => {
@@ -79471,11 +79478,6 @@ ${this.customData.serverResponse}`;
     iconName: "spoon",
     icon: [512, 512, [129348, 61873, "utensil-spoon"], "f2e5", "M245.8 220.9c-14.5-17.6-21.8-39.2-21.8-60.8C224 80 320 0 416 0c53 0 96 43 96 96c0 96-80 192-160.2 192c-21.6 0-43.2-7.3-60.8-21.8L54.6 502.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L245.8 220.9z"]
   };
-  var faImage = {
-    prefix: "fas",
-    iconName: "image",
-    icon: [512, 512, [], "f03e", "M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"]
-  };
   var faPen = {
     prefix: "fas",
     iconName: "pen",
@@ -79492,8 +79494,7 @@ ${this.customData.serverResponse}`;
   var ICONS = {
     \u704C\u6C34: () => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(FontAwesomeIcon, { icon: faDroplet }),
     \u690D\u66FF\u3048: () => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(FontAwesomeIcon, { icon: faSpoon }),
-    \u6210\u9577\u306E\u8A18\u9332: () => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(FontAwesomeIcon, { icon: faPen }),
-    \u753B\u50CF\u3092\u66F4\u65B0: () => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(FontAwesomeIcon, { icon: faImage })
+    \u6210\u9577\u306E\u8A18\u9332: () => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(FontAwesomeIcon, { icon: faPen })
   };
 
   // src/components/atoms/ModalTitle/index.tsx
@@ -79691,9 +79692,10 @@ ${this.customData.serverResponse}`;
   var use\u9262\u306E\u5C65\u6B74\u4E00\u89A7 = (id2, userId, options) => {
     const [state, setState] = (0, import_react57.useState)([]);
     (0, import_react57.useEffect)(() => {
-      if (!userId && !id2)
+      if (!userId || !id2)
         return;
       const { unsubscribe: unsubscribe2 } = FSAppRepository.\u5C65\u6B74.\u8CFC\u8AAD(id2, userId, options, (list) => {
+        console.log("[\u8CFC\u8AAD]: \u5C65\u6B74\u4E00\u89A7", list.length);
         setState(list.map((i) => i.value));
       });
       return () => unsubscribe2();
@@ -79731,17 +79733,17 @@ ${this.customData.serverResponse}`;
   // src/components/molecules/HistoryTimeline/index.tsx
   var import_jsx_runtime16 = __toESM(require_jsx_runtime());
   function \u753B\u50CF\u3068\u8868\u793A(props) {
-    const { \u4E00\u884C\u76EE, \u753B\u50CF\u306EPATH } = props;
+    const { \u4E00\u884C\u76EE, \u4E8C\u884C\u76EE, \u753B\u50CF\u306EPATH } = props;
     const { imageUrl } = StorageRepository.\u9262.use\u753B\u50CF(\u753B\u50CF\u306EPATH);
     return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E00\u884C\u76EE }),
+      \u4E8C\u884C\u76EE ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E8C\u884C\u76EE }) : null,
       /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(image_default, { style: { maxWidth: "100%", maxHeight: 80, minHeight: 80 }, src: imageUrl || NO_IMAGE })
     ] });
   }
   var \u5C65\u6B74\u3054\u3068\u306E\u8868\u793A\u5185\u5BB9 = (i) => {
     const \u4E00\u884C\u76EE = `[${i.\u4F5C\u6210\u65E5\u6642.format(F2)}]: ${i.\u5185\u5BB9.type}`;
     switch (i.\u5185\u5BB9.type) {
-      case "\u753B\u50CF\u3092\u66F4\u65B0":
       case "\u6210\u9577\u306E\u8A18\u9332": {
         return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(\u753B\u50CF\u3068\u8868\u793A, { \u4E00\u884C\u76EE, \u753B\u50CF\u306EPATH: i.\u5185\u5BB9.\u753B\u50CF\u306EPATH });
       }
@@ -79751,13 +79753,14 @@ ${this.customData.serverResponse}`;
           /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: i.\u5185\u5BB9.\u704C\u6C34\u91CF })
         ] });
       case "\u690D\u66FF\u3048":
-        return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E00\u884C\u76EE }),
-          /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("p", { className: "Item\u884C", children: [
-            "\u30B5\u30A4\u30BA: ",
-            \u9262\u30B5\u30A4\u30BA.toString(i.\u5185\u5BB9.\u9262\u306E\u30B5\u30A4\u30BA)
-          ] })
-        ] });
+        return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          \u753B\u50CF\u3068\u8868\u793A,
+          {
+            \u4E00\u884C\u76EE,
+            \u4E8C\u884C\u76EE: \u9262\u30B5\u30A4\u30BA.toString(i.\u5185\u5BB9.\u9262\u306E\u30B5\u30A4\u30BA),
+            \u753B\u50CF\u306EPATH: i.\u5185\u5BB9.\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH
+          }
+        );
     }
   };
   var F2 = "YYYY/MM/DD HH\u6642";
@@ -83943,7 +83946,7 @@ ${this.customData.serverResponse}`;
         const result2 = await createUserWithEmailAndPassword(auth, email2, password);
         const manager = new FsAppManager.User();
         const newUser = User.createDefault(result2.user.uid);
-        await FSAppRepository.addItemWithId(manager, newUser);
+        await FSAppRepository.addItemWithId(manager, newUser, newUser.id);
         return newUser;
       };
     })(createAccount = AuthRepository2.createAccount || (AuthRepository2.createAccount = {}));
@@ -84020,7 +84023,7 @@ ${this.customData.serverResponse}`;
           navigate(ROUTES.TOP.PATH);
           return;
         }
-        await FSAppRepository.addItemWithId(new FsAppManager.User(), User.createDefault(uid2));
+        await FSAppRepository.addItemWithId(new FsAppManager.User(), User.createDefault(uid2), uid2);
         setStep("setUserName", "");
       } catch (_error) {
         if ("code" in _error) {

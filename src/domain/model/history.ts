@@ -63,17 +63,11 @@ export namespace 履歴の内容 {
     灌水量: 灌水.量のKey型;
   };
 
-  // 新規作成
-  export type 画像を更新 = {
-    type: '画像を更新';
-    画像のPATH: string;
-  };
-
   // 成長の記録
   export type 成長の記録 = {
     type: '成長の記録';
-    memo: string;
     画像のPATH: string;
+    memo: string;
   };
 
   // 植替え
@@ -85,11 +79,10 @@ export namespace 履歴の内容 {
     memo?: string;
   };
 
-  export type 一覧 = 灌水 | 画像を更新 | 成長の記録 | 植替え;
+  export type 一覧 = 灌水 | 成長の記録 | 植替え;
   export type Type = 一覧['type'];
   export const Type = tObjectKeys({
     灌水: undefined,
-    画像を更新: undefined,
     成長の記録: undefined,
     植替え: undefined,
   } as const satisfies { [Key in Type]: undefined });
@@ -108,13 +101,13 @@ const 作成 = async (新規履歴: 履歴) => {
   return new 履歴({ ...新規履歴, id });
 };
 
-const _画像の更新歴を作成 = async (params: NewProps<履歴の内容.画像を更新>) => {
+const _成長の記録履歴を作成 = async (params: NewProps<履歴の内容.成長の記録>) => {
   const { props, 内容 } = params;
   const 新規履歴 = new 履歴({
     id: undefined,
     ...props,
     内容: {
-      type: '画像を更新',
+      type: '成長の記録',
       ...内容,
     },
   });
@@ -181,9 +174,6 @@ export class 履歴 extends 履歴のBase {
   is灌水(this: 履歴): this is 履歴.灌水 {
     return this.内容.type === '灌水';
   }
-  is画像を更新(this: 履歴): this is 履歴.画像を更新 {
-    return this.内容.type === '画像を更新';
-  }
   is成長の記録(this: 履歴): this is 履歴.成長の記録 {
     return this.内容.type === '成長の記録';
   }
@@ -192,14 +182,13 @@ export class 履歴 extends 履歴のBase {
   }
 
   static 新規作成 = {
-    画像の更新歴: _画像の更新歴を作成,
+    画像の更新歴: _成長の記録履歴を作成,
     植替え: _植替え履歴を作成,
     灌水: _灌水履歴を作成,
   };
 }
 export namespace 履歴 {
   export type 灌水 = 履歴 & { 内容: 履歴の内容.灌水 };
-  export type 画像を更新 = 履歴 & { 内容: 履歴の内容.画像を更新 };
   export type 成長の記録 = 履歴 & { 内容: 履歴の内容.成長の記録 };
   export type 植替え = 履歴 & { 内容: 履歴の内容.植替え };
 }

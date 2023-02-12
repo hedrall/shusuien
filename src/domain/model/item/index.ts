@@ -7,6 +7,7 @@ import { optionalCall } from '@frontend/supports/functions';
 import { _植替えする } from '@frontend/domain/model/item/operation/replant';
 import { _新規作成する } from '@frontend/domain/model/item/operation/newItem';
 import { _灌水する } from '@frontend/domain/model/item/operation/provideWater';
+import { _成長を記録する } from '@frontend/domain/model/item/operation/docGrowth';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 
@@ -113,6 +114,7 @@ export class 鉢 extends 鉢のBase {
     新規作成: _新規作成する,
     植替え: _植替えする,
     灌水: _灌水する,
+    成長を記録: _成長を記録する,
   };
 
   constructor(props: 鉢のBase) {

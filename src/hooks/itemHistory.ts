@@ -11,8 +11,9 @@ export const use鉢の履歴一覧 = (id: 鉢Id | undefined, userId: UserId | un
   const [state, setState] = useState<履歴[]>([]);
 
   useEffect(() => {
-    if (!userId && !id) return;
+    if (!userId || !id) return;
     const { unsubscribe } = FSAppRepository.履歴.購読(id, userId, options, list => {
+      console.log('[購読]: 履歴一覧', list.length);
       setState(list.map(i => i.value));
     });
     return () => unsubscribe();

@@ -21,7 +21,6 @@ type TLItem = {
 };
 const 履歴ごとの色 = (type: 履歴の内容.Type) => {
   switch (type) {
-    case '画像を更新':
     case '成長の記録':
       return 'grey';
     case '植替え':
@@ -31,12 +30,13 @@ const 履歴ごとの色 = (type: 履歴の内容.Type) => {
   }
 };
 
-function 画像と表示(props: { 一行目: string; 画像のPATH: string }) {
-  const { 一行目, 画像のPATH } = props;
+function 画像と表示(props: { 一行目: string; 二行目?: string; 画像のPATH: string }) {
+  const { 一行目, 二行目, 画像のPATH } = props;
   const { imageUrl } = StorageRepository.鉢.use画像(画像のPATH);
   return (
     <div>
       <p className="Item行">{一行目}</p>
+      {二行目 ? <p className="Item行">{二行目}</p> : null}
       <Image style={{ maxWidth: '100%', maxHeight: 80, minHeight: 80 }} src={imageUrl || NO_IMAGE} />
     </div>
   );
@@ -45,7 +45,6 @@ function 画像と表示(props: { 一行目: string; 画像のPATH: string }) {
 const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
   const 一行目 = `[${i.作成日時.format(F)}]: ${i.内容.type}`;
   switch (i.内容.type) {
-    case '画像を更新':
     case '成長の記録': {
       return <画像と表示 一行目={一行目} 画像のPATH={i.内容.画像のPATH} />;
     }
@@ -58,10 +57,11 @@ const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
       );
     case '植替え':
       return (
-        <div>
-          <p className="Item行">{一行目}</p>
-          <p className="Item行">サイズ: {鉢サイズ.toString(i.内容.鉢のサイズ)}</p>
-        </div>
+        <画像と表示
+          一行目={一行目}
+          二行目={鉢サイズ.toString(i.内容.鉢のサイズ)}
+          画像のPATH={i.内容.植替え後の画像のPATH}
+        />
       );
   }
 };

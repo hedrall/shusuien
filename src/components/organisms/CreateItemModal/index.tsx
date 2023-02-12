@@ -100,7 +100,7 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
           棚Id,
         },
       });
-      close(setIsOpen);
+      close();
     });
   };
 

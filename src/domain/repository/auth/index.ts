@@ -64,7 +64,7 @@ export namespace AuthRepository {
       // create new user to firestore
       const manager = new FsAppManager.User();
       const newUser = User.createDefault(result.user.uid);
-      await FSAppRepository.addItemWithId(manager, newUser);
+      await FSAppRepository.addItemWithId(manager, newUser, newUser.id);
 
       return newUser;
     };
