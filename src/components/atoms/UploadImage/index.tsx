@@ -1,5 +1,5 @@
 import React from 'react';
-import { Upload, UploadFile } from 'antd';
+import { Image, Upload, UploadFile } from 'antd';
 import type { UploadChangeParam, UploadProps } from 'antd/es/upload';
 import { CameraOutlined, LoadingOutlined } from '@ant-design/icons';
 import { BrowserRepository } from '@frontend/domain/repository/browser';
@@ -51,7 +51,11 @@ export function UploadImage<Key extends string>(props: UploadImageProps) {
   return (
     <>
       <Upload {...uploadProps}>
-        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%', maxHeight: '40vh' }} /> : uploadButton}
+        {imageUrl ? (
+          <Image src={imageUrl} style={{ width: '100%', maxHeight: '40vh', objectFit: 'contain' }} />
+        ) : (
+          uploadButton
+        )}
       </Upload>
     </>
   );

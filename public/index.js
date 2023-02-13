@@ -76517,7 +76517,7 @@ ${this.customData.serverResponse}`;
       },
       onRemove: () => setImageUrl(void 0)
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(upload_default, __spreadProps(__spreadValues({}, uploadProps), { children: imageUrl ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("img", { src: imageUrl, alt: "avatar", style: { width: "100%", maxHeight: "40vh" } }) : uploadButton })) });
+    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(upload_default, __spreadProps(__spreadValues({}, uploadProps), { children: imageUrl ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(image_default, { src: imageUrl, style: { width: "100%", maxHeight: "40vh", objectFit: "contain" } }) : uploadButton })) });
   }
 
   // src/components/atoms/MyInputWithAlert/index.tsx
@@ -76622,6 +76622,7 @@ ${this.customData.serverResponse}`;
         /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("label", { children: "\u753B\u50CF\u3092\u64AE\u5F71\u{1F4F8}" }),
         /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(UploadImage, { field: imageDataUrl.field })
       ] }),
+      formState.isValid ? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { style: { display: "flex", justifyContent: "end" }, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(MyButton, { title: "\u4F5C\u6210", onClick: \u9262\u306E\u4F5C\u6210\u3092\u5B9F\u884C\u3059\u308B }) }) : null,
       /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "FormItem", children: [
         /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("label", { children: "\u9262\u306E\u540D\u524D" }),
         /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(MyInputWithAlert, { controller: name7, inputProps: { placeholder: "\u9262\u306E\u540D\u524D" } })
@@ -80106,7 +80107,13 @@ ${this.customData.serverResponse}`;
     };
     return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(modal_default, __spreadProps(__spreadValues({}, modalProps), { children: [
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h1", { children: "\u9262\u306E\u304A\u624B\u5165\u308C" }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(image_default, { style: { maxWidth: "100%", maxHeight: 250, minHeight: 174 }, src: imageUrl || NO_IMAGE }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+        image_default,
+        {
+          style: { maxWidth: "100%", maxHeight: 250, minHeight: 174, objectFit: "contain" },
+          src: imageUrl || NO_IMAGE
+        }
+      ) }),
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h2", { className: "\u898B\u51FA\u3057", children: "\u7BA1\u7406" }),
       /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "\u7BA1\u7406\u30DC\u30BF\u30F3", children: [
         /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(

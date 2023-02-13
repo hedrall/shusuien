@@ -77,7 +77,10 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
       <h1>鉢のお手入れ</h1>
 
       <div>
-        <Image style={{ maxWidth: '100%', maxHeight: 250, minHeight: 174 }} src={imageUrl || NO_IMAGE} />
+        <Image
+          style={{ maxWidth: '100%', maxHeight: 250, minHeight: 174, objectFit: 'contain' }}
+          src={imageUrl || NO_IMAGE}
+        />
       </div>
 
       <h2 className="見出し">管理</h2>

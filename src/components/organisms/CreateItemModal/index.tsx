@@ -8,6 +8,7 @@ import { 鉢 } from '@frontend/domain/model/item';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
 import { 棚ID } from '@frontend/domain/model/tana';
+import { MyButton } from '@frontend/components/atoms/MyButton';
 
 export namespace 鉢作成モーダル {
   export type Props = {
@@ -117,6 +118,11 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
         <label>画像を撮影📸</label>
         <UploadImage field={imageDataUrl.field} />
       </div>
+      {formState.isValid ? (
+        <div style={{ display: 'flex', justifyContent: 'end' }}>
+          <MyButton title="作成" onClick={鉢の作成を実行する} />
+        </div>
+      ) : null}
       <div className="FormItem">
         <label>鉢の名前</label>
         <MyInputWithAlert controller={name} inputProps={{ placeholder: '鉢の名前' }} />
