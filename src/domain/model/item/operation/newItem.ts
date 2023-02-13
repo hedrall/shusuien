@@ -26,6 +26,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
       itemId: 鉢ID,
     }),
   });
+  const 画像URL = await StorageRepository.getDownloadUrls(画像のPATH);
 
   console.log('2. 鉢を作成する');
   const 新規鉢 = new 鉢({
@@ -33,7 +34,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
     id: undefined,
     snapshot: {
       更新日時: now,
-      画像のPATH,
+      画像のURL: 画像URL,
     },
     作成日時: now,
   });
@@ -49,7 +50,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
     },
     内容: {
       memo: '[自動記載]: 新規に鉢を追加しました。',
-      画像のPATH,
+      画像のURL: 画像URL,
     },
   });
 };

@@ -18,7 +18,7 @@ type Snapshot = {
     日時: Dayjs;
     量: 履歴の内容.灌水.量のKey型;
   };
-  画像のPATH?: string;
+  画像のURL?: string;
   更新日時: Dayjs;
 };
 
@@ -45,7 +45,7 @@ export class 鉢のBase {
     this.snapshot = {
       鉢のサイズ: props.snapshot.鉢のサイズ,
       最後の植替え: optionalCall(props.snapshot.最後の植替え, dayjs),
-      画像のPATH: props.snapshot.画像のPATH,
+      画像のURL: props.snapshot.画像のURL,
       更新日時: dayjs(props.snapshot.更新日時),
     };
     const snapshot = this.snapshot;
@@ -86,7 +86,7 @@ function _履歴を適用(this: 鉢, 履歴: 履歴) {
         {
           鉢のサイズ: 履歴.内容.鉢のサイズ,
           最後の植替え: 履歴.内容.植替え日時,
-          画像のPATH: 履歴.内容.植替え後の画像のPATH,
+          画像のURL: 履歴.内容.植替え後の画像のURL,
         },
         履歴.作成日時,
       );
@@ -107,7 +107,7 @@ function _履歴を適用(this: 鉢, 履歴: 履歴) {
       return update(
         this,
         {
-          ...(履歴.内容.画像のPATH ? { 画像のPATH: 履歴.内容.画像のPATH } : {}),
+          ...(履歴.内容.画像のURL ? { 画像のURL: 履歴.内容.画像のURL } : {}),
         },
         履歴.作成日時,
       );

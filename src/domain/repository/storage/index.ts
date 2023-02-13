@@ -1,18 +1,15 @@
 import {
-  getStorage as _getStorage,
-  ref,
-  uploadBytes,
-  StorageReference,
   deleteObject,
   getDownloadURL,
+  getStorage as _getStorage,
   listAll,
+  ref,
+  StorageReference,
   uploadString,
 } from 'firebase/storage';
-import { ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
-import { 鉢 } from '@frontend/domain/model/item';
 
 export namespace StorageRepository {
   type StorageDirPathParams = {
@@ -64,17 +61,17 @@ export namespace StorageRepository {
   };
 
   export namespace 鉢 {
-    export const 画像を取得 = async (画像のPATH?: string) => {
-      if (!画像のPATH) return '';
-      return StorageRepository.getDownloadUrls(画像のPATH);
-    };
-    export const use画像 = (画像のPATH?: string) => {
-      const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
-      useEffect(() => {
-        画像を取得(画像のPATH).then(setImageUrl);
-      }, [鉢]);
-
-      return { imageUrl, setImageUrl };
-    };
+    // export const 画像を取得 = async (画像のURL?: string) => {
+    //   if (!画像のURL) return '';
+    //   return StorageRepository.getDownloadUrls(画像のURL);
+    // };
+    // export const use画像 = (画像のURL?: string) => {
+    //   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+    //   useEffect(() => {
+    //     画像を取得(画像のURL).then(setImageUrl);
+    //   }, [鉢]);
+    //
+    //   return { imageUrl, setImageUrl };
+    // };
   }
 }

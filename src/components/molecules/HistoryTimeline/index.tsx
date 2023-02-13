@@ -30,14 +30,13 @@ const 履歴ごとの色 = (type: 履歴の内容.Type) => {
   }
 };
 
-const 画像と表示 = (props: { 一行目: React.ReactNode; 二行目?: React.ReactNode; 画像のPATH?: string }) => {
-  const { 一行目, 二行目, 画像のPATH } = props;
-  const { imageUrl } = StorageRepository.鉢.use画像(画像のPATH);
+const 画像と表示 = (props: { 一行目: React.ReactNode; 二行目?: React.ReactNode; 画像のURL?: string }) => {
+  const { 一行目, 二行目, 画像のURL } = props;
   return (
     <div>
       <p className="Item行">{一行目}</p>
       {二行目 ? <p className="Item行">{二行目}</p> : null}
-      <Image style={{ maxWidth: '100%', maxHeight: 80, minHeight: 80 }} src={imageUrl || NO_IMAGE} />
+      <Image style={{ maxWidth: '100%', maxHeight: 80, minHeight: 80 }} src={画像のURL || NO_IMAGE} />
     </div>
   );
 };
@@ -46,12 +45,12 @@ const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
   const 一行目 = `[${i.作成日時.format(F)}]: ${i.内容.type}`;
   switch (i.内容.type) {
     case '成長の記録': {
-      const { 画像のPATH, memo } = i.内容;
+      const { 画像のURL, memo } = i.内容;
       return (
         <画像と表示
           一行目={一行目}
           二行目={memo ? <span className="Memo">メモ: {memo}</span> : undefined}
-          画像のPATH={画像のPATH}
+          画像のURL={画像のURL}
         />
       );
     }
@@ -69,7 +68,7 @@ const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
         <画像と表示
           一行目={一行目}
           二行目={[size, memo ? `メモ: ${memo}` : undefined].filter(Boolean).join(', ')}
-          画像のPATH={i.内容.植替え後の画像のPATH}
+          画像のURL={i.内容.植替え後の画像のURL}
         />
       );
     }

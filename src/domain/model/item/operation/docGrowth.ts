@@ -17,11 +17,11 @@ export const _成長を記録する = async (params: _成長を記録する.Para
   const { item, userId, imageDataUrl, memo } = params;
   const 鉢Id = item.id!;
   const date = dayjs();
-  let 画像のPATH: string | undefined = undefined;
+  let 画像のURL: string | undefined = undefined;
 
   console.log('1. あれば画像をuploadする');
   if (imageDataUrl) {
-    const { 画像のPATH: path } = await StorageRepository.uploadImageByBase64String({
+    const { 画像のPATH } = await StorageRepository.uploadImageByBase64String({
       dataUrl: imageDataUrl,
       path: StorageRepository.storagePath({
         type: '鉢',
@@ -30,7 +30,7 @@ export const _成長を記録する = async (params: _成長を記録する.Para
         itemId: 鉢Id,
       }),
     });
-    画像のPATH = path;
+    画像のURL = await StorageRepository.getDownloadUrls(画像のPATH);
   }
 
   console.log('2. 成長記録履歴を作成');
@@ -42,7 +42,7 @@ export const _成長を記録する = async (params: _成長を記録する.Para
       対象の鉢のID: 鉢Id,
     },
     内容: {
-      画像のPATH,
+      画像のURL: 画像のURL,
       memo,
     },
   });

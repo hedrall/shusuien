@@ -26,6 +26,8 @@ export const _植替えする = async (params: _植替えするParams) => {
       itemId: 鉢Id,
     }),
   });
+  const 画像のURL = await StorageRepository.getDownloadUrls(画像のPATH);
+
   console.log('2. 植替えの履歴を作成');
   const 植替え履歴 = await 履歴.新規作成.植替え({
     props: {
@@ -35,12 +37,13 @@ export const _植替えする = async (params: _植替えするParams) => {
       対象の鉢のID: 鉢Id,
     },
     内容: {
-      植替え後の画像のPATH: 画像のPATH,
+      植替え後の画像のURL: 画像のURL,
       植替え日時: date,
       鉢のサイズ,
       memo,
     },
   });
+
   console.log('3. 鉢の情報を更新する');
   const 更新後の鉢 = item.履歴を適用(植替え履歴);
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);

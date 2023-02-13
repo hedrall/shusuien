@@ -1,0 +1,18 @@
+@use '../../../assets/variables' as v;
+
+.Top {
+  .棚を作成 {
+    padding: 8px;
+    border: dimgrey solid 1px;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    &:hover {
+      background: lightgrey;
+    }
+  }
+
+  .Section {
+    margin: 16px 0;
+  }
+}

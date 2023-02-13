@@ -15,7 +15,7 @@ export type ItemListProps = {
   棚: 棚;
 };
 
-const ListItem: React.FC<{ 鉢: 鉢; 鉢を選択: (鉢: 鉢, imageUrl: string | undefined) => void }> = props => {
+const ListItem: React.FC<{ 鉢: 鉢; 鉢を選択: (鉢: 鉢) => void }> = props => {
   const { 鉢, 鉢を選択 } = props;
 
   return (
@@ -35,8 +35,8 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
   const 鉢作成モーダルを開く = () => 鉢操作モーダルRef.current?.open();
 
-  const 鉢を選択 = (鉢: 鉢, imageUrl: string | undefined) => {
-    鉢管理モーダルRef.current?.open(鉢, imageUrl);
+  const 鉢を選択 = (鉢: 鉢) => {
+    鉢管理モーダルRef.current?.open(鉢);
   };
 
   return (

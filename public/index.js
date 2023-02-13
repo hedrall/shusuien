@@ -1030,7 +1030,7 @@
             }
             return dispatcher.useContext(Context2);
           }
-          function useState53(initialState) {
+          function useState52(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1042,7 +1042,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect52(create, deps) {
+          function useEffect51(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1822,7 +1822,7 @@
           exports.useContext = useContext60;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect52;
+          exports.useEffect = useEffect51;
           exports.useId = useId2;
           exports.useImperativeHandle = useImperativeHandle20;
           exports.useInsertionEffect = useInsertionEffect;
@@ -1830,7 +1830,7 @@
           exports.useMemo = useMemo31;
           exports.useReducer = useReducer2;
           exports.useRef = useRef55;
-          exports.useState = useState53;
+          exports.useState = useState52;
           exports.useSyncExternalStore = useSyncExternalStore3;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -24214,11 +24214,11 @@
               return jsxWithValidation(type4, props, key2, false);
             }
           }
-          var jsx38 = jsxWithValidationDynamic;
-          var jsxs24 = jsxWithValidationStatic;
+          var jsx39 = jsxWithValidationDynamic;
+          var jsxs25 = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
-          exports.jsx = jsx38;
-          exports.jsxs = jsxs24;
+          exports.jsx = jsx39;
+          exports.jsxs = jsxs25;
         })();
       }
     }
@@ -34758,10 +34758,10 @@ This is currently a DEV-only warning but will become a thrown exception in the n
   }
 
   // src/components/pages/Top/index.tsx
-  var import_react62 = __toESM(require_react());
+  var import_react61 = __toESM(require_react());
 
   // src/components/organisms/CreateTanaModal/index.tsx
-  var import_react52 = __toESM(require_react());
+  var import_react51 = __toESM(require_react());
 
   // node_modules/.pnpm/@babel+runtime@7.20.13/node_modules/@babel/runtime/helpers/esm/classCallCheck.js
   function _classCallCheck(instance, Constructor) {
@@ -72168,7 +72168,7 @@ This typically indicates that your device does not have a healthy Internet conne
   };
   var _\u690D\u66FF\u3048\u5C65\u6B74\u3092\u4F5C\u6210 = async (params) => {
     const { props, \u5185\u5BB9 } = params;
-    const { \u690D\u66FF\u3048\u65E5\u6642, \u9262\u306E\u30B5\u30A4\u30BA, \u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH, memo: memo4 } = \u5185\u5BB9;
+    const { \u690D\u66FF\u3048\u65E5\u6642, \u9262\u306E\u30B5\u30A4\u30BA, \u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EURL, memo: memo4 } = \u5185\u5BB9;
     const \u65B0\u898F\u5C65\u6B74 = new \u5C65\u6B74(__spreadProps(__spreadValues({
       id: void 0
     }, props), {
@@ -72176,7 +72176,7 @@ This typically indicates that your device does not have a healthy Internet conne
         type: "\u690D\u66FF\u3048",
         \u690D\u66FF\u3048\u65E5\u6642,
         \u9262\u306E\u30B5\u30A4\u30BA,
-        \u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH,
+        \u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EURL,
         memo: memo4
       }
     }));
@@ -73774,7 +73774,6 @@ ${this.customData.serverResponse}`;
   registerStorage();
 
   // src/domain/repository/storage/index.ts
-  var import_react50 = __toESM(require_react());
   var StorageRepository;
   ((StorageRepository2) => {
     StorageRepository2.storagePath = (params) => {
@@ -73811,21 +73810,6 @@ ${this.customData.serverResponse}`;
         await deleteObject(ref2);
       }
     };
-    let \u92622;
-    ((\u92623) => {
-      \u92623.\u753B\u50CF\u3092\u53D6\u5F97 = async (\u753B\u50CF\u306EPATH) => {
-        if (!\u753B\u50CF\u306EPATH)
-          return "";
-        return StorageRepository2.getDownloadUrls(\u753B\u50CF\u306EPATH);
-      };
-      \u92623.use\u753B\u50CF = (\u753B\u50CF\u306EPATH) => {
-        const [imageUrl, setImageUrl] = (0, import_react50.useState)(void 0);
-        (0, import_react50.useEffect)(() => {
-          (0, \u92623.\u753B\u50CF\u3092\u53D6\u5F97)(\u753B\u50CF\u306EPATH).then(setImageUrl);
-        }, [\u92623]);
-        return { imageUrl, setImageUrl };
-      };
-    })(\u92622 = StorageRepository2.\u9262 || (StorageRepository2.\u9262 = {}));
   })(StorageRepository || (StorageRepository = {}));
 
   // src/domain/model/item/operation/replant.ts
@@ -73842,6 +73826,7 @@ ${this.customData.serverResponse}`;
         itemId: \u9262Id
       })
     });
+    const \u753B\u50CF\u306EURL = await StorageRepository.getDownloadUrls(\u753B\u50CF\u306EPATH);
     console.log("2. \u690D\u66FF\u3048\u306E\u5C65\u6B74\u3092\u4F5C\u6210");
     const \u690D\u66FF\u3048\u5C65\u6B74 = await \u5C65\u6B74.\u65B0\u898F\u4F5C\u6210.\u690D\u66FF\u3048({
       props: {
@@ -73851,7 +73836,7 @@ ${this.customData.serverResponse}`;
         \u5BFE\u8C61\u306E\u9262\u306EID: \u9262Id
       },
       \u5185\u5BB9: {
-        \u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH: \u753B\u50CF\u306EPATH,
+        \u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EURL: \u753B\u50CF\u306EURL,
         \u690D\u66FF\u3048\u65E5\u6642: date4,
         \u9262\u306E\u30B5\u30A4\u30BA,
         memo: memo4
@@ -73880,12 +73865,13 @@ ${this.customData.serverResponse}`;
         itemId: \u9262ID
       })
     });
+    const \u753B\u50CFURL = await StorageRepository.getDownloadUrls(\u753B\u50CF\u306EPATH);
     console.log("2. \u9262\u3092\u4F5C\u6210\u3059\u308B");
     const \u65B0\u898F\u9262 = new \u9262(__spreadProps(__spreadValues({}, props), {
       id: void 0,
       snapshot: {
         \u66F4\u65B0\u65E5\u6642: now2,
-        \u753B\u50CF\u306EPATH
+        \u753B\u50CF\u306EURL: \u753B\u50CFURL
       },
       \u4F5C\u6210\u65E5\u6642: now2
     }));
@@ -73900,7 +73886,7 @@ ${this.customData.serverResponse}`;
       },
       \u5185\u5BB9: {
         memo: "[\u81EA\u52D5\u8A18\u8F09]: \u65B0\u898F\u306B\u9262\u3092\u8FFD\u52A0\u3057\u307E\u3057\u305F\u3002",
-        \u753B\u50CF\u306EPATH
+        \u753B\u50CF\u306EURL: \u753B\u50CFURL
       }
     });
   };
@@ -73932,10 +73918,10 @@ ${this.customData.serverResponse}`;
     const { item, userId, imageDataUrl, memo: memo4 } = params;
     const \u9262Id = item.id;
     const date4 = (0, import_dayjs4.default)();
-    let \u753B\u50CF\u306EPATH = void 0;
+    let \u753B\u50CF\u306EURL = void 0;
     console.log("1. \u3042\u308C\u3070\u753B\u50CF\u3092upload\u3059\u308B");
     if (imageDataUrl) {
-      const { \u753B\u50CF\u306EPATH: path } = await StorageRepository.uploadImageByBase64String({
+      const { \u753B\u50CF\u306EPATH } = await StorageRepository.uploadImageByBase64String({
         dataUrl: imageDataUrl,
         path: StorageRepository.storagePath({
           type: "\u9262",
@@ -73944,7 +73930,7 @@ ${this.customData.serverResponse}`;
           itemId: \u9262Id
         })
       });
-      \u753B\u50CF\u306EPATH = path;
+      \u753B\u50CF\u306EURL = await StorageRepository.getDownloadUrls(\u753B\u50CF\u306EPATH);
     }
     console.log("2. \u6210\u9577\u8A18\u9332\u5C65\u6B74\u3092\u4F5C\u6210");
     const \u690D\u66FF\u3048\u5C65\u6B74 = await \u5C65\u6B74.\u65B0\u898F\u4F5C\u6210.\u6210\u9577\u8A18\u9332({
@@ -73955,7 +73941,7 @@ ${this.customData.serverResponse}`;
         \u5BFE\u8C61\u306E\u9262\u306EID: \u9262Id
       },
       \u5185\u5BB9: {
-        \u753B\u50CF\u306EPATH,
+        \u753B\u50CF\u306EURL,
         memo: memo4
       }
     });
@@ -73974,7 +73960,7 @@ ${this.customData.serverResponse}`;
       this.snapshot = {
         \u9262\u306E\u30B5\u30A4\u30BA: props.snapshot.\u9262\u306E\u30B5\u30A4\u30BA,
         \u6700\u5F8C\u306E\u690D\u66FF\u3048: optionalCall(props.snapshot.\u6700\u5F8C\u306E\u690D\u66FF\u3048, import_dayjs5.default),
-        \u753B\u50CF\u306EPATH: props.snapshot.\u753B\u50CF\u306EPATH,
+        \u753B\u50CF\u306EURL: props.snapshot.\u753B\u50CF\u306EURL,
         \u66F4\u65B0\u65E5\u6642: (0, import_dayjs5.default)(props.snapshot.\u66F4\u65B0\u65E5\u6642)
       };
       const snapshot = this.snapshot;
@@ -74009,7 +73995,7 @@ ${this.customData.serverResponse}`;
           {
             \u9262\u306E\u30B5\u30A4\u30BA: \u5C65\u6B743.\u5185\u5BB9.\u9262\u306E\u30B5\u30A4\u30BA,
             \u6700\u5F8C\u306E\u690D\u66FF\u3048: \u5C65\u6B743.\u5185\u5BB9.\u690D\u66FF\u3048\u65E5\u6642,
-            \u753B\u50CF\u306EPATH: \u5C65\u6B743.\u5185\u5BB9.\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH
+            \u753B\u50CF\u306EURL: \u5C65\u6B743.\u5185\u5BB9.\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EURL
           },
           \u5C65\u6B743.\u4F5C\u6210\u65E5\u6642
         );
@@ -74027,7 +74013,7 @@ ${this.customData.serverResponse}`;
       case "\u6210\u9577\u306E\u8A18\u9332":
         return update2(
           this,
-          __spreadValues({}, \u5C65\u6B743.\u5185\u5BB9.\u753B\u50CF\u306EPATH ? { \u753B\u50CF\u306EPATH: \u5C65\u6B743.\u5185\u5BB9.\u753B\u50CF\u306EPATH } : {}),
+          __spreadValues({}, \u5C65\u6B743.\u5185\u5BB9.\u753B\u50CF\u306EURL ? { \u753B\u50CF\u306EURL: \u5C65\u6B743.\u5185\u5BB9.\u753B\u50CF\u306EURL } : {}),
           \u5C65\u6B743.\u4F5C\u6210\u65E5\u6642
         );
       default:
@@ -74220,8 +74206,8 @@ ${this.customData.serverResponse}`;
       const updateParams = basicToFirestore(rawUpdateParams);
       await FSAppRepository.update(manager, id2, updateParams);
     };
-    _FsApp\u9262Repository2.\u753B\u50CF\u3092\u66F4\u65B0 = async (id2, \u753B\u50CF\u306EPATH, date4) => {
-      await (0, _FsApp\u9262Repository2.snapshot\u3092\u66F4\u65B0)(id2, { \u753B\u50CF\u306EPATH }, date4);
+    _FsApp\u9262Repository2.\u753B\u50CF\u3092\u66F4\u65B0 = async (id2, \u753B\u50CF\u306EURL, date4) => {
+      await (0, _FsApp\u9262Repository2.snapshot\u3092\u66F4\u65B0)(id2, { \u753B\u50CF\u306EURL }, date4);
     };
     _FsApp\u9262Repository2.\u4E00\u89A7\u8CFC\u8AAD = (params, onListen) => {
       const { userId, \u68DAId } = params;
@@ -74423,9 +74409,9 @@ ${this.customData.serverResponse}`;
   };
 
   // src/supports/ui.ts
-  var import_react51 = __toESM(require_react());
+  var import_react50 = __toESM(require_react());
   var useWithLoading = () => {
-    const [isLoading, setIsLoading] = (0, import_react51.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react50.useState)(false);
     const withLoading = async (fn2) => {
       setIsLoading(true);
       try {
@@ -74442,8 +74428,8 @@ ${this.customData.serverResponse}`;
 
   // src/components/organisms/CreateTanaModal/index.tsx
   var import_jsx_runtime2 = __toESM(require_jsx_runtime());
-  var \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB = (0, import_react52.forwardRef)((props, ref2) => {
-    const [isOpen, setIsOpen] = (0, import_react52.useState)(false);
+  var \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB = (0, import_react51.forwardRef)((props, ref2) => {
+    const [isOpen, setIsOpen] = (0, import_react51.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
     const { user } = useAuthState();
     const { control, getValues } = useForm2({
@@ -74478,7 +74464,7 @@ ${this.customData.serverResponse}`;
       });
       setIsOpen(false);
     };
-    (0, import_react52.useImperativeHandle)(ref2, () => {
+    (0, import_react51.useImperativeHandle)(ref2, () => {
       return {
         open: () => setIsOpen(true)
       };
@@ -74514,7 +74500,7 @@ ${this.customData.serverResponse}`;
   });
 
   // src/store/data/action.ts
-  var import_react53 = __toESM(require_react());
+  var import_react52 = __toESM(require_react());
   var \u9262Selector = Recoil_index_11({
     key: "\u9262Selector",
     get: (\u68DAID) => ({ get: get4 }) => {
@@ -74540,7 +74526,7 @@ ${this.customData.serverResponse}`;
         set5(items.map((i) => i.value));
       });
     };
-    (0, import_react53.useEffect)(() => {
+    (0, import_react52.useEffect)(() => {
       if (!(user == null ? void 0 : user.id))
         return;
       const { unsubscribe: unsubscribe2 } = \u9262\u3092\u8CFC\u8AAD(user.id, \u68DAId);
@@ -74551,8 +74537,8 @@ ${this.customData.serverResponse}`;
     };
   };
   var use\u9262\u5358\u4F53 = (id2, userId) => {
-    const [item, setItem] = (0, import_react53.useState)(void 0);
-    (0, import_react53.useEffect)(() => {
+    const [item, setItem] = (0, import_react52.useState)(void 0);
+    (0, import_react52.useEffect)(() => {
       if (!userId || !id2)
         return;
       const { unsubscribe: unsubscribe2 } = FSAppRepository.\u9262.\u5358\u4F53\u8CFC\u8AAD(id2, (newItem) => {
@@ -74594,10 +74580,10 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/molecules/ItemList/index.tsx
-  var import_react61 = __toESM(require_react());
+  var import_react60 = __toESM(require_react());
 
   // src/components/organisms/CreateItemModal/index.tsx
-  var import_react54 = __toESM(require_react());
+  var import_react53 = __toESM(require_react());
 
   // node_modules/.pnpm/browser-image-compression@2.0.0/node_modules/browser-image-compression/dist/browser-image-compression.mjs
   function _mergeNamespaces(e, r) {
@@ -76547,9 +76533,9 @@ ${this.customData.serverResponse}`;
     \u7A2E\u540D: void 0,
     \u88DC\u8DB3: void 0
   };
-  var \u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB = (0, import_react54.forwardRef)((props, ref2) => {
+  var \u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB = (0, import_react53.forwardRef)((props, ref2) => {
     const { \u68DAId } = props;
-    const [isOpen, setIsOpen] = (0, import_react54.useState)(false);
+    const [isOpen, setIsOpen] = (0, import_react53.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
     const { user } = useAuthState();
     const { control, getValues, formState, reset } = useForm2({
@@ -76611,7 +76597,7 @@ ${this.customData.serverResponse}`;
         close();
       });
     };
-    (0, import_react54.useImperativeHandle)(ref2, () => {
+    (0, import_react53.useImperativeHandle)(ref2, () => {
       return {
         open: () => setIsOpen(true)
       };
@@ -76646,22 +76632,21 @@ ${this.customData.serverResponse}`;
   var import_jsx_runtime7 = __toESM(require_jsx_runtime());
   var \u9262\u4E00\u89A7\u306E\u8981\u7D20 = (props) => {
     const { item, \u9262\u3092\u9078\u629E } = props;
-    const { imageUrl } = StorageRepository.\u9262.use\u753B\u50CF(item.snapshot.\u753B\u50CF\u306EPATH);
     const imageProps = {
       className: "\u9262\u4E00\u89A7\u306E\u8981\u7D20",
       preview: false,
-      src: imageUrl || NO_IMAGE,
+      src: item.snapshot.\u753B\u50CF\u306EURL || NO_IMAGE,
       style: { borderRadius: 7 },
-      onClick: () => \u9262\u3092\u9078\u629E(item, imageUrl)
+      onClick: () => \u9262\u3092\u9078\u629E(item)
     };
     return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(image_default, __spreadValues({}, imageProps));
   };
 
   // src/components/organisms/OperateItemModal/index.tsx
-  var import_react60 = __toESM(require_react());
+  var import_react59 = __toESM(require_react());
 
   // src/components/organisms/ReplantOperationModal/index.tsx
-  var import_react56 = __toESM(require_react());
+  var import_react55 = __toESM(require_react());
   var import_dayjs8 = __toESM(require_dayjs_min());
 
   // src/components/atoms/RadioGroup/index.tsx
@@ -79180,7 +79165,7 @@ ${this.customData.serverResponse}`;
 
   // node_modules/.pnpm/@fortawesome+react-fontawesome@0.2.0_d5rbrisxfyemehbvmdbryvgjte/node_modules/@fortawesome/react-fontawesome/index.es.js
   var import_prop_types = __toESM(require_prop_types());
-  var import_react55 = __toESM(require_react());
+  var import_react54 = __toESM(require_react());
   function ownKeys5(object4, enumerableOnly) {
     var keys = Object.keys(object4);
     if (Object.getOwnPropertySymbols) {
@@ -79420,7 +79405,7 @@ ${this.customData.serverResponse}`;
   function objectWithKey(key2, value2) {
     return Array.isArray(value2) && value2.length > 0 || !Array.isArray(value2) && value2 ? _defineProperty6({}, key2, value2) : {};
   }
-  var FontAwesomeIcon = /* @__PURE__ */ import_react55.default.forwardRef(function(props, ref2) {
+  var FontAwesomeIcon = /* @__PURE__ */ import_react54.default.forwardRef(function(props, ref2) {
     var iconArgs = props.icon, maskArgs = props.mask, symbol = props.symbol, className = props.className, title = props.title, titleId = props.titleId, maskId = props.maskId;
     var iconLookup = normalizeIconArgs(iconArgs);
     var classes = objectWithKey("classes", [].concat(_toConsumableArray3(classList(props)), _toConsumableArray3(className.split(" "))));
@@ -79505,7 +79490,7 @@ ${this.customData.serverResponse}`;
     transform: null,
     swapOpacity: false
   };
-  var convertCurry = convert.bind(null, import_react55.default.createElement);
+  var convertCurry = convert.bind(null, import_react54.default.createElement);
 
   // node_modules/.pnpm/@fortawesome+free-solid-svg-icons@6.3.0/node_modules/@fortawesome/free-solid-svg-icons/index.mjs
   var faSpoon = {
@@ -79607,10 +79592,10 @@ ${this.customData.serverResponse}`;
       value: num
     };
   });
-  var \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EB = (0, import_react56.forwardRef)((props, ref2) => {
-    const [isOpen, setIsOpen] = (0, import_react56.useState)(false);
+  var \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EB = (0, import_react55.forwardRef)((props, ref2) => {
+    const [isOpen, setIsOpen] = (0, import_react55.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
-    const [item, setItem] = (0, import_react56.useState)(null);
+    const [item, setItem] = (0, import_react55.useState)(null);
     const { user } = useAuthState();
     const { control, getValues, formState, reset } = useForm2({
       mode: "onChange",
@@ -79655,7 +79640,7 @@ ${this.customData.serverResponse}`;
       confirmLoading: isLoading,
       destroyOnClose: true
     };
-    (0, import_react56.useImperativeHandle)(ref2, () => {
+    (0, import_react55.useImperativeHandle)(ref2, () => {
       return {
         open: (\u92622) => {
           setItem(\u92622);
@@ -79730,10 +79715,10 @@ ${this.customData.serverResponse}`;
   };
 
   // src/hooks/itemHistory.ts
-  var import_react57 = __toESM(require_react());
+  var import_react56 = __toESM(require_react());
   var use\u9262\u306E\u5C65\u6B74\u4E00\u89A7 = (id2, userId, options) => {
-    const [state, setState] = (0, import_react57.useState)([]);
-    (0, import_react57.useEffect)(() => {
+    const [state, setState] = (0, import_react56.useState)([]);
+    (0, import_react56.useEffect)(() => {
       if (!userId || !id2)
         return;
       const { unsubscribe: unsubscribe2 } = FSAppRepository.\u5C65\u6B74.\u8CFC\u8AAD(id2, userId, options, (list) => {
@@ -79775,19 +79760,18 @@ ${this.customData.serverResponse}`;
   // src/components/molecules/HistoryTimeline/index.tsx
   var import_jsx_runtime16 = __toESM(require_jsx_runtime());
   var \u753B\u50CF\u3068\u8868\u793A = (props) => {
-    const { \u4E00\u884C\u76EE, \u4E8C\u884C\u76EE, \u753B\u50CF\u306EPATH } = props;
-    const { imageUrl } = StorageRepository.\u9262.use\u753B\u50CF(\u753B\u50CF\u306EPATH);
+    const { \u4E00\u884C\u76EE, \u4E8C\u884C\u76EE, \u753B\u50CF\u306EURL } = props;
     return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E00\u884C\u76EE }),
       \u4E8C\u884C\u76EE ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E8C\u884C\u76EE }) : null,
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(image_default, { style: { maxWidth: "100%", maxHeight: 80, minHeight: 80 }, src: imageUrl || NO_IMAGE })
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(image_default, { style: { maxWidth: "100%", maxHeight: 80, minHeight: 80 }, src: \u753B\u50CF\u306EURL || NO_IMAGE })
     ] });
   };
   var \u5C65\u6B74\u3054\u3068\u306E\u8868\u793A\u5185\u5BB9 = (i) => {
     const \u4E00\u884C\u76EE = `[${i.\u4F5C\u6210\u65E5\u6642.format(F2)}]: ${i.\u5185\u5BB9.type}`;
     switch (i.\u5185\u5BB9.type) {
       case "\u6210\u9577\u306E\u8A18\u9332": {
-        const { \u753B\u50CF\u306EPATH, memo: memo4 } = i.\u5185\u5BB9;
+        const { \u753B\u50CF\u306EURL, memo: memo4 } = i.\u5185\u5BB9;
         return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
           \u753B\u50CF\u3068\u8868\u793A,
           {
@@ -79796,7 +79780,7 @@ ${this.customData.serverResponse}`;
               "\u30E1\u30E2: ",
               memo4
             ] }) : void 0,
-            \u753B\u50CF\u306EPATH
+            \u753B\u50CF\u306EURL
           }
         );
       }
@@ -79813,7 +79797,7 @@ ${this.customData.serverResponse}`;
           {
             \u4E00\u884C\u76EE,
             \u4E8C\u884C\u76EE: [size, memo4 ? `\u30E1\u30E2: ${memo4}` : void 0].filter(Boolean).join(", "),
-            \u753B\u50CF\u306EPATH: i.\u5185\u5BB9.\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH
+            \u753B\u50CF\u306EURL: i.\u5185\u5BB9.\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EURL
           }
         );
       }
@@ -79856,7 +79840,7 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/organisms/ProvideWater/index.tsx
-  var import_react58 = __toESM(require_react());
+  var import_react57 = __toESM(require_react());
 
   // src/components/atoms/VerticalRadioGroup/index.tsx
   var import_jsx_runtime17 = __toESM(require_jsx_runtime());
@@ -79888,10 +79872,10 @@ ${this.customData.serverResponse}`;
       };
     }
   );
-  var \u704C\u6C34\u30E2\u30FC\u30C0\u30EB = (0, import_react58.forwardRef)((props, ref2) => {
-    const [isOpen, setIsOpen] = (0, import_react58.useState)(false);
+  var \u704C\u6C34\u30E2\u30FC\u30C0\u30EB = (0, import_react57.forwardRef)((props, ref2) => {
+    const [isOpen, setIsOpen] = (0, import_react57.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
-    const [item, setItem] = (0, import_react58.useState)(null);
+    const [item, setItem] = (0, import_react57.useState)(null);
     const { user } = useAuthState();
     const { control, getValues, formState, reset } = useForm2({
       mode: "onChange",
@@ -79930,7 +79914,7 @@ ${this.customData.serverResponse}`;
       confirmLoading: isLoading,
       destroyOnClose: true
     };
-    (0, import_react58.useImperativeHandle)(ref2, () => {
+    (0, import_react57.useImperativeHandle)(ref2, () => {
       return {
         open: (\u92622) => {
           setItem(\u92622);
@@ -79956,7 +79940,7 @@ ${this.customData.serverResponse}`;
   });
 
   // src/components/organisms/DocGrowthModal/index.tsx
-  var import_react59 = __toESM(require_react());
+  var import_react58 = __toESM(require_react());
   var import_jsx_runtime19 = __toESM(require_jsx_runtime());
   var DEFAULT_VALUES5 = () => ({
     imageDataUrl: void 0,
@@ -79976,10 +79960,10 @@ ${this.customData.serverResponse}`;
     });
     return { imageDataUrl, memo: memo4 };
   };
-  var \u6210\u9577\u8A18\u9332\u30E2\u30FC\u30C0\u30EB = (0, import_react59.forwardRef)((props, ref2) => {
-    const [isOpen, setIsOpen] = (0, import_react59.useState)(false);
+  var \u6210\u9577\u8A18\u9332\u30E2\u30FC\u30C0\u30EB = (0, import_react58.forwardRef)((props, ref2) => {
+    const [isOpen, setIsOpen] = (0, import_react58.useState)(false);
     const { isLoading, withLoading } = useWithLoading();
-    const [item, setItem] = (0, import_react59.useState)(null);
+    const [item, setItem] = (0, import_react58.useState)(null);
     const { user } = useAuthState();
     const { control, getValues, reset } = useForm2({
       mode: "onChange",
@@ -80022,7 +80006,7 @@ ${this.customData.serverResponse}`;
       confirmLoading: isLoading,
       destroyOnClose: true
     };
-    (0, import_react59.useImperativeHandle)(ref2, () => {
+    (0, import_react58.useImperativeHandle)(ref2, () => {
       return {
         open: (\u92622) => {
           setItem(\u92622);
@@ -80053,19 +80037,14 @@ ${this.customData.serverResponse}`;
 
   // src/components/organisms/OperateItemModal/index.tsx
   var import_jsx_runtime20 = __toESM(require_jsx_runtime());
-  var \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB = (0, import_react60.forwardRef)((props, ref2) => {
-    const [isOpen, setIsOpen] = (0, import_react60.useState)(false);
-    const [id2, setId] = (0, import_react60.useState)(void 0);
+  var \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB = (0, import_react59.forwardRef)((props, ref2) => {
+    const [isOpen, setIsOpen] = (0, import_react59.useState)(false);
+    const [id2, setId] = (0, import_react59.useState)(void 0);
     const { user } = useAuthState();
     const { item, setItem } = use\u9262\u5358\u4F53(id2, user == null ? void 0 : user.id);
-    const { imageUrl, setImageUrl } = StorageRepository.\u9262.use\u753B\u50CF(item == null ? void 0 : item.snapshot.\u753B\u50CF\u306EPATH);
-    console.log({
-      path: item == null ? void 0 : item.snapshot.\u753B\u50CF\u306EPATH,
-      imageUrl
-    });
-    const \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
-    const \u704C\u6C34\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
-    const \u6210\u9577\u8A18\u9332\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
+    const \u690D\u66FF\u3048\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react59.useRef)(null);
+    const \u704C\u6C34\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react59.useRef)(null);
+    const \u6210\u9577\u8A18\u9332\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react59.useRef)(null);
     const modalProps = {
       className: "\u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB",
       open: isOpen,
@@ -80077,11 +80056,10 @@ ${this.customData.serverResponse}`;
       cancelText: "\u9589\u3058\u308B",
       destroyOnClose: true
     };
-    (0, import_react60.useImperativeHandle)(ref2, () => {
+    (0, import_react59.useImperativeHandle)(ref2, () => {
       return {
-        open: (\u92622, imageUrl2) => {
+        open: (\u92622, imageUrl) => {
           setItem(\u92622);
-          setImageUrl(imageUrl2);
           setId(\u92622.id);
           setIsOpen(true);
         }
@@ -80111,7 +80089,7 @@ ${this.customData.serverResponse}`;
         image_default,
         {
           style: { maxWidth: "100%", maxHeight: 250, minHeight: 174, objectFit: "contain" },
-          src: imageUrl || NO_IMAGE
+          src: (item == null ? void 0 : item.snapshot.\u753B\u50CF\u306EURL) || NO_IMAGE
         }
       ) }),
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h2", { className: "\u898B\u51FA\u3057", children: "\u7BA1\u7406" }),
@@ -80165,8 +80143,8 @@ ${this.customData.serverResponse}`;
   };
   var \u9262\u4E00\u89A7 = (props) => {
     const { \u68DA: \u68DA2 } = props;
-    const \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react61.useRef)(null);
-    const \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef = (0, import_react61.useRef)(null);
+    const \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
+    const \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef = (0, import_react60.useRef)(null);
     const { user } = useAuthState();
     const \u68DAId = \u68DA2.id;
     const { \u9262\u4E00\u89A7: \u9262\u4E00\u89A72 } = use\u9262\u4E00\u89A7(\u68DAId, user);
@@ -80174,9 +80152,9 @@ ${this.customData.serverResponse}`;
       var _a2;
       return (_a2 = \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef.current) == null ? void 0 : _a2.open();
     };
-    const \u9262\u3092\u9078\u629E = (\u92622, imageUrl) => {
+    const \u9262\u3092\u9078\u629E = (\u92622) => {
       var _a2;
-      (_a2 = \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef.current) == null ? void 0 : _a2.open(\u92622, imageUrl);
+      (_a2 = \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef.current) == null ? void 0 : _a2.open(\u92622);
     };
     return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "\u9262\u4E00\u89A7", children: [
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(row_default2, { gutter: { xs: 8, sm: 16, md: 24, lg: 32 }, children: \u9262\u4E00\u89A72.map((\u92622) => {
@@ -80201,14 +80179,14 @@ ${this.customData.serverResponse}`;
   var TopPage = (props) => {
     const { user } = useAuthState();
     const { \u68DA\u3092\u8CFC\u8AAD, \u68DA\u4E00\u89A7 } = useDataState();
-    (0, import_react62.useEffect)(() => {
+    (0, import_react61.useEffect)(() => {
       if (!(user == null ? void 0 : user.id))
         return;
       const { unsubscribe: unsubscribe2 } = \u68DA\u3092\u8CFC\u8AAD(user.id);
       return () => unsubscribe2();
     }, [user == null ? void 0 : user.id]);
     const navigator2 = useNavigate();
-    const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef = (0, import_react62.useRef)(null);
+    const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef = (0, import_react61.useRef)(null);
     const \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F = () => {
       var _a2;
       (_a2 = \u68DA\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u306ERef.current) == null ? void 0 : _a2.open();
@@ -80230,7 +80208,7 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/pages/Login/index.tsx
-  var import_react66 = __toESM(require_react());
+  var import_react65 = __toESM(require_react());
   var import_classnames71 = __toESM(require_classnames());
 
   // src/components/atoms/MyAlert/index.tsx
@@ -84257,13 +84235,13 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/pages/Login/steps/setUserName.tsx
-  var import_react63 = __toESM(require_react());
+  var import_react62 = __toESM(require_react());
   var import_jsx_runtime28 = __toESM(require_jsx_runtime());
   var InputGroup3 = input_default.Group;
   var SetUserNameStep = (props) => {
     var _a2, _b, _c2;
     const { setStep } = props;
-    const [isLoading, setIsLoading] = (0, import_react63.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react62.useState)(false);
     const { setUser } = useAuthState();
     const navigate = useNavigate();
     const { control, getValues, setError, formState } = useForm2({
@@ -84320,7 +84298,7 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/pages/Login/steps/registerNewAccount.tsx
-  var import_react64 = __toESM(require_react());
+  var import_react63 = __toESM(require_react());
 
   // src/components/atoms/PasswordInput/index.tsx
   var import_classnames70 = __toESM(require_classnames());
@@ -84336,7 +84314,7 @@ ${this.customData.serverResponse}`;
   var RegisterNewAccountStep = (props) => {
     var _a2, _b;
     const { setStep, email: email2 } = props;
-    const [isLoading, setIsLoading] = (0, import_react64.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react63.useState)(false);
     const { setUser } = useAuthState();
     const { control, getValues, setError, formState } = useForm2({
       mode: "onChange",
@@ -84396,14 +84374,14 @@ ${this.customData.serverResponse}`;
   };
 
   // src/components/pages/Login/steps/inputPassword.tsx
-  var import_react65 = __toESM(require_react());
+  var import_react64 = __toESM(require_react());
   var import_jsx_runtime31 = __toESM(require_jsx_runtime());
   var InputGroup5 = input_default.Group;
   var InputPasswordStep = (props) => {
     var _a2, _b;
     const { email: email2 } = props;
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = (0, import_react65.useState)(false);
+    const [isLoading, setIsLoading] = (0, import_react64.useState)(false);
     const { control, getValues, setError, formState } = useForm2({
       mode: "onChange",
       reValidateMode: "onChange",
@@ -84461,7 +84439,7 @@ ${this.customData.serverResponse}`;
   };
   var LoginPage = (props) => {
     const { className } = props;
-    const [state, setState] = (0, import_react66.useState)({
+    const [state, setState] = (0, import_react65.useState)({
       step: "first",
       email: ""
     });
@@ -84473,6 +84451,76 @@ ${this.customData.serverResponse}`;
       /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("h2", { children: "\u30ED\u30B0\u30A4\u30F3" }),
       /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Component12, { setStep: setStepHandler, email: state.email })
     ] }) });
+  };
+
+  // src/components/pages/Admin/index.tsx
+  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
+  var querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
+  var AdminPage = (props) => {
+    const { user } = useAuthState();
+    const userId = user == null ? void 0 : user.id;
+    if (!user)
+      return null;
+    if (userId && userId !== "DxHELmn516Zz0at4Kkn2U4uCKCp2")
+      return null;
+    const \u9262\u306E\u753B\u50CFPATH\u3092URL\u306B\u8F09\u305B\u66FF\u3048\u308B = async () => {
+      const db2 = () => oh();
+      const col = Ta2(db2(), "\u9262");
+      const query = sl(
+        col,
+        rl("userId", "==", userId),
+        rl("\u68DAId", "==", "P91BSdjKv7ZXbtT0C55N"),
+        hl("\u4F5C\u6210\u65E5\u6642", "asc")
+      );
+      const docs = await Bl(query);
+      const { refValue: values } = querySnapshotToRefValues(docs);
+      console.log({ values: values.map((i) => i.value) });
+      for (const item of values) {
+        const value2 = item.value;
+        if (value2.snapshot["\u753B\u50CF\u306EPATH"]) {
+          const url2 = await StorageRepository.getDownloadUrls(value2.snapshot["\u753B\u50CF\u306EPATH"]);
+          console.log("download url");
+          if (!url2)
+            throw new Error("url nasi");
+          console.log("update", item.ref.id);
+          await Kl(item.ref, {
+            "snapshot.\u753B\u50CF\u306EURL": url2
+          });
+        }
+      }
+    };
+    const \u5C65\u6B74\u306E\u753B\u50CFPATH\u3092URL\u306B\u8F09\u305B\u66FF\u3048\u308B = async () => {
+      const db2 = () => oh();
+      const col = Ta2(db2(), "\u5C65\u6B74");
+      const query = sl(col, rl("userId", "==", userId));
+      const docs = await Bl(query);
+      const { refValue: values } = querySnapshotToRefValues(docs);
+      console.log({ values: values.map((i) => i.value) });
+      for (const item of values) {
+        const value2 = item.value;
+        const key2 = value2["\u5185\u5BB9"]["\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH"] ? "\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EURL" : "\u753B\u50CF\u306EURL";
+        const path = value2["\u5185\u5BB9"]["\u690D\u66FF\u3048\u5F8C\u306E\u753B\u50CF\u306EPATH"] || value2["\u5185\u5BB9"]["\u753B\u50CF\u306EPATH"];
+        if (path && path.includes("http"))
+          continue;
+        if (path) {
+          console.log("download url", path);
+          const url2 = await StorageRepository.getDownloadUrls(path);
+          if (!url2)
+            throw new Error("url nasi");
+          console.log("update", item.ref.id);
+          await Kl(item.ref, {
+            [`\u5185\u5BB9.${key2}`]: url2
+          });
+        }
+      }
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h1", { children: "admin" }),
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { style: { display: "flex", flexDirection: "column", gap: 8 }, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(MyButton, { title: "\u9262\u306E\u753B\u50CFPATH\u3092URL\u306B\u8F09\u305B\u66FF\u3048\u308B", onClick: \u9262\u306E\u753B\u50CFPATH\u3092URL\u306B\u8F09\u305B\u66FF\u3048\u308B }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(MyButton, { title: "\u5C65\u6B74\u306E\u753B\u50CFPATH\u3092URL\u306B\u8F09\u305B\u66FF\u3048\u308B", onClick: \u5C65\u6B74\u306E\u753B\u50CFPATH\u3092URL\u306B\u8F09\u305B\u66FF\u3048\u308B })
+      ] })
+    ] });
   };
 
   // src/settings/routes.ts
@@ -84491,28 +84539,33 @@ ${this.customData.serverResponse}`;
       PATH: "/error",
       NAME: "top",
       COMPONENT: Error2
+    },
+    Admin: {
+      PATH: "/admin",
+      NAME: "admin",
+      COMPONENT: AdminPage
     }
   };
 
   // src/components/common/Routing.tsx
-  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
   var routes = Object.values(ROUTES);
   var RoutingContent = () => {
-    return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(Routes, { children: [
-      routes.map(({ PATH, COMPONENT }) => /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Route, { path: PATH, element: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(COMPONENT, {}) }, PATH)),
-      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Navigate, { to: "/error" }) })
+    return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(Routes, { children: [
+      routes.map(({ PATH, COMPONENT }) => /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Route, { path: PATH, element: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(COMPONENT, {}) }, PATH)),
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Navigate, { to: "/error" }) })
     ] }) });
   };
 
   // src/components/common/Layout.tsx
-  var import_react67 = __toESM(require_react());
-  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
+  var import_react66 = __toESM(require_react());
+  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
   var Layout = ({ children }) => {
     const { user } = useAuthState();
     const navigate = useNavigate();
     const location = useLocation();
     const signOut2 = AuthRepository.signOut;
-    (0, import_react67.useEffect)(() => {
+    (0, import_react66.useEffect)(() => {
       if (location.pathname === ROUTES.LOGIN.PATH && user) {
         const params = new URLSearchParams(location.search);
         const from2 = params.get("from");
@@ -84528,42 +84581,42 @@ ${this.customData.serverResponse}`;
         navigate(ROUTES.LOGIN.PATH + `?from=${from2}`);
       }
     }, [user == null ? void 0 : user.id]);
-    return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "Layout", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "Header", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "Layout", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "Header", children: [
         "\u8DA3\u6C34\u5712",
-        user && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(LogoutOutlined_default2, { onClick: signOut2 })
+        user && /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(LogoutOutlined_default2, { onClick: signOut2 })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "Main", children }),
-      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "Footer", children: "Created by Hedrall" })
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "Main", children }),
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "Footer", children: "Created by Hedrall" })
     ] });
   };
 
   // src/components/common/Utils.tsx
-  var import_react68 = __toESM(require_react());
+  var import_react67 = __toESM(require_react());
   var Utils = () => {
     const { authStateChangeSubscriber } = useAuthState();
-    (0, import_react68.useEffect)(() => {
+    (0, import_react67.useEffect)(() => {
       AuthRepository.listen.authStateChanged(authStateChangeSubscriber);
     }, []);
     return null;
   };
 
   // src/components/common/Document.tsx
-  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
   var Document = () => {
-    return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(Recoil_index_5, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Utils, {}),
-      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Layout, { children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(RoutingContent, {}) })
+    return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(BrowserRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(Recoil_index_5, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Utils, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Layout, { children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(RoutingContent, {}) })
     ] }) });
   };
 
   // src/App.tsx
-  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
-  var App = () => /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Document, {});
+  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
+  var App = () => /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Document, {});
 
   // src/index.tsx
-  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime38 = __toESM(require_jsx_runtime());
   var root = (0, import_client.createRoot)(document.getElementById("root"));
-  root.render(/* @__PURE__ */ (0, import_jsx_runtime37.jsx)(App, {}));
+  root.render(/* @__PURE__ */ (0, import_jsx_runtime38.jsx)(App, {}));
 })();
 //# sourceMappingURL=index.js.map

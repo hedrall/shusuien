@@ -5,7 +5,6 @@ import { 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 植替え操作モーダル } from '@frontend/components/organisms/ReplantOperationModal';
 import { 鉢の情報 } from '@frontend/components/molecules/ItemDesc';
-import { StorageRepository } from '@frontend/domain/repository/storage';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { use鉢単体 } from '@frontend/store/data/action';
 import { 鉢の履歴 } from '@frontend/components/molecules/HistoryTimeline';
@@ -15,7 +14,7 @@ import { 成長記録モーダル } from '@frontend/components/organisms/DocGrow
 
 export namespace 鉢管理モーダル {
   export type Ref = {
-    open: (鉢: 鉢, imageUrl: string | undefined) => void;
+    open: (鉢: 鉢) => void;
   };
   export type Props = {};
 }
@@ -25,11 +24,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
   const [id, setId] = useState<鉢Id | undefined>(undefined);
   const { user } = useAuthState();
   const { item, setItem } = use鉢単体(id, user?.id);
-  const { imageUrl, setImageUrl } = StorageRepository.鉢.use画像(item?.snapshot.画像のPATH);
-  console.log({
-    path: item?.snapshot.画像のPATH,
-    imageUrl,
-  });
+
   const 植替え操作モーダルRef = useRef<植替え操作モーダル.Ref | null>(null);
   const 灌水操作モーダルRef = useRef<灌水モーダル.Ref | null>(null);
   const 成長記録操作モーダルRef = useRef<成長記録モーダル.Ref | null>(null);
@@ -52,7 +47,6 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
     return {
       open: (鉢: 鉢, imageUrl?: string) => {
         setItem(鉢);
-        setImageUrl(imageUrl);
         setId(鉢.id!);
         setIsOpen(true);
       },
@@ -79,7 +73,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
       <div>
         <Image
           style={{ maxWidth: '100%', maxHeight: 250, minHeight: 174, objectFit: 'contain' }}
-          src={imageUrl || NO_IMAGE}
+          src={item?.snapshot.画像のURL || NO_IMAGE}
         />
       </div>
 

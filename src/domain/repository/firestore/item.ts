@@ -36,8 +36,8 @@ export namespace _FsApp鉢Repository {
     await FSAppRepository.update(manager, id, updateParams);
   };
 
-  export const 画像を更新 = async (id: 鉢Id, 画像のPATH: string, date: Dayjs) => {
-    await snapshotを更新(id, { 画像のPATH }, date);
+  export const 画像を更新 = async (id: 鉢Id, 画像のURL: string, date: Dayjs) => {
+    await snapshotを更新(id, { 画像のURL }, date);
   };
 
   type 購読Params = { userId: UserId; 棚Id: 棚ID };

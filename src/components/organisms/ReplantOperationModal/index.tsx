@@ -25,7 +25,7 @@ export namespace 植替え操作モーダル {
 type Input = {
   size: 鉢サイズ.番号;
   isLong: boolean;
-  imageDataUrl: 履歴の内容.植替え['植替え後の画像のPATH'];
+  imageDataUrl: 履歴の内容.植替え['植替え後の画像のURL'];
   date: string;
   memo: 履歴の内容.植替え['memo'];
 };

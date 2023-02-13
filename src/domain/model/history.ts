@@ -66,7 +66,7 @@ export namespace 履歴の内容 {
   // 成長の記録
   export type 成長の記録 = {
     type: '成長の記録';
-    画像のPATH: string | undefined;
+    画像のURL: string | undefined;
     memo: string | undefined;
   };
 
@@ -75,7 +75,7 @@ export namespace 履歴の内容 {
     type: '植替え';
     植替え日時: Dayjs;
     鉢のサイズ: 鉢サイズ;
-    植替え後の画像のPATH: string;
+    植替え後の画像のURL: string;
     memo?: string;
   };
 
@@ -116,7 +116,7 @@ const _成長の記録履歴を作成 = async (params: NewProps<履歴の内容.
 
 const _植替え履歴を作成 = async (params: NewProps<履歴の内容.植替え>) => {
   const { props, 内容 } = params;
-  const { 植替え日時, 鉢のサイズ, 植替え後の画像のPATH, memo } = 内容;
+  const { 植替え日時, 鉢のサイズ, 植替え後の画像のURL, memo } = 内容;
   const 新規履歴 = new 履歴({
     id: undefined,
     ...props,
@@ -124,7 +124,7 @@ const _植替え履歴を作成 = async (params: NewProps<履歴の内容.植替
       type: '植替え',
       植替え日時,
       鉢のサイズ,
-      植替え後の画像のPATH,
+      植替え後の画像のURL,
       memo,
     },
   });

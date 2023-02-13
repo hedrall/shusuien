@@ -141,6 +141,20 @@
   margin-bottom: 16px;
 }
 
+.Top .棚を作成 {
+  padding: 8px;
+  border: dimgrey solid 1px;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+.Top .棚を作成:hover {
+  background: lightgrey;
+}
+.Top .Section {
+  margin: 16px 0;
+}
+
 .LoginPage .Content {
   max-width: 600px;
   width: 100%;
