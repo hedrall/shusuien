@@ -120,7 +120,7 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
       </div>
       {formState.isValid ? (
         <div style={{ display: 'flex', justifyContent: 'end' }}>
-          <MyButton title="作成" onClick={鉢の作成を実行する} />
+          <MyButton title="作成" onClick={鉢の作成を実行する} isLoading={isLoading} />
         </div>
       ) : null}
       <div className="FormItem">

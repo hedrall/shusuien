@@ -39,5 +39,5 @@ firebase-debug.log
 .firebase
 .idea
 
-public/index.css*
+public/main.css*
 public/index.js*
