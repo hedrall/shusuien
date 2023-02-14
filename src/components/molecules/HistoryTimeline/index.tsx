@@ -36,7 +36,10 @@ const 画像と表示 = (props: { 一行目: React.ReactNode; 二行目?: React.
     <div>
       <p className="Item行">{一行目}</p>
       {二行目 ? <p className="Item行">{二行目}</p> : null}
-      <Image style={{ maxWidth: '100%', maxHeight: 80, minHeight: 80 }} src={画像のURL || NO_IMAGE} />
+      <Image
+        style={{ maxWidth: '100%', maxHeight: 80, minHeight: 80, objectFit: 'contain' }}
+        src={画像のURL || NO_IMAGE}
+      />
     </div>
   );
 };

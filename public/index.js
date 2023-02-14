@@ -79764,7 +79764,13 @@ ${this.customData.serverResponse}`;
     return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E00\u884C\u76EE }),
       \u4E8C\u884C\u76EE ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "Item\u884C", children: \u4E8C\u884C\u76EE }) : null,
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(image_default, { style: { maxWidth: "100%", maxHeight: 80, minHeight: 80 }, src: \u753B\u50CF\u306EURL || NO_IMAGE })
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+        image_default,
+        {
+          style: { maxWidth: "100%", maxHeight: 80, minHeight: 80, objectFit: "contain" },
+          src: \u753B\u50CF\u306EURL || NO_IMAGE
+        }
+      )
     ] });
   };
   var \u5C65\u6B74\u3054\u3068\u306E\u8868\u793A\u5185\u5BB9 = (i) => {
