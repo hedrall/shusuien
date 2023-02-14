@@ -76636,7 +76636,7 @@ ${this.customData.serverResponse}`;
       className: "\u9262\u4E00\u89A7\u306E\u8981\u7D20",
       preview: false,
       src: item.snapshot.\u753B\u50CF\u306EURL || NO_IMAGE,
-      style: { borderRadius: 7 },
+      style: { borderRadius: 7, aspectRatio: "1", objectFit: "cover" },
       onClick: () => \u9262\u3092\u9078\u629E(item)
     };
     return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(image_default, __spreadValues({}, imageProps));
@@ -80157,9 +80157,18 @@ ${this.customData.serverResponse}`;
       (_a2 = \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef.current) == null ? void 0 : _a2.open(\u92622);
     };
     return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "\u9262\u4E00\u89A7", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(row_default2, { gutter: { xs: 8, sm: 16, md: 24, lg: 32 }, children: \u9262\u4E00\u89A72.map((\u92622) => {
-        return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(ListItem2, { \u9262: \u92622, \u9262\u3092\u9078\u629E }, \u92622.id);
-      }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+        row_default2,
+        {
+          gutter: [
+            { xs: 8, sm: 16, md: 24, lg: 32 },
+            { xs: 8, sm: 16, md: 24, lg: 32 }
+          ],
+          children: \u9262\u4E00\u89A72.map((\u92622) => {
+            return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(ListItem2, { \u9262: \u92622, \u9262\u3092\u9078\u629E }, \u92622.id);
+          })
+        }
+      ),
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "Section", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(MyButton, { title: "\u2A01 \u9262\u3092\u8FFD\u52A0\u3059\u308B", onClick: \u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB\u3092\u958B\u304F }) }),
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(\u9262\u4F5C\u6210\u30E2\u30FC\u30C0\u30EB, { ref: \u9262\u64CD\u4F5C\u30E2\u30FC\u30C0\u30EBRef, \u68DAId }),
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(\u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EB, { ref: \u9262\u7BA1\u7406\u30E2\u30FC\u30C0\u30EBRef })

@@ -41,7 +41,12 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
   return (
     <div className="鉢一覧">
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+      <Row
+        gutter={[
+          { xs: 8, sm: 16, md: 24, lg: 32 },
+          { xs: 8, sm: 16, md: 24, lg: 32 },
+        ]}
+      >
         {鉢一覧.map(鉢 => {
           return <ListItem key={鉢.id} 鉢={鉢} 鉢を選択={鉢を選択} />;
         })}
