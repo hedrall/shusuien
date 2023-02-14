@@ -76690,7 +76690,7 @@ ${this.customData.serverResponse}`;
 
   // src/supports/date.ts
   var DATE_TIME_FORMAT = "YYYY/MM/DD HH:mm:ss";
-  var DATE_READONLY_FORMAT = "YYYY\u5E74M\u6708D\u65E5 HH";
+  var DATE_READONLY_FORMAT = "YYYY\u5E74M\u6708D\u65E5 H\u6642";
 
   // node_modules/.pnpm/@fortawesome+fontawesome-svg-core@6.3.0/node_modules/@fortawesome/fontawesome-svg-core/index.mjs
   function ownKeys4(object4, enumerableOnly) {
@@ -79693,6 +79693,7 @@ ${this.customData.serverResponse}`;
     const \u79D1_\u5C5E_\u7A2E = [\u8A73\u7D30.\u79D1, \u8A73\u7D30.\u5C5E, \u8A73\u7D30.\u7A2E\u540D].filter(Boolean).join("/");
     const \u9262\u306E\u30B5\u30A4\u30BA = optionalCall(snapshot.\u9262\u306E\u30B5\u30A4\u30BA, \u9262\u30B5\u30A4\u30BA.toString);
     const \u6700\u5F8C\u306E\u704C\u6C34 = [(_a2 = snapshot.\u6700\u5F8C\u306E\u704C\u6C34) == null ? void 0 : _a2.\u65E5\u6642.format(F), (_b = snapshot.\u6700\u5F8C\u306E\u704C\u6C34) == null ? void 0 : _b.\u91CF].filter(Boolean).join(", ");
+    const \u6700\u5F8C\u306E\u690D\u66FF\u3048 = [(_c2 = snapshot.\u6700\u5F8C\u306E\u690D\u66FF\u3048) == null ? void 0 : _c2.format(F)].filter(Boolean).join(", ");
     return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(
       descriptions_default,
       {
@@ -79707,8 +79708,8 @@ ${this.customData.serverResponse}`;
           /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(descriptions_default.Item, { label: "\u8FFD\u52A0", children: \u4F5C\u6210\u65E5\u6642.format(F) }),
           /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(descriptions_default.Item, { label: "\u88DC\u8DB3", children: \u88DC\u8DB3 }),
           /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(descriptions_default.Item, { label: "\u9262\u306E\u30B5\u30A4\u30BA", children: \u9262\u306E\u30B5\u30A4\u30BA }),
-          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(descriptions_default.Item, { label: "\u6700\u5F8C\u306E\u704C\u6C34", children: (_c2 = snapshot.\u6700\u5F8C\u306E\u690D\u66FF\u3048) == null ? void 0 : _c2.format(F) }),
-          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(descriptions_default.Item, { label: "\u6700\u5F8C\u306E\u690D\u66FF\u3048", children: \u6700\u5F8C\u306E\u704C\u6C34 })
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(descriptions_default.Item, { label: "\u6700\u5F8C\u306E\u704C\u6C34", children: \u6700\u5F8C\u306E\u704C\u6C34 }),
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(descriptions_default.Item, { label: "\u6700\u5F8C\u306E\u690D\u66FF\u3048", children: \u6700\u5F8C\u306E\u690D\u66FF\u3048 })
         ]
       }
     );
