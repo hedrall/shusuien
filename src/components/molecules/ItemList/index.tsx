@@ -19,7 +19,7 @@ const ListItem: React.FC<{ 鉢: 鉢; 鉢を選択: (鉢: 鉢) => void }> = props
   const { 鉢, 鉢を選択 } = props;
 
   return (
-    <Col lg={2} sm={4} xs={6}>
+    <Col lg={2} sm={4} xs={8}>
       <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} />
     </Col>
   );
