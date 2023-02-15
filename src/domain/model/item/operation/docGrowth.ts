@@ -36,7 +36,7 @@ export const _成長を記録する = async (params: _成長を記録する.Para
       }),
     });
     画像のURL = await StorageRepository.getDownloadUrls(画像のPATH);
-    small画像のURL = (await 小画像の生成(画像のPATH, pathBaseParams)).small画像のURL;
+    small画像のURL = (await 小画像の生成(imageDataUrl, pathBaseParams)).small画像のURL;
   }
 
   console.log('2. 成長記録履歴を作成');
