@@ -4,6 +4,7 @@ import { Dayjs } from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 鉢 } from '@frontend/domain/model/item';
+import { 小画像の生成 } from '@frontend/domain/model/item/operation/newItem';
 
 export type _植替えするParams = {
   item: 鉢;
@@ -17,16 +18,20 @@ export const _植替えする = async (params: _植替えするParams) => {
   const { item, imageDataUrl, userId, 鉢のサイズ, date, memo } = params;
   console.log('1. 画像をuploadする');
   const 鉢Id = item.id!;
+  const pathBaseParams = {
+    userId,
+    datetime: date,
+    itemId: 鉢Id,
+  };
   const { 画像のPATH } = await StorageRepository.uploadImageByBase64String({
     dataUrl: imageDataUrl,
     path: StorageRepository.storagePath({
       type: '鉢',
-      userId,
-      datetime: date,
-      itemId: 鉢Id,
+      ...pathBaseParams,
     }),
   });
   const 画像のURL = await StorageRepository.getDownloadUrls(画像のPATH);
+  const { small画像のURL } = await 小画像の生成(imageDataUrl, pathBaseParams);
 
   console.log('2. 植替えの履歴を作成');
   const 植替え履歴 = await 履歴.新規作成.植替え({
@@ -45,6 +50,6 @@ export const _植替えする = async (params: _植替えするParams) => {
   });
 
   console.log('3. 鉢の情報を更新する');
-  const 更新後の鉢 = item.履歴を適用(植替え履歴);
+  const 更新後の鉢 = item.履歴を適用(植替え履歴, small画像のURL);
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);
 };

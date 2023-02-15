@@ -4,6 +4,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 鉢 } from '@frontend/domain/model/item';
+import { 小画像の生成 } from '@frontend/domain/model/item/operation/newItem';
 
 export namespace _成長を記録する {
   export type Params = {
@@ -18,19 +19,24 @@ export const _成長を記録する = async (params: _成長を記録する.Para
   const 鉢Id = item.id!;
   const date = dayjs();
   let 画像のURL: string | undefined = undefined;
+  let small画像のURL: string | undefined = undefined;
 
   console.log('1. あれば画像をuploadする');
   if (imageDataUrl) {
+    const pathBaseParams = {
+      userId,
+      datetime: date,
+      itemId: 鉢Id,
+    };
     const { 画像のPATH } = await StorageRepository.uploadImageByBase64String({
       dataUrl: imageDataUrl,
       path: StorageRepository.storagePath({
         type: '鉢',
-        userId,
-        datetime: date,
-        itemId: 鉢Id,
+        ...pathBaseParams,
       }),
     });
     画像のURL = await StorageRepository.getDownloadUrls(画像のPATH);
+    small画像のURL = (await 小画像の生成(画像のPATH, pathBaseParams)).small画像のURL;
   }
 
   console.log('2. 成長記録履歴を作成');
@@ -48,6 +54,6 @@ export const _成長を記録する = async (params: _成長を記録する.Para
   });
 
   console.log('3. 鉢の情報を更新する');
-  const 更新後の鉢 = item.履歴を適用(植替え履歴);
+  const 更新後の鉢 = item.履歴を適用(植替え履歴, small画像のURL);
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);
 };

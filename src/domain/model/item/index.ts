@@ -19,6 +19,7 @@ type Snapshot = {
     量: 履歴の内容.灌水.量のKey型;
   };
   画像のURL?: string;
+  small画像のURL?: string;
   更新日時: Dayjs;
 };
 
@@ -46,6 +47,7 @@ export class 鉢のBase {
       鉢のサイズ: props.snapshot.鉢のサイズ,
       最後の植替え: optionalCall(props.snapshot.最後の植替え, dayjs),
       画像のURL: props.snapshot.画像のURL,
+      small画像のURL: props.snapshot.small画像のURL,
       更新日時: dayjs(props.snapshot.更新日時),
     };
     const snapshot = this.snapshot;
@@ -76,14 +78,16 @@ const update = (cur: 鉢, 更新するsnapshotの項目: Partial<鉢['snapshot']
   });
 };
 
-function _履歴を適用(this: 鉢, 履歴: 履歴) {
+function _履歴を適用(this: 鉢, 履歴: 履歴, small画像のURL: string | undefined) {
   const type = 履歴.内容.type;
+  const common = { ...(small画像のURL ? { small画像のURL } : {}) };
   switch (type) {
     case '植替え':
       // [更新項目] 鉢サイズ, 最後の植替え, 画像
       return update(
         this,
         {
+          ...common,
           鉢のサイズ: 履歴.内容.鉢のサイズ,
           最後の植替え: 履歴.内容.植替え日時,
           画像のURL: 履歴.内容.植替え後の画像のURL,
@@ -95,6 +99,7 @@ function _履歴を適用(this: 鉢, 履歴: 履歴) {
       return update(
         this,
         {
+          ...common,
           最後の灌水: {
             日時: 履歴.作成日時,
             量: 履歴.内容.灌水量,
@@ -107,6 +112,7 @@ function _履歴を適用(this: 鉢, 履歴: 履歴) {
       return update(
         this,
         {
+          ...common,
           ...(履歴.内容.画像のURL ? { 画像のURL: 履歴.内容.画像のURL } : {}),
         },
         履歴.作成日時,

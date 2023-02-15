@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from '@frontend/store/auth/action';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 棚ID } from '@frontend/domain/model/tana';
-import { 鉢 } from '@frontend/domain/model/item';
+import { 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import * as fs from 'firebase/firestore';
 import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
 import { StorageRepository } from '@frontend/domain/repository/storage';
+import { BrowserRepository } from '@frontend/domain/repository/browser';
+import { UserId } from '@frontend/domain/model/user';
+import dayjs, { Dayjs } from 'dayjs';
+import { 小画像の生成 } from '@frontend/domain/model/item/operation/newItem';
 
 export type TopPageProps = {};
 
@@ -69,6 +73,67 @@ export const AdminPage: React.FC<TopPageProps> = props => {
       }
     }
   };
+
+  const fetchImageBase64 = async (url: string): Promise<string> => {
+    return new Promise(resolve => {
+      fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+          const reader = new FileReader();
+          reader.onload = function () {
+            resolve(this.result as string);
+          }; // <--- `this.result` contains a base64 data URI
+          reader.readAsDataURL(blob);
+        });
+    });
+  };
+
+  // private/works/proxy-expressを起動してから実行することkoto
+  const 小画像を作成する = async () => {
+    const db = () => fs.getFirestore();
+    const col = fs.collection(db(), '鉢');
+    const query = fs.query(
+      col,
+      fs.where('userId', '==', userId),
+      // fs.limit(1)
+    );
+    const docs = await fs.getDocs(query);
+    const { refValue: values } = querySnapshotToRefValues(docs);
+
+    for (const item of values) {
+      const { ref, value } = item;
+      const snapshot = value['snapshot'] as 鉢['snapshot'];
+      if (snapshot.small画像のURL) {
+        console.log(`${ref.id}: skip 1`);
+        continue;
+      }
+      const 画像のURL = snapshot.画像のURL;
+      if (!画像のURL) {
+        console.log(`${ref.id}: skip 2`);
+        continue;
+      }
+      // "https://firebasestorage.googleapis.com/v0/b/shusuien-dee8f.appspot.com/o/DxHELmn516Zz0at4Kkn2U4uCKCp2%2F%E9%89%A2%2F1oWMehOM82jAVONIhNkM%2F2023-02-13T09%3A08%3A50%2B09%3A00?alt=media&token=4c8b4a19-934b-4821-80e2-cbbe1f7eeffe"
+      // https://firebasestorage.googleapis.com
+      const modUrl = 画像のURL.replace('https://firebasestorage.googleapis.com', 'http://localhost:3031');
+      const dataUrl = await fetchImageBase64(modUrl);
+
+      const date = dayjs(decodeURIComponent(画像のURL).match(/2023.*\+09:00/)![0]);
+      const { small画像のURL } = await 小画像の生成(dataUrl, {
+        userId: userId!,
+        datetime: date,
+        itemId: ref.id as 鉢Id,
+      });
+      await fs.updateDoc(ref, {
+        'snapshot.small画像のURL': small画像のURL,
+      });
+
+      console.log({
+        id: ref.id,
+        small画像のURL,
+      });
+    }
+  };
+
   return (
     <div>
       <h1>admin</h1>
@@ -76,6 +141,7 @@ export const AdminPage: React.FC<TopPageProps> = props => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         <MyButton title="鉢の画像PATHをURLに載せ替える" onClick={鉢の画像PATHをURLに載せ替える} />
         <MyButton title="履歴の画像PATHをURLに載せ替える" onClick={履歴の画像PATHをURLに載せ替える} />
+        <MyButton title="小画像を作成する" onClick={小画像を作成する} />
       </div>
     </div>
   );

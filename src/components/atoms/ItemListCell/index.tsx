@@ -14,7 +14,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const imageProps: ImageProps = {
     className: '鉢一覧の要素',
     preview: false,
-    src: item.snapshot.画像のURL || NO_IMAGE,
+    src: item.snapshot.small画像のURL || item.snapshot.画像のURL || NO_IMAGE,
     style: { borderRadius: 7, aspectRatio: '1', objectFit: 'cover' },
     onClick: () => 鉢を選択(item),
   };

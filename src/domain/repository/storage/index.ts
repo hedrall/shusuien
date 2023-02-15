@@ -17,7 +17,7 @@ export namespace StorageRepository {
     type: '鉢';
     datetime: Dayjs;
     itemId: string;
-    index?: number;
+    index?: number | string;
   };
   export const storagePath = (params: StorageDirPathParams) => {
     const { userId, type, datetime, itemId, index } = params;
