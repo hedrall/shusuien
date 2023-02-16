@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Col, Collapse, Row } from 'antd';
 import { 棚 } from '@frontend/domain/model/tana';
 import { MyButton } from '@frontend/components/atoms/MyButton';
@@ -8,6 +8,7 @@ import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { 鉢一覧の要素 } from '@frontend/components/atoms/ItemListCell';
 import { 鉢管理モーダル } from '@frontend/components/organisms/OperateItemModal';
+import dayjs from 'dayjs';
 
 const { Panel } = Collapse;
 
@@ -23,6 +24,14 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
   const 棚Id = 棚.id!;
   const { 鉢一覧 } = use鉢一覧(棚Id, user);
+
+  const 最古の最後の灌水 = useMemo(() => {
+    return 鉢一覧.reduce((pre, cur) => {
+      const c = cur.snapshot.最後の灌水?.日時;
+      if (!c) return pre;
+      return c.diff(pre) < 0 ? c : pre;
+    }, dayjs());
+  }, [鉢一覧]);
 
   const 鉢作成モーダルを開く = () => 鉢操作モーダルRef.current?.open();
 
@@ -48,7 +57,7 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
         {鉢一覧.map(鉢 => {
           return (
             <Col key={鉢.id} lg={2} sm={4} xs={8}>
-              <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} onDelete={鉢を削除} />
+              <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} onDelete={鉢を削除} 最古の最後の灌水={最古の最後の灌水} />
             </Col>
           );
         })}

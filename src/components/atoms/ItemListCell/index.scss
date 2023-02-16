@@ -1,2 +1,9 @@
 .鉢一覧の要素 {
+  .灌水ゲージ {
+    font-size: 10px;
+    display: flex;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow-x: hidden;
+  }
 }
