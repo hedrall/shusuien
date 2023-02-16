@@ -5,6 +5,8 @@ import { faSpoon } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { 履歴の内容 } from '@frontend/domain/model/history';
 
 export const ICONS = {
@@ -17,5 +19,11 @@ export const OPERATION_ICONS = {
   DELETE: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faTrash} style={{ ...p.style, color: '#ff2c2c' }} />,
   MENU: (p: { style?: CSSProperties }) => (
     <FontAwesomeIcon icon={faEllipsis} style={{ ...p.style, color: '#525252' }} />
+  ),
+  EDIT: (p: { style?: CSSProperties }) => (
+    <FontAwesomeIcon icon={faPenToSquare} style={{ ...p.style, color: '#525252' }} />
+  ),
+  完了: (p: { style?: CSSProperties }) => (
+    <FontAwesomeIcon icon={faCircleCheck} style={{ ...p.style, color: '#0ACF84' }} />
   ),
 };

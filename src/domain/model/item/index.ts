@@ -132,10 +132,28 @@ async function _削除(this: 鉢) {
   await FSAppRepository.鉢.更新(this.id!, { 削除済み: true });
 }
 
+async function _詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(this: 鉢, key: Key, value: V) {
+  // isDeletedを True にする
+  // 一旦論理削除のみ
+  await FSAppRepository.鉢.更新(this.id!, {
+    [`詳細.${key}`]: value,
+  });
+}
+
+async function _フィールドを更新<Key extends 'name' | '補足', V = 鉢[Key]>(this: 鉢, key: Key, value: V) {
+  // isDeletedを True にする
+  // 一旦論理削除のみ
+  await FSAppRepository.鉢.更新(this.id!, {
+    [key]: value,
+  });
+}
+
 export class 鉢 extends 鉢のBase {
   履歴を適用 = _履歴を適用;
 
   削除 = _削除;
+  詳細を更新 = _詳細を更新;
+  フィールドを更新 = _フィールドを更新;
 
   static 管理 = {
     新規作成: _新規作成する,

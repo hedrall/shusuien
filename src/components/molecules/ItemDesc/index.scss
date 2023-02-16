@@ -1,2 +1,10 @@
 .鉢の情報 {
+  .科属種 {
+    .項目 {
+      word-break: keep-all;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  }
 }
