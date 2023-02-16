@@ -25,14 +25,6 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
   const 棚Id = 棚.id!;
   const { 鉢一覧 } = use鉢一覧(棚Id, user);
 
-  const 最古の最後の灌水 = useMemo(() => {
-    return 鉢一覧.reduce((pre, cur) => {
-      const c = cur.snapshot.最後の灌水?.日時;
-      if (!c) return pre;
-      return c.diff(pre) < 0 ? c : pre;
-    }, dayjs());
-  }, [鉢一覧]);
-
   const 鉢作成モーダルを開く = () => 鉢操作モーダルRef.current?.open();
 
   const 鉢を選択 = (鉢: 鉢) => {
@@ -57,7 +49,7 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
         {鉢一覧.map(鉢 => {
           return (
             <Col key={鉢.id} lg={2} sm={4} xs={8}>
-              <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} onDelete={鉢を削除} 最古の最後の灌水={最古の最後の灌水} />
+              <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} onDelete={鉢を削除} />
             </Col>
           );
         })}

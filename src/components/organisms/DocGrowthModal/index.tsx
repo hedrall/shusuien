@@ -3,16 +3,11 @@ import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
 import { 鉢 } from '@frontend/domain/model/item';
-import { 履歴の内容, 鉢サイズ } from '@frontend/domain/model/history';
-import dayjs from 'dayjs';
 import { Control, useController, useForm } from 'react-hook-form';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
-import { RadioGroup, RadioGroupOption } from '@frontend/components/atoms/RadioGroup';
-import { MySwitch } from '@frontend/components/atoms/MySwitch';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { UploadImage } from '@frontend/components/atoms/UploadImage';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
-import { DATE_TIME_FORMAT } from '@frontend/supports';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 
 export namespace 成長記録モーダル {
@@ -111,11 +106,11 @@ export const 成長記録モーダル = forwardRef<成長記録モーダル.Ref,
 
   return (
     <Modal {...modalProps}>
-      <モーダルの見出し type="植替え" />
+      <モーダルの見出し type="成長の記録" />
       <MyFormLayout
         items={[
           {
-            label: '植替え後の画像を撮影📸',
+            label: '画像を撮影📸',
             input: <UploadImage field={imageDataUrl.field} />,
           },
           {

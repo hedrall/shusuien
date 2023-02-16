@@ -4,3 +4,4 @@ const sleep = async (d: number) => {
   });
 };
 export { DATE_TIME_FORMAT } from '@frontend/supports/date';
+export { x日前の表記 } from '@frontend/supports/date';

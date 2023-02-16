@@ -17,7 +17,7 @@ export function Editable<V extends Value, K extends string>(props: EditableProps
   const { value, name, onSubmit } = props;
   const isNumber = typeof value === 'number';
   const [isEditing, setIsEditing] = useState(false);
-  const { control } = useForm<any, any>({
+  const { control, setValue } = useForm<any, any>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -45,17 +45,27 @@ export function Editable<V extends Value, K extends string>(props: EditableProps
           controller={controller}
           inputProps={{ type: isNumber ? 'number' : 'text', autoFocus: true, onKeyDown: e => onKeyDown(e.key) }}
         />
-        <div onClick={onClick}>
+        <div onClick={onClick} role="button">
           <OPERATION_ICONS.完了 />
+        </div>
+        <div>
+          value: {value}, name: {name}
         </div>
       </div>
     );
   }
 
+  const startEdit = () => {
+    setValue(name, value);
+    console.log('set value', { name, value });
+    console.log('get value', controller.field.value);
+    setIsEditing(true);
+  };
+
   return (
     <div className="Editable">
       {value}
-      <div onClick={() => setIsEditing(true)}>
+      <div onClick={startEdit} role="button">
         <OPERATION_ICONS.EDIT />
       </div>
     </div>
