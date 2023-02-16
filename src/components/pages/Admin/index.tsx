@@ -134,6 +134,23 @@ export const AdminPage: React.FC<TopPageProps> = props => {
     }
   };
 
+  const 削除済みにfalseを設定 = async () => {
+    // 鉢,履歴,棚
+    const colName = '棚';
+    console.log(colName, '削除済みにfalseを設定');
+    const db = () => fs.getFirestore();
+    const col = fs.collection(db(), colName);
+    const query = fs.query(col, fs.where('userId', '==', userId));
+    const docs = await fs.getDocs(query);
+    const { refValue: values } = querySnapshotToRefValues(docs);
+
+    for (const item of values) {
+      console.log(`${1 + values.findIndex(i => i.ref.id === item.ref.id)}/${values.length}: ${item.ref.id}`);
+      const { ref, value } = item;
+      await fs.updateDoc(ref, { 削除済み: false });
+    }
+  };
+
   return (
     <div>
       <h1>admin</h1>
@@ -142,6 +159,7 @@ export const AdminPage: React.FC<TopPageProps> = props => {
         <MyButton title="鉢の画像PATHをURLに載せ替える" onClick={鉢の画像PATHをURLに載せ替える} />
         <MyButton title="履歴の画像PATHをURLに載せ替える" onClick={履歴の画像PATHをURLに載せ替える} />
         <MyButton title="小画像を作成する" onClick={小画像を作成する} />
+        <MyButton title="削除済みにfalseを設定" onClick={削除済みにfalseを設定} />
       </div>
     </div>
   );

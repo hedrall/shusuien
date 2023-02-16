@@ -3,7 +3,7 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
 import { UserId } from '@frontend/domain/model/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
-import { 鉢, 鉢Id } from '@frontend/domain/model/item';
+import { 鉢, 鉢Id, 鉢のBase } from '@frontend/domain/model/item';
 import { 棚ID } from '@frontend/domain/model/tana';
 import { Dayjs } from 'dayjs';
 import { basicToFirestore } from '@frontend/domain/repository/firebase/converters/app';
@@ -17,6 +17,11 @@ export namespace _FsApp鉢Repository {
   export const 作成 = async (新規鉢: 鉢, id: 鉢Id) => {
     const manager = new FsAppManager.鉢();
     await FSAppRepository.addItemWithId(manager, 新規鉢, id);
+  };
+
+  export const 更新 = async (id: 鉢Id, props: fs.UpdateData<鉢のBase>) => {
+    const manager = new FsAppManager.鉢();
+    await FSAppRepository.update(manager, id, props);
   };
 
   export const snapshotを更新 = async (id: 鉢Id, 更新後のsnapshot: Partial<鉢['snapshot']>, date: Dayjs) => {
@@ -47,8 +52,8 @@ export namespace _FsApp鉢Repository {
     const { unsubscribe } = FSAppRepository.listenList(
       manager,
       {
-        wheres: [fs.where('userId', '==', userId), fs.where('棚Id', '==', 棚Id)],
-        orderBy: { key: '作成日時', dir: 'asc' },
+        wheres: [fs.where('userId', '==', userId), fs.where('棚Id', '==', 棚Id), fs.where('削除済み', '==', false)],
+        orderBy: [{ key: '作成日時', dir: 'asc' }],
       },
       items => onListen(items),
     );

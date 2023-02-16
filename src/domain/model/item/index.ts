@@ -8,6 +8,7 @@ import { _植替えする } from '@frontend/domain/model/item/operation/replant'
 import { _新規作成する } from '@frontend/domain/model/item/operation/newItem';
 import { _灌水する } from '@frontend/domain/model/item/operation/provideWater';
 import { _成長を記録する } from '@frontend/domain/model/item/operation/docGrowth';
+import { FSAppRepository } from '@frontend/domain/repository/firestore';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 
@@ -37,6 +38,7 @@ export class 鉢のBase {
   // 履歴を畳み込んで得られるもの
   snapshot: Snapshot;
   作成日時: Dayjs;
+  削除済み: boolean;
 
   constructor(props: 鉢のBase) {
     this.id = props.id;
@@ -64,6 +66,7 @@ export class 鉢のBase {
     };
     this.補足 = props.補足;
     this.作成日時 = dayjs(props.作成日時);
+    this.削除済み = props.削除済み;
   }
 }
 
@@ -122,8 +125,16 @@ function _履歴を適用(this: 鉢, 履歴: 履歴, small画像のURL: string |
   }
 }
 
+async function _削除(this: 鉢) {
+  // isDeletedを True にする
+  // 一旦論理削除のみ
+  await FSAppRepository.鉢.更新(this.id!, { 削除済み: true });
+}
+
 export class 鉢 extends 鉢のBase {
   履歴を適用 = _履歴を適用;
+
+  削除 = _削除;
 
   static 管理 = {
     新規作成: _新規作成する,

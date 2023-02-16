@@ -89,7 +89,7 @@ export namespace 履歴の内容 {
 }
 export type 履歴の内容 = 履歴の内容.一覧;
 
-type NewBaseProps = Omit<履歴のBase, 'id' | '内容'>;
+type NewBaseProps = Omit<履歴のBase, 'id' | '内容' | '削除済み'>;
 export type New内容Props<T extends 履歴の内容> = Omit<T, 'type'>;
 type NewProps<T extends 履歴の内容> = {
   props: NewBaseProps;
@@ -105,6 +105,7 @@ const _成長の記録履歴を作成 = async (params: NewProps<履歴の内容.
   const { props, 内容 } = params;
   const 新規履歴 = new 履歴({
     id: undefined,
+    削除済み: false,
     ...props,
     内容: {
       type: '成長の記録',
@@ -119,6 +120,7 @@ const _植替え履歴を作成 = async (params: NewProps<履歴の内容.植替
   const { 植替え日時, 鉢のサイズ, 植替え後の画像のURL, memo } = 内容;
   const 新規履歴 = new 履歴({
     id: undefined,
+    削除済み: false,
     ...props,
     内容: {
       type: '植替え',
@@ -136,6 +138,7 @@ const _灌水履歴を作成 = async (params: NewProps<履歴の内容.灌水>) 
   const { 灌水量 } = 内容;
   const 新規履歴 = new 履歴({
     id: undefined,
+    削除済み: false,
     ...props,
     内容: {
       type: '灌水',
@@ -152,6 +155,7 @@ export class 履歴のBase {
   対象の鉢のID: 鉢Id | undefined;
   内容: 履歴の内容;
   作成日時: Dayjs;
+  削除済み: boolean;
 
   constructor(props: 履歴のBase) {
     this.id = props.id;
@@ -159,6 +163,7 @@ export class 履歴のBase {
     this.作成日時 = dayjs(props.作成日時);
     this.対象の棚のID = props.対象の棚のID;
     this.対象の鉢のID = props.対象の鉢のID;
+    this.削除済み = props.削除済み;
 
     this.内容 = props.内容;
     if ('植替え日時' in this.内容) {

@@ -1,2 +1,6 @@
 .棚一覧表示 {
+  .棚名部分 {
+    display: flex;
+    justify-content: space-between;
+  }
 }

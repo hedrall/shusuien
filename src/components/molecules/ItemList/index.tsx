@@ -5,7 +5,7 @@ import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 鉢作成モーダル } from '@frontend/components/organisms/CreateItemModal';
 import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
-import { 鉢 } from '@frontend/domain/model/item';
+import { 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { 鉢一覧の要素 } from '@frontend/components/atoms/ItemListCell';
 import { 鉢管理モーダル } from '@frontend/components/organisms/OperateItemModal';
 
@@ -15,15 +15,6 @@ export type ItemListProps = {
   棚: 棚;
 };
 
-const ListItem: React.FC<{ 鉢: 鉢; 鉢を選択: (鉢: 鉢) => void }> = props => {
-  const { 鉢, 鉢を選択 } = props;
-
-  return (
-    <Col lg={2} sm={4} xs={8}>
-      <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} />
-    </Col>
-  );
-};
 export const 鉢一覧: React.FC<ItemListProps> = props => {
   const { 棚 } = props;
   const 鉢操作モーダルRef = useRef<鉢作成モーダル.Ref | null>(null);
@@ -39,6 +30,13 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
     鉢管理モーダルRef.current?.open(鉢);
   };
 
+  const 鉢を削除 = async (id: 鉢Id) => {
+    const 鉢 = 鉢一覧.find(i => i.id === id);
+    if (!鉢) return;
+    console.log('削除を実行', id);
+    await 鉢.削除();
+  };
+
   return (
     <div className="鉢一覧">
       <Row
@@ -48,7 +46,11 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
         ]}
       >
         {鉢一覧.map(鉢 => {
-          return <ListItem key={鉢.id} 鉢={鉢} 鉢を選択={鉢を選択} />;
+          return (
+            <Col key={鉢.id} lg={2} sm={4} xs={8}>
+              <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} onDelete={鉢を削除} />
+            </Col>
+          );
         })}
       </Row>
 
