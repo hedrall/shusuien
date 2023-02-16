@@ -48,9 +48,6 @@ export function Editable<V extends Value, K extends string>(props: EditableProps
         <div onClick={onClick} role="button">
           <OPERATION_ICONS.完了 />
         </div>
-        <div>
-          value: {value}, name: {name}
-        </div>
       </div>
     );
   }
