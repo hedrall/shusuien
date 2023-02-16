@@ -25,6 +25,8 @@ type InputType = {
   科: string | undefined;
   属: string | undefined;
   種名: string | undefined;
+  入手元: string | undefined;
+  金額: number | undefined;
   補足: string | undefined;
 };
 
@@ -34,6 +36,8 @@ const DEFAULT_VALUES = {
   科: undefined,
   属: undefined,
   種名: undefined,
+  入手元: undefined,
+  金額: undefined,
   補足: undefined,
 };
 
@@ -60,12 +64,17 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
     name: 'name',
     rules: { maxLength },
   });
-  const [科, 属, 種名, 補足] = (['科', '属', '種名', '補足'] as const).map(key => {
+  const keys = ['科', '属', '種名', '入手元', '補足'] as const;
+  const [科, 属, 種名, 入手元, 補足] = keys.map(key => {
     return useController({
       control,
       name: key,
       rules: { maxLength },
     });
+  });
+  const 金額 = useController({
+    control,
+    name: '金額',
   });
 
   const modalProps: ModalProps = {
@@ -133,6 +142,8 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
           <MyInputWithAlert controller={科} inputProps={{ placeholder: '科' }} />
           <MyInputWithAlert controller={属} inputProps={{ placeholder: '属' }} />
           <MyInputWithAlert controller={種名} inputProps={{ placeholder: '種名' }} />
+          <MyInputWithAlert controller={入手元} inputProps={{ placeholder: '入手元' }} />
+          <MyInputWithAlert controller={金額} inputProps={{ placeholder: '金額', type: 'number' }} />
           <MyInputWithAlert controller={補足} inputProps={{ placeholder: '補足' }} />
         </div>
       </div>

@@ -33,6 +33,8 @@ export class 鉢のBase {
     科?: string;
     属?: string;
     種名?: string;
+    入手元?: string;
+    金額?: number;
   };
   補足?: string;
   // 履歴を畳み込んで得られるもの
@@ -48,21 +50,20 @@ export class 鉢のBase {
     this.snapshot = {
       鉢のサイズ: props.snapshot.鉢のサイズ,
       最後の植替え: optionalCall(props.snapshot.最後の植替え, dayjs),
+      最後の灌水: optionalCall(props.snapshot.最後の灌水, v => ({
+        日時: dayjs(v.日時),
+        量: v.量,
+      })),
       画像のURL: props.snapshot.画像のURL,
       small画像のURL: props.snapshot.small画像のURL,
       更新日時: dayjs(props.snapshot.更新日時),
     };
-    const snapshot = this.snapshot;
-    if ('最後の灌水' in snapshot) {
-      this.snapshot.最後の灌水 = {
-        日時: dayjs(snapshot.最後の灌水!.日時),
-        量: snapshot.最後の灌水!.量,
-      };
-    }
     this.詳細 = {
       科: props.詳細.科,
       属: props.詳細.属,
       種名: props.詳細.種名,
+      入手元: props.詳細.入手元,
+      金額: props.詳細.金額,
     };
     this.補足 = props.補足;
     this.作成日時 = dayjs(props.作成日時);

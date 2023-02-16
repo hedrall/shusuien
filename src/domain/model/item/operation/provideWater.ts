@@ -30,5 +30,6 @@ export const _灌水する = async (params: _灌水操作Params) => {
 
   console.log('2. 鉢の情報を更新する');
   const 更新後の鉢 = item.履歴を適用(灌水履歴, undefined);
+  console.log({ 更新後の鉢 });
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);
 };

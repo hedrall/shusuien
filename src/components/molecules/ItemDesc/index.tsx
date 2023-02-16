@@ -28,7 +28,9 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
     >
       <Descriptions.Item label="名前">{name}</Descriptions.Item>
       <Descriptions.Item label="科/属/種">{科_属_種}</Descriptions.Item>
-      <Descriptions.Item label="追加">{作成日時.format(F)}</Descriptions.Item>
+      <Descriptions.Item label="追加日時">{作成日時.format(F)}</Descriptions.Item>
+      <Descriptions.Item label="入手元">{詳細.入手元}</Descriptions.Item>
+      <Descriptions.Item label="金額">{詳細.金額}</Descriptions.Item>
       <Descriptions.Item label="補足">{補足}</Descriptions.Item>
       <Descriptions.Item label="鉢のサイズ">{鉢のサイズ}</Descriptions.Item>
       <Descriptions.Item label="最後の灌水">{最後の灌水}</Descriptions.Item>

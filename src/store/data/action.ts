@@ -57,7 +57,7 @@ export const use鉢単体 = (id: 鉢Id | undefined, userId: UserId | undefined) 
   useEffect(() => {
     if (!userId || !id) return;
     const { unsubscribe } = FSAppRepository.鉢.単体購読(id, newItem => {
-      console.log('[購読]: 鉢単体');
+      console.log('[購読]: 鉢単体', newItem.ref.id);
       setItem(newItem.value);
     });
     return () => unsubscribe();
