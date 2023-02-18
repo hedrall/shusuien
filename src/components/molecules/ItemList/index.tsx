@@ -40,7 +40,7 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
   return (
     <div className="鉢一覧">
-      <Row>鉢数: {鉢一覧.length}</Row>
+      <Row className="鉢数">鉢数: {鉢一覧.length}</Row>
       <Row
         gutter={[
           { xs: 8, sm: 16, md: 24, lg: 32 },

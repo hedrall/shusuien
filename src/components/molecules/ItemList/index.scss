@@ -1,2 +1,9 @@
+@use '../../../assets/variables' as v;
+
 .鉢一覧 {
+  .鉢数 {
+    color: v.$color-grey;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
 }
