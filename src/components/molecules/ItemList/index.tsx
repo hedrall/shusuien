@@ -40,6 +40,7 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
   return (
     <div className="鉢一覧">
+      <Row>鉢数: {鉢一覧.length}</Row>
       <Row
         gutter={[
           { xs: 8, sm: 16, md: 24, lg: 32 },
@@ -54,7 +55,6 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
           );
         })}
       </Row>
-
       {/* 新規作成ボタン */}
       <div className="Section">
         <MyButton title={'⨁ 鉢を追加する'} onClick={鉢作成モーダルを開く} />
