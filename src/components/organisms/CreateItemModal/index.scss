@@ -1,5 +1,14 @@
 .鉢を作成モーダル {
   .FormItem {
+
+    .UploadImage {
+      width: 100%;
+      display: block;
+      .ant-upload.ant-upload-select {
+        width: 100%;
+      }
+    }
+
     margin-bottom: 16px;
     label {
       display: block;

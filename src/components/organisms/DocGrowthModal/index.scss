@@ -1,2 +1,9 @@
 .成長記録モーダル {
+  .UploadImage {
+    width: 100%;
+    display: block;
+    .ant-upload.ant-upload-select {
+      width: 100%;
+    }
+  }
 }
