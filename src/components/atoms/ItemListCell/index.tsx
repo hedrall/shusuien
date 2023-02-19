@@ -10,7 +10,7 @@ import cn from 'classnames';
 
 export type 鉢一覧の要素Props = {
   item: 鉢;
-  鉢を選択: (鉢: 鉢) => void;
+  鉢を選択: (鉢: 鉢, eventType: 'click' | 'doubleClick') => void;
   onDelete: (id: 鉢Id) => Promise<void>;
   一括灌水モード: boolean;
 };
@@ -51,9 +51,67 @@ const 経過日数アラート色 = (_経過日数: number): string => {
   // 8 ~ 30 の24段階
   return グラデーション生成(grey, red, Math.max(経過日数, 30) - 7, 24);
 };
+
+import { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
+
+type EmptyCallback = () => void;
+
+export type CallbackFunction<Target = Element> = MouseEventHandler<Target> | EmptyCallback;
+
+export type DoubleTapCallback<Target = Element> = CallbackFunction<Target> | null;
+
+export interface DoubleTapOptions<Target = Element> {
+  onSingleTap?: CallbackFunction<Target>;
+}
+
+export type DoubleTapResult<Target, Callback> = Callback extends CallbackFunction<Target>
+  ? {
+      onClick: CallbackFunction<Target>;
+    }
+  : Callback extends null
+  ? {}
+  : never;
+
+export function useDoubleTap<Target = Element, Callback extends DoubleTapCallback<Target> = DoubleTapCallback<Target>>(
+  callback: Callback,
+  threshold = 300,
+  options: DoubleTapOptions<Target> = {},
+): DoubleTapResult<Target, Callback> {
+  const timer = useRef<NodeJS.Timeout | null>(null);
+
+  const handler = useCallback<CallbackFunction<Target>>(
+    (event: MouseEvent<Target>) => {
+      if (!timer.current) {
+        timer.current = setTimeout(() => {
+          if (options.onSingleTap) {
+            options.onSingleTap(event);
+          }
+          timer.current = null;
+        }, threshold);
+      } else {
+        clearTimeout(timer.current);
+        timer.current = null;
+        callback && callback(event);
+      }
+    },
+    [callback, threshold, options.onSingleTap],
+  );
+
+  return (
+    callback
+      ? {
+          onClick: handler,
+        }
+      : {}
+  ) as DoubleTapResult<Target, Callback>;
+}
+
 export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const { item, 鉢を選択, onDelete, 一括灌水モード } = props;
-
+  const _鉢を選択 = 鉢を選択.bind(null, item);
+  const bind = useDoubleTap(() => _鉢を選択('doubleClick'), 300, {
+    onSingleTap: () => _鉢を選択('click'),
+  });
   const 最後の灌水 = item.snapshot.最後の灌水?.日時;
   const 最後の灌水からの経過日数 = optionalCall(最後の灌水, v => x日前の表記(dayjs(), v)) || '';
   const imageProps: ImageProps = {
@@ -61,10 +119,10 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
     preview: false,
     src: item.snapshot.small画像のURL || item.snapshot.画像のURL || NO_IMAGE,
     style: { borderRadius: 7, aspectRatio: '1', objectFit: 'cover' },
-    onClick: () => 鉢を選択(item),
     onContextMenu: e => {
       e.preventDefault();
     },
+    ...bind,
   };
 
   const items = useMemo(() => {
@@ -73,7 +131,13 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
 
   return (
     <Dropdown trigger={['contextMenu']} menu={{ items }}>
-      <div className={cn('鉢一覧の要素', { 一括灌水モード })}>
+      <div
+        className={cn('鉢一覧の要素', { 一括灌水モード })}
+        onContextMenu={e => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
         <Image {...imageProps} />
         {最後の灌水からの経過日数 ? (
           <span

@@ -1,0 +1,12 @@
+@use '../../../assets/variables' as v;
+
+.便利機能モーダル {
+  .一括灌水 {
+    display: flex;
+    gap: 8px;
+  }
+  .一括灌水モードの補足 {
+    font-size: 11px;
+    color: v.$color-blue;
+  }
+}

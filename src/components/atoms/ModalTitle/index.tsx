@@ -1,9 +1,9 @@
 import React from 'react';
-import { ICONS } from '@frontend/supports/icons';
+import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import { 履歴の内容 } from '@frontend/domain/model/history';
 
 export type ModalTitleProps = {
-  type: 履歴の内容.Type;
+  type: 履歴の内容.Type | '機能';
 };
 
 const 灌水 = () => {
@@ -29,9 +29,19 @@ const 成長記録 = () => {
     </h1>
   );
 };
+const 機能 = () => {
+  return (
+    <h1 className="機能設定">
+      <OPERATION_ICONS.設定 />
+      成長を記録
+    </h1>
+  );
+};
 export const モーダルの見出し: React.FC<ModalTitleProps> = props => {
   const { type } = props;
   switch (type) {
+    case '機能':
+      return 機能();
     case '灌水':
       return 灌水();
     case '植替え':

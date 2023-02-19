@@ -6,7 +6,7 @@ import { 鉢作成モーダル } from '@frontend/components/organisms/CreateItem
 import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢, 鉢Id } from '@frontend/domain/model/item';
-import { 鉢一覧の要素 } from '@frontend/components/atoms/ItemListCell';
+import { 鉢一覧の要素, 鉢一覧の要素Props } from '@frontend/components/atoms/ItemListCell';
 import { 鉢管理モーダル } from '@frontend/components/organisms/OperateItemModal';
 import { use一括灌水モード設定 } from '@frontend/store/operation/action';
 import dayjs from 'dayjs';
@@ -28,11 +28,14 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
   const 鉢作成モーダルを開く = () => 鉢操作モーダルRef.current?.open();
 
-  const 鉢を選択 = async (item: 鉢) => {
+  const 鉢を選択: 鉢一覧の要素Props['鉢を選択'] = async (item, type) => {
+    console.log('鉢を選択', type);
     if (!一括灌水モード設定.state.ON) {
-      鉢管理モーダルRef.current?.open(item);
+      if (type === 'click') 鉢管理モーダルRef.current?.open(item);
       return;
     }
+    // 一括灌水モードの場合
+    if (type === 'click') return;
     const 最後の灌水 = item.snapshot.最後の灌水;
     if (最後の灌水 && 最後の灌水.日時.format('YYYYMMDD') === dayjs().format('YYYYMMDD')) {
       api.warning({ message: '本日灌水済みのためスキップします。', placement: 'bottomRight' });

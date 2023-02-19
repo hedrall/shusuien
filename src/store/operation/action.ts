@@ -1,6 +1,9 @@
 import { selector, useRecoilState } from 'recoil';
 import { OPERATION_STATE_ATOM, OperationState } from '@frontend/store/operation/atom';
 import { 履歴の内容 } from '@frontend/domain/model/history';
+import { Subject } from 'rxjs';
+
+export const 一括灌水モードイベント = new Subject<boolean>();
 
 export const 一括灌水モード設定Selector = selector<OperationState['一括灌水モード設定']>({
   key: '一括灌水モードSelector',
@@ -9,9 +12,9 @@ export const 一括灌水モード設定Selector = selector<OperationState['一�
   },
   set: ({ set }, item) => {
     set(OPERATION_STATE_ATOM, pre => {
-      console.log('update', pre, item);
       return { ...pre, 一括灌水モード設定: item };
     });
+    if ('ON' in item) 一括灌水モードイベント.next(item.ON);
   },
 });
 
