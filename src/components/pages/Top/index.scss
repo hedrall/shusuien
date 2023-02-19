@@ -1,6 +1,14 @@
 @use '../../../assets/variables' as v;
 
 .Top {
+  .一括灌水 {
+    display: flex;
+    gap: 8px;
+  }
+  .一括灌水モードの補足 {
+    font-size: 11px;
+    color: v.$color-blue;
+  }
   .棚を作成 {
     padding: 8px;
     border: dimgrey solid 1px;

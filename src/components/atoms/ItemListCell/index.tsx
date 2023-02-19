@@ -6,11 +6,13 @@ import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';
 import { x日前の表記 } from '@frontend/supports';
 import { optionalCall } from '@frontend/supports/functions';
+import cn from 'classnames';
 
 export type 鉢一覧の要素Props = {
   item: 鉢;
   鉢を選択: (鉢: 鉢) => void;
   onDelete: (id: 鉢Id) => Promise<void>;
+  一括灌水モード: boolean;
 };
 
 const getItems = (p: { onDelete: () => void }): MenuProps['items'] => [
@@ -50,7 +52,7 @@ const 経過日数アラート色 = (_経過日数: number): string => {
   return グラデーション生成(grey, red, Math.max(経過日数, 30) - 7, 24);
 };
 export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
-  const { item, 鉢を選択, onDelete } = props;
+  const { item, 鉢を選択, onDelete, 一括灌水モード } = props;
 
   const 最後の灌水 = item.snapshot.最後の灌水?.日時;
   const 最後の灌水からの経過日数 = optionalCall(最後の灌水, v => x日前の表記(dayjs(), v)) || '';
@@ -71,7 +73,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
 
   return (
     <Dropdown trigger={['contextMenu']} menu={{ items }}>
-      <div className="鉢一覧の要素">
+      <div className={cn('鉢一覧の要素', { 一括灌水モード })}>
         <Image {...imageProps} />
         {最後の灌水からの経過日数 ? (
           <span

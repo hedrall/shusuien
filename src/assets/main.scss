@@ -8,4 +8,28 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
+.灌水量の選択肢のLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
+  .灌水量アイコンの側 {
+    display: flex;
+    gap: 2px;
+    .ぽち {
+      background: #0063F8;
+      width: 6px;
+      height: 12px;
+      border-radius: 3px;
+      &.空 {
+        background: transparent;
+        border: .5px solid grey;
+        width: 5px;
+        height: 11px;
+      }
+    }
+  }
+}
+.ant-radio-button-wrapper-checked .灌水量アイコンの側 .ぽち {
+  background: white;
+}

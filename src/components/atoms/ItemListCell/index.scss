@@ -1,3 +1,5 @@
+@use '../../../assets/variables' as v;
+
 .鉢一覧の要素 {
   position: relative;
 
@@ -15,5 +17,10 @@
     word-break: keep-all;
     white-space: nowrap;
     overflow-x: hidden;
+  }
+
+  &.一括灌水モード {
+    border: 3px solid v.$color-blue;
+    border-radius: 3px;
   }
 }

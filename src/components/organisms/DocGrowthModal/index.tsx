@@ -135,7 +135,7 @@ export const 成長記録モーダル = forwardRef<成長記録モーダル.Ref,
       />
       <Checkbox
         checked={isUpdateImage.field.value}
-        onChange={isUpdateImage.field.onChange(e)}
+        onChange={isUpdateImage.field.onChange}
         disabled={!value.imageDataUrl}
       >
         メイン画像を更新する
