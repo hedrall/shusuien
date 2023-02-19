@@ -1,12 +1,17 @@
 import { 鉢 } from '@frontend/domain/model/item';
 import React from 'react';
-import { Descriptions } from 'antd';
+import { Descriptions, Select, SelectProps } from 'antd';
 import { optionalCall } from '@frontend/supports/functions';
 import { 鉢サイズ } from '@frontend/domain/model/history';
 import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date';
 import { Editable } from '@frontend/components/atoms/Editable';
 import dayjs, { Dayjs } from 'dayjs';
 import { ICONS } from '@frontend/supports/icons';
+import { 棚ID } from '@frontend/domain/model/tana';
+import { useRecoilState } from 'recoil';
+import { 棚Selector } from '@frontend/store/data/action';
+import { useWithLoading } from '@frontend/supports/ui';
+import { FSAppRepository } from '@frontend/domain/repository/firestore';
 
 const F = DATE_READONLY_FORMAT;
 
@@ -19,7 +24,7 @@ const 最後の灌水の表示 = (最後の灌水: 鉢['snapshot']['最後の灌
 
   const 日前 = x日前の表記(now, 最後の灌水.日時);
   const 日 = 最後の灌水.日時.format('M月D日 H時');
-  return `${日前} (${日}), ${最後の灌水.量}`;
+  return `${日前.表記} (${日}), ${最後の灌水.量}`;
 };
 export const 鉢の情報: React.FC<MyDescProps> = props => {
   const now = dayjs();
@@ -38,6 +43,22 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       await 鉢.フィールドを更新(key, value);
     };
   }
+
+  const { isLoading, withLoading } = useWithLoading();
+  const 棚を変更 = async (id: 棚ID) => {
+    await withLoading(async () => {
+      await 鉢.フィールドを更新('棚Id', id);
+    });
+  };
+  const [棚一覧] = useRecoilState(棚Selector);
+  const 棚SelectProps: SelectProps = {
+    options: 棚一覧.map(i => ({ value: i.id, label: i.name })),
+    onChange: e => 棚を変更(e as 棚ID),
+    value: 鉢.棚Id,
+    loading: isLoading,
+    style: { width: '100%' },
+  };
+
   return (
     <Descriptions
       className="鉢の情報"
@@ -48,6 +69,9 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
     >
       <Descriptions.Item label="名前">
         <Editable value={name || ''} name="name" onSubmit={フィールドを更新('name')} />
+      </Descriptions.Item>
+      <Descriptions.Item label="棚">
+        <Select {...棚SelectProps} />
       </Descriptions.Item>
       <Descriptions.Item label="科/属/種" className="科属種">
         <div className="項目">

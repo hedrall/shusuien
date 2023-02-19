@@ -15,7 +15,7 @@ export const x日前の表記 = (
   const weeks = now.diff(date, 'weeks');
   if (days === 0) return { 表記: '本日', 日数: days };
   if (days === 1) return { 表記: '昨日', 日数: days };
-  if (days === 2) return { 表記: 'おととい', 日数: days };
+  if (days === 2) return { 表記: '一昨日', 日数: days };
   if (weeks === 0) return { 表記: `${days}日前`, 日数: days };
   const months = now.diff(date, 'months');
   if (months === 0) return { 表記: `${weeks}週間前`, 日数: days };

@@ -11,14 +11,12 @@ const 鉢Selector = selectorFamily<鉢[], 棚ID>({
   get:
     棚ID =>
     ({ get }) => {
-      console.log('get');
       return get(DATA_STATE_ATOM).鉢一覧[棚ID] || [];
     },
   set:
     棚Id =>
     ({ set }, items) => {
       set(DATA_STATE_ATOM, pre => {
-        console.log('update state');
         return {
           ...pre,
           鉢一覧: {
@@ -64,6 +62,35 @@ export const use鉢単体 = (id: 鉢Id | undefined, userId: UserId | undefined) 
   }, [userId, id]);
 
   return { item, setItem };
+};
+
+export const 棚Selector = selector<棚[]>({
+  key: '棚Selector',
+  get: ({ get }) => {
+    return get(DATA_STATE_ATOM).棚一覧 || [];
+  },
+  set: ({ set }, items) => {
+    set(DATA_STATE_ATOM, pre => {
+      return { ...pre, 棚一覧: items as 棚[] };
+    });
+  },
+});
+
+export const use棚一覧購読 = (userId: UserId | undefined) => {
+  const [, set] = useRecoilState(棚Selector);
+
+  const 棚を購読 = (userId: UserId) => {
+    return FSAppRepository.棚.購読(userId, items => {
+      console.log('棚をlisten', items);
+      set(items.map(i => i.value));
+    });
+  };
+
+  useEffect(() => {
+    if (!userId) return;
+    const { unsubscribe } = 棚を購読(userId);
+    return () => unsubscribe();
+  }, [userId]);
 };
 
 export const useDataState = () => {

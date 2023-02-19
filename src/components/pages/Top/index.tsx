@@ -1,24 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { 棚作成モーダル } from '@frontend/components/organisms/CreateTanaModal';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useNavigate } from 'react-router-dom';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { ROUTES } from '@frontend/settings/routes';
-import { useDataState } from '@frontend/store/data/action';
+import { 棚Selector } from '@frontend/store/data/action';
 import { 棚一覧表示 } from '@frontend/components/organisms/TanaList';
+import { useRecoilState } from 'recoil';
 
 export type TopPageProps = {};
 
 export const TopPage: React.FC<TopPageProps> = props => {
   const { user } = useAuthState();
-
-  const { 棚を購読, 棚一覧 } = useDataState();
-
-  useEffect(() => {
-    if (!user?.id) return;
-    const { unsubscribe } = 棚を購読(user.id);
-    return () => unsubscribe();
-  }, [user?.id]);
+  const [棚一覧] = useRecoilState(棚Selector);
 
   const navigator = useNavigate();
 

@@ -49,6 +49,7 @@ specifiers:
   react-hook-form: ^7.42.1
   react-router-dom: ^6.4.5
   recoil: ^0.7.6
+  rxjs: ^7.8.0
   sass: ^1.56.2
   type-fest: ^3.4.0
   typescript: ^4.9.4
@@ -70,6 +71,7 @@ dependencies:
   react-hook-form: 7.42.1_react@18.2.0
   react-router-dom: 6.4.5_biqbaboplfbrettd7655fr4n2y
   recoil: 0.7.6_biqbaboplfbrettd7655fr4n2y
+  rxjs: 7.8.0
 
 devDependencies:
   '@testing-library/jest-dom': 5.16.5
@@ -1996,7 +1998,7 @@ packages:
     resolution: {integrity: sha512-CzNkWqQftcmk2jaCWdBTf9Sm7xSw4rkI1zpU/Udw3HX5//adEZUIm9STtoRP1qgWj0CWQtJ9UTvqmO2NNjhMJw==}
     dependencies:
       '@types/through': 0.0.30
-      rxjs: 7.5.6
+      rxjs: 7.8.0
     dev: true
 
   /@types/istanbul-lib-coverage/2.0.4:
@@ -3487,7 +3489,7 @@ packages:
       chalk: 4.1.2
       date-fns: 2.29.2
       lodash: 4.17.21
-      rxjs: 7.5.6
+      rxjs: 7.8.0
       shell-quote: 1.7.3
       spawn-command: 0.0.2-1
       supports-color: 8.1.1
@@ -5619,7 +5621,7 @@ packages:
       mute-stream: 0.0.8
       ora: 5.4.1
       run-async: 2.4.1
-      rxjs: 7.6.0
+      rxjs: 7.8.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
       through: 2.3.8
@@ -5640,7 +5642,7 @@ packages:
       mute-stream: 0.0.8
       ora: 6.1.2
       run-async: 2.4.1
-      rxjs: 7.6.0
+      rxjs: 7.8.0
       string-width: 5.1.2
       strip-ansi: 7.0.1
       through: 2.3.8
@@ -8989,17 +8991,10 @@ packages:
       symbol-observable: 1.0.1
     dev: true
 
-  /rxjs/7.5.6:
-    resolution: {integrity: sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==}
+  /rxjs/7.8.0:
+    resolution: {integrity: sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==}
     dependencies:
       tslib: 2.4.0
-    dev: true
-
-  /rxjs/7.6.0:
-    resolution: {integrity: sha512-DDa7d8TFNUalGC9VqXvQ1euWNN7sc63TrUCuM9J998+ViviahMIjKSOU7rfcgFOF+FCD71BhDRv4hrFz+ImDLQ==}
-    dependencies:
-      tslib: 2.4.0
-    dev: true
 
   /safe-buffer/5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
@@ -10202,7 +10197,7 @@ packages:
       joi: 17.6.0
       lodash: 4.17.21
       minimist: 1.2.6
-      rxjs: 7.5.6
+      rxjs: 7.8.0
     transitivePeerDependencies:
       - debug
     dev: true

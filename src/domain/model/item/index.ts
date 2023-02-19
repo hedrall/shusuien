@@ -9,6 +9,7 @@ import { _新規作成する } from '@frontend/domain/model/item/operation/newIt
 import { _灌水する } from '@frontend/domain/model/item/operation/provideWater';
 import { _成長を記録する } from '@frontend/domain/model/item/operation/docGrowth';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
+import { Subject } from 'rxjs';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 
@@ -130,6 +131,7 @@ async function _削除(this: 鉢) {
   // isDeletedを True にする
   // 一旦論理削除のみ
   await FSAppRepository.鉢.更新(this.id!, { 削除済み: true });
+  鉢.events.削除.next({ item: this });
 }
 
 async function _詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(this: 鉢, key: Key, value: V) {
@@ -138,14 +140,17 @@ async function _詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細
   await FSAppRepository.鉢.更新(this.id!, {
     [`詳細.${key}`]: value,
   });
+  鉢.events.詳細を更新.next({ プロパティ名: key, 更新後のValue: value });
 }
 
-async function _フィールドを更新<Key extends 'name' | '補足', V = 鉢[Key]>(this: 鉢, key: Key, value: V) {
+type 鉢の更新可能なフィールドのKey = Extract<keyof 鉢, 'name' | '補足' | '棚Id'>;
+async function _フィールドを更新<Key extends 鉢の更新可能なフィールドのKey, V = 鉢[Key]>(this: 鉢, key: Key, value: V) {
   // isDeletedを True にする
   // 一旦論理削除のみ
   await FSAppRepository.鉢.更新(this.id!, {
     [key]: value,
   });
+  鉢.events.フィールドを更新.next({ フィールド名: key, 更新後のValue: value });
 }
 
 export class 鉢 extends 鉢のBase {
@@ -165,6 +170,13 @@ export class 鉢 extends 鉢のBase {
   constructor(props: 鉢のBase) {
     super(props);
   }
+
+  static events = {
+    フィールドを更新: new Subject<{ フィールド名: string; 更新後のValue: any }>(),
+    詳細を更新: new Subject<{ プロパティ名: string; 更新後のValue: any }>(),
+    削除: new Subject<{ item: 鉢 }>(),
+    管理: new Subject<{ type: 履歴の内容.Type | '新規作成' }>(),
+  };
 
   static create = () => {
     /**

@@ -4,12 +4,18 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@frontend/settings/routes';
 import { LogoutOutlined } from '@ant-design/icons';
 import { AuthRepository } from '@frontend/domain/repository/auth';
+import { use棚一覧購読 } from '@frontend/store/data/action';
+import { 鉢 } from '@frontend/domain/model/item';
+import { notification } from 'antd';
+import { Subscription } from 'rxjs';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuthState();
   const navigate = useNavigate();
   const location = useLocation();
   const signOut = AuthRepository.signOut;
+
+  use棚一覧購読(user?.id);
 
   useEffect(() => {
     if (location.pathname === ROUTES.LOGIN.PATH && user) {
@@ -27,8 +33,47 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       navigate(ROUTES.LOGIN.PATH + `?from=${from}`);
     }
   }, [user?.id]);
+
+  // 通知系
+  const [api, contextHolder] = notification.useNotification();
+  useEffect(() => {
+    const unSubs: Subscription[] = [];
+    unSubs.push(
+      鉢.events.フィールドを更新.subscribe(({ フィールド名, 更新後のValue }) => {
+        api.success({
+          message: `"${フィールド名}" を更新しました。`,
+          description: `${更新後のValue}`,
+          placement: 'bottomRight',
+        });
+      }),
+    );
+    unSubs.push(
+      鉢.events.詳細を更新.subscribe(({ プロパティ名, 更新後のValue }) => {
+        api.success({
+          message: `"${プロパティ名}" を更新しました。`,
+          description: `${更新後のValue}`,
+          placement: 'bottomRight',
+        });
+      }),
+    );
+    unSubs.push(
+      鉢.events.削除.subscribe(({ item }) => {
+        api.success({ message: `削除しました。`, placement: 'bottomRight' });
+      }),
+    );
+    unSubs.push(
+      鉢.events.管理.subscribe(({ type }) => {
+        api.success({ message: `${type}しました。`, placement: 'bottomRight' });
+      }),
+    );
+    return () => {
+      unSubs.map(us => us.unsubscribe());
+    };
+  }, []);
+
   return (
     <div className="Layout">
+      {contextHolder}
       <div className="Header">
         趣水園
         {user && <LogoutOutlined onClick={signOut} />}

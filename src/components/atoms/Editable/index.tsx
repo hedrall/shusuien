@@ -43,9 +43,9 @@ export function Editable<V extends Value, K extends string>(props: EditableProps
       <div className="Editable">
         <MyInputWithAlert
           controller={controller}
-          inputProps={{ type: isNumber ? 'number' : 'text', autoFocus: true, onKeyDown: e => onKeyDown(e.key) }}
+          inputProps={{ type: isNumber ? 'number' : 'text', autoFocus: true }}
         />
-        <div onClick={onClick} role="button">
+        <div onClick={onClick} role="button" tabIndex={0} onKeyDown={e => onKeyDown(e.key)}>
           <OPERATION_ICONS.完了 />
         </div>
       </div>
@@ -54,8 +54,6 @@ export function Editable<V extends Value, K extends string>(props: EditableProps
 
   const startEdit = () => {
     setValue(name, value);
-    console.log('set value', { name, value });
-    console.log('get value', controller.field.value);
     setIsEditing(true);
   };
 

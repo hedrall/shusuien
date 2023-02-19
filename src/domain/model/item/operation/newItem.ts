@@ -85,4 +85,5 @@ export const _新規作成する = async (params: 新規作成のParams) => {
       画像のURL: 画像のURL,
     },
   });
+  鉢.events.管理.next({ type: '新規作成' });
 };
