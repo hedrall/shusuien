@@ -9,7 +9,6 @@ import { RadioGroupOption } from '@frontend/components/atoms/RadioGroup';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { VerticalRadioGroup } from '@frontend/components/atoms/VerticalRadioGroup';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
-import dayjs from 'dayjs';
 
 export namespace 灌水モーダル {
   export type Ref = {
@@ -23,7 +22,7 @@ type Input = {
 };
 
 const DEFAULT_VALUES = (): Partial<Input> => ({
-  amount: 履歴の内容.灌水.量の定義['流れ出るくらい'].key,
+  amount: 履歴の内容.灌水.量の定義['鉢いっぱい'].key,
 });
 
 const createController = (control: Control<Input, any>) => {
@@ -35,14 +34,48 @@ const createController = (control: Control<Input, any>) => {
   return { amount };
 };
 
-const 灌水量の選択肢: RadioGroupOption<履歴の内容.灌水.量のKey型>[] = Object.values(履歴の内容.灌水.量の定義).map(
-  def => {
+const 量のアイコン: { [k in 履歴の内容.灌水.量のKey型]: React.ReactNode } = {
+  表面が濡れる程度: (
+    <div className="灌水量アイコンの側">
+      <div className="空 ぽち" />
+      <div className="空 ぽち" />
+      <div className="空 ぽち" />
+    </div>
+  ),
+  '1/3程度': (
+    <div className="灌水量アイコンの側">
+      <div className="ぽち" />
+      <div className="空 ぽち" />
+      <div className="空 ぽち" />
+    </div>
+  ),
+  '2/3程度': (
+    <div className="灌水量アイコンの側">
+      <div className="ぽち" />
+      <div className="ぽち" />
+      <div className="空 ぽち" />
+    </div>
+  ),
+  鉢いっぱい: (
+    <div className="灌水量アイコンの側">
+      <div className="ぽち" />
+      <div className="ぽち" />
+      <div className="ぽち" />
+    </div>
+  ),
+};
+const 灌水量の選択肢: RadioGroupOption<履歴の内容.灌水.量のKey型>[] = Object.values(履歴の内容.灌水.量の定義)
+  .reverse()
+  .map(def => {
     return {
-      name: def.表示名,
+      name: (
+        <div className="灌水量の選択肢のLabel">
+          {量のアイコン[def.key]} {def.表示名}
+        </div>
+      ),
       value: def.key,
     };
-  },
-);
+  });
 export const 灌水モーダル = forwardRef<灌水モーダル.Ref, 灌水モーダル.Props>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoading, withLoading } = useWithLoading();

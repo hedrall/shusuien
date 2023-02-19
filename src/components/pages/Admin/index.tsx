@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuthState } from '@frontend/store/auth/action';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 棚ID } from '@frontend/domain/model/tana';
 import { 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import * as fs from 'firebase/firestore';
-import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
 import { StorageRepository } from '@frontend/domain/repository/storage';
-import { BrowserRepository } from '@frontend/domain/repository/browser';
-import { UserId } from '@frontend/domain/model/user';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { 小画像の生成 } from '@frontend/domain/model/item/operation/newItem';
+import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
+import { RefValue } from '@frontend/domain/repository/firestore/type';
+import { 履歴 } from '@frontend/domain/model/history';
+import { FsManager } from '@frontend/domain/repository/firebase/manager';
 
 export type TopPageProps = {};
 
@@ -151,6 +151,28 @@ export const AdminPage: React.FC<TopPageProps> = props => {
     }
   };
 
+  const 鉢いっぱい以上をなくす = async () => {
+    // 鉢,履歴,棚
+    const colName = '鉢';
+    const db = () => fs.getFirestore();
+    const col = fs.collection(db(), colName);
+    const query = fs.query(col, fs.where('userId', '==', userId));
+    const docs = await fs.getDocs(query);
+    const { refValue: values } = querySnapshotToRefValues(docs);
+
+    const targets = values.filter(v => (v.value as 鉢).snapshot?.最後の灌水?.量 === '流れ出るくらい');
+    console.log(targets.map(v => v.value as 鉢).map(i => i.snapshot.最後の灌水));
+    for (const t of targets) {
+      console.log(t.ref.id);
+      await fs.updateDoc(t.ref, { 'snapshot.最後の灌水.量': '鉢いっぱい' });
+    }
+    // for (const item of values) {
+    //   console.log(`${1 + values.findIndex(i => i.ref.id === item.ref.id)}/${values.length}: ${item.ref.id}`);
+    //   const { ref, value } = item;
+    //   await fs.updateDoc(ref, { 削除済み: false });
+    // }
+  };
+
   return (
     <div>
       <h1>admin</h1>
@@ -160,6 +182,7 @@ export const AdminPage: React.FC<TopPageProps> = props => {
         <MyButton title="履歴の画像PATHをURLに載せ替える" onClick={履歴の画像PATHをURLに載せ替える} />
         <MyButton title="小画像を作成する" onClick={小画像を作成する} />
         <MyButton title="削除済みにfalseを設定" onClick={削除済みにfalseを設定} />
+        <MyButton title="鉢いっぱい以上をなくす" onClick={鉢いっぱい以上をなくす} />
       </div>
     </div>
   );

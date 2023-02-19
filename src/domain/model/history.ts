@@ -45,10 +45,6 @@ export namespace 履歴の内容 {
         key: '鉢いっぱい',
         表示名: '鉢いっぱい',
       },
-      ['流れ出るくらい']: {
-        key: '流れ出るくらい',
-        表示名: '流れ出るくらい',
-      },
     } as const satisfies {
       [Key in string]: {
         key: Key;
