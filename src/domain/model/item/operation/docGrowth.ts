@@ -12,10 +12,11 @@ export namespace _成長を記録する {
     userId: UserId;
     imageDataUrl: string | undefined;
     memo: string | undefined;
+    画像を更新する: boolean;
   };
 }
 export const _成長を記録する = async (params: _成長を記録する.Params) => {
-  const { item, userId, imageDataUrl, memo } = params;
+  const { item, userId, imageDataUrl, memo, 画像を更新する } = params;
   const 鉢Id = item.id!;
   const date = dayjs();
   let 画像のURL: string | undefined = undefined;
@@ -54,7 +55,7 @@ export const _成長を記録する = async (params: _成長を記録する.Para
   });
 
   console.log('3. 鉢の情報を更新する');
-  const 更新後の鉢 = item.履歴を適用(植替え履歴, small画像のURL);
+  const 更新後の鉢 = item.履歴を適用(植替え履歴, small画像のURL, 画像を更新する);
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);
   鉢.events.管理.next({ type: '成長の記録' });
 };

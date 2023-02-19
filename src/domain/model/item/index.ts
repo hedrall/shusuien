@@ -83,9 +83,9 @@ const update = (cur: 鉢, 更新するsnapshotの項目: Partial<鉢['snapshot']
   });
 };
 
-function _履歴を適用(this: 鉢, 履歴: 履歴, small画像のURL: string | undefined) {
+function _履歴を適用(this: 鉢, 履歴: 履歴, small画像のURL: string | undefined, 画像を更新する = true) {
   const type = 履歴.内容.type;
-  const common = { ...(small画像のURL ? { small画像のURL } : {}) };
+  const common = { ...(画像を更新する && small画像のURL ? { small画像のURL } : {}) };
   switch (type) {
     case '植替え':
       // [更新項目] 鉢サイズ, 最後の植替え, 画像
