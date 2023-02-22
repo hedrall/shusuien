@@ -121,6 +121,12 @@ export namespace FSAppRepository {
   export const update = async <T extends Entity>(manager: FsAppManager<T>, id: string, attrs: fs.UpdateData<T>) => {
     const collection = getCollection(manager);
     const doc = fs.doc(collection, id);
+    Object.entries(attrs).map(([key, value]) => {
+      if (!value) {
+        // @ts-ignore
+        attrs[key as keyof typeof attrs] = fs.deleteField();
+      }
+    });
     await fs.updateDoc(doc, attrs);
   };
 

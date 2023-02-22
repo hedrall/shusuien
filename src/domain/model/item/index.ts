@@ -1,4 +1,4 @@
-import { Opaque } from 'type-fest';
+import { Opaque, ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/history';
@@ -10,6 +10,7 @@ import { _灌水する } from '@frontend/domain/model/item/operation/provideWate
 import { _成長を記録する } from '@frontend/domain/model/item/operation/docGrowth';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { Subject } from 'rxjs';
+import fs from 'firebase/firestore';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 
@@ -25,6 +26,23 @@ type Snapshot = {
   更新日時: Dayjs;
 };
 
+export const 日光の強度 = {
+  直射日光: '直射日光',
+  '20%遮光': '20%遮光',
+  '30%遮光': '30%遮光',
+  '40%遮光': '40%遮光',
+  '50%遮光': '50%遮光',
+  '60%遮光': '60%遮光',
+  半日陰: '半日陰',
+} as const;
+export type 日光の強度 = ValueOf<typeof 日光の強度>;
+export type 日光の強度設定 = {
+  春?: 日光の強度;
+  夏?: 日光の強度;
+  秋?: 日光の強度;
+  冬?: 日光の強度;
+};
+
 export class 鉢のBase {
   id: 鉢Id | undefined;
   userId: UserId;
@@ -34,6 +52,9 @@ export class 鉢のBase {
     科?: string;
     属?: string;
     種名?: string;
+    耐寒温度?: number;
+    日光の強度設定?: 日光の強度設定;
+    水切れ日数?: number;
     入手元?: string;
     金額?: number;
   };
@@ -63,6 +84,9 @@ export class 鉢のBase {
       科: props.詳細.科,
       属: props.詳細.属,
       種名: props.詳細.種名,
+      耐寒温度: props.詳細.耐寒温度,
+      日光の強度設定: props.詳細.日光の強度設定,
+      水切れ日数: props.詳細.水切れ日数,
       入手元: props.詳細.入手元,
       金額: props.詳細.金額,
     };
@@ -135,10 +159,26 @@ async function _削除(this: 鉢) {
 }
 
 async function _詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(this: 鉢, key: Key, value: V) {
-  // isDeletedを True にする
-  // 一旦論理削除のみ
   await FSAppRepository.鉢.更新(this.id!, {
     [`詳細.${key}`]: value,
+  });
+  鉢.events.詳細を更新.next({ プロパティ名: key, 更新後のValue: value });
+}
+
+async function _日光の強度を更新<Key extends keyof 日光の強度設定, V = 日光の強度設定[Key]>(
+  this: 鉢,
+  key: Key,
+  value: V,
+) {
+  const updated = {
+    ...this.詳細.日光の強度設定,
+    [key]: value,
+  };
+  if (!value) {
+    delete updated[key];
+  }
+  await FSAppRepository.鉢.更新(this.id!, {
+    [`詳細.日光の強度設定`]: updated,
   });
   鉢.events.詳細を更新.next({ プロパティ名: key, 更新後のValue: value });
 }
@@ -158,6 +198,7 @@ export class 鉢 extends 鉢のBase {
 
   削除 = _削除;
   詳細を更新 = _詳細を更新;
+  日光の強度を更新 = _日光の強度を更新;
   フィールドを更新 = _フィールドを更新;
 
   static 管理 = {

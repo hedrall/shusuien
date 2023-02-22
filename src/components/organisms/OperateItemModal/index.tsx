@@ -41,6 +41,10 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
     okText: '作成',
     cancelText: '閉じる',
     destroyOnClose: true,
+    width: '90vw',
+    style: {
+      maxWidth: 800,
+    },
   };
 
   useImperativeHandle(ref, () => {

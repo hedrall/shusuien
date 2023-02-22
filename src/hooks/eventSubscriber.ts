@@ -37,17 +37,17 @@ export const useEventSubscriber = () => {
         api.success({ message: `${type}しました。`, placement: 'bottomRight' });
       }),
     );
-    unSubs.push(
-      一括灌水モードイベント.subscribe(ON => {
-        if (ON) {
-          api.info({
-            message: `一括灌水モードをON!`,
-            description: '鉢をダブルクリックすると灌水されます。\n(灌水量は設定から変更可能)',
-            placement: 'bottomRight',
-          });
-        }
-      }),
-    );
+    // unSubs.push(
+    //   一括灌水モードイベント.subscribe(ON => {
+    //     if (ON) {
+    //       api.info({
+    //         message: `一括灌水モードをON!`,
+    //         description: '鉢をダブルクリックすると灌水されます。\n(灌水量は設定から変更可能)',
+    //         placement: 'bottomRight',
+    //       });
+    //     }
+    //   }),
+    // );
     return () => {
       unSubs.map(us => us.unsubscribe());
     };

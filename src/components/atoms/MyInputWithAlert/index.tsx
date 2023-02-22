@@ -12,7 +12,7 @@ export type MyInputPropsWithAlert<Inputs extends Record<string, any>, Name exten
 export function MyInputWithAlert<Inputs extends Record<string, any>, Name extends Path<Inputs>>(
   props: MyInputPropsWithAlert<Inputs, Name>,
 ) {
-  const { controller, inputProps: _ip, alertProps: _ap } = props;
+  const { controller, inputProps, alertProps: _ap } = props;
 
   const errorMessage = controller.fieldState.error?.message;
   const alertProps: AlertProps = {
@@ -24,7 +24,7 @@ export function MyInputWithAlert<Inputs extends Record<string, any>, Name extend
 
   return (
     <div className="MyInputWithAlert">
-      <MyInput controller={controller} {..._ip} />
+      <MyInput controller={controller} {...inputProps} />
       {errorMessage ? <Alert {...alertProps} /> : undefined}
     </div>
   );

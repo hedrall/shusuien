@@ -30,12 +30,11 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
   const 鉢を選択: 鉢一覧の要素Props['鉢を選択'] = async (item, type) => {
     console.log('鉢を選択', type);
-    if (!一括灌水モード設定.state.ON) {
-      if (type === 'click') 鉢管理モーダルRef.current?.open(item);
+    if (type === 'click') {
+      鉢管理モーダルRef.current?.open(item);
       return;
     }
     // 一括灌水モードの場合
-    if (type === 'click') return;
     const 最後の灌水 = item.snapshot.最後の灌水;
     if (最後の灌水 && 最後の灌水.日時.format('YYYYMMDD') === dayjs().format('YYYYMMDD')) {
       api.warning({ message: '本日灌水済みのためスキップします。', placement: 'bottomRight' });

@@ -1,4 +1,8 @@
 .鉢の情報 {
+  .Editable {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   .科属種 {
     .項目 {
       word-break: keep-all;
@@ -11,5 +15,21 @@
     display: flex;
     align-items: center;
     gap: 4px;
+  }
+  .日光の強度 .側 {
+    display: grid;
+    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: 100%;
+    gap: 4px 8px;
+    padding-bottom: 12px;
+
+    .Item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      p {
+        margin: 0;
+      }
+    }
   }
 }

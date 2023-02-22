@@ -41,15 +41,20 @@ const グラデーション生成 = (startColor: Color, endColor: Color, index: 
   return `rgb(${color.join()})`;
 };
 const blue = [0, 99, 248] as const;
-const grey = [82, 82, 82] as const;
-const red = [255, 44, 44] as const;
-const 経過日数アラート色 = (_経過日数: number): string => {
-  const 経過日数 = _経過日数 + 1;
-  if (経過日数 <= 7 /* 1 ~ 7 の7段階 */) {
-    return グラデーション生成(blue, grey, 経過日数, 7);
+const 水切れ色 = [82, 82, 82] as const;
+const アラート色 = [255, 44, 44] as const;
+/**
+ * 水切れ日数が3の時
+ * 1, 2, 3(水切れ色), 4, 5, 6(アラート色)
+ */
+const 経過日数アラート色 = (_経過日数: number, 水切れ日数 = 14): string => {
+  let 経過日数 = _経過日数 + 1; /* 1, 2, 3, ... */
+  if (経過日数 <= 水切れ日数 /* 1 ~ 7 の7段階 */) {
+    return グラデーション生成(blue, 水切れ色, 経過日数, 水切れ日数);
   }
-  // 8 ~ 30 の24段階
-  return グラデーション生成(grey, red, Math.max(経過日数, 30) - 7, 24);
+  経過日数 -= 水切れ日数; /* 1(8), 2(9), 3(10), ... */
+  // 8 ~ 14 の7段階
+  return グラデーション生成(水切れ色, アラート色, 経過日数, 水切れ日数);
 };
 
 import { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
@@ -123,6 +128,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
       e.preventDefault();
     },
     ...bind,
+    role: 'button',
   };
 
   const items = useMemo(() => {
@@ -142,7 +148,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
         {最後の灌水からの経過日数 ? (
           <span
             className="最後の灌水からの経過日数"
-            style={{ color: 経過日数アラート色(最後の灌水からの経過日数.日数) }}
+            style={{ color: 経過日数アラート色(最後の灌水からの経過日数.日数, item.詳細.水切れ日数) }}
           >
             <ICONS.灌水 />
             {最後の灌水からの経過日数.表記}
