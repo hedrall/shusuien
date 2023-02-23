@@ -24,6 +24,7 @@ type Input = {
   属: string | undefined;
   種: string | undefined;
   耐寒温度: number | undefined;
+  水切れ日数: number | undefined;
   日光の強度設定: 日光の強度設定;
 };
 
@@ -32,6 +33,7 @@ const DEFAULT_VALUES = (): Partial<Input> => ({
   属: undefined,
   種: undefined,
   耐寒温度: undefined,
+  水切れ日数: undefined,
   日光の強度設定: {
     春: undefined,
     夏: undefined,
@@ -61,6 +63,10 @@ const createController = (control: Control<Input, any>) => {
     control,
     name: '耐寒温度',
   });
+  const 水切れ日数 = useController({
+    control,
+    name: '水切れ日数',
+  });
   const 日光の強度設定 = Object.values(季節).reduce((pre, s) => {
     return {
       ...pre,
@@ -72,7 +78,7 @@ const createController = (control: Control<Input, any>) => {
     };
   }, {} as Record<季節, UseControllerReturn<Input['日光の強度設定'], 季節>>);
 
-  return { 科, 属, 種, 耐寒温度, 日光の強度設定 };
+  return { 科, 属, 種, 耐寒温度, 水切れ日数, 日光の強度設定 };
 };
 
 export const 植物ごとのデフォルト設定の新規作成モーダル = forwardRef<
@@ -89,7 +95,7 @@ export const 植物ごとのデフォルト設定の新規作成モーダル = f
     defaultValues: DEFAULT_VALUES(),
   });
   const isValid = formState.isValid;
-  const { 科, 属, 種, 耐寒温度, 日光の強度設定 } = createController(control);
+  const { 科, 属, 種, 耐寒温度, 水切れ日数, 日光の強度設定 } = createController(control);
 
   const close = () => {
     setIsOpen(false);
@@ -156,6 +162,10 @@ export const 植物ごとのデフォルト設定の新規作成モーダル = f
           {
             label: '耐寒温度',
             input: <MyInputWithAlert controller={耐寒温度} />,
+          },
+          {
+            label: '水切れ日数',
+            input: <MyInputWithAlert controller={水切れ日数} />,
           },
           {
             label: '日光の強度設定',

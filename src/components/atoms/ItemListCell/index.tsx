@@ -126,10 +126,10 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const 最後の灌水からの経過日数 = optionalCall(最後の灌水, v => x日前の表記(dayjs(), v)) || '';
   const 耐寒温度 = item.詳細.耐寒温度;
   const 日光の強度設定 = item.詳細.日光の強度設定?.[現在の季節];
+  const res = 植物ごとのデフォルト設定サービス.鉢の設定を特定(植物ごとのデフォルト設定一覧, item);
+  const { デフォルト設定 } = res;
   const 上部補足情報 = (() => {
     const msg: string[] = [];
-    const res = 植物ごとのデフォルト設定サービス.鉢の設定を特定(植物ごとのデフォルト設定一覧, item);
-    const { デフォルト設定 } = res;
     const _耐寒温度 =
       typeof 耐寒温度 === 'number'
         ? 耐寒温度
@@ -158,6 +158,8 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
     return getItems({ onDelete: () => onDelete(item.id!) });
   }, [item.id]);
 
+  const 水切れ日数 = item.詳細.水切れ日数 || デフォルト設定?.水切れ日数;
+
   return (
     <Dropdown trigger={['contextMenu']} menu={{ items }}>
       <div
@@ -172,7 +174,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
         {最後の灌水からの経過日数 ? (
           <span
             className="最後の灌水からの経過日数 表示"
-            style={{ color: 経過日数アラート色(最後の灌水からの経過日数.日数, item.詳細.水切れ日数) }}
+            style={{ color: 経過日数アラート色(最後の灌水からの経過日数.日数, 水切れ日数) }}
           >
             <ICONS.灌水 />
             {最後の灌水からの経過日数.表記}

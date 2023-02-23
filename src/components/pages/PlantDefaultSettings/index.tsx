@@ -42,7 +42,18 @@ const 要素 = ({ 設定 }: { 設定: 植物ごとのデフォルト設定 }) =>
         <div className="項目">種: {設定.種}</div>
       </Descriptions.Item>
       <Descriptions.Item label="耐寒温度">
-        <Editable.Number value={設定.耐寒温度} name="耐寒温度" onSubmit={設定.更新.耐寒温度} />
+        <Editable.Number
+          value={設定.耐寒温度}
+          name="耐寒温度"
+          onSubmit={設定.更新.ルートプロパティ.bind(null, '耐寒温度')}
+        />
+      </Descriptions.Item>
+      <Descriptions.Item label="水切れ日数">
+        <Editable.Number
+          value={設定.水切れ日数}
+          name="水切れ日数"
+          onSubmit={設定.更新.ルートプロパティ.bind(null, '水切れ日数')}
+        />
       </Descriptions.Item>
       <Descriptions.Item label="日光の強度" className="日光の強度">
         <div className="側">

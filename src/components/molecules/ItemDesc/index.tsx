@@ -135,7 +135,16 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         </div>
       </Descriptions.Item>
       <Descriptions.Item label="水切れ日数">
-        <Editable.Number value={詳細.水切れ日数} name="水切れ日数" onSubmit={詳細を更新('水切れ日数')} />
+        <Editable.Number
+          value={詳細.水切れ日数}
+          name="水切れ日数"
+          onSubmit={詳細を更新('水切れ日数')}
+          placeholder={
+            typeof 詳細.水切れ日数 !== 'number' && デフォルト設定.デフォルト設定?.水切れ日数
+              ? `${デフォルト設定.デフォルト設定?.水切れ日数} (${デフォルト設定.一致Type}より)`
+              : undefined
+          }
+        />
       </Descriptions.Item>
       <Descriptions.Item label="追加日時">{作成日時.format(F)}</Descriptions.Item>
       <Descriptions.Item label="入手元">
