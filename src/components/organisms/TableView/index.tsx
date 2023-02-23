@@ -1,13 +1,14 @@
 import React from 'react';
 import { 棚 } from '@frontend/domain/model/tana';
 import { Badge, Dropdown, Image, ImageProps, Space, Table, TableColumnsType } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢 } from '@frontend/domain/model/item';
 import { User, UserId } from '@frontend/domain/model/user';
 import { Editable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';
+import { 科属種の入力 } from '@frontend/components/atoms/InputClass';
+import { Master } from '@frontend/components/atoms/InputClass/master';
 
 export type TableViewProps = {
   棚一覧: 棚[];
@@ -45,7 +46,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
   const { 棚, user } = props;
   const { 鉢一覧 } = use鉢一覧(棚.id!, user);
 
-  const getRender = (key: keyof 鉢['詳細']) => (_, 鉢) => {
+  const getRender = (key: keyof 鉢['詳細']) => (_: unknown, 鉢: 鉢) => {
     const value = 鉢.詳細[key] || '';
     return <Editable value={value} name={key} onSubmit={詳細を更新(鉢, key)} />;
   };
@@ -76,7 +77,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       render: getRender('科'),
     },
     { title: '属', dataIndex: '属', key: '属', render: getRender('属') },
-    { title: '種名', dataIndex: '種名', key: '種名', render: getRender('種名') },
+    { title: '種名', dataIndex: '種名', key: '種名', render: getRender('種') },
     { title: '作成日時', dataIndex: '作成日時', key: '作成日時' },
   ];
   console.log({ 鉢一覧 });

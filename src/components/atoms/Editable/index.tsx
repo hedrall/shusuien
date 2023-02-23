@@ -3,6 +3,7 @@ import { OPERATION_ICONS } from '@frontend/supports/icons';
 import { useController, useForm } from 'react-hook-form';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
+import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 
 export type EditableProps<T, V> = {
   value: V;
@@ -83,4 +84,70 @@ export namespace Editable {
     const Elem = Editable<'number'>;
     return <Elem {...props} type="number" />;
   };
+
+  type WithSlotProps<V> = {
+    value: V;
+    name: string;
+    onSubmit: (v: V | undefined) => Promise<void>;
+    placeholder?: string;
+    inputComponent: React.FC<{ field: ControllerRenderProps }>;
+  };
+  export function WithSlot(props: WithSlotProps<string>) {
+    const { value, name, onSubmit, placeholder, inputComponent } = props;
+    const [isEditing, setIsEditing] = useState(false);
+    const { control, setValue } = useForm<any, any>({
+      mode: 'onChange',
+      reValidateMode: 'onChange',
+      defaultValues: {
+        [name]: value,
+      },
+    });
+
+    const controller = useController({
+      control,
+      name,
+      rules: { maxLength },
+    });
+    const Input = () => {
+      const Elem = inputComponent;
+      return <Elem field={controller.field} />;
+    };
+
+    if (isEditing) {
+      const onKeyDown = async (key: string) => {
+        if (key !== 'Enter') return;
+        await onClick();
+      };
+      const submitValue = async () => {
+        const value = controller.field.value;
+        await onSubmit(value);
+      };
+      const onClick = async () => {
+        await submitValue();
+        setIsEditing(false);
+      };
+      return (
+        <div className="Editable">
+          <Input />
+          <div onClick={onClick} role="button" tabIndex={0} onKeyDown={e => onKeyDown(e.key)}>
+            <OPERATION_ICONS.完了 />
+          </div>
+        </div>
+      );
+    }
+
+    const startEdit = () => {
+      setValue(name, value);
+      setIsEditing(true);
+    };
+
+    return (
+      <div className="Editable">
+        {value ? value : placeholder ? <span className="Placeholder">{placeholder}</span> : null}
+        <div onClick={startEdit} role="button">
+          <OPERATION_ICONS.EDIT />
+        </div>
+      </div>
+    );
+  }
 }
