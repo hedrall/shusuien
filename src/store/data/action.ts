@@ -76,22 +76,29 @@ export const 棚Selector = selector<棚[]>({
   },
 });
 
-export const use棚一覧購読 = (userId: UserId | undefined) => {
-  const [, set] = useRecoilState(棚Selector);
+export namespace use棚一覧 {
+  export const 購読 = (userId: UserId | undefined) => {
+    const [, set] = useRecoilState(棚Selector);
 
-  const 棚を購読 = (userId: UserId) => {
-    return FSAppRepository.棚.購読(userId, items => {
-      console.log('棚をlisten', items);
-      set(items.map(i => i.value));
-    });
+    const 棚を購読 = (userId: UserId) => {
+      return FSAppRepository.棚.購読(userId, items => {
+        console.log('棚をlisten', items);
+        set(items.map(i => i.value));
+      });
+    };
+
+    useEffect(() => {
+      if (!userId) return;
+      const { unsubscribe } = 棚を購読(userId);
+      return () => unsubscribe();
+    }, [userId]);
   };
 
-  useEffect(() => {
-    if (!userId) return;
-    const { unsubscribe } = 棚を購読(userId);
-    return () => unsubscribe();
-  }, [userId]);
-};
+  export const 一覧を利用 = () => {
+    const [state] = useRecoilState(棚Selector);
+    return { 棚一覧: state };
+  };
+}
 
 export const useDataState = () => {
   const [state, setState] = useRecoilState(DATA_STATE_ATOM);

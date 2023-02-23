@@ -4,8 +4,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@frontend/settings/routes';
 import { LogoutOutlined } from '@ant-design/icons';
 import { AuthRepository } from '@frontend/domain/repository/auth';
-import { use棚一覧購読 } from '@frontend/store/data/action';
+import { use棚一覧 } from '@frontend/store/data/action';
 import { useEventSubscriber } from '@frontend/hooks/eventSubscriber';
+import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuthState();
@@ -13,7 +14,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const location = useLocation();
   const signOut = AuthRepository.signOut;
 
-  use棚一覧購読(user?.id);
+  const userId = user?.id;
+  use棚一覧.購読(userId);
+  use植物ごとのデフォルト設定.購読を開始(userId);
 
   useEffect(() => {
     if (location.pathname === ROUTES.LOGIN.PATH && user) {
@@ -30,7 +33,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       const from = encodeURIComponent(location.pathname + location.search);
       navigate(ROUTES.LOGIN.PATH + `?from=${from}`);
     }
-  }, [user?.id]);
+  }, [userId]);
 
   // 通知系
   const { contextHolder } = useEventSubscriber();

@@ -4,6 +4,9 @@ import { Subject } from 'rxjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { UserId } from '@frontend/domain/model/user';
 
+function getOrder(i: 植物ごとのデフォルト設定) {
+  return [i.科, i.属, i.種].filter(Boolean).join('-');
+}
 export type 植物ごとのデフォルト設定Id = Opaque<string, '植物ごとのデフォルト設定'>;
 export class 植物ごとのデフォルト設定 implements 鉢.デフォルト設定可能な鉢のプロパティ {
   id: 植物ごとのデフォルト設定Id | undefined;
@@ -13,9 +16,10 @@ export class 植物ごとのデフォルト設定 implements 鉢.デフォルト
   種: string | undefined;
   耐寒温度?: number;
   日光の強度設定?: 日光の強度設定;
+  order: string;
 
   // ルーム
-  constructor(props: 植物ごとのデフォルト設定) {
+  constructor(props: Omit<植物ごとのデフォルト設定, 'order'>) {
     this.id = props.id;
     this.userId = props.userId;
     this.科 = props.科;
@@ -23,13 +27,14 @@ export class 植物ごとのデフォルト設定 implements 鉢.デフォルト
     this.種 = props.種;
     this.耐寒温度 = props.耐寒温度;
     this.日光の強度設定 = props.日光の強度設定;
+    this.order = getOrder(this);
   }
 
   static events = {
     作成: new Subject<void>(),
   };
 
-  static 作成 = async (props: Omit<植物ごとのデフォルト設定, 'id'>) => {
+  static 作成 = async (props: Omit<植物ごとのデフォルト設定, 'id' | 'order'>) => {
     const 設定 = new 植物ごとのデフォルト設定({
       ...props,
       id: undefined,

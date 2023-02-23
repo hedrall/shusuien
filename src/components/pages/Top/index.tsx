@@ -4,11 +4,9 @@ import { useAuthState } from '@frontend/store/auth/action';
 import { useNavigate } from 'react-router-dom';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { ROUTES } from '@frontend/settings/routes';
-import { 棚Selector } from '@frontend/store/data/action';
+import { use棚一覧 } from '@frontend/store/data/action';
 import { 棚一覧表示 } from '@frontend/components/organisms/TanaList';
-import { useRecoilState } from 'recoil';
 import { Divider } from 'antd';
-import { use一括灌水モード設定 } from '@frontend/store/operation/action';
 import { FloatMenu } from '@frontend/components/molecules/FloatMenu';
 import { MyLink } from '@frontend/components/atoms/MyLink';
 
@@ -16,8 +14,7 @@ export type TopPageProps = {};
 
 export const TopPage: React.FC<TopPageProps> = props => {
   const { user } = useAuthState();
-  const [棚一覧] = useRecoilState(棚Selector);
-  const 一括灌水モード = use一括灌水モード設定();
+  const { 棚一覧 } = use棚一覧.一覧を利用();
   const navigator = useNavigate();
 
   const 棚作成モーダルのRef = useRef<棚作成モーダル.Ref | null>(null);

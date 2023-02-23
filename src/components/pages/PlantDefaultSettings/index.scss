@@ -1,18 +1,28 @@
 @use '../../../assets/variables' as v;
 
 .植物ごとのデフォルト設定ページ {
-  .棚を作成 {
-    padding: 8px;
-    border: dimgrey solid 1px;
-    border-radius: 5px;
-    display: inline-block;
-    cursor: pointer;
-    &:hover {
-      background: lightgrey;
-    }
-  }
-
   .Section {
     margin: 16px 0;
+  }
+  .一覧表示 {
+    margin: 16px 0;
+
+    .要素 {
+      .科属種 {
+        .項目 {
+          display: flex;
+        }
+      }
+      .日光の強度 {
+        .Item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          > p {
+            margin: 4px 0;
+          }
+        }
+      }
+    }
   }
 }

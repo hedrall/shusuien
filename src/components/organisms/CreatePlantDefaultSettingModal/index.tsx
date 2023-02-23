@@ -45,12 +45,12 @@ const createController = (control: Control<Input, any>) => {
   const 科 = useController({
     control,
     name: '科',
-    rules: { maxLength },
+    rules: { required: true, maxLength },
   });
   const 属 = useController({
     control,
     name: '属',
-    rules: { maxLength },
+    rules: { required: true, maxLength },
   });
   const 種 = useController({
     control,
@@ -83,13 +83,12 @@ export const 植物ごとのデフォルト設定の新規作成モーダル = f
   const { isLoading, withLoading } = useWithLoading();
   const { user } = useAuthState();
 
-  const { control, getValues, reset, setValue } = useForm<Input>({
+  const { control, getValues, reset, setValue, formState } = useForm<Input>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: DEFAULT_VALUES(),
   });
-  const value = getValues();
-  const isValid = value.科 || value.属 || value.種;
+  const isValid = formState.isValid;
   const { 科, 属, 種, 耐寒温度, 日光の強度設定 } = createController(control);
 
   const close = () => {
@@ -143,11 +142,11 @@ export const 植物ごとのデフォルト設定の新規作成モーダル = f
       <MyFormLayout
         items={[
           {
-            label: '科',
-            input: <MyInputWithAlert controller={科} />,
+            label: '* 科',
+            input: <MyInputWithAlert controller={科} inputProps={{ autoFocus: true }} />,
           },
           {
-            label: '属',
+            label: '* 属',
             input: <MyInputWithAlert controller={属} />,
           },
           {
