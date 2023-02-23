@@ -8,6 +8,7 @@ export namespace 日光の強度Select {
     value: 日光の強度 | undefined;
     isLoading?: boolean;
     size: SelectProps['size'];
+    placeholder?: string;
   };
 }
 
@@ -16,7 +17,7 @@ const 日光の強度一覧 = [...Object.values(日光の強度), 指定なし];
 const options = 日光の強度一覧.map(i => ({ value: i, label: i }));
 
 export const 日光の強度Select: React.FC<日光の強度Select.Props> = props => {
-  const { onChange, value, isLoading, size } = props;
+  const { onChange, value, isLoading, size, placeholder } = props;
   const selectProps: SelectProps = {
     options,
     onChange,
@@ -25,6 +26,7 @@ export const 日光の強度Select: React.FC<日光の強度Select.Props> = prop
     style: { width: '100%' },
     size,
     popupClassName: '日光の強度SelectのPopup',
+    placeholder,
   };
   return <Select className="日光の強度Select" {...selectProps} />;
 };

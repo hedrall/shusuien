@@ -9,6 +9,7 @@ export type EditableProps<T, V> = {
   name: string;
   onSubmit: (v: V | undefined) => Promise<void>;
   type?: T;
+  placeholder?: string;
 };
 
 type Value = string | number | undefined;
@@ -17,7 +18,7 @@ const maxLength: ValidationRule<number> = { value: 40, message: '最大40文字�
 export function Editable<T extends 'text' | 'number' = 'text', V = T extends 'text' ? string : number | undefined>(
   props: EditableProps<T, V>,
 ) {
-  const { type = 'text', value, name, onSubmit } = props;
+  const { type = 'text', value, name, onSubmit, placeholder } = props;
   const isNumber = type === 'number';
   const [isEditing, setIsEditing] = useState(false);
   const { control, setValue } = useForm<any, any>({
@@ -69,7 +70,7 @@ export function Editable<T extends 'text' | 'number' = 'text', V = T extends 'te
 
   return (
     <div className="Editable">
-      {value}
+      {value ? value : placeholder ? <span className="Placeholder">{placeholder}</span> : null}
       <div onClick={startEdit} role="button">
         <OPERATION_ICONS.EDIT />
       </div>

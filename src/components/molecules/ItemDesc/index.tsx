@@ -14,6 +14,8 @@ import { useWithLoading } from '@frontend/supports/ui';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 季節 } from '@frontend/domain/const/season';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
+import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
+import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 
 const F = DATE_READONLY_FORMAT;
 
@@ -38,6 +40,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
   const 鉢のサイズ = optionalCall(snapshot.鉢のサイズ, 鉢サイズ.toString);
   const 最後の灌水 = 最後の灌水の表示(snapshot.最後の灌水, now);
   const 最後の植替え = [snapshot.最後の植替え?.format(F)].filter(Boolean).join(', ');
+  const { 植物ごとのデフォルト設定一覧 } = use植物ごとのデフォルト設定.一覧を利用();
   function 詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(key: Key) {
     return async (value: V) => {
       await 鉢.詳細を更新(key, value);
@@ -69,12 +72,16 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       await 鉢.日光の強度を更新(key, value === 指定なし ? undefined : value);
     };
   }
-  const 日光の強度SelectProps = (key: keyof 日光の強度設定): 日光の強度Select.Props => {
+  const デフォルト設定 = 植物ごとのデフォルト設定サービス.鉢の設定を特定(植物ごとのデフォルト設定一覧, 鉢);
+  const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
+    const 強度 = 詳細.日光の強度設定?.[季節];
+    const デフォルト = デフォルト設定.デフォルト設定?.日光の強度設定?.[季節];
     return {
-      onChange: e => 日光の強度を更新(key)(e as 日光の強度),
-      value: 鉢.詳細.日光の強度設定?.[key],
+      onChange: e => 日光の強度を更新(季節)(e as 日光の強度),
+      value: 強度,
       isLoading,
       size: 'small',
+      placeholder: typeof !強度 && デフォルト ? `${デフォルト} (${デフォルト設定.一致Type}より)` : undefined,
     };
   };
 
@@ -104,7 +111,16 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         </div>
       </Descriptions.Item>
       <Descriptions.Item label="耐寒温度">
-        <Editable.Number value={詳細.耐寒温度} name="耐寒温度" onSubmit={詳細を更新('耐寒温度')} />
+        <Editable.Number
+          value={詳細.耐寒温度}
+          name="耐寒温度"
+          onSubmit={詳細を更新('耐寒温度')}
+          placeholder={
+            typeof 詳細.耐寒温度 !== 'number' && デフォルト設定.デフォルト設定?.耐寒温度
+              ? `${デフォルト設定.デフォルト設定?.耐寒温度} (${デフォルト設定.一致Type}より)`
+              : undefined
+          }
+        />
       </Descriptions.Item>
       <Descriptions.Item label="日光の強度" className="日光の強度">
         <div className="側">

@@ -10,7 +10,7 @@ import { Editable } from '@frontend/components/atoms/Editable';
 import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
 import { 季節 } from '@frontend/domain/const/season';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
-import { 日光の強度, 日光の強度設定 } from '@frontend/domain/model/item';
+import { 日光の強度 } from '@frontend/domain/model/item';
 
 export namespace 植物ごとのデフォルト設定ページ {
   export type Props = {};
@@ -19,10 +19,10 @@ export namespace 植物ごとのデフォルト設定ページ {
 const { Panel } = Collapse;
 
 const 要素 = ({ 設定 }: { 設定: 植物ごとのデフォルト設定 }) => {
-  const 日光の強度SelectProps = (key: keyof 日光の強度設定): 日光の強度Select.Props => {
+  const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
     return {
-      onChange: e => {},
-      value: 設定.日光の強度設定?.[key],
+      onChange: e => 設定.更新.日光の強度設定(e as 日光の強度, 季節),
+      value: 設定.日光の強度設定?.[季節],
       isLoading: false,
       size: 'small',
     };
@@ -42,7 +42,7 @@ const 要素 = ({ 設定 }: { 設定: 植物ごとのデフォルト設定 }) =>
         <div className="項目">種: {設定.種}</div>
       </Descriptions.Item>
       <Descriptions.Item label="耐寒温度">
-        <Editable.Number value={設定.耐寒温度} name="耐寒温度" onSubmit={() => {} /* 詳細を更新('耐寒温度') */} />
+        <Editable.Number value={設定.耐寒温度} name="耐寒温度" onSubmit={設定.更新.耐寒温度} />
       </Descriptions.Item>
       <Descriptions.Item label="日光の強度" className="日光の強度">
         <div className="側">
