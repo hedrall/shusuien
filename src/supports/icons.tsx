@@ -9,6 +9,8 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { faTableCells } from '@fortawesome/free-solid-svg-icons';
+import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { 履歴の内容 } from '@frontend/domain/model/history';
 
 export const ICONS = {
@@ -30,4 +32,9 @@ export const OPERATION_ICONS = {
   ),
   FLOAT_MENU: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faPlus} style={{ ...p.style }} />,
   設定: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faGear} style={{ ...p.style }} />,
+};
+
+export const SYMBOL_ICONS = {
+  グリッド: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faTableCells} style={{ ...p.style }} />,
+  テーブル: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faTableList} style={{ ...p.style }} />,
 };

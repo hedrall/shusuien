@@ -2,13 +2,24 @@ import React from 'react';
 import { 棚 } from '@frontend/domain/model/tana';
 import { Collapse, Dropdown, MenuProps, Popconfirm } from 'antd';
 import { 鉢一覧 } from '@frontend/components/molecules/ItemList';
-import { OPERATION_ICONS } from '@frontend/supports/icons';
+import { OPERATION_ICONS, SYMBOL_ICONS } from '@frontend/supports/icons';
+import { ValueOf } from 'type-fest';
+import { テーブル表示 } from '@frontend/components/organisms/TableView';
 
 const { Panel } = Collapse;
 
-type Props = {
-  棚一覧: 棚[];
-};
+export const 表示モード = {
+  グリッド: { KEY: 'グリッド', ICON: SYMBOL_ICONS.グリッド },
+  テーブル: { KEY: 'テーブル', ICON: SYMBOL_ICONS.テーブル },
+} as const;
+export type 表示モード = ValueOf<typeof 表示モード>['KEY'];
+
+export namespace 棚一覧表示 {
+  export type Props = {
+    棚一覧: 棚[];
+    表示モード: 表示モード;
+  };
+}
 
 const getItems = (p: { onDelete: () => Promise<void> }): MenuProps['items'] => [
   {
@@ -27,9 +38,7 @@ const getItems = (p: { onDelete: () => Promise<void> }): MenuProps['items'] => [
   },
 ];
 
-export const 棚一覧表示: React.FC<Props> = props => {
-  const { 棚一覧 } = props;
-
+const グリッド表示 = ({ 棚一覧 }: { 棚一覧: 棚[] }) => {
   return (
     <Collapse className="棚一覧表示" defaultActiveKey={undefined}>
       {棚一覧.map((棚, index) => {
@@ -56,4 +65,9 @@ export const 棚一覧表示: React.FC<Props> = props => {
       })}
     </Collapse>
   );
+};
+export const 棚一覧表示: React.FC<棚一覧表示.Props> = props => {
+  const { 棚一覧, 表示モード } = props;
+  const isグリッド表示 = 表示モード === 'グリッド';
+  return <div>{isグリッド表示 ? <グリッド表示 棚一覧={棚一覧} /> : <テーブル表示 棚一覧={棚一覧} />}</div>;
 };
