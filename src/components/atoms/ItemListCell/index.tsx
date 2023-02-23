@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Dropdown, Image, ImageProps, MenuProps, Popconfirm } from 'antd';
-import { 鉢, 鉢Id } from '@frontend/domain/model/item';
+import { 日光の強度の短縮表現, 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';
@@ -58,6 +58,7 @@ const 経過日数アラート色 = (_経過日数: number, 水切れ日数 = 14
 };
 
 import { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
+import { 現在の季節 } from '@frontend/domain/const/season';
 
 type EmptyCallback = () => void;
 
@@ -119,6 +120,15 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   });
   const 最後の灌水 = item.snapshot.最後の灌水?.日時;
   const 最後の灌水からの経過日数 = optionalCall(最後の灌水, v => x日前の表記(dayjs(), v)) || '';
+  const 耐寒温度 = item.詳細.耐寒温度;
+  const 日光の強度設定 = item.詳細.日光の強度設定?.[現在の季節];
+  const 上部補足情報 = (() => {
+    const msg: string[] = [];
+    if (typeof 耐寒温度 === 'number') msg.push(`🌡${耐寒温度}℃`);
+    if (日光の強度設定) msg.push(`☀️${日光の強度の短縮表現[日光の強度設定]}`);
+    return msg.join();
+  })();
+
   const imageProps: ImageProps = {
     className: '鉢一覧の要素',
     preview: false,
@@ -145,9 +155,10 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
         }}
       >
         <Image {...imageProps} />
+        {上部補足情報 ? <span className="上部補足情報 表示">{上部補足情報}</span> : null}
         {最後の灌水からの経過日数 ? (
           <span
-            className="最後の灌水からの経過日数"
+            className="最後の灌水からの経過日数 表示"
             style={{ color: 経過日数アラート色(最後の灌水からの経過日数.日数, item.詳細.水切れ日数) }}
           >
             <ICONS.灌水 />

@@ -1,4 +1,4 @@
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 export const DATE_TIME_FORMAT = 'YYYY/MM/DD HH:mm:ss';
 export const DATE_READONLY_FORMAT = 'YYYY年M月D日 H時';
@@ -23,3 +23,5 @@ export const x日前の表記 = (
   if (years === 0) return { 表記: `${months}ヶ月前`, 日数: days };
   return { 表記: `${years}年前`, 日数: days };
 };
+export const NOW = dayjs();
+export const 今月 = (NOW.month() + 1) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;

@@ -3,14 +3,27 @@
 .鉢一覧の要素 {
   position: relative;
 
-  .最後の灌水からの経過日数 {
+  .表示 {
     position: absolute;
-    right: 5px;
-    bottom: 1px;
-    background: rgba(255, 255, 255, 0.72);
-    padding: 1px 2px;
-    border-radius: 3px;
     font-size: 10px;
+    background: rgba(255, 255, 255, 0.72);
+    padding: 2px 3px;
+    border-radius: 3px;
+  }
+
+  .上部補足情報 {
+    left: 0px;
+    top: 0px;
+    font-weight: bold;
+    background: rgb(82, 82, 82, 0.72);
+    color: white;
+  }
+
+  .最後の灌水からの経過日数 {
+
+    right: 0px;
+    bottom: 0px;
+    padding: 1px 2px;
     display: flex;
     align-items: center;
     gap: 2px;

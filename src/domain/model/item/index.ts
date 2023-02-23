@@ -36,6 +36,15 @@ export const 日光の強度 = {
   半日陰: '半日陰',
 } as const;
 export type 日光の強度 = ValueOf<typeof 日光の強度>;
+export const 日光の強度の短縮表現 = {
+  直射日光: '直',
+  '20%遮光': '-20%',
+  '30%遮光': '-30%',
+  '40%遮光': '-40%',
+  '50%遮光': '-50%',
+  '60%遮光': '-60%',
+  半日陰: '半日陰',
+} as const satisfies Record<日光の強度, string>;
 export type 日光の強度設定 = {
   春?: 日光の強度;
   夏?: 日光の強度;
