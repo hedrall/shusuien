@@ -71,7 +71,11 @@ export function Editable<T extends 'text' | 'number' = 'text', V = T extends 'te
 
   return (
     <div className="Editable">
-      {value ? value : placeholder ? <span className="Placeholder">{placeholder}</span> : null}
+      {value !== undefined ? (
+        value
+      ) : placeholder !== undefined ? (
+        <span className="Placeholder">{placeholder}</span>
+      ) : null}
       <div onClick={startEdit} role="button">
         <OPERATION_ICONS.EDIT />
       </div>

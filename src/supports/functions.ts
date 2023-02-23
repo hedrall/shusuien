@@ -17,6 +17,10 @@ export const nullableCall = <T, R>(value: T | (undefined | null), callback: (val
   return callback(value);
 };
 
+export const optionalValue = <T, R>(value: T | (undefined | null), optionalValue: R): T | R => {
+  return isDefined(value) ? value : optionalValue;
+};
+
 export const toUnique = <T>(arr: T[]) => {
   return [...new Set(arr)];
 };

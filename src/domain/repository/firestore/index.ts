@@ -123,7 +123,7 @@ export namespace FSAppRepository {
     const collection = getCollection(manager);
     const doc = fs.doc(collection, id);
     Object.entries(attrs).map(([key, value]) => {
-      if (!value) {
+      if (value === undefined && value === null) {
         // @ts-ignore
         attrs[key as keyof typeof attrs] = fs.deleteField();
       }
