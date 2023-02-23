@@ -5,6 +5,7 @@ import { 棚 } from '@frontend/domain/model/tana';
 import type fs from 'firebase/firestore';
 import { User } from '@frontend/domain/model/user';
 import dayjs, { Dayjs } from 'dayjs';
+import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
 
 export const dropUndefined = (obj: { [key: string]: any }) => {
   Object.keys(obj).map(key => {
@@ -69,4 +70,5 @@ export const appConverters = {
   鉢: basicConverter(鉢),
   履歴: basicConverter(履歴),
   User: basicConverter(User),
+  植物ごとのデフォルト設定: basicConverter(植物ごとのデフォルト設定),
 } as const;

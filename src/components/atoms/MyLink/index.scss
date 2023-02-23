@@ -1,0 +1,5 @@
+@use '../../../assets/variables' as v;
+
+.MyLink {
+  color: v.$color-blue;
+}

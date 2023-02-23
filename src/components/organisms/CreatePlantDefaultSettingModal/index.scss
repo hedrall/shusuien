@@ -1,0 +1,14 @@
+.植物ごとのデフォルト設定モーダル {
+  .植物ごとのデフォルト設定 {
+    font-size: 20px;
+  }
+  .Item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .MyInputWithAlert {
+      flex-grow: 1;
+    }
+  }
+}

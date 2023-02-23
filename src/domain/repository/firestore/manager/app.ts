@@ -1,6 +1,6 @@
 import fs from 'firebase/firestore';
-import { FsManager } from '@frontend/domain/repository/firebase/manager';
-import { appConverters } from '@frontend/domain/repository/firebase/converters/app';
+import { FsManager } from '@frontend/domain/repository/firestore/manager/index';
+import { appConverters } from '@frontend/domain/repository/firestore/converters/app';
 
 export type FsAppManager<T> = {
   path: string;
@@ -25,6 +25,13 @@ export namespace FsAppManager {
   export class User extends FsManager.User<typeof appConverters.User> {
     constructor() {
       super(appConverters.User);
+    }
+  }
+  export class 植物ごとのデフォルト設定 extends FsManager.植物ごとのデフォルト設定<
+    typeof appConverters.植物ごとのデフォルト設定
+  > {
+    constructor() {
+      super(appConverters.植物ごとのデフォルト設定);
     }
   }
 }

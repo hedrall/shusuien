@@ -10,7 +10,7 @@ import { 小画像の生成 } from '@frontend/domain/model/item/operation/newIte
 import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { 履歴 } from '@frontend/domain/model/history';
-import { FsManager } from '@frontend/domain/repository/firebase/manager';
+import { FsManager } from '@frontend/domain/repository/firestore/manager';
 
 export type TopPageProps = {};
 

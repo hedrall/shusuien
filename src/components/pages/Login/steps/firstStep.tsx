@@ -13,7 +13,7 @@ import { User, UserId } from '@frontend/domain/model/user';
 import { AuthRepository } from '@frontend/domain/repository/auth';
 import { ROUTES } from '@frontend/settings/routes';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
+import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 
 export const isValidEmail = (email: string) =>
   // eslint-disable-next-line no-useless-escape

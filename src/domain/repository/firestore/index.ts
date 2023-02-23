@@ -1,11 +1,12 @@
 import * as fs from 'firebase/firestore';
 import { Entity } from '@frontend/domain/model';
-import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
+import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { MayBeArray, toArray } from '@frontend/supports/array';
 import { _FsApp棚Repository } from '@frontend/domain/repository/firestore/tana';
 import { _FsApp鉢Repository } from '@frontend/domain/repository/firestore/item';
 import { _FsApp履歴Repository } from '@frontend/domain/repository/firestore/history';
+import { _FsApp植物ごとのデフォルト設定Repository } from '@frontend/domain/repository/firestore/plantDefaultSetting';
 
 export namespace FSAppRepository {
   type DocumentSnapshot<T> = fs.DocumentSnapshot<T>;
@@ -164,4 +165,5 @@ export namespace FSAppRepository {
   export import 棚 = _FsApp棚Repository;
   export import 鉢 = _FsApp鉢Repository;
   export import 履歴 = _FsApp履歴Repository;
+  export import 植物ごとのデフォルト設定 = _FsApp植物ごとのデフォルト設定Repository;
 }

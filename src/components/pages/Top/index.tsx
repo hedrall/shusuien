@@ -7,21 +7,17 @@ import { ROUTES } from '@frontend/settings/routes';
 import { 棚Selector } from '@frontend/store/data/action';
 import { 棚一覧表示 } from '@frontend/components/organisms/TanaList';
 import { useRecoilState } from 'recoil';
-import { ICONS } from '@frontend/supports/icons';
-import { Select, SelectProps } from 'antd';
-import { 灌水量の選択肢 } from '@frontend/supports/selections';
+import { Divider } from 'antd';
 import { use一括灌水モード設定 } from '@frontend/store/operation/action';
 import { FloatMenu } from '@frontend/components/molecules/FloatMenu';
+import { MyLink } from '@frontend/components/atoms/MyLink';
 
 export type TopPageProps = {};
-
-const options = 灌水量の選択肢.map(({ name, value }) => ({ label: name, value }));
 
 export const TopPage: React.FC<TopPageProps> = props => {
   const { user } = useAuthState();
   const [棚一覧] = useRecoilState(棚Selector);
   const 一括灌水モード = use一括灌水モード設定();
-
   const navigator = useNavigate();
 
   const 棚作成モーダルのRef = useRef<棚作成モーダル.Ref | null>(null);
@@ -37,17 +33,6 @@ export const TopPage: React.FC<TopPageProps> = props => {
       </div>
     );
   }
-
-  const toggle一括灌水モード = () => {
-    一括灌水モード.isをトグル();
-  };
-  const selectProps: SelectProps = {
-    options,
-    value: 一括灌水モード.state.灌水量,
-    onChange: e => {
-      一括灌水モード.灌水量をセット(e);
-    },
-  };
   return (
     <div className="Top">
       <FloatMenu />
@@ -59,6 +44,16 @@ export const TopPage: React.FC<TopPageProps> = props => {
       </div>
 
       <棚作成モーダル ref={棚作成モーダルのRef} />
+
+      <Divider />
+      <div className="導線">
+        <h2>その他の機能</h2>
+        <MyLink
+          path={ROUTES.植物ごとのデフォルト設定ページ.PATH}
+          navigator={navigator}
+          text="植物ごとのデフォルト設定"
+        />
+      </div>
     </div>
   );
 };

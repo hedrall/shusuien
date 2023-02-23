@@ -3,7 +3,7 @@ import { AUTH_STATE } from '@frontend/store/auth/atom';
 import { User, UserId } from '@frontend/domain/model/user';
 import { User as AuthUser } from 'firebase/auth';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
+import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 
 let unsubscribe: null | (() => void) = null;
 export const useAuthState = () => {

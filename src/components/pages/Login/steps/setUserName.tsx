@@ -11,7 +11,7 @@ import { CheckCircleOutlined } from '@ant-design/icons';
 import { useAuthState } from '@frontend/store/auth/action';
 import { UserId } from '@frontend/domain/model/user';
 import { AuthRepository } from '@frontend/domain/repository/auth';
-import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
+import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { ROUTES } from '@frontend/settings/routes';
 

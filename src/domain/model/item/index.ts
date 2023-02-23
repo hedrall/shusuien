@@ -240,6 +240,7 @@ export class 鉢 extends 鉢のBase {
 }
 
 type _S = Snapshot;
-namespace 鉢 {
+export namespace 鉢 {
   export type Snapshot = _S;
+  export type デフォルト設定可能な鉢のプロパティ = Pick<鉢['詳細'], '耐寒温度' | '日光の強度設定'>;
 }

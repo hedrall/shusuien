@@ -1,5 +1,5 @@
 import { 棚, 棚ID } from '@frontend/domain/model/tana';
-import { FsAppManager } from '@frontend/domain/repository/firebase/manager/app';
+import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
 import { UserId } from '@frontend/domain/model/user';
 import * as fs from 'firebase/firestore';

@@ -12,6 +12,8 @@ import { useRecoilState } from 'recoil';
 import { 棚Selector } from '@frontend/store/data/action';
 import { useWithLoading } from '@frontend/supports/ui';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
+import { 季節 } from '@frontend/domain/const/season';
+import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 
 const F = DATE_READONLY_FORMAT;
 
@@ -27,7 +29,7 @@ const 最後の灌水の表示 = (最後の灌水: 鉢['snapshot']['最後の灌
   return `${日前.表記} (${日}), ${最後の灌水.量}`;
 };
 
-const 指定なし = '指定なし';
+const 指定なし = '';
 const 日光の強度一覧 = [...Object.values(日光の強度), 指定なし];
 export const 鉢の情報: React.FC<MyDescProps> = props => {
   const now = dayjs();
@@ -67,15 +69,12 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       await 鉢.日光の強度を更新(key, value === 指定なし ? undefined : value);
     };
   }
-  const 日光の強度SelectProps = (key: keyof 日光の強度設定): SelectProps => {
+  const 日光の強度SelectProps = (key: keyof 日光の強度設定): 日光の強度Select.Props => {
     return {
-      options: 日光の強度一覧.map(i => ({ value: i, label: i })),
       onChange: e => 日光の強度を更新(key)(e as 日光の強度),
       value: 鉢.詳細.日光の強度設定?.[key],
-      loading: isLoading,
-      style: { width: '100%' },
+      isLoading,
       size: 'small',
-      popupClassName: '日光の強度SelectのPopup',
     };
   };
 
@@ -109,11 +108,11 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       </Descriptions.Item>
       <Descriptions.Item label="日光の強度" className="日光の強度">
         <div className="側">
-          {(['春', '夏', '秋', '冬'] as const).map(季節 => {
+          {Object.values(季節).map(s => {
             return (
-              <div key={季節} className="Item">
-                <p>{季節}</p>
-                <Select {...日光の強度SelectProps(季節)} />
+              <div key={s} className="Item">
+                <p>{s}</p>
+                <日光の強度Select {...日光の強度SelectProps(s)} />
               </div>
             );
           })}

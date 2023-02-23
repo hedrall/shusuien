@@ -2,6 +2,7 @@ import { 棚 as Domainの棚 } from '@frontend/domain/model/tana';
 import { 鉢 as Domainの鉢 } from '@frontend/domain/model/item';
 import { 履歴 as Domainの履歴 } from '@frontend/domain/model/history';
 import { User as DomainのUser } from '@frontend/domain/model/user';
+import { 植物ごとのデフォルト設定 as Domainの植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
 import fs from 'firebase/firestore';
 import { Entity } from '@frontend/domain/model';
 
@@ -54,6 +55,19 @@ export namespace FsManager {
     constructor(converter: C) {
       this.converter = converter;
       this.path = User.createPath();
+    }
+  }
+  export class 植物ごとのデフォルト設定<C extends Converter<Domainの植物ごとのデフォルト設定>>
+    implements FsManager<Domainの植物ごとのデフォルト設定, C>
+  {
+    static _name = '植物ごとのデフォルト設定';
+    static createPath = () => 植物ごとのデフォルト設定._name;
+    path: string;
+    converter: C;
+
+    constructor(converter: C) {
+      this.converter = converter;
+      this.path = 植物ごとのデフォルト設定.createPath();
     }
   }
 }

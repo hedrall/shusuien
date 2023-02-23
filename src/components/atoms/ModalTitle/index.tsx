@@ -3,7 +3,7 @@ import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import { 履歴の内容 } from '@frontend/domain/model/history';
 
 export type ModalTitleProps = {
-  type: 履歴の内容.Type | '機能';
+  type: 履歴の内容.Type | '機能' | '植物ごとのデフォルト設定';
 };
 
 const 灌水 = () => {
@@ -37,6 +37,9 @@ const 機能 = () => {
     </h1>
   );
 };
+const 植物ごとのデフォルト設定 = () => {
+  return <h1 className="植物ごとのデフォルト設定">植物ごとのデフォルト設定</h1>;
+};
 export const モーダルの見出し: React.FC<ModalTitleProps> = props => {
   const { type } = props;
   switch (type) {
@@ -48,5 +51,7 @@ export const モーダルの見出し: React.FC<ModalTitleProps> = props => {
       return 植替え();
     case '成長の記録':
       return 成長記録();
+    case '植物ごとのデフォルト設定':
+      return 植物ごとのデフォルト設定();
   }
 };

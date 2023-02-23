@@ -21,4 +21,14 @@
       align-items: center;
     }
   }
+  .Group {
+    .GroupLabel {
+      margin-bottom: 8px;
+      display: block;
+      font-weight: bold;
+    }
+    .GroupItems {
+      padding-left: 16px;
+    }
+  }
 }
