@@ -1,6 +1,9 @@
 @use '../../../assets/variables' as v;
 
 .Top {
+  .SectionTitle {
+    font-size: 14px;
+  }
   .棚を作成 {
     padding: 8px;
     border: dimgrey solid 1px;

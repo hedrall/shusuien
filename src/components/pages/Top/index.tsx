@@ -12,7 +12,7 @@ import { MyLink } from '@frontend/components/atoms/MyLink';
 import { RadioGroup } from '@frontend/components/atoms/RadioGroup';
 import { useController, useForm } from 'react-hook-form';
 import { SYMBOL_ICONS } from '@frontend/supports/icons';
-import { FilterInput } from '@frontend/components/molecules/FilterInput';
+import { フィルタ条件の入力 } from '@frontend/components/molecules/FilterInput';
 
 export type TopPageProps = {};
 
@@ -61,16 +61,19 @@ export const TopPage: React.FC<TopPageProps> = props => {
   }
   return (
     <div className="Top">
+      <h2 className="SectionTitle">表示形式</h2>
       <div className="Section コントロール">
         <RadioGroup field={C表示モード.field} options={表示モードのOption} size="small" />
       </div>
 
+      <h2 className="SectionTitle">絞り込み</h2>
       <div className="Section">
-        <棚一覧表示 棚一覧={棚一覧} 表示モード={C表示モード.field.value} />
+        <フィルタ条件の入力 />
       </div>
 
+      <h2 className="SectionTitle">棚一覧</h2>
       <div className="Section">
-        <FilterInput />
+        <棚一覧表示 棚一覧={棚一覧} 表示モード={C表示モード.field.value} />
       </div>
 
       <div className="Section">

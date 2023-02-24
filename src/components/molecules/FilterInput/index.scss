@@ -1,2 +1,24 @@
-.FilterInput {
+.フィルタ条件の入力 {
+  max-width: 480px;
+  label {
+    font-size: 11px;
+  }
+  .ant-slider-mark-text {
+    font-size: 11px;
+  }
+  .耐寒温度Section {
+    padding: 0 16px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    > label {
+      width: 56px;
+    }
+
+    .耐寒温度Slider {
+      width: calc(100% - 56px - 32px - 8px);
+      //flex-glow: 1;
+    }
+  }
 }

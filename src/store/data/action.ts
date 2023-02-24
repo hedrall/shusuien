@@ -3,15 +3,65 @@ import { 棚, 棚ID } from '@frontend/domain/model/tana';
 import { DATA_STATE_ATOM, DataState } from '@frontend/store/data/atom';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { User, UserId } from '@frontend/domain/model/user';
-import { 鉢, 鉢Id } from '@frontend/domain/model/item';
+import { 日光の強度設定, 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { useEffect, useState } from 'react';
+import { MASTER_STATE_ATOM } from '@frontend/store/master/atom';
+import { isDefined, optionalValue } from '@frontend/supports/functions';
+import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
+import { 季節, 現在の季節 } from '@frontend/domain/const/season';
+import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
+import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
 
-const 鉢Selector = selectorFamily<鉢[], 棚ID>({
-  key: '鉢Selector',
+const フィルタを適用 = (i: 鉢, filter: FilterState) => {
+  const { 耐寒温度, keyword, 日光の強度 } = filter;
+  let is = true;
+  if ((isDefined(耐寒温度) && isDefined(耐寒温度.start)) || isDefined(耐寒温度?.end)) {
+    is =
+      !!i.詳細.耐寒温度 &&
+      (!isDefined(耐寒温度.start) || i.詳細.耐寒温度 >= 耐寒温度.start) &&
+      (!isDefined(耐寒温度.end) || i.詳細.耐寒温度 <= 耐寒温度.end);
+  }
+  if (isDefined(keyword)) {
+    is = [i.詳細.科, i.詳細.属, i.詳細.種名, i.name].filter(Boolean).join('').includes(keyword);
+  }
+  if (isDefined(日光の強度)) {
+    const 今季の強度 = i.詳細.日光の強度設定?.[現在の季節];
+    is = isDefined(今季の強度) && 今季の強度 === 日光の強度;
+  }
+  return is;
+};
+
+const デフォルト直を適用 = (i: 鉢, デフォルト設定一覧: 植物ごとのデフォルト設定[]) => {
+  const { デフォルト設定 } = 植物ごとのデフォルト設定サービス.鉢の設定を特定(デフォルト設定一覧, i);
+  return {
+    ...i,
+    詳細: {
+      ...i.詳細,
+      耐寒温度: optionalValue(i.詳細.耐寒温度, optionalValue(デフォルト設定?.耐寒温度, undefined)),
+      日光の強度設定: Object.values(季節).reduce((pre, 季節) => {
+        return {
+          ...pre,
+          [季節]: optionalValue(
+            i.詳細.日光の強度設定?.[季節],
+            optionalValue(デフォルト設定?.日光の強度設定?.[季節], undefined),
+          ),
+        };
+      }, 日光の強度設定.Default),
+      水切れ日数: optionalValue(i.詳細.水切れ日数, optionalValue(デフォルト設定?.水切れ日数, undefined)),
+    },
+  };
+};
+
+const 鉢一覧Selector = selectorFamily<鉢[], 棚ID>({
+  key: '鉢一覧Selector',
   get:
     棚ID =>
     ({ get }) => {
-      return get(DATA_STATE_ATOM).鉢一覧[棚ID] || [];
+      const 鉢一覧 = get(DATA_STATE_ATOM).鉢一覧[棚ID] || [];
+      const デフォルト設定一覧 = get(MASTER_STATE_ATOM).植物のデフォルト設定;
+      const filter = get(FILTER_STATE_ATOM);
+
+      return 鉢一覧.map(i => デフォルト直を適用(i, デフォルト設定一覧)).filter(i => フィルタを適用(i, filter));
     },
   set:
     棚Id =>
@@ -29,7 +79,7 @@ const 鉢Selector = selectorFamily<鉢[], 棚ID>({
 });
 
 export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
-  const [state, set] = useRecoilState(鉢Selector(棚Id));
+  const [state, set] = useRecoilState(鉢一覧Selector(棚Id));
 
   const 鉢を購読 = (userId: UserId, 棚Id: 棚ID) => {
     return FSAppRepository.鉢.一覧購読({ userId, 棚Id }, items => {

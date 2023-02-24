@@ -77,7 +77,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       render: getRender('科'),
     },
     { title: '属', dataIndex: '属', key: '属', render: getRender('属') },
-    { title: '種名', dataIndex: '種名', key: '種名', render: getRender('種') },
+    { title: '種', dataIndex: '種', key: '種', render: getRender('種名') },
     { title: '作成日時', dataIndex: '作成日時', key: '作成日時' },
   ];
   console.log({ 鉢一覧 });

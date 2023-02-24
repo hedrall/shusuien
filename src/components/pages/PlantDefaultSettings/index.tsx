@@ -11,6 +11,7 @@ import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/pla
 import { 季節 } from '@frontend/domain/const/season';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { 日光の強度 } from '@frontend/domain/model/item';
+import { optionalValue } from '@frontend/supports/functions';
 
 export namespace 植物ごとのデフォルト設定ページ {
   export type Props = {};
@@ -81,8 +82,17 @@ export const 植物ごとのデフォルト設定ページ: React.FC<植物ご�
       <MyLink path={ROUTES.TOP.PATH} navigator={navigator} text="TOPへ戻る" />
       <Collapse className="一覧表示" size="small">
         {植物ごとのデフォルト設定一覧.map((item, index) => {
+          const header: string = [
+            item.order,
+            `耐寒温度: ${item.耐寒温度 || ' - '}`,
+            `水切れ日数: ${item.水切れ日数 || ' - '}`,
+            `日光の強度設定: `,
+            ...Object.values(季節).map(s => {
+              return `${s}: ${item.日光の強度設定?.[s] || ' - '}`;
+            }),
+          ].join('\t');
           return (
-            <Panel key={index} header={item.order}>
+            <Panel key={index} header={header}>
               <要素 設定={item} />
             </Panel>
           );

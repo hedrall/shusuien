@@ -11,6 +11,7 @@ import { _成長を記録する } from '@frontend/domain/model/item/operation/do
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { Subject } from 'rxjs';
 import fs from 'firebase/firestore';
+import { 季節 } from '@frontend/domain/const/season';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 
@@ -45,6 +46,14 @@ export const 日光の強度の短縮表現 = {
   '60%遮光': '-60%',
   半日陰: '半日陰',
 } as const satisfies Record<日光の強度, string>;
+export namespace 日光の強度設定 {
+  export const Default: Record<季節, 日光の強度 | undefined> = {
+    春: undefined,
+    夏: undefined,
+    秋: undefined,
+    冬: undefined,
+  };
+}
 export type 日光の強度設定 = {
   春?: 日光の強度;
   夏?: 日光の強度;
