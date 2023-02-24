@@ -177,9 +177,11 @@ async function _削除(this: 鉢) {
 }
 
 async function _詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(this: 鉢, key: Key, value: V) {
-  await FSAppRepository.鉢.更新(this.id!, {
+  const updates = {
     [`詳細.${key}`]: value,
-  });
+  };
+  console.log('_詳細を更新', { updates });
+  await FSAppRepository.鉢.更新(this.id!, updates);
   鉢.events.詳細を更新.next({ プロパティ名: key, 更新後のValue: value });
 }
 

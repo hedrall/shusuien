@@ -5,7 +5,7 @@ import { NO_IMAGE } from '@frontend/supports/image';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';
 import { x日前の表記 } from '@frontend/supports';
-import { optionalCall } from '@frontend/supports/functions';
+import { isDefined, optionalCall } from '@frontend/supports/functions';
 import cn from 'classnames';
 
 export type 鉢一覧の要素Props = {
@@ -121,24 +121,15 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const bind = useDoubleTap(() => _鉢を選択('doubleClick'), 300, {
     onSingleTap: () => _鉢を選択('click'),
   });
-  const { 植物ごとのデフォルト設定一覧 } = use植物ごとのデフォルト設定.一覧を利用();
-  const 最後の灌水 = item.snapshot.最後の灌水?.日時;
+  const { 最後の灌水: _灌水 } = item.snapshot;
+  const { 耐寒温度, 日光の強度設定: _強度, 水切れ日数 } = item.詳細;
+  const 最後の灌水 = _灌水?.日時;
   const 最後の灌水からの経過日数 = optionalCall(最後の灌水, v => x日前の表記(dayjs(), v)) || '';
-  const 耐寒温度 = item.詳細.耐寒温度;
-  const 日光の強度設定 = item.詳細.日光の強度設定?.[現在の季節];
-  const res = 植物ごとのデフォルト設定サービス.鉢の設定を特定(植物ごとのデフォルト設定一覧, item);
-  const { デフォルト設定 } = res;
+  const 日光の強度設定 = _強度?.[現在の季節];
   const 上部補足情報 = (() => {
     const msg: string[] = [];
-    const _耐寒温度 =
-      typeof 耐寒温度 === 'number'
-        ? 耐寒温度
-        : typeof デフォルト設定?.耐寒温度 === 'number'
-        ? デフォルト設定?.耐寒温度
-        : undefined;
-    const _日光の強度設定 = 日光の強度設定 || デフォルト設定?.日光の強度設定?.[現在の季節];
-    if (typeof _耐寒温度 === 'number') msg.push(`🌡${_耐寒温度}℃`);
-    if (_日光の強度設定) msg.push(`☀️${日光の強度の短縮表現[_日光の強度設定]}`);
+    if (isDefined(耐寒温度)) msg.push(`🌡${耐寒温度}℃`);
+    if (isDefined(日光の強度設定)) msg.push(`☀️${日光の強度の短縮表現[日光の強度設定]}`);
     return msg.join();
   })();
 
@@ -157,8 +148,6 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const items = useMemo(() => {
     return getItems({ onDelete: () => onDelete(item.id!) });
   }, [item.id]);
-
-  const 水切れ日数 = item.詳細.水切れ日数 || デフォルト設定?.水切れ日数;
 
   return (
     <Dropdown trigger={['contextMenu']} menu={{ items }}>

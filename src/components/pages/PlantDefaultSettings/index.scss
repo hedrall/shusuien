@@ -1,26 +1,31 @@
 @use '../../../assets/variables' as v;
 
 .植物ごとのデフォルト設定ページ {
+
+  .Editable {
+    justify-content: start;
+  }
+  .MyLink {
+    display: block;
+    margin-bottom: 16px;
+  }
   .Section {
     margin: 16px 0;
   }
-  .一覧表示 {
-    margin: 16px 0;
+  .日光の強度 {
+    padding: 8px !important;
+    .側 {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px 8px;
 
-    .要素 {
-      .科属種 {
-        .項目 {
-          display: flex;
-        }
-      }
-      .日光の強度 {
-        .Item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          > p {
-            margin: 4px 0;
-          }
+      .Item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        > p {
+          margin: 4px 0;
         }
       }
     }

@@ -43,6 +43,10 @@ export function Editable<T extends 'text' | 'number' = 'text', V = T extends 'te
     const submitValue = async () => {
       const value = controller.field.value;
       if (isNumber) {
+        if (value === '') {
+          onSubmit(undefined);
+          return;
+        }
         // なぜかstringでくる
         // @ts-ignore
         await onSubmit(value ? parseInt(value) : undefined /*空文字相当*/);

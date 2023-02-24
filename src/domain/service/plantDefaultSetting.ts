@@ -1,5 +1,7 @@
 import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
-import { 鉢 } from '@frontend/domain/model/item';
+import { 日光の強度設定, 鉢 } from '@frontend/domain/model/item';
+import { optionalValue } from '@frontend/supports/functions';
+import { 季節 } from '@frontend/domain/const/season';
 
 export namespace 植物ごとのデフォルト設定サービス {
   type Res =
@@ -30,5 +32,30 @@ export namespace 植物ごとのデフォルト設定サービス {
 
     // 科のみで当てるのは意味がなさそう
     return { 一致Type: '一致なし', デフォルト設定: undefined };
+  };
+
+  export const デフォルト直を適用 = (i: 鉢, デフォルト設定一覧: 植物ごとのデフォルト設定[]) => {
+    const { デフォルト設定, 一致Type } = 植物ごとのデフォルト設定サービス.鉢の設定を特定(デフォルト設定一覧, i);
+    const mod = {
+      ...i,
+      詳細: {
+        ...i.詳細,
+        耐寒温度: optionalValue(i.詳細.耐寒温度, optionalValue(デフォルト設定?.耐寒温度, undefined)),
+        日光の強度設定: Object.values(季節).reduce((pre, 季節) => {
+          return {
+            ...pre,
+            [季節]: optionalValue(
+              i.詳細.日光の強度設定?.[季節],
+              optionalValue(デフォルト設定?.日光の強度設定?.[季節], undefined),
+            ),
+          };
+        }, 日光の強度設定.Default),
+        水切れ日数: optionalValue(i.詳細.水切れ日数, optionalValue(デフォルト設定?.水切れ日数, undefined)),
+      },
+    };
+    return {
+      デフォルトを適用した鉢: mod,
+      一致Type,
+    };
   };
 }
