@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { 棚 } from '@frontend/domain/model/tana';
-import { Badge, Dropdown, Image, ImageProps, Space, Table, TableColumnsType } from 'antd';
+import { Badge, Button, Dropdown, Image, ImageProps, Space, Table, TableColumnsType } from 'antd';
 import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢 } from '@frontend/domain/model/item';
@@ -9,6 +9,8 @@ import { Editable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { 科属種の入力 } from '@frontend/components/atoms/InputClass';
 import { Master } from '@frontend/components/atoms/InputClass/master';
+import { MyButton } from '@frontend/components/atoms/MyButton';
+import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/SelectFromDefaultSettingModal';
 
 export type TableViewProps = {
   棚一覧: 棚[];
@@ -45,6 +47,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
 
   const { 棚, user } = props;
   const { 鉢一覧 } = use鉢一覧(棚.id!, user);
+  const ref = useRef<デフォルト設定から選択するモーダル.Ref | null>(null);
 
   const getRender = (key: keyof 鉢['詳細']) => (_: unknown, 鉢: 鉢) => {
     const value = 鉢.詳細[key] || '';
@@ -68,8 +71,34 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
         return <Image {...imageProps} />;
       },
     },
-    // { title: 'id', dataIndex: 'id', key: 'id' },
-    { title: '名前', dataIndex: 'name', key: 'name' },
+    {
+      title: 'デフォルト設定から選ぶ',
+      dataIndex: 'd',
+      key: 'd',
+      render: (_, 鉢) => {
+        const onClick = () => ref.current?.open?.(鉢);
+        return (
+          <Button
+            tabIndex={0}
+            onClick={onClick}
+            onKeyDown={e => {
+              if (e.key === 'Enter') onClick();
+            }}
+            role="button"
+          >
+            選択する
+          </Button>
+        );
+      },
+    },
+    {
+      title: '名前',
+      dataIndex: 'name',
+      key: 'name',
+      render: (_, 鉢) => {
+        return <Editable value={鉢.name} name="name" onSubmit={e => 鉢.フィールドを更新('name', e)} />;
+      },
+    },
     {
       title: '科',
       dataIndex: '科',
@@ -81,7 +110,12 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
     { title: '作成日時', dataIndex: '作成日時', key: '作成日時' },
   ];
   console.log({ 鉢一覧 });
-  return <Table key={棚.id} columns={columns} dataSource={鉢一覧.map(i => ({ ...i, key: i.id }))} pagination={false} />;
+  return (
+    <>
+      <Table key={棚.id} columns={columns} dataSource={鉢一覧.map(i => ({ ...i, key: i.id }))} pagination={false} />
+      <デフォルト設定から選択するモーダル ref={ref} />
+    </>
+  );
 };
 
 const expandedRowRender = (user?: User) => (棚: 棚, index: number) => {
