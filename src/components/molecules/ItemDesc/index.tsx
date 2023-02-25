@@ -74,19 +74,40 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       await 鉢.日光の強度を更新(key, value === 指定なし ? undefined : value);
     };
   }
-  const デフォルト設定 = 植物ごとのデフォルト設定サービス.鉢の設定を特定(植物ごとのデフォルト設定一覧, 鉢);
+  const デフォルト設定一覧 = 植物ごとのデフォルト設定サービス.鉢の設定を特定(植物ごとのデフォルト設定一覧, 鉢);
+  const 耐寒温度のデフォルト = 植物ごとのデフォルト設定サービス.デフォルト直を加味した直の取得(
+    デフォルト設定一覧,
+    鉢,
+    '耐寒温度',
+  );
+  const 水切れ日数のデフォルト = 植物ごとのデフォルト設定サービス.デフォルト直を加味した直の取得(
+    デフォルト設定一覧,
+    鉢,
+    '水切れ日数',
+  );
   const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
     const 強度 = 詳細.日光の強度設定?.[季節];
-    const デフォルト = デフォルト設定.デフォルト設定?.日光の強度設定?.[季節];
+    const { 一致Type, value, デフォルトを適用 } =
+      植物ごとのデフォルト設定サービス.四季のあるデフォルト直を加味した直の取得(
+        デフォルト設定一覧,
+        鉢,
+        '日光の強度設定',
+      );
     return {
       onChange: e => 日光の強度を更新(季節)(e as 日光の強度),
       value: 強度,
       isLoading,
       size: 'small',
-      placeholder: typeof !強度 && デフォルト ? `${デフォルト} (${デフォルト設定.一致Type}より)` : undefined,
+      placeholder: デフォルトを適用 ? `${value} (${一致Type}より)` : undefined,
     };
   };
 
+  const 耐寒性のPlaceholder = 耐寒温度のデフォルト.デフォルトを適用
+    ? `${耐寒温度のデフォルト.value} (${耐寒温度のデフォルト.一致Type}より)`
+    : undefined;
+  const 水切れ日数のPlaceholder = 水切れ日数のデフォルト.デフォルトを適用
+    ? `${水切れ日数のデフォルト.value} (${水切れ日数のデフォルト.一致Type}より)`
+    : undefined;
   return (
     <>
       <Descriptions
@@ -112,6 +133,16 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           <div className="項目">
             種名: <Editable value={詳細.種名 || ''} name="種名" onSubmit={詳細を更新('種名')} />
           </div>
+          <div className="候補となっているデフォルト設定">
+            ※ 候補となっているデフォルト設定
+            {デフォルト設定一覧.map((設定, index) => {
+              return (
+                <p key={設定.デフォルト設定.order}>
+                  {index + 1}: {設定.デフォルト設定.order.split('-').join(' - ')}
+                </p>
+              );
+            })}
+          </div>
           <Button
             tabIndex={0}
             onClick={() => デフォルト設定から選択するモーダルref.current?.open(鉢)}
@@ -123,18 +154,6 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           >
             デフォルト設定から選択する
           </Button>
-        </Descriptions.Item>
-        <Descriptions.Item label="耐寒温度">
-          <Editable.Number
-            value={詳細.耐寒温度}
-            name="耐寒温度"
-            onSubmit={詳細を更新('耐寒温度')}
-            placeholder={
-              typeof 詳細.耐寒温度 !== 'number' && デフォルト設定.デフォルト設定?.耐寒温度
-                ? `${デフォルト設定.デフォルト設定?.耐寒温度} (${デフォルト設定.一致Type}より)`
-                : undefined
-            }
-          />
         </Descriptions.Item>
         <Descriptions.Item label="日光の強度" className="日光の強度">
           <div className="側">
@@ -148,16 +167,20 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
             })}
           </div>
         </Descriptions.Item>
+        <Descriptions.Item label="耐寒温度">
+          <Editable.Number
+            value={詳細.耐寒温度}
+            name="耐寒温度"
+            onSubmit={詳細を更新('耐寒温度')}
+            placeholder={水切れ日数のPlaceholder}
+          />
+        </Descriptions.Item>
         <Descriptions.Item label="水切れ日数">
           <Editable.Number
             value={詳細.水切れ日数}
             name="水切れ日数"
             onSubmit={詳細を更新('水切れ日数')}
-            placeholder={
-              typeof 詳細.水切れ日数 !== 'number' && デフォルト設定.デフォルト設定?.水切れ日数
-                ? `${デフォルト設定.デフォルト設定?.水切れ日数} (${デフォルト設定.一致Type}より)`
-                : undefined
-            }
+            placeholder={耐寒性のPlaceholder}
           />
         </Descriptions.Item>
         <Descriptions.Item label="追加日時">{作成日時.format(F)}</Descriptions.Item>

@@ -17,11 +17,13 @@ import { 鉢Service } from '@frontend/domain/service/item';
 const フィルタを適用 = (i: 鉢, filter: FilterState) => {
   const { 耐寒温度, keyword, 日光の強度, 最後の灌水からの経過日数 } = filter;
   let is = true;
-  if ((isDefined(耐寒温度) && isDefined(耐寒温度.start)) || isDefined(耐寒温度?.end)) {
+  if (isDefined(耐寒温度) && (isDefined(耐寒温度.start) || isDefined(耐寒温度?.end))) {
+    const start = 耐寒温度?.start;
+    const end = 耐寒温度?.end;
     is =
       !!i.詳細.耐寒温度 &&
-      (!isDefined(耐寒温度?.start) || i.詳細.耐寒温度 >= 耐寒温度?.start) &&
-      (!isDefined(耐寒温度?.end) || i.詳細.耐寒温度 <= 耐寒温度?.end);
+      (!isDefined(start) || i.詳細.耐寒温度 >= start) &&
+      (!isDefined(end) || i.詳細.耐寒温度 <= end);
   }
   if (isDefined(keyword)) {
     is = [i.詳細.科, i.詳細.属, i.詳細.種名, i.name].filter(Boolean).join('').includes(keyword);
@@ -50,7 +52,7 @@ const 鉢一覧Selector = selectorFamily<鉢[], 棚ID>({
       const filter = get(FILTER_STATE_ATOM);
 
       return 鉢一覧
-        .map(i => 植物ごとのデフォルト設定サービス.デフォルト直を適用(i, デフォルト設定一覧).デフォルトを適用した鉢)
+        .map(i => 植物ごとのデフォルト設定サービス.デフォルト直を適用(i, デフォルト設定一覧))
         .filter(i => フィルタを適用(i, filter));
     },
   set:
@@ -68,6 +70,9 @@ const 鉢一覧Selector = selectorFamily<鉢[], 棚ID>({
     },
 });
 
+/**
+ * デフォルト直が適用されているので注意
+ */
 export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
   const [state, set] = useRecoilState(鉢一覧Selector(棚Id));
 

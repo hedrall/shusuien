@@ -84,7 +84,6 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
 
   return (
     <div className="フィルタ条件の入力">
-      {/*<pre>{JSON.stringify(filter, null, 2)}</pre>*/}
       <Row gutter={[16, 0]}>
         <Col span={8}>
           <label>キーワード</label>
@@ -105,7 +104,6 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
           <Slider {...sliderProps} />
         </div>
       </Row>
-      <pre>{JSON.stringify(filter, null, 2)}</pre>
     </div>
   );
 };

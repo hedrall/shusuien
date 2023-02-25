@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { MouseEvent, MouseEventHandler, useCallback, useMemo, useRef } from 'react';
 import { Dropdown, Image, ImageProps, MenuProps, Popconfirm } from 'antd';
 import { 日光の強度の短縮表現, 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { NO_IMAGE } from '@frontend/supports/image';
@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { x日前の表記 } from '@frontend/supports';
 import { isDefined, optionalCall } from '@frontend/supports/functions';
 import cn from 'classnames';
+import { 現在の季節 } from '@frontend/domain/const/season';
 
 export type 鉢一覧の要素Props = {
   item: 鉢;
@@ -56,12 +57,6 @@ const 経過日数アラート色 = (_経過日数: number, 水切れ日数 = 14
   // 8 ~ 14 の7段階
   return グラデーション生成(水切れ色, アラート色, 経過日数, 水切れ日数);
 };
-
-import { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
-import { 現在の季節 } from '@frontend/domain/const/season';
-import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
-import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
 
 type EmptyCallback = () => void;
 

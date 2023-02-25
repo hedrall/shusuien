@@ -1,15 +1,12 @@
 import React, { useRef } from 'react';
 import { 棚 } from '@frontend/domain/model/tana';
-import { Badge, Button, Dropdown, Image, ImageProps, Space, Table, TableColumnsType } from 'antd';
+import { Button, Image, ImageProps, Table, TableColumnsType } from 'antd';
 import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢 } from '@frontend/domain/model/item';
-import { User, UserId } from '@frontend/domain/model/user';
+import { User } from '@frontend/domain/model/user';
 import { Editable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';
-import { 科属種の入力 } from '@frontend/components/atoms/InputClass';
-import { Master } from '@frontend/components/atoms/InputClass/master';
-import { MyButton } from '@frontend/components/atoms/MyButton';
 import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/SelectFromDefaultSettingModal';
 
 export type TableViewProps = {
