@@ -12,6 +12,7 @@ import { 季節, 現在の季節 } from '@frontend/domain/const/season';
 import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
 import { NOW, 今日 } from '@frontend/supports/date';
+import { 鉢Service } from '@frontend/domain/service/item';
 
 const フィルタを適用 = (i: 鉢, filter: FilterState) => {
   const { 耐寒温度, keyword, 日光の強度, 最後の灌水からの経過日数 } = filter;
@@ -72,7 +73,8 @@ export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
 
   const 鉢を購読 = (userId: UserId, 棚Id: 棚ID) => {
     return FSAppRepository.鉢.一覧購読({ userId, 棚Id }, items => {
-      set(items.map(i => i.value));
+      console.log('[購読]: 鉢一覧', items);
+      set(鉢Service.並び替える(items.map(i => i.value)));
     });
   };
 
