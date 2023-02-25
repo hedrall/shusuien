@@ -8,6 +8,9 @@ export type FilterState = {
   };
   日光の強度?: 日光の強度;
   keyword?: string;
+  最後の灌水からの経過日数?: {
+    start?: number;
+  };
 };
 
 export const FILTER_STATE_ATOM = atom<FilterState>({

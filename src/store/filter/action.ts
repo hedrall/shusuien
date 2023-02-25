@@ -25,6 +25,10 @@ export const useFilter = () => {
         set(pre => ({ ...pre, 耐寒温度: { start, end } })),
       日光の強度: (v?: 日光の強度) => set(pre => ({ ...pre, 日光の強度: v })),
       keyword: (v?: string) => set(pre => ({ ...pre, keyword: v })),
+      最後の灌水からの経過日数: (v: number | undefined) => {
+        console.log({ update: v });
+        set(pre => ({ ...pre, 最後の灌水からの経過日数: { start: v } }));
+      },
     },
   };
 };

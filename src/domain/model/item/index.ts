@@ -12,6 +12,7 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { Subject } from 'rxjs';
 import fs from 'firebase/firestore';
 import { 季節 } from '@frontend/domain/const/season';
+import { 今日 } from '@frontend/supports/date';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 
@@ -220,6 +221,12 @@ export class 鉢 extends 鉢のBase {
   詳細を更新 = _詳細を更新;
   日光の強度を更新 = _日光の強度を更新;
   フィールドを更新 = _フィールドを更新;
+
+  get 最後の灌水からの経過日数(): number | undefined {
+    const 日時 = this.snapshot.最後の灌水?.日時;
+    console.log({ 日時 });
+    return optionalCall(日時, v => 今日.diff(v.startOf('day'), 'days'));
+  }
 
   static 管理 = {
     新規作成: _新規作成する,

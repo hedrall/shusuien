@@ -54,7 +54,7 @@ export namespace 植物ごとのデフォルト設定サービス {
       },
     };
     return {
-      デフォルトを適用した鉢: mod,
+      デフォルトを適用した鉢: new 鉢(mod),
       一致Type,
     };
   };

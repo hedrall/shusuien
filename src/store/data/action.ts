@@ -11,9 +11,10 @@ import { 植物ごとのデフォルト設定サービス } from '@frontend/doma
 import { 季節, 現在の季節 } from '@frontend/domain/const/season';
 import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
+import { NOW, 今日 } from '@frontend/supports/date';
 
 const フィルタを適用 = (i: 鉢, filter: FilterState) => {
-  const { 耐寒温度, keyword, 日光の強度 } = filter;
+  const { 耐寒温度, keyword, 日光の強度, 最後の灌水からの経過日数 } = filter;
   let is = true;
   if ((isDefined(耐寒温度) && isDefined(耐寒温度.start)) || isDefined(耐寒温度?.end)) {
     is =
@@ -27,6 +28,13 @@ const フィルタを適用 = (i: 鉢, filter: FilterState) => {
   if (isDefined(日光の強度)) {
     const 今季の強度 = i.詳細.日光の強度設定?.[現在の季節];
     is = isDefined(今季の強度) && 今季の強度 === 日光の強度;
+  }
+  const 最後の灌水からの経過日数Start = 最後の灌水からの経過日数?.start;
+  if (isDefined(最後の灌水からの経過日数Start)) {
+    console.log({ i });
+    const 経過日数 = i.最後の灌水からの経過日数;
+    console.log({ 経過日数, 最後の灌水からの経過日数Start });
+    is = isDefined(経過日数) && 経過日数 >= 最後の灌水からの経過日数Start;
   }
   return is;
 };
@@ -64,7 +72,6 @@ export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
 
   const 鉢を購読 = (userId: UserId, 棚Id: 棚ID) => {
     return FSAppRepository.鉢.一覧購読({ userId, 棚Id }, items => {
-      console.log('鉢をlisten', items);
       set(items.map(i => i.value));
     });
   };

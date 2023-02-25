@@ -1,9 +1,9 @@
 import React from 'react';
 import { useFilter } from '@frontend/store/filter/action';
-import { Col, Input, InputProps, Row, Slider } from 'antd';
+import { Col, Input, InputNumber, InputNumberProps, InputProps, Row, Slider } from 'antd';
 import { 日光の強度 } from '@frontend/domain/model/item';
 import { SliderRangeProps } from 'antd/es/slider';
-import { optionalValue } from '@frontend/supports/functions';
+import { equalFn, isDefined, optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 
 namespace フィルタ条件の入力 {
@@ -60,7 +60,7 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
 
   const 強度 = filter.日光の強度;
   const 日光の強度SelectProps: 日光の強度Select.Props = {
-    onChange: e => set.日光の強度(e === '' ? undefined : (e as 日光の強度)),
+    onChange: e => set.日光の強度(optionalValue(e, undefined) as 日光の強度 | undefined),
     value: 強度,
     size: 'small',
   };
@@ -71,18 +71,32 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
     size: 'small',
     allowClear: true,
   };
+  const 最後の灌水からの経過日数InputProps: InputNumberProps = {
+    value: filter.最後の灌水からの経過日数?.start,
+    onChange: value => {
+      set.最後の灌水からの経過日数(optionalValue(value, undefined) as number | undefined);
+    },
+    size: 'small',
+    min: 0,
+    max: 365,
+    type: 'number',
+  };
 
   return (
     <div className="フィルタ条件の入力">
       {/*<pre>{JSON.stringify(filter, null, 2)}</pre>*/}
       <Row gutter={[16, 0]}>
-        <Col span={12}>
+        <Col span={8}>
           <label>キーワード</label>
           <Input {...keywordInputProps} />
         </Col>
-        <Col span={12}>
+        <Col span={8}>
           <label>日光の強度</label>
           <日光の強度Select {...日光の強度SelectProps} />
+        </Col>
+        <Col span={8}>
+          <label>最後の灌水から</label>
+          <InputNumber type="number" {...最後の灌水からの経過日数InputProps} />
         </Col>
       </Row>
       <Row className="耐寒温度Section">
@@ -91,6 +105,7 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
           <Slider {...sliderProps} />
         </div>
       </Row>
+      <pre>{JSON.stringify(filter, null, 2)}</pre>
     </div>
   );
 };
