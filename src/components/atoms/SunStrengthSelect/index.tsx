@@ -25,7 +25,6 @@ export const 日光の強度Select: React.FC<日光の強度Select.Props> = prop
     loading: isLoading,
     style: { width: '100%' },
     size,
-    popupClassName: '日光の強度SelectのPopup',
     placeholder,
   };
   return <Select className="日光の強度Select" {...selectProps} />;

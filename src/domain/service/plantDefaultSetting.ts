@@ -48,7 +48,7 @@ export namespace 植物ごとのデフォルト設定サービス {
     value: V;
     デフォルトを適用: boolean;
   };
-  export const デフォルト直を加味した直の取得 = <K extends '耐寒温度' | '水切れ日数'>(
+  export const デフォルト直を加味した直の取得 = <K extends '耐寒温度' | '水切れ日数' | '育成タイプ'>(
     items: Item[],
     鉢: 鉢,
     key: K,

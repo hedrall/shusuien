@@ -12,6 +12,7 @@ import { 季節 } from '@frontend/domain/const/season';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { 日光の強度 } from '@frontend/domain/model/item';
 import { uniqueArray } from '@frontend/supports/array';
+import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
 
 export namespace 植物ごとのデフォルト設定ページ {
   export type Props = {};
@@ -34,11 +35,26 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
       title: '属',
       dataIndex: '属',
       key: '属',
+      width: 200,
     },
     {
       title: '種',
       dataIndex: '種',
       key: '種',
+      width: 200,
+    },
+    {
+      title: '成長タイプ',
+      dataIndex: '成長タイプ',
+      key: '成長タイプ',
+      width: 140,
+      render: (_, 設定) => {
+        const props: 育成タイプSelect.Props = {
+          value: 設定['育成タイプ'],
+          onChange: e => 設定.更新.ルートプロパティ('育成タイプ', e),
+        };
+        return <育成タイプSelect {...props} />;
+      },
     },
     ...['耐寒温度', '水切れ日数'].map(key => {
       return {
@@ -48,6 +64,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
         render: (_, 設定) => {
           return <Editable.Number value={設定[key]} name={key} onSubmit={設定.更新.ルートプロパティ.bind(null, key)} />;
         },
+        width: 80,
       };
     }),
     {
@@ -78,6 +95,10 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
           </div>
         );
       },
+    },
+    {
+      title: '',
+      render: () => null,
     },
   ];
 

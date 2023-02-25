@@ -62,6 +62,12 @@ export type 日光の強度設定 = {
   冬?: 日光の強度;
 };
 
+export const 育成タイプ = {
+  冬: '冬',
+  春秋: '春秋',
+  夏: '夏',
+} as const;
+export type 育成タイプ = ValueOf<typeof 育成タイプ>;
 export class 鉢のBase {
   id: 鉢Id | undefined;
   userId: UserId;
@@ -71,6 +77,7 @@ export class 鉢のBase {
     科?: string;
     属?: string;
     種名?: string;
+    育成タイプ?: 育成タイプ;
     耐寒温度?: number;
     日光の強度設定?: 日光の強度設定;
     水切れ日数?: number;
@@ -103,6 +110,7 @@ export class 鉢のBase {
       科: props.詳細.科,
       属: props.詳細.属,
       種名: props.詳細.種名,
+      育成タイプ: props.詳細.育成タイプ,
       耐寒温度: props.詳細.耐寒温度,
       日光の強度設定: props.詳細.日光の強度設定,
       水切れ日数: props.詳細.水切れ日数,

@@ -1,5 +1,5 @@
 import { Opaque } from 'type-fest';
-import { 日光の強度設定, 鉢 } from '@frontend/domain/model/item';
+import { 日光の強度設定, 育成タイプ, 鉢 } from '@frontend/domain/model/item';
 import { Subject } from 'rxjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { UserId } from '@frontend/domain/model/user';
@@ -18,6 +18,7 @@ class Base implements 鉢.デフォルト設定可能な鉢のプロパティ {
   科: string | undefined;
   属: string | undefined;
   種: string | undefined;
+  育成タイプ?: 育成タイプ;
   耐寒温度?: number;
   水切れ日数?: number;
   日光の強度設定?: 日光の強度設定;
@@ -30,6 +31,7 @@ class Base implements 鉢.デフォルト設定可能な鉢のプロパティ {
     this.科 = props.科;
     this.属 = props.属;
     this.種 = props.種;
+    this.育成タイプ = props.育成タイプ;
     this.耐寒温度 = props.耐寒温度;
     this.水切れ日数 = props.水切れ日数;
     this.日光の強度設定 = props.日光の強度設定;
@@ -55,10 +57,13 @@ export class 植物ごとのデフォルト設定 extends Base {
   };
 
   更新 = {
-    ルートプロパティ: async <Key extends Extract<keyof 植物ごとのデフォルト設定, '耐寒温度' | '水切れ日数'>>(
+    ルートプロパティ: async <
+      Key extends Extract<keyof 植物ごとのデフォルト設定, '育成タイプ' | '耐寒温度' | '水切れ日数'>,
+    >(
       key: Key,
       value: 植物ごとのデフォルト設定[Key],
     ) => {
+      console.log('ルートプロパティ', { key, value });
       await FSAppRepository.植物ごとのデフォルト設定.更新(this.id!, { [key]: value });
     },
     日光の強度設定: async (value: 日光の強度設定[季節], 季節: 季節) => {

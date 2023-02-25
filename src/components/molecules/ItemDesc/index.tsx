@@ -1,4 +1,4 @@
-import { 日光の強度, 日光の強度設定, 鉢 } from '@frontend/domain/model/item';
+import { 日光の強度, 日光の強度設定, 育成タイプ, 鉢 } from '@frontend/domain/model/item';
 import React, { useRef } from 'react';
 import { Button, Descriptions, Select, SelectProps } from 'antd';
 import { optionalCall } from '@frontend/supports/functions';
@@ -17,6 +17,7 @@ import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSel
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/SelectFromDefaultSettingModal';
+import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
 
 const F = DATE_READONLY_FORMAT;
 
@@ -101,6 +102,21 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       placeholder: デフォルトを適用 ? `${value} (${一致Type}より)` : undefined,
     };
   };
+  const 育成タイプSelectProps: 育成タイプSelect.Props = (() => {
+    const value = 詳細.育成タイプ;
+    const {
+      一致Type,
+      value: defaultValue,
+      デフォルトを適用,
+    } = 植物ごとのデフォルト設定サービス.デフォルト直を加味した直の取得(デフォルト設定一覧, 鉢, '育成タイプ');
+    return {
+      onChange: e => 詳細を更新('育成タイプ')(e as 育成タイプ),
+      value,
+      isLoading,
+      size: 'small',
+      placeholder: デフォルトを適用 ? `${defaultValue} (${一致Type}より)` : undefined,
+    };
+  })();
 
   const 耐寒性のPlaceholder = 耐寒温度のデフォルト.デフォルトを適用
     ? `${耐寒温度のデフォルト.value} (${耐寒温度のデフォルト.一致Type}より)`
@@ -166,6 +182,9 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
               );
             })}
           </div>
+        </Descriptions.Item>
+        <Descriptions.Item label="育成タイプ">
+          <育成タイプSelect {...育成タイプSelectProps} />
         </Descriptions.Item>
         <Descriptions.Item label="耐寒温度">
           <Editable.Number
