@@ -6,7 +6,7 @@ import { 鉢サイズ } from '@frontend/domain/model/history';
 import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date';
 import { Editable, EditableProps } from '@frontend/components/atoms/Editable';
 import dayjs, { Dayjs } from 'dayjs';
-import { ICONS } from '@frontend/supports/icons';
+import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import { 棚ID } from '@frontend/domain/model/tana';
 import { useRecoilState } from 'recoil';
 import { 棚Selector } from '@frontend/store/data/action';
@@ -18,6 +18,7 @@ import { 植物ごとのデフォルト設定サービス } from '@frontend/doma
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/SelectFromDefaultSettingModal';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
+import { 植物ごとのデフォルト設定編集モーダル } from '@frontend/components/organisms/EditPDSModal';
 
 const F = DATE_READONLY_FORMAT;
 
@@ -40,6 +41,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
   const { 鉢 } = props;
   const { name, 詳細, snapshot, 作成日時, 補足 } = 鉢;
   const デフォルト設定から選択するモーダルref = useRef<デフォルト設定から選択するモーダル.Ref | null>(null);
+  const 植物ごとのデフォルト設定編集モーダルref = useRef<植物ごとのデフォルト設定編集モーダル.Ref | null>(null);
   const 鉢のサイズ = optionalCall(snapshot.鉢のサイズ, 鉢サイズ.toString);
   const 最後の灌水 = 最後の灌水の表示(snapshot.最後の灌水, now);
   const 最後の植替え = [snapshot.最後の植替え?.format(F)].filter(Boolean).join(', ');
@@ -152,10 +154,16 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           <div className="候補となっているデフォルト設定">
             ※ 候補となっているデフォルト設定
             {デフォルト設定一覧.map((設定, index) => {
+              const onClick = () => 植物ごとのデフォルト設定編集モーダルref.current?.open?.(設定.デフォルト設定.id!);
               return (
-                <p key={設定.デフォルト設定.order}>
-                  {index + 1}: {設定.デフォルト設定.order.split('-').join(' - ')}
-                </p>
+                <div className="Item" key={設定.デフォルト設定.order}>
+                  <p>
+                    {index + 1}: {設定.デフォルト設定.order.split('-').join(' - ')}
+                  </p>
+                  <div onClick={onClick} onKeyDown={e => e.key === 'Enter' && onClick()} role="button" tabIndex={0}>
+                    <OPERATION_ICONS.EDIT />
+                  </div>
+                </div>
               );
             })}
           </div>
@@ -191,7 +199,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
             value={詳細.耐寒温度}
             name="耐寒温度"
             onSubmit={詳細を更新('耐寒温度')}
-            placeholder={水切れ日数のPlaceholder}
+            placeholder={耐寒性のPlaceholder}
           />
         </Descriptions.Item>
         <Descriptions.Item label="水切れ日数">
@@ -199,7 +207,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
             value={詳細.水切れ日数}
             name="水切れ日数"
             onSubmit={詳細を更新('水切れ日数')}
-            placeholder={耐寒性のPlaceholder}
+            placeholder={水切れ日数のPlaceholder}
           />
         </Descriptions.Item>
         <Descriptions.Item label="追加日時">{作成日時.format(F)}</Descriptions.Item>
@@ -235,6 +243,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         </Descriptions.Item>
       </Descriptions>
       <デフォルト設定から選択するモーダル ref={デフォルト設定から選択するモーダルref} />
+      <植物ごとのデフォルト設定編集モーダル ref={植物ごとのデフォルト設定編集モーダルref} />
     </>
   );
 };

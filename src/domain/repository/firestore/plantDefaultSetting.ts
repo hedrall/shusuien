@@ -4,6 +4,7 @@ import { 植物ごとのデフォルト設定, 植物ごとのデフォルト設
 import { UserId } from '@frontend/domain/model/user';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import * as fs from 'firebase/firestore';
+import { 鉢, 鉢Id } from '@frontend/domain/model/item';
 
 type 設定 = 植物ごとのデフォルト設定;
 export namespace _FsApp植物ごとのデフォルト設定Repository {
@@ -28,5 +29,13 @@ export namespace _FsApp植物ごとのデフォルト設定Repository {
       items => onListen(items),
     );
     return { unsubscribe };
+  };
+
+  export const 単体購読 = (
+    id: 植物ごとのデフォルト設定Id,
+    onListen: (items: RefValue<植物ごとのデフォルト設定>) => void,
+  ) => {
+    const manager = new FsAppManager.植物ごとのデフォルト設定();
+    return FSAppRepository.listenById(manager, id, item => onListen(item));
   };
 }
