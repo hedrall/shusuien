@@ -29,6 +29,7 @@ export const useFilter = () => {
         console.log({ update: v });
         set(pre => ({ ...pre, 最後の灌水からの経過日数: { start: v } }));
       },
+      clear: () => set(FilterState.DEFAULT()),
     },
   };
 };
