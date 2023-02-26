@@ -13,34 +13,37 @@ import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
 import { NOW, 今日 } from '@frontend/supports/date';
 import { 鉢Service } from '@frontend/domain/service/item';
+import { ひらがなtoカタカナ } from '@frontend/supports/string';
 
 const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
   if (!filter.enabled) return true;
   const { 耐寒温度, keyword, 日光の強度, 最後の灌水からの経過日数 } = filter;
-  let is = true;
   if (isDefined(耐寒温度) && (isDefined(耐寒温度.start) || isDefined(耐寒温度?.end))) {
     const start = 耐寒温度?.start;
     const end = 耐寒温度?.end;
-    is =
+    const is =
       !!i.詳細.耐寒温度 &&
       (!isDefined(start) || i.詳細.耐寒温度 >= start) &&
       (!isDefined(end) || i.詳細.耐寒温度 <= end);
+    if (!is) return false;
   }
   if (isDefined(keyword)) {
-    is = [i.詳細.科, i.詳細.属, i.詳細.種名, i.name].filter(Boolean).join('').includes(keyword);
+    const k = ひらがなtoカタカナ(keyword);
+    const is = [i.詳細.科, i.詳細.属, i.詳細.種名, i.name].filter(Boolean).join('').includes(k);
+    if (!is) return false;
   }
   if (isDefined(日光の強度)) {
     const 今季の強度 = i.詳細.日光の強度設定?.[現在の季節];
-    is = isDefined(今季の強度) && 今季の強度 === 日光の強度;
+    const is = isDefined(今季の強度) && 今季の強度 === 日光の強度;
+    if (!is) return false;
   }
   const 最後の灌水からの経過日数Start = 最後の灌水からの経過日数?.start;
   if (isDefined(最後の灌水からの経過日数Start)) {
-    console.log({ i });
     const 経過日数 = i.最後の灌水からの経過日数;
-    console.log({ 経過日数, 最後の灌水からの経過日数Start });
-    is = isDefined(経過日数) && 経過日数 >= 最後の灌水からの経過日数Start;
+    const is = !isDefined(経過日数) || 経過日数 >= 最後の灌水からの経過日数Start;
+    if (!is) return false;
   }
-  return is;
+  return true;
 };
 
 const 鉢一覧Selector = selectorFamily<鉢[], 棚ID>({
