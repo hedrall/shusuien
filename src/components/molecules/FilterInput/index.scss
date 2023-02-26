@@ -38,6 +38,9 @@
       svg {
         color: v.$border-grey;
       }
+      :first-child {
+        flex-grow: 1;
+      }
     }
     .開閉ボタン {
       margin: 0;
