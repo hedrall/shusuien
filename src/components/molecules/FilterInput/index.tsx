@@ -3,7 +3,7 @@ import { useFilter } from '@frontend/store/filter/action';
 import { Col, Input, InputNumber, InputNumberProps, InputProps, Row, Slider } from 'antd';
 import { 日光の強度 } from '@frontend/domain/model/item';
 import { SliderRangeProps } from 'antd/es/slider';
-import { equalFn, isDefined, optionalCall, optionalValue } from '@frontend/supports/functions';
+import { optionalValue } from '@frontend/supports/functions';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { SYMBOL_ICONS } from '@frontend/supports/icons';
 
@@ -110,7 +110,7 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
           <Slider {...sliderProps} />
         </div>
       </Row>
-      <pre>{JSON.stringify(filter, null, 2)}</pre>
+      {/*<pre>{JSON.stringify(filter, null, 2)}</pre>*/}
     </div>
   );
 };

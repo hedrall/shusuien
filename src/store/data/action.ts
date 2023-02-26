@@ -14,7 +14,8 @@ import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/pla
 import { NOW, 今日 } from '@frontend/supports/date';
 import { 鉢Service } from '@frontend/domain/service/item';
 
-const フィルタを適用 = (i: 鉢, filter: FilterState) => {
+const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
+  if (!filter.enabled) return true;
   const { 耐寒温度, keyword, 日光の強度, 最後の灌水からの経過日数 } = filter;
   let is = true;
   if (isDefined(耐寒温度) && (isDefined(耐寒温度.start) || isDefined(耐寒温度?.end))) {

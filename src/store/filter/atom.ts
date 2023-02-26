@@ -15,6 +15,7 @@ export type FilterState = {
         start?: number;
       }
     | undefined;
+  enabled: boolean;
 };
 export namespace FilterState {
   export const DEFAULT = () => ({
@@ -22,6 +23,7 @@ export namespace FilterState {
     日光の強度: undefined,
     keyword: undefined,
     最後の灌水からの経過日数: undefined,
+    enabled: false,
   });
 }
 
