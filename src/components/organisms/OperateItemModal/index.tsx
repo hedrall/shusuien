@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { useAuthState } from '@frontend/store/auth/action';
-import { Image, Modal, ModalProps } from 'antd';
+import { Image, Modal, ModalProps, Popconfirm } from 'antd';
 import { 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 植替え操作モーダル } from '@frontend/components/organisms/ReplantOperationModal';
@@ -11,6 +11,7 @@ import { 鉢の履歴 } from '@frontend/components/molecules/HistoryTimeline';
 import { 灌水モーダル } from '@frontend/components/organisms/ProvideWater';
 import { ICONS } from '@frontend/supports/icons';
 import { 成長記録モーダル } from '@frontend/components/organisms/DocGrowthModal';
+import { Button } from 'antd';
 
 export namespace 鉢管理モーダル {
   export type Ref = {
@@ -29,10 +30,15 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
   const 灌水操作モーダルRef = useRef<灌水モーダル.Ref | null>(null);
   const 成長記録操作モーダルRef = useRef<成長記録モーダル.Ref | null>(null);
 
+  const close = () => {
+    setIsOpen(false);
+    setId(undefined);
+  };
+
   const modalProps: ModalProps = {
     className: '鉢管理モーダル',
     open: isOpen,
-    onCancel: () => setIsOpen(false),
+    onCancel: close,
     // onOk: () => 棚の作成を実行する(),
     okButtonProps: {
       // disabled: !isValid,
@@ -70,6 +76,10 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
     成長記録操作モーダルRef.current?.open(item);
   };
 
+  const 鉢を削除 = async () => {
+    await item?.削除();
+    close();
+  };
   return (
     <Modal {...modalProps}>
       <h1>鉢のお手入れ</h1>
@@ -110,6 +120,19 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
       </div>
 
       {item && <鉢の情報 鉢={item} />}
+
+      <div>
+        <Popconfirm
+          title="この鉢を本当に削除してよろしいですか？"
+          // description="Are you sure to delete this task?"
+          onConfirm={鉢を削除}
+          // onCancel={cancel}
+          okText="削除"
+          cancelText="キャンセル"
+        >
+          <Button danger>削除する</Button>
+        </Popconfirm>
+      </div>
 
       <h2 className="見出し">履歴</h2>
       <鉢の履歴 鉢={item} />

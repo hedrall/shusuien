@@ -8,6 +8,7 @@ import { x日前の表記 } from '@frontend/supports';
 import { isDefined, optionalCall } from '@frontend/supports/functions';
 import cn from 'classnames';
 import { 現在の季節 } from '@frontend/domain/const/season';
+import { onKeyEnter } from '@frontend/supports/keyboardAction';
 
 export type 鉢一覧の要素Props = {
   item: 鉢;
@@ -37,7 +38,7 @@ type Color = readonly [number, number, number];
 const グラデーション生成 = (startColor: Color, endColor: Color, index: number, 分割数: number) => {
   const color = startColor.map((start, i) => {
     const end = endColor[i];
-    return start + ((end - start) / 分割数) * index;
+    return Math.ceil(start + ((end - start) / 分割数) * index);
   });
   return `rgb(${color.join()})`;
 };
@@ -49,6 +50,7 @@ const アラート色 = [255, 44, 44] as const;
  * 1, 2, 3(水切れ色), 4, 5, 6(アラート色)
  */
 const 経過日数アラート色 = (_経過日数: number, 水切れ日数 = 14): string => {
+  console.log({ _経過日数, 水切れ日数 });
   let 経過日数 = _経過日数 + 1; /* 1, 2, 3, ... */
   if (経過日数 <= 水切れ日数 /* 1 ~ 7 の7段階 */) {
     return グラデーション生成(blue, 水切れ色, 経過日数, 水切れ日数);
@@ -138,6 +140,8 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
     },
     ...bind,
     role: 'button',
+    tabIndex: 0,
+    ...onKeyEnter(() => _鉢を選択('click')),
   };
 
   const items = useMemo(() => {
@@ -162,6 +166,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
           >
             <ICONS.灌水 />
             {最後の灌水からの経過日数.表記}
+            {経過日数アラート色(最後の灌水からの経過日数.日数, 水切れ日数)}
           </span>
         ) : null}
       </div>

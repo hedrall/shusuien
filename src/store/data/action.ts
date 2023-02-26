@@ -35,6 +35,12 @@ const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
   if (isDefined(日光の強度)) {
     const 今季の強度 = i.詳細.日光の強度設定?.[現在の季節];
     const is = isDefined(今季の強度) && 今季の強度 === 日光の強度;
+    console.log({
+      今季の強度,
+      日光の強度,
+      is,
+      i,
+    });
     if (!is) return false;
   }
   const 最後の灌水からの経過日数Start = 最後の灌水からの経過日数?.start;

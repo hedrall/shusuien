@@ -43,7 +43,7 @@ const グリッド表示 = ({ 棚一覧 }: { 棚一覧: 棚[] }) => {
     <Collapse className="棚一覧表示" defaultActiveKey={undefined}>
       {棚一覧.map((棚, index) => {
         const header = (
-          <div className="棚名部分">
+          <div className="棚名部分" role="listbox" tabIndex={0}>
             <span>{棚.name}</span>
             <Dropdown trigger={['click']} menu={{ items: getItems({ onDelete: () => 棚.削除() }) }}>
               <div

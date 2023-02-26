@@ -11,7 +11,7 @@ import { FloatMenu } from '@frontend/components/molecules/FloatMenu';
 import { MyLink } from '@frontend/components/atoms/MyLink';
 import { RadioGroup } from '@frontend/components/atoms/RadioGroup';
 import { useController, useForm } from 'react-hook-form';
-import { ICONS, OPERATION_ICONS, SYMBOL_ICONS } from '@frontend/supports/icons';
+import { SYMBOL_ICONS } from '@frontend/supports/icons';
 import { フィルタ条件の入力 } from '@frontend/components/molecules/FilterInput';
 
 export type TopPageProps = {};

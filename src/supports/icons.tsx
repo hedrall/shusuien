@@ -13,6 +13,7 @@ import { faTableCells } from '@fortawesome/free-solid-svg-icons';
 import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { 履歴の内容 } from '@frontend/domain/model/history';
 
 export const ICONS = {
@@ -41,4 +42,5 @@ export const SYMBOL_ICONS = {
   テーブル: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faTableList} style={{ ...p.style }} />,
   CLEAR: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faCircleXmark} style={{ ...p.style }} />,
   FILTER: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faFilter} style={{ ...p.style }} />,
+  UP: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faAngleUp} style={{ ...p.style }} />,
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFilter } from '@frontend/store/filter/action';
 import { Col, Input, InputNumber, InputNumberProps, InputProps, Row, Slider } from 'antd';
 import { 日光の強度 } from '@frontend/domain/model/item';
@@ -6,6 +6,8 @@ import { SliderRangeProps } from 'antd/es/slider';
 import { optionalValue } from '@frontend/supports/functions';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { SYMBOL_ICONS } from '@frontend/supports/icons';
+import cn from 'classnames';
+import { DebugOnly } from '@frontend/components/atoms/DebugOnly';
 
 namespace フィルタ条件の入力 {
   export type Props = {};
@@ -31,6 +33,7 @@ const DEFAULT_VALUES = () => ({
 
 export const フィルタ条件の入力: React.FC<フィルタ条件の入力.Props> = props => {
   const { filter, set } = useFilter();
+  const [詳細を表示, set詳細を表示] = useState(false);
 
   const 下限なし = -11;
   const 上限なし = 16;
@@ -90,27 +93,47 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
           <SYMBOL_ICONS.CLEAR /> <span>クリア</span>
         </div>
       </div>
-      <Row gutter={[16, 0]}>
-        <Col span={8}>
+      <Row gutter={[16, 0]} className="メイン" align="bottom">
+        <Col span={12}>
           <label>キーワード</label>
           <Input {...keywordInputProps} />
         </Col>
-        <Col span={8}>
-          <label>日光の強度</label>
-          <日光の強度Select {...日光の強度SelectProps} />
-        </Col>
-        <Col span={8}>
-          <label>最後の灌水から</label>
-          <InputNumber type="number" {...最後の灌水からの経過日数InputProps} />
+        <Col span={12}>
+          <p
+            onClick={() => set詳細を表示(pre => !pre)}
+            className={cn('開閉ボタン', { Open: 詳細を表示 })}
+            role="button"
+            tabIndex={0}
+          >
+            詳細な条件 <SYMBOL_ICONS.UP />
+          </p>
         </Col>
       </Row>
-      <Row className="耐寒温度Section">
-        <label>耐寒温度</label>
-        <div className="耐寒温度Slider">
-          <Slider {...sliderProps} />
-        </div>
+      <Row className="詳細">
+        {詳細を表示 ? (
+          <div className={cn('コンテナ', { Open: 詳細を表示 })}>
+            <Row gutter={[16, 0]}>
+              <Col span={8}>
+                <label>日光の強度</label>
+                <日光の強度Select {...日光の強度SelectProps} />
+              </Col>
+              <Col span={8}>
+                <label>最後の灌水から</label>
+                <InputNumber type="number" {...最後の灌水からの経過日数InputProps} />
+              </Col>
+            </Row>
+            <Row className="耐寒温度Section">
+              <label>耐寒温度</label>
+              <div className="耐寒温度Slider">
+                <Slider {...sliderProps} />
+              </div>
+            </Row>
+          </div>
+        ) : null}
       </Row>
-      {/*<pre>{JSON.stringify(filter, null, 2)}</pre>*/}
+      <DebugOnly>
+        <pre>{JSON.stringify(filter, null, 2)}</pre>
+      </DebugOnly>
     </div>
   );
 };
