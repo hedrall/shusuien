@@ -9,10 +9,11 @@ import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 export type UploadImageInput = string | undefined;
 export type UploadImageProps = {
   field: ControllerRenderProps<any, any>;
+  onFileSelect?: (file: File) => void;
 };
 
 export function UploadImage<Key extends string>(props: UploadImageProps) {
-  const { field } = props;
+  const { field, onFileSelect } = props;
   const { withLoading, isLoading } = useWithLoading();
   const setImageUrl = (dataUrl?: string) => {
     field.onChange(dataUrl);
@@ -21,6 +22,7 @@ export function UploadImage<Key extends string>(props: UploadImageProps) {
 
   const handleChange: UploadProps['onChange'] = async (info: UploadChangeParam<UploadFile>) => {
     if (info.file.status === 'done') {
+      onFileSelect?.(info.file as any as File);
       await withLoading(async () => {
         const { dataUrl } = await BrowserRepository.Image.compressFileIfLarge(info.file.originFileObj as File);
         setImageUrl(dataUrl);

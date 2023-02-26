@@ -54,6 +54,12 @@ export const 成長記録モーダル = forwardRef<成長記録モーダル.Ref,
   const [item, setItem] = useState<鉢 | null>(null);
   const { user } = useAuthState();
 
+  const open = (鉢: 鉢) => {
+    setItem(鉢);
+    console.log(鉢);
+    setIsOpen(true);
+  };
+
   const { control, getValues, reset, setValue } = useForm<Input>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -65,9 +71,7 @@ export const 成長記録モーダル = forwardRef<成長記録モーダル.Ref,
   const { imageDataUrl, memo, isUpdateImage } = createController(control);
 
   useEffect(() => {
-    console.log('image url change');
     if (value.imageDataUrl) {
-      console.log(' change is');
       setValue('isUpdateImage', true);
     }
   }, [value.imageDataUrl]);
@@ -110,11 +114,7 @@ export const 成長記録モーダル = forwardRef<成長記録モーダル.Ref,
 
   useImperativeHandle(ref, () => {
     return {
-      open: (鉢: 鉢) => {
-        setItem(鉢);
-        console.log(鉢);
-        setIsOpen(true);
-      },
+      open: open,
     };
   });
 

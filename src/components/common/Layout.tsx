@@ -47,6 +47,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       </div>
       <div className="Main">{children}</div>
       <div className="Footer">Created by Hedrall</div>
+      <canvas id="canvas" style={{ display: 'none' }} />
     </div>
   );
 };

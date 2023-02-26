@@ -55,4 +55,47 @@ export namespace _BrowserRepository_Image {
       };
     }
   };
+
+  export const canvasImageCompressor = async (imageDataUrl: string, size = 240): Promise<string> => {
+    const canvasの一辺 = size;
+
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = function () {
+        // 画像のonloadで, width, heightが読み取れるようになっている
+        const { width, height } = img;
+
+        // Canvasを準備
+        const canvas = document.getElementById('canvas') as HTMLCanvasElement | null;
+        const canvasContext = canvas?.getContext('2d');
+        if (!canvas || !canvasContext) {
+          throw new Error('このページに <canvas id="canvas" /> を設置してください。');
+        }
+
+        // 正方形に切り抜きたいので、切り抜き開始位置を決定していく
+        const 長編 = Math.min(width, height);
+        const xの切り抜き開始位置 = width / 2 - 長編 / 2;
+        const yの切り抜き開始位置 = height / 2 - 長編 / 2;
+
+        // Canvasに描画する
+        canvas.width = canvasの一辺;
+        canvas.height = canvasの一辺;
+        canvasContext.drawImage(
+          img,
+          xの切り抜き開始位置,
+          yの切り抜き開始位置,
+          長編,
+          長編,
+          0,
+          0,
+          canvasの一辺,
+          canvasの一辺,
+        );
+
+        resolve(canvas.toDataURL());
+      };
+
+      img.src = imageDataUrl;
+    });
+  };
 }
