@@ -31,9 +31,19 @@
   }
 
   .メイン {
+    .最後の灌水からの経過日数 {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      svg {
+        color: v.$border-grey;
+      }
+    }
     .開閉ボタン {
       margin: 0;
       margin-bottom: 2px;
+      font-size: 12px;
+      color: v.$color-blue;
 
       svg {
         transition: all ease-in-out .2s;

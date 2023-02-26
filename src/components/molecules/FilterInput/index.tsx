@@ -8,6 +8,7 @@ import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSel
 import { SYMBOL_ICONS } from '@frontend/supports/icons';
 import cn from 'classnames';
 import { DebugOnly } from '@frontend/components/atoms/DebugOnly';
+import { onClickOrEnter, onKeyEnter } from '@frontend/supports/keyboardAction';
 
 namespace フィルタ条件の入力 {
   export type Props = {};
@@ -88,17 +89,28 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
 
   return (
     <div className="フィルタ条件の入力">
-      <div className="クリアボタン" role="button" tabIndex={0}>
-        <div onClick={set.clear}>
-          <SYMBOL_ICONS.CLEAR /> <span>クリア</span>
+      {filter.enabled ? (
+        <div className="クリアボタン" role="button" tabIndex={0} {...onClickOrEnter(set.clear)}>
+          <div>
+            <SYMBOL_ICONS.CLEAR /> <span>クリア</span>
+          </div>
         </div>
-      </div>
+      ) : null}
       <Row gutter={[16, 0]} className="メイン" align="bottom">
-        <Col span={12}>
+        <Col span={8}>
           <label>キーワード</label>
           <Input {...keywordInputProps} />
         </Col>
-        <Col span={12}>
+        <Col span={8}>
+          <label>最後の灌水から</label>
+          <div className="最後の灌水からの経過日数">
+            <InputNumber type="number" {...最後の灌水からの経過日数InputProps} />
+            <div tabIndex={0} role="button" {...onClickOrEnter(() => set.最後の灌水からの経過日数(undefined))}>
+              <SYMBOL_ICONS.CLEAR />
+            </div>
+          </div>
+        </Col>
+        <Col span={8}>
           <p
             onClick={() => set詳細を表示(pre => !pre)}
             className={cn('開閉ボタン', { Open: 詳細を表示 })}
@@ -116,10 +128,6 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
               <Col span={8}>
                 <label>日光の強度</label>
                 <日光の強度Select {...日光の強度SelectProps} />
-              </Col>
-              <Col span={8}>
-                <label>最後の灌水から</label>
-                <InputNumber type="number" {...最後の灌水からの経過日数InputProps} />
               </Col>
             </Row>
             <Row className="耐寒温度Section">

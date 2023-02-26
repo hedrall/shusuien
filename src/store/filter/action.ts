@@ -1,6 +1,7 @@
 import { selector, useRecoilState } from 'recoil';
 import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { 日光の強度 } from '@frontend/domain/model/item';
+import { isDefined } from '@frontend/supports/functions';
 
 const isEmpty = (item: FilterState) => {
   const { enabled, ...rest } = item;
@@ -12,6 +13,7 @@ const FilterSelector = selector<FilterState>({
   set: ({ set }, _item) => {
     const item = _item as FilterState;
     set(FILTER_STATE_ATOM, pre => {
+      console.log({ pre, item });
       return {
         ...pre,
         ...item,
@@ -33,6 +35,10 @@ export const useFilter = () => {
       keyword: (v?: string) => set(pre => ({ ...pre, keyword: v, enabled: true })),
       最後の灌水からの経過日数: (v: number | undefined) => {
         console.log({ update: v });
+        if (!isDefined(v)) {
+          set(pre => ({ ...pre, 最後の灌水からの経過日数: undefined }));
+          return;
+        }
         set(pre => ({ ...pre, 最後の灌水からの経過日数: { start: v }, enabled: true }));
       },
       toggleEnabled: () => set(pre => ({ ...pre, enabled: !pre.enabled })),
