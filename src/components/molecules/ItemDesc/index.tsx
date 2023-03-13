@@ -1,7 +1,7 @@
 import { 日光の強度, 日光の強度設定, 育成タイプ, 鉢 } from '@frontend/domain/model/item';
 import React, { useRef } from 'react';
 import { Button, Descriptions, Select, SelectProps } from 'antd';
-import { optionalCall } from '@frontend/supports/functions';
+import { isDefined, optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 鉢サイズ } from '@frontend/domain/model/history';
 import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date';
 import { Editable, EditableProps } from '@frontend/components/atoms/Editable';
@@ -196,7 +196,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         </Descriptions.Item>
         <Descriptions.Item label="耐寒温度">
           <Editable.Number
-            value={詳細.耐寒温度}
+            value={optionalValue(詳細.耐寒温度, undefined)}
             name="耐寒温度"
             onSubmit={詳細を更新('耐寒温度')}
             placeholder={耐寒性のPlaceholder}
@@ -204,7 +204,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         </Descriptions.Item>
         <Descriptions.Item label="水切れ日数">
           <Editable.Number
-            value={詳細.水切れ日数}
+            value={optionalValue(詳細.水切れ日数, undefined)}
             name="水切れ日数"
             onSubmit={詳細を更新('水切れ日数')}
             placeholder={水切れ日数のPlaceholder}
