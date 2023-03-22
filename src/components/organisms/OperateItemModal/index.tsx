@@ -44,6 +44,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
       // disabled: !isValid,
       style: { display: 'none' },
     },
+    closable: true,
     okText: '作成',
     cancelText: '閉じる',
     destroyOnClose: true,

@@ -1,13 +1,14 @@
 import React, { useRef } from 'react';
-import { 棚 } from '@frontend/domain/model/tana';
-import { Button, Image, ImageProps, Table, TableColumnsType } from 'antd';
-import { use鉢一覧 } from '@frontend/store/data/action';
+import { 棚, 棚ID } from '@frontend/domain/model/tana';
+import { Button, Image, ImageProps, Select, SelectProps, Table, TableColumnsType } from 'antd';
+import { use鉢一覧, 棚Selector } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢 } from '@frontend/domain/model/item';
 import { User } from '@frontend/domain/model/user';
 import { Editable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/SelectFromDefaultSettingModal';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export type TableViewProps = {
   棚一覧: 棚[];
@@ -44,6 +45,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
 
   const { 棚, user } = props;
   const { 鉢一覧 } = use鉢一覧(棚.id!, user);
+  const 棚一覧 = useRecoilValue(棚Selector);
   const ref = useRef<デフォルト設定から選択するモーダル.Ref | null>(null);
 
   const getRender = (key: keyof 鉢['詳細']) => (_: unknown, 鉢: 鉢) => {
@@ -104,7 +106,25 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
     },
     { title: '属', dataIndex: '属', key: '属', render: getRender('属') },
     { title: '種', dataIndex: '種', key: '種', render: getRender('種名') },
-    { title: '作成日時', dataIndex: '作成日時', key: '作成日時' },
+    {
+      title: '棚',
+      dataIndex: '棚',
+      key: '棚',
+      render: (_: unknown, 鉢: 鉢) => {
+        const 棚を変更 = async (id: 棚ID) => {
+          await 鉢.フィールドを更新('棚Id', id);
+        };
+        const 棚SelectProps: SelectProps = {
+          options: 棚一覧.map(i => ({ value: i.id, label: i.name })),
+          onChange: e => 棚を変更(e as 棚ID),
+          value: 鉢.棚Id,
+          style: { width: '100%' },
+          listHeight: 300,
+        };
+        return <Select {...棚SelectProps} />;
+      },
+      width: 300,
+    },
   ];
   console.log({ 鉢一覧 });
   return (
@@ -137,6 +157,7 @@ export const テーブル表示: React.FC<TableViewProps> = props => {
       <Table
         columns={columns}
         expandable={{ expandedRowRender: expandedRowRender(user) }}
+        pagination={undefined}
         dataSource={棚一覧.map(i => ({
           ...i,
           key: i.id,
