@@ -91,10 +91,11 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
   const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
     const 強度 = 詳細.日光の強度設定?.[季節];
     const { 一致Type, value, デフォルトを適用 } =
-      植物ごとのデフォルト設定サービス.四季のあるデフォルト直を加味した直の取得(
+      植物ごとのデフォルト設定サービス.デフォルト直を加味した四季のある直の取得(
         デフォルト設定一覧,
         鉢,
         '日光の強度設定',
+        季節,
       );
     return {
       onChange: e => 日光の強度を更新(季節)(e as 日光の強度),
