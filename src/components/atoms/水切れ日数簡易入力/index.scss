@@ -1,0 +1,39 @@
+@use '../../../assets/variables' as v;
+
+.水切れ日数簡易入力 {
+  .コントロール {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+
+    justify-content: center;
+    align-items: center;
+
+    .数値部分 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid v.$color-grey;
+      border-radius: 50%;
+      $size: 80px;
+      height: $size;
+      width: $size;
+
+      .メインの数値 {
+        font-size: 24px ;
+        color: v.$color-grey;
+      }
+
+      .一致タイプ {
+        color: v.$color-grey;
+        font-size: v.$font-size-normal;
+      }
+    }
+    .上矢印, .下矢印 {
+      font-size: 48px;
+      color: v.$color-grey;
+      padding: 16px;
+    }
+  }
+}

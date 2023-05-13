@@ -20,8 +20,8 @@ export namespace 植物ごとのデフォルト設定サービス {
     一致Type: 一致Type;
     デフォルト設定: 植物ごとのデフォルト設定;
   };
-  type Res = Item[];
-  export const 鉢の設定を特定 = (設定一覧: 植物ごとのデフォルト設定[], 鉢: 鉢): Res => {
+  export type 鉢のデフォルト設定 = Item[];
+  export const 鉢の設定を特定 = (設定一覧: 植物ごとのデフォルト設定[], 鉢: 鉢): 鉢のデフォルト設定 => {
     const { 科, 属, 種名 } = 鉢.詳細;
 
     const items: Item[] = [];

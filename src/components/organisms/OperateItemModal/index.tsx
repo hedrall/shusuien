@@ -12,6 +12,9 @@ import { 灌水モーダル } from '@frontend/components/organisms/ProvideWater'
 import { ICONS } from '@frontend/supports/icons';
 import { 成長記録モーダル } from '@frontend/components/organisms/DocGrowthModal';
 import { Button } from 'antd';
+import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
+import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
+import { 水切れ日数簡易入力 } from 'src/components/atoms/水切れ日数簡易入力';
 
 export namespace 鉢管理モーダル {
   export type Ref = {
@@ -20,6 +23,7 @@ export namespace 鉢管理モーダル {
   export type Props = {};
 }
 
+const 水切れ日数のDEFAULT = 6;
 export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢管理モーダル.Props>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [id, setId] = useState<鉢Id | undefined>(undefined);
@@ -81,17 +85,22 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
     await item?.削除();
     close();
   };
+
+  const { 植物ごとのデフォルト設定一覧 } = use植物ごとのデフォルト設定.一覧を利用();
+
+  if (!item) return null;
+
+  const デフォルト設定 = 植物ごとのデフォルト設定サービス.鉢の設定を特定(植物ごとのデフォルト設定一覧, item);
+
   return (
     <Modal {...modalProps}>
       <h1>鉢のお手入れ</h1>
-
       <div>
         <Image
           style={{ maxWidth: '100%', maxHeight: 250, minHeight: 174, objectFit: 'contain' }}
           src={item?.snapshot.画像のURL || NO_IMAGE}
         />
       </div>
-
       <h2 className="見出し">管理</h2>
       <div className="管理ボタン">
         <MyButton
@@ -119,9 +128,13 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
           onClick={成長記録モーダルを開く}
         />
       </div>
+      <水切れ日数簡易入力
+        鉢={item}
+        鉢のデフォルト設定={デフォルト設定}
+        onChange={value => item.詳細を更新('水切れ日数', value, true)}
+      />
 
       {item && <鉢の情報 鉢={item} />}
-
       <div>
         <Popconfirm
           title="この鉢を本当に削除してよろしいですか？"
@@ -134,10 +147,8 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
           <Button danger>削除する</Button>
         </Popconfirm>
       </div>
-
       <h2 className="見出し">履歴</h2>
       <鉢の履歴 鉢={item} />
-
       <植替え操作モーダル ref={植替え操作モーダルRef} />
       <灌水モーダル ref={灌水操作モーダルRef} />
       <成長記録モーダル ref={成長記録操作モーダルRef} />
