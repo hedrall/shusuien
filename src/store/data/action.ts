@@ -80,10 +80,8 @@ const 鉢一覧Selector = selectorFamily<鉢[], 棚ID>({
     },
 });
 
-/**
- * デフォルト直が適用されているので注意
- */
 export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
+  // デフォルト直が適用されているので注意
   const [state, set] = useRecoilState(鉢一覧Selector(棚Id));
 
   const 鉢を購読 = (userId: UserId, 棚Id: 棚ID) => {
@@ -101,6 +99,34 @@ export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
 
   return {
     鉢一覧: state,
+  };
+};
+
+export const use全ての鉢一覧 = (user: User | undefined) => {
+  // デフォルト直が適用されているので注意
+  const [state, set] = useRecoilState(鉢一覧Selector('#@$$@#all' as 棚ID));
+
+  const 鉢を購読 = (userId: UserId) => {
+    return FSAppRepository.鉢.全て購読(userId, items => {
+      console.log('[購読]: 全ての鉢を購読', items);
+      set(鉢Service.並び替える(items.map(i => i.value)));
+    });
+  };
+
+  useEffect(() => {
+    if (!user?.id) return;
+    const { unsubscribe } = 鉢を購読(user.id);
+    return () => unsubscribe();
+  }, [user?.id]);
+
+  return { 鉢一覧: state };
+};
+
+export const 灌水が必要な鉢一覧 = (user: User | undefined) => {
+  const { 鉢一覧 } = use全ての鉢一覧(user);
+  const filtered = 鉢一覧;
+  return {
+    鉢一覧,
   };
 };
 

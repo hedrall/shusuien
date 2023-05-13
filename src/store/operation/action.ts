@@ -12,7 +12,7 @@ export const 一括灌水モード設定Selector = selector<OperationState['一�
   },
   set: ({ set }, item) => {
     set(OPERATION_STATE_ATOM, pre => {
-      return { ...pre, 一括灌水モード設定: item };
+      return { ...pre, 一括灌水モード設定: item as OperationState['一括灌水モード設定'] };
     });
     if ('ON' in item) 一括灌水モードイベント.next(item.ON);
   },

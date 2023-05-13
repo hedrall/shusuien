@@ -129,7 +129,14 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
   console.log({ 鉢一覧 });
   return (
     <>
-      <Table key={棚.id} columns={columns} dataSource={鉢一覧.map(i => ({ ...i, key: i.id }))} pagination={false} />
+      <Table
+        key={棚.id}
+        columns={columns}
+        dataSource={鉢一覧.map(鉢 => {
+          return Object.assign(鉢, { key: 鉢.id });
+        })}
+        pagination={false}
+      />
       <デフォルト設定から選択するモーダル ref={ref} />
     </>
   );
@@ -158,10 +165,9 @@ export const テーブル表示: React.FC<TableViewProps> = props => {
         columns={columns}
         expandable={{ expandedRowRender: expandedRowRender(user) }}
         pagination={undefined}
-        dataSource={棚一覧.map(i => ({
-          ...i,
-          key: i.id,
-        }))}
+        dataSource={棚一覧.map(棚 => {
+          return Object.assign(棚, { key: 棚.id });
+        })}
       />
     </div>
   );

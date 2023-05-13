@@ -7,10 +7,8 @@ import * as fs from 'firebase/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import dayjs from 'dayjs';
 import { 小画像の生成 } from '@frontend/domain/model/item/operation/newItem';
-import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
-import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { 履歴 } from '@frontend/domain/model/history';
-import { FsManager } from '@frontend/domain/repository/firestore/manager';
+import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
 
 export type TopPageProps = {};
 
@@ -20,6 +18,31 @@ export const AdminPage: React.FC<TopPageProps> = props => {
 
   if (!user) return null;
   if (userId && userId !== 'DxHELmn516Zz0at4Kkn2U4uCKCp2') return null;
+
+  const 鉢を全て取得する = async () => {
+    const db = () => fs.getFirestore();
+    const col = fs.collection(db(), '鉢');
+    const query = fs.query(
+      col,
+      fs.where('userId', '==', userId),
+      fs.where('削除済み', '==', false),
+      fs.orderBy('作成日時', 'asc'),
+    );
+    const docs = await fs.getDocs(query);
+    const { refValue: values } = querySnapshotToRefValues(docs);
+
+    console.table(
+      values
+        .map(v => v.value as 鉢)
+        .map(v => {
+          return {
+            種名: v.詳細.種名,
+            最後の灌水: v.snapshot.最後の灌水,
+            水切れ日数: v.詳細.水切れ日数,
+          };
+        }),
+    );
+  };
 
   const 鉢の画像PATHをURLに載せ替える = async () => {
     const db = () => fs.getFirestore();
@@ -151,38 +174,16 @@ export const AdminPage: React.FC<TopPageProps> = props => {
     }
   };
 
-  const 鉢いっぱい以上をなくす = async () => {
-    // 鉢,履歴,棚
-    const colName = '鉢';
-    const db = () => fs.getFirestore();
-    const col = fs.collection(db(), colName);
-    const query = fs.query(col, fs.where('userId', '==', userId));
-    const docs = await fs.getDocs(query);
-    const { refValue: values } = querySnapshotToRefValues(docs);
-
-    const targets = values.filter(v => (v.value as 鉢).snapshot?.最後の灌水?.量 === '流れ出るくらい');
-    console.log(targets.map(v => v.value as 鉢).map(i => i.snapshot.最後の灌水));
-    for (const t of targets) {
-      console.log(t.ref.id);
-      await fs.updateDoc(t.ref, { 'snapshot.最後の灌水.量': '鉢いっぱい' });
-    }
-    // for (const item of values) {
-    //   console.log(`${1 + values.findIndex(i => i.ref.id === item.ref.id)}/${values.length}: ${item.ref.id}`);
-    //   const { ref, value } = item;
-    //   await fs.updateDoc(ref, { 削除済み: false });
-    // }
-  };
-
   return (
     <div>
       <h1>admin</h1>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <MyButton title="鉢を全て取得する" onClick={鉢を全て取得する} />
         <MyButton title="鉢の画像PATHをURLに載せ替える" onClick={鉢の画像PATHをURLに載せ替える} />
         <MyButton title="履歴の画像PATHをURLに載せ替える" onClick={履歴の画像PATHをURLに載せ替える} />
         <MyButton title="小画像を作成する" onClick={小画像を作成する} />
         <MyButton title="削除済みにfalseを設定" onClick={削除済みにfalseを設定} />
-        <MyButton title="鉢いっぱい以上をなくす" onClick={鉢いっぱい以上をなくす} />
       </div>
     </div>
   );

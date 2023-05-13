@@ -56,13 +56,13 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
         return <育成タイプSelect {...props} />;
       },
     },
-    ...['耐寒温度', '水切れ日数'].map(key => {
+    ...(['耐寒温度', '水切れ日数'] as const).map(key => {
       return {
         title: key,
         dataIndex: '種',
         key: '種',
-        render: (_, 設定) => {
-          return <Editable.Number value={設定[key]} name={key} onSubmit={設定.更新.ルートプロパティ.bind(null, key)} />;
+        render: (_: any, 設定: 植物ごとのデフォルト設定) => {
+          return <Editable.Number value={設定[key]} name={key} onSubmit={v => 設定.更新.ルートプロパティ(key, v)} />;
         },
         width: 80,
       };

@@ -17,7 +17,7 @@ export type 鉢一覧の要素Props = {
   一括灌水モード: boolean;
 };
 
-const getItems = (p: { onDelete: () => void }): MenuProps['items'] => [
+const getMenuItems = (p: { onDelete: () => void }): MenuProps['items'] => [
   {
     label: (
       <Popconfirm title="本当に削除してもよろしいですか？" onConfirm={p.onDelete} okText="削除" cancelText="キャンセル">
@@ -144,7 +144,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   };
 
   const items = useMemo(() => {
-    return getItems({ onDelete: () => onDelete(item.id!) });
+    return getMenuItems({ onDelete: () => onDelete(item.id!) });
   }, [item.id]);
 
   return (

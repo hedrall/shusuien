@@ -63,6 +63,7 @@ export const TopPage: React.FC<TopPageProps> = props => {
     <div className="Top">
       <h2 className="SectionTitle">表示形式</h2>
       <div className="Section コントロール">
+        {/* @ts-ignore*/}
         <RadioGroup field={C表示モード.field} options={表示モードのOption} size="small" />
       </div>
 

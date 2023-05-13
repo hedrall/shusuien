@@ -59,6 +59,19 @@ export namespace _FsApp鉢Repository {
     );
     return { unsubscribe };
   };
+  export const 全て購読 = (userId: UserId, onListen: (items: RefValue<鉢>[]) => void) => {
+    const manager = new FsAppManager.鉢();
+    const { unsubscribe } = FSAppRepository.listenList(
+      manager,
+      {
+        wheres: [fs.where('userId', '==', userId), fs.where('削除済み', '==', false)],
+        orderBy: [{ key: '作成日時', dir: 'asc' }],
+        limit: 10, // todo delete
+      },
+      items => onListen(items),
+    );
+    return { unsubscribe };
+  };
   export const 単体購読 = (id: 鉢Id, onListen: (items: RefValue<鉢>) => void) => {
     const manager = new FsAppManager.鉢();
     return FSAppRepository.listenById(manager, id, items => onListen(items));

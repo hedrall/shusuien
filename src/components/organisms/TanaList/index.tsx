@@ -59,7 +59,7 @@ const グリッド表示 = ({ 棚一覧 }: { 棚一覧: 棚[] }) => {
         );
         return (
           <Panel key={index} header={header}>
-            <鉢一覧 棚={棚} key={index} />
+            <鉢一覧 棚Id={棚.id!} key={index} />
           </Panel>
         );
       })}

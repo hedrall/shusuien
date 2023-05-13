@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Col, notification, Row } from 'antd';
-import { 棚 } from '@frontend/domain/model/tana';
+import { 棚ID } from '@frontend/domain/model/tana';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 鉢作成モーダル } from '@frontend/components/organisms/CreateItemModal';
 import { use鉢一覧 } from '@frontend/store/data/action';
@@ -10,21 +10,33 @@ import { 鉢一覧の要素, 鉢一覧の要素Props } from '@frontend/component
 import { 鉢管理モーダル } from '@frontend/components/organisms/OperateItemModal';
 import { use一括灌水モード設定 } from '@frontend/store/operation/action';
 import dayjs from 'dayjs';
+import { UserId } from '@frontend/domain/model/user';
 
 export type ItemListProps = {
-  棚: 棚;
+  棚Id: 棚ID;
 };
 
 export const 鉢一覧: React.FC<ItemListProps> = props => {
-  const { 棚 } = props;
+  const { 棚Id } = props;
+  const { user } = useAuthState();
+  const { 鉢一覧 } = use鉢一覧(棚Id, user);
+
+  const viewProps: 鉢一覧ViewProps = { 鉢一覧, 棚Id, userId: user?.id };
+
+  return <鉢一覧View {...viewProps} />;
+};
+
+type 鉢一覧ViewProps = {
+  鉢一覧: 鉢[];
+  棚Id: 棚ID | undefined;
+  userId: UserId | undefined;
+};
+export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
+  const { userId, 鉢一覧, 棚Id } = props;
   const 鉢操作モーダルRef = useRef<鉢作成モーダル.Ref | null>(null);
   const 鉢管理モーダルRef = useRef<鉢管理モーダル.Ref | null>(null);
-  const { user } = useAuthState();
   const 一括灌水モード設定 = use一括灌水モード設定();
   const [api, notElem] = notification.useNotification();
-
-  const 棚Id = 棚.id!;
-  const { 鉢一覧 } = use鉢一覧(棚Id, user);
 
   const 鉢作成モーダルを開く = () => 鉢操作モーダルRef.current?.open();
 
@@ -40,10 +52,10 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
       api.warning({ message: '本日灌水済みのためスキップします。', placement: 'bottomRight' });
       return;
     }
-    if (!user) return;
+    if (!userId) return;
     await 鉢.管理.灌水({
       item,
-      userId: user.id,
+      userId,
       灌水量: 一括灌水モード設定.state.灌水量,
     });
   };
@@ -79,9 +91,11 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
         })}
       </Row>
       {/* 新規作成ボタン */}
-      <div className="Section">
-        <MyButton title={'⨁ 鉢を追加する'} onClick={鉢作成モーダルを開く} />
-      </div>
+      {!棚Id ? null : (
+        <div className="Section">
+          <MyButton title={'⨁ 鉢を追加する'} onClick={鉢作成モーダルを開く} />
+        </div>
+      )}
 
       <鉢作成モーダル ref={鉢操作モーダルRef} 棚Id={棚Id} />
       <鉢管理モーダル ref={鉢管理モーダルRef} />

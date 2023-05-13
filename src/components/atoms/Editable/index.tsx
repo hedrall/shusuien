@@ -75,21 +75,23 @@ export function Editable<T extends 'text' | 'number' = 'text', V = T extends 'te
 
   return (
     <div className="Editable">
-      {value !== undefined ? (
-        value
-      ) : placeholder !== undefined ? (
-        <span className="Placeholder">{placeholder}</span>
-      ) : null}
-      <div
-        onClick={startEdit}
-        role="button"
-        tabIndex={0}
-        onKeyDown={e => {
-          if (e.key === 'Enter') startEdit();
-        }}
-      >
-        <OPERATION_ICONS.EDIT />
-      </div>
+      <>
+        {value !== undefined ? (
+          value
+        ) : placeholder !== undefined ? (
+          <span className="Placeholder">{placeholder}</span>
+        ) : null}
+        <div
+          onClick={startEdit}
+          role="button"
+          tabIndex={0}
+          onKeyDown={e => {
+            if (e.key === 'Enter') startEdit();
+          }}
+        >
+          <OPERATION_ICONS.EDIT />
+        </div>
+      </>
     </div>
   );
 }
