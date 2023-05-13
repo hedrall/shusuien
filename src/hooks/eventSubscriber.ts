@@ -7,6 +7,7 @@ import { 一括灌水モードイベント } from '@frontend/store/operation/act
 export const useEventSubscriber = () => {
   const [api, contextHolder] = notification.useNotification();
 
+  notification.config({ maxCount: 3 });
   useEffect(() => {
     const unSubs: Subscription[] = [];
     unSubs.push(
