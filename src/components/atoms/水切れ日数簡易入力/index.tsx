@@ -2,13 +2,14 @@ import React from 'react';
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
 import { 鉢 } from '@frontend/domain/model/item';
 import { CaretDownOutlined, CaretUpOutlined, UpOutlined } from '@ant-design/icons';
+import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
 export type 水切れ日数簡易入力Props = {
   鉢: 鉢;
   鉢のデフォルト設定: 植物ごとのデフォルト設定サービス.鉢のデフォルト設定;
   onChange: (value: number) => void;
 };
 
-const DEFAULT = 6;
+const DEFAULT = 水切れのデフォルト日数;
 
 export const 水切れ日数簡易入力: React.FC<水切れ日数簡易入力Props> = props => {
   const { 鉢, 鉢のデフォルト設定, onChange } = props;

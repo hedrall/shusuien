@@ -6,14 +6,16 @@ import { User, UserId } from '@frontend/domain/model/user';
 import { 日光の強度設定, 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { useEffect, useState } from 'react';
 import { MASTER_STATE_ATOM } from '@frontend/store/master/atom';
-import { isDefined, optionalValue } from '@frontend/supports/functions';
+import { isDefined, optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
 import { 季節, 現在の季節 } from '@frontend/domain/const/season';
 import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
-import { NOW, 今日 } from '@frontend/supports/date';
+import { NOW, x日前の表記, 今日 } from '@frontend/supports/date';
 import { 鉢Service } from '@frontend/domain/service/item';
 import { ひらがなtoカタカナ } from '@frontend/supports/string';
+import dayjs from 'dayjs';
+import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
 
 const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
   if (!filter.enabled) return true;
@@ -102,7 +104,7 @@ export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
   };
 };
 
-export const use全ての鉢一覧 = (user: User | undefined) => {
+const use全ての鉢一覧 = (user: User | undefined) => {
   // デフォルト直が適用されているので注意
   const [state, set] = useRecoilState(鉢一覧Selector('#@$$@#all' as 棚ID));
 
@@ -124,10 +126,22 @@ export const use全ての鉢一覧 = (user: User | undefined) => {
 
 export const 灌水が必要な鉢一覧 = (user: User | undefined) => {
   const { 鉢一覧 } = use全ての鉢一覧(user);
-  const filtered = 鉢一覧;
-  return {
-    鉢一覧,
+  type Res = {
+    要灌水: 鉢[];
+    それ以外: 鉢[];
   };
+
+  return 鉢一覧.reduce<Res>(
+    (pre, 鉢) => {
+      const 最後の灌水からの経過日数 = 鉢.最後の灌水からの経過日数;
+      const is要灌水 =
+        !isDefined(最後の灌水からの経過日数) ||
+        最後の灌水からの経過日数 >= (鉢.詳細.水切れ日数 || 水切れのデフォルト日数);
+      if (is要灌水) return { ...pre, 要灌水: [...pre.要灌水, 鉢] };
+      return { ...pre, それ以外: [...pre.それ以外, 鉢] };
+    },
+    { 要灌水: [], それ以外: [] },
+  );
 };
 
 export const use鉢単体 = (id: 鉢Id | undefined, userId: UserId | undefined) => {

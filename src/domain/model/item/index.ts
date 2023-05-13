@@ -237,7 +237,6 @@ export class 鉢 extends 鉢のBase {
 
   get 最後の灌水からの経過日数(): number | undefined {
     const 日時 = this.snapshot.最後の灌水?.日時;
-    console.log({ 日時 });
     return optionalCall(日時, v => 今日.diff(v.startOf('day'), 'days'));
   }
 
