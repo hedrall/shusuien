@@ -66,7 +66,6 @@ export namespace _FsApp鉢Repository {
       {
         wheres: [fs.where('userId', '==', userId), fs.where('削除済み', '==', false)],
         orderBy: [{ key: '作成日時', dir: 'asc' }],
-        limit: 10, // todo delete
       },
       items => onListen(items),
     );

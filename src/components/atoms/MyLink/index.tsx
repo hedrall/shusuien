@@ -1,5 +1,6 @@
 import React, { MouseEventHandler, ReactNode } from 'react';
 import { NavigateFunction } from 'react-router-dom';
+import { ROUTES } from '@frontend/settings/routes';
 
 export type MyLinkProps = {
   path: string;
@@ -22,3 +23,7 @@ export const MyLink: React.FC<MyLinkProps> = props => {
     </span>
   );
 };
+
+export const TOPに戻るリンク = (props: { navigator: any }) => (
+  <MyLink path={ROUTES.TOP.PATH} navigator={props.navigator} text="TOPへ戻る" />
+);

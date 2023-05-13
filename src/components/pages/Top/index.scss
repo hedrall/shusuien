@@ -4,6 +4,23 @@
   .SectionTitle {
     font-size: 14px;
   }
+
+  .表示形式の内容 {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .灌水専用ページへのリンク {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      .New {
+        font-size: v.$font-size-normal;
+        color: v.$red;
+      }
+    }
+  }
+
   .棚を作成 {
     padding: 8px;
     border: dimgrey solid 1px;

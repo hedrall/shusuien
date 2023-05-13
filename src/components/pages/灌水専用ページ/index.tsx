@@ -4,6 +4,8 @@ import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢一覧View } from '@frontend/components/molecules/ItemList';
 import { 鉢 } from '@frontend/domain/model/item';
 import { 棚ID } from '@frontend/domain/model/tana';
+import { useNavigate } from 'react-router-dom';
+import { TOPに戻るリンク } from '@frontend/components/atoms/MyLink';
 
 export namespace 灌水専用ページ {
   export type Props = {};
@@ -13,6 +15,7 @@ type 棚ごと = { [棚名: string]: 鉢[] };
 
 export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = props => {
   const { user } = useAuthState();
+  const navigator = useNavigate();
   const { 棚一覧 } = use棚一覧.一覧を利用();
   const { 要灌水, それ以外 } = 灌水が必要な鉢一覧(user);
 
@@ -26,9 +29,10 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = prop
   }, {});
   return (
     <div className="灌水専用ページ">
+      <TOPに戻るリンク navigator={navigator} />
       <h2>要灌水ページ</h2>
-      <鉢一覧View userId={user?.id} 鉢一覧={要灌水} 棚Id={undefined} />
       {Object.entries(棚ごと)
+        .filter(([棚名]) => 棚名 !== 'unknown')
         .sort((pre, cur) => {
           const pre棚Index = 棚一覧.findIndex(棚 => 棚.name === pre[0]);
           const cur棚Index = 棚一覧.findIndex(棚 => 棚.name === cur[0]);

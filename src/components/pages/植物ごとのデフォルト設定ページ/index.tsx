@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@frontend/settings/routes';
-import { MyLink } from '@frontend/components/atoms/MyLink';
+import { TOPに戻るリンク } from '@frontend/components/atoms/MyLink';
 import { 植物ごとのデフォルト設定の新規作成モーダル } from '@frontend/components/organisms/CreatePlantDefaultSettingModal';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
@@ -106,6 +105,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
   const data = この科の種.map(i => ({ ...i, key: i.order }));
   return <Table key={科} columns={columns} dataSource={data} />;
 };
+
 export const 植物ごとのデフォルト設定ページ: React.FC<植物ごとのデフォルト設定ページ.Props> = props => {
   const navigator = useNavigate();
   const 新規作成モーダルのRef = useRef<植物ごとのデフォルト設定の新規作成モーダル.Ref | null>(null);
@@ -115,7 +115,7 @@ export const 植物ごとのデフォルト設定ページ: React.FC<植物ご�
   const 科一覧 = uniqueArray(設定一覧.map(i => i.科)).map(i => ({ 科: i, key: i }));
   return (
     <div className="植物ごとのデフォルト設定ページ">
-      <MyLink path={ROUTES.TOP.PATH} navigator={navigator} text="TOPへ戻る" />
+      <TOPに戻るリンク navigator={navigator} />
       <Table
         columns={columns}
         expandable={{ expandedRowRender: expandedRowRender(設定一覧) }}
