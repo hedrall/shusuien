@@ -1,8 +1,8 @@
-import React, { MouseEvent, MouseEventHandler, useCallback, useMemo, useRef } from 'react';
-import { Dropdown, Image, ImageProps, MenuProps, Popconfirm } from 'antd';
+import React, { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
+import { Image, ImageProps } from 'antd';
 import { 日光の強度の短縮表現, 鉢, 鉢Id } from '@frontend/domain/model/item';
 import { NO_IMAGE } from '@frontend/supports/image';
-import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
+import { ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';
 import { x日前の表記 } from '@frontend/supports';
 import { isDefined, optionalCall } from '@frontend/supports/functions';
@@ -13,26 +13,8 @@ import { onKeyEnter } from '@frontend/supports/keyboardAction';
 export type 鉢一覧の要素Props = {
   item: 鉢;
   鉢を選択: (鉢: 鉢, eventType: 'click' | 'doubleClick') => void;
-  onDelete: (id: 鉢Id) => Promise<void>;
   一括灌水モード: boolean;
 };
-
-const getMenuItems = (p: { onDelete: () => void }): MenuProps['items'] => [
-  {
-    label: (
-      <Popconfirm title="本当に削除してもよろしいですか？" onConfirm={p.onDelete} okText="削除" cancelText="キャンセル">
-        <span>
-          <OPERATION_ICONS.DELETE style={{ marginRight: 4 }} />
-          削除
-        </span>
-      </Popconfirm>
-    ),
-    key: '0',
-    onClick: () => {
-      /* do nothing */
-    },
-  },
-];
 
 type Color = readonly [number, number, number];
 const グラデーション生成 = (startColor: Color, endColor: Color, index: number, 分割数: number) => {
@@ -112,7 +94,7 @@ export function useDoubleTap<Target = Element, Callback extends DoubleTapCallbac
 }
 
 export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
-  const { item, 鉢を選択, onDelete, 一括灌水モード } = props;
+  const { item, 鉢を選択, 一括灌水モード } = props;
   const _鉢を選択 = 鉢を選択.bind(null, item);
   const bind = useDoubleTap(() => _鉢を選択('doubleClick'), 300, {
     onSingleTap: () => _鉢を選択('click'),
@@ -143,31 +125,25 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
     ...onKeyEnter(() => _鉢を選択('click')),
   };
 
-  const items = useMemo(() => {
-    return getMenuItems({ onDelete: () => onDelete(item.id!) });
-  }, [item.id]);
-
   return (
-    <Dropdown trigger={['contextMenu']} menu={{ items }}>
-      <div
-        className={cn('鉢一覧の要素', { 一括灌水モード })}
-        onContextMenu={e => {
-          e.preventDefault();
-          e.stopPropagation();
-        }}
-      >
-        <Image {...imageProps} />
-        {上部補足情報 ? <span className="上部補足情報 表示">{上部補足情報}</span> : null}
-        {最後の灌水からの経過日数 ? (
-          <span
-            className="最後の灌水からの経過日数 表示"
-            style={{ color: 経過日数アラート色(最後の灌水からの経過日数.日数, 水切れ日数) }}
-          >
-            <ICONS.灌水 />
-            {最後の灌水からの経過日数.表記}
-          </span>
-        ) : null}
-      </div>
-    </Dropdown>
+    <div
+      className={cn('鉢一覧の要素', { 一括灌水モード })}
+      onContextMenu={e => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
+      <Image {...imageProps} />
+      {上部補足情報 ? <span className="上部補足情報 表示">{上部補足情報}</span> : null}
+      {最後の灌水からの経過日数 ? (
+        <span
+          className="最後の灌水からの経過日数 表示"
+          style={{ color: 経過日数アラート色(最後の灌水からの経過日数.日数, 水切れ日数) }}
+        >
+          <ICONS.灌水 />
+          {最後の灌水からの経過日数.表記}
+        </span>
+      ) : null}
+    </div>
   );
 };

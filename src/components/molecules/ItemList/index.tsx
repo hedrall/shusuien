@@ -61,13 +61,6 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
     });
   };
 
-  const 鉢を削除 = async (id: 鉢Id) => {
-    const 鉢 = 鉢一覧.find(i => i.id === id);
-    if (!鉢) return;
-    console.log('削除を実行', id);
-    await 鉢.削除();
-  };
-
   return (
     <div className="鉢一覧">
       {notElem}
@@ -81,12 +74,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
         {鉢一覧.map(鉢 => {
           return (
             <Col key={鉢.id} lg={2} sm={4} xs={8}>
-              <鉢一覧の要素
-                item={鉢}
-                鉢を選択={鉢を選択}
-                onDelete={鉢を削除}
-                一括灌水モード={一括灌水モード設定.state.ON}
-              />
+              <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} 一括灌水モード={一括灌水モード設定.state.ON} />
             </Col>
           );
         })}
