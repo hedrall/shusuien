@@ -33,7 +33,7 @@ type 鉢一覧ViewProps = {
 };
 export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
   const { userId, 鉢一覧, 棚Id } = props;
-  const 灌水ページから = !!棚Id;
+  const 灌水ページから = !棚Id;
   const 鉢操作モーダルRef = useRef<鉢作成モーダル.Ref | null>(null);
   const 鉢管理モーダルRef = useRef<鉢管理モーダル.Ref | null>(null);
   const 一括灌水モード設定 = use一括灌水モード設定();
@@ -71,7 +71,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
   return (
     <div className="鉢一覧">
       {notElem}
-      <Row className="鉢数">鉢数: {鉢一覧.length}</Row>
+      {灌水ページから ? null : <Row className="鉢数">鉢数: {鉢一覧.length}</Row>}
       <Row
         gutter={[
           { xs: 8, sm: 16, md: 24, lg: 32 },
@@ -92,7 +92,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
         })}
       </Row>
       {/* 新規作成ボタン */}
-      {!灌水ページから ? null : (
+      {灌水ページから ? null : (
         <div className="Section">
           <MyButton title={'⨁ 鉢を追加する'} onClick={鉢作成モーダルを開く} />
         </div>
