@@ -1,9 +1,9 @@
-import { 鉢, 鉢Id, 鉢のBase } from '@frontend/domain/model/item';
-import { _成長を記録する } from '@frontend/domain/model/item/operation/docGrowth';
+import { 鉢, 鉢Id, 鉢のBase } from 'src/domain/model/鉢';
+import { _成長を記録する } from '@frontend/domain/model/鉢/管理操作/成長を記録';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
-import { 履歴 } from '@frontend/domain/model/history';
+import { 履歴 } from '@frontend/domain/model/履歴';
 import { BrowserRepository } from '@frontend/domain/repository/browser';
 import { UserId } from '@frontend/domain/model/user';
 

@@ -1,10 +1,10 @@
 import { UserId } from '@frontend/domain/model/user';
-import { 履歴, 鉢サイズ } from '@frontend/domain/model/history';
+import { 履歴, 鉢サイズ } from '@frontend/domain/model/履歴';
 import { Dayjs } from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢 } from '@frontend/domain/model/item';
-import { 小画像の生成 } from '@frontend/domain/model/item/operation/newItem';
+import { 鉢 } from 'src/domain/model/鉢';
+import { 小画像の生成 } from '@frontend/domain/model/鉢/管理操作/新規作成';
 
 export type _植替えするParams = {
   item: 鉢;

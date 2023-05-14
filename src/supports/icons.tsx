@@ -14,7 +14,7 @@ import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { 履歴の内容 } from '@frontend/domain/model/history';
+import { 履歴の内容 } from '@frontend/domain/model/履歴';
 
 export const ICONS = {
   灌水: () => <FontAwesomeIcon icon={faDroplet} />,

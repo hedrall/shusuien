@@ -1,8 +1,8 @@
 import { UserId } from '@frontend/domain/model/user';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { useEffect, useState } from 'react';
-import { 履歴, 履歴の内容 } from '@frontend/domain/model/history';
-import { 鉢Id } from '@frontend/domain/model/item';
+import { 履歴, 履歴の内容 } from '@frontend/domain/model/履歴';
+import { 鉢Id } from 'src/domain/model/鉢';
 
 type Options = {
   filter: 履歴の内容.Type[];

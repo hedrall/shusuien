@@ -1,5 +1,5 @@
 import React from 'react';
-import { 棚 } from '@frontend/domain/model/tana';
+import { 棚 } from '@frontend/domain/model/棚';
 import { Collapse, Dropdown, MenuProps, Popconfirm } from 'antd';
 import { 鉢一覧 } from '@frontend/components/molecules/ItemList';
 import { OPERATION_ICONS, SYMBOL_ICONS } from '@frontend/supports/icons';

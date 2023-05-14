@@ -1,7 +1,7 @@
-import { 鉢 } from '@frontend/domain/model/item';
-import { 棚 } from '@frontend/domain/model/tana';
-import { 履歴 } from '@frontend/domain/model/history';
+import { 鉢 } from 'src/domain/model/鉢';
+import { 棚 } from '@frontend/domain/model/棚';
+import { 履歴 } from '@frontend/domain/model/履歴';
 import { User } from '@frontend/domain/model/user';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
+import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
 
 export type Entity = 鉢 | 棚 | 履歴 | User | 植物ごとのデフォルト設定;

@@ -1,17 +1,17 @@
 import { Opaque, ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import dayjs, { Dayjs } from 'dayjs';
-import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/history';
-import { 棚ID } from '@frontend/domain/model/tana';
+import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/履歴';
+import { 棚ID } from '@frontend/domain/model/棚';
 import { optionalCall } from '@frontend/supports/functions';
-import { _植替えする } from '@frontend/domain/model/item/operation/replant';
-import { _新規作成する } from '@frontend/domain/model/item/operation/newItem';
-import { _灌水する } from '@frontend/domain/model/item/operation/provideWater';
-import { _成長を記録する } from '@frontend/domain/model/item/operation/docGrowth';
+import { _植替えする } from '@frontend/domain/model/鉢/管理操作/植替';
+import { _新規作成する } from '@frontend/domain/model/鉢/管理操作/新規作成';
+import { _灌水する } from '@frontend/domain/model/鉢/管理操作/灌水';
+import { _成長を記録する } from '@frontend/domain/model/鉢/管理操作/成長を記録';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { Subject } from 'rxjs';
 import fs from 'firebase/firestore';
-import { 季節 } from '@frontend/domain/const/season';
+import { 季節 } from '@frontend/domain/const/季節';
 import { 今日 } from '@frontend/supports/date';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;

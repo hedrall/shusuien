@@ -1,9 +1,9 @@
 import { Opaque } from 'type-fest';
-import { 日光の強度設定, 育成タイプ, 鉢 } from '@frontend/domain/model/item';
+import { 日光の強度設定, 育成タイプ, 鉢 } from 'src/domain/model/鉢';
 import { Subject } from 'rxjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { UserId } from '@frontend/domain/model/user';
-import { 季節 } from '@frontend/domain/const/season';
+import { 季節 } from '@frontend/domain/const/季節';
 
 function getOrder(i: Base) {
   return [i.科, i.属, i.種].filter(Boolean).join('-');

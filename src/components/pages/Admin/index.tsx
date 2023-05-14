@@ -1,13 +1,13 @@
 import React from 'react';
 import { useAuthState } from '@frontend/store/auth/action';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢, 鉢Id } from '@frontend/domain/model/item';
+import { 鉢, 鉢Id } from 'src/domain/model/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import * as fs from 'firebase/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import dayjs from 'dayjs';
-import { 小画像の生成 } from '@frontend/domain/model/item/operation/newItem';
-import { 履歴 } from '@frontend/domain/model/history';
+import { 小画像の生成 } from '@frontend/domain/model/鉢/管理操作/新規作成';
+import { 履歴 } from '@frontend/domain/model/履歴';
 import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
 
 export type TopPageProps = {};

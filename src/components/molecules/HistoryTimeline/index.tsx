@@ -1,9 +1,9 @@
 import React from 'react';
 import { use鉢の履歴一覧 } from '@frontend/hooks/itemHistory';
-import { 鉢 } from '@frontend/domain/model/item';
+import { 鉢 } from 'src/domain/model/鉢';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Image, Timeline, TimelineProps } from 'antd';
-import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/history';
+import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/履歴';
 import { ICONS } from '@frontend/supports/icons';
 import { useController, useForm } from 'react-hook-form';
 import { 履歴のタイプでの絞り込みフィルターグループ } from '@frontend/components/atoms/HistoryTypeFilterButtonGroup';

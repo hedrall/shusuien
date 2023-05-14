@@ -6,10 +6,10 @@ import { MyButton } from '@frontend/components/atoms/MyButton';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 import { Table, TableColumnsType } from 'antd';
 import { Editable } from '@frontend/components/atoms/Editable';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
-import { 季節 } from '@frontend/domain/const/season';
+import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
+import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
-import { 日光の強度 } from '@frontend/domain/model/item';
+import { 日光の強度 } from 'src/domain/model/鉢';
 import { uniqueArray } from '@frontend/supports/array';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
 

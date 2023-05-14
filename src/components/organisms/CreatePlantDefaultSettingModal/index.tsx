@@ -2,14 +2,14 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
-import { 日光の強度, 日光の強度設定 } from '@frontend/domain/model/item';
+import { 日光の強度, 日光の強度設定 } from 'src/domain/model/鉢';
 import { Control, useController, UseControllerReturn, useForm } from 'react-hook-form';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
-import { 季節 } from '@frontend/domain/const/season';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
+import { 季節 } from '@frontend/domain/const/季節';
+import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 
 export namespace 植物ごとのデフォルト設定の新規作成モーダル {

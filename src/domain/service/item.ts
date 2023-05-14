@@ -1,4 +1,4 @@
-import { 鉢 } from '@frontend/domain/model/item';
+import { 鉢 } from 'src/domain/model/鉢';
 
 export namespace 鉢Service {
   export const 並び替える = (鉢一覧: 鉢[]) => {

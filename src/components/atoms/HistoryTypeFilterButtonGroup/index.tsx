@@ -1,6 +1,6 @@
 import React from 'react';
 import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
-import { 履歴の内容 } from '@frontend/domain/model/history';
+import { 履歴の内容 } from '@frontend/domain/model/履歴';
 import { ICONS } from '@frontend/supports/icons';
 import cn from 'classnames';
 

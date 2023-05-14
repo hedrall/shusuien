@@ -1,6 +1,6 @@
 import { selector, useRecoilState } from 'recoil';
 import { OPERATION_STATE_ATOM, OperationState } from '@frontend/store/operation/atom';
-import { 履歴の内容 } from '@frontend/domain/model/history';
+import { 履歴の内容 } from '@frontend/domain/model/履歴';
 import { Subject } from 'rxjs';
 
 export const 一括灌水モードイベント = new Subject<boolean>();

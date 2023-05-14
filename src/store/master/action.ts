@@ -2,7 +2,7 @@ import { selector, useRecoilState } from 'recoil';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { UserId } from '@frontend/domain/model/user';
 import { useEffect, useState } from 'react';
-import { 植物ごとのデフォルト設定, 植物ごとのデフォルト設定Id } from '@frontend/domain/model/plantDefautlSetting';
+import { 植物ごとのデフォルト設定, 植物ごとのデフォルト設定Id } from '@frontend/domain/model/植物のデフォルト設定';
 import { MASTER_STATE_ATOM } from '@frontend/store/master/atom';
 
 const 植物ごとのデフォルト設定Selector = selector<植物ごとのデフォルト設定[]>({

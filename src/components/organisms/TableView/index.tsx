@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { 棚, 棚ID } from '@frontend/domain/model/tana';
+import { 棚, 棚ID } from '@frontend/domain/model/棚';
 import { Button, Image, ImageProps, Select, SelectProps, Table, TableColumnsType } from 'antd';
 import { use鉢一覧, 棚Selector } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
-import { 鉢 } from '@frontend/domain/model/item';
+import { 鉢 } from 'src/domain/model/鉢';
 import { User } from '@frontend/domain/model/user';
 import { Editable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';

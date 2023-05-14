@@ -2,10 +2,10 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Button, Input, InputRef, Modal, ModalProps, Row, Table } from 'antd';
-import { 鉢 } from '@frontend/domain/model/item';
+import { 鉢 } from 'src/domain/model/鉢';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/plantDefautlSetting';
+import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
 
 export namespace デフォルト設定から選択するモーダル {
   export type Ref = {

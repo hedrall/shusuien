@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { 履歴の内容 } from '@frontend/domain/model/history';
+import { 履歴の内容 } from '@frontend/domain/model/履歴';
 
 export type OperationState = {
   一括灌水モード設定: {

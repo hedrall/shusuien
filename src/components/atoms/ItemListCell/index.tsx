@@ -1,13 +1,13 @@
 import React, { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
 import { Image, ImageProps } from 'antd';
-import { 日光の強度の短縮表現, 鉢, 鉢Id } from '@frontend/domain/model/item';
+import { 日光の強度の短縮表現, 鉢, 鉢Id } from 'src/domain/model/鉢';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';
 import { x日前の表記 } from '@frontend/supports';
 import { isDefined, optionalCall } from '@frontend/supports/functions';
 import cn from 'classnames';
-import { 現在の季節 } from '@frontend/domain/const/season';
+import { 現在の季節 } from '@frontend/domain/const/季節';
 import { onKeyEnter } from '@frontend/supports/keyboardAction';
 
 export type 鉢一覧の要素Props = {
