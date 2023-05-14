@@ -2,13 +2,14 @@ import React, { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react
 import { Image, ImageProps } from 'antd';
 import { 日光の強度の短縮表現, 鉢, 鉢Id } from 'src/domain/model/鉢';
 import { NO_IMAGE } from '@frontend/supports/image';
-import { ICONS } from '@frontend/supports/icons';
+import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';
 import { x日前の表記 } from '@frontend/supports';
 import { isDefined, optionalCall } from '@frontend/supports/functions';
 import cn from 'classnames';
 import { 現在の季節 } from '@frontend/domain/const/季節';
 import { onKeyEnter } from '@frontend/supports/keyboardAction';
+import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
 
 export type 鉢一覧の要素Props = {
   item: 鉢;
@@ -17,7 +18,7 @@ export type 鉢一覧の要素Props = {
 };
 
 type Color = readonly [number, number, number];
-const グラデーション生成 = (startColor: Color, endColor: Color, index: number, 分割数: number) => {
+export const グラデーション生成 = (startColor: Color, endColor: Color, index: number, 分割数: number) => {
   const color = startColor.map((start, i) => {
     const end = endColor[i];
     return Math.ceil(start + ((end - start) / 分割数) * index);
@@ -100,9 +101,14 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
     onSingleTap: () => _鉢を選択('click'),
   });
   const { 最後の灌水: _灌水 } = item.snapshot;
-  const { 耐寒温度, 日光の強度設定: _強度, 水切れ日数 } = item.詳細;
+  const { 耐寒温度, 日光の強度設定: _強度, 水切れ日数: _水切れ日数 } = item.詳細;
+  const 水切れ日数 = _水切れ日数 || 水切れのデフォルト日数;
   const 最後の灌水 = _灌水?.日時;
-  const 最後の灌水からの経過日数 = optionalCall(最後の灌水, v => x日前の表記(dayjs(), v)) || '';
+  const 経過日数 = {
+    最後の灌水: optionalCall(最後の灌水, v => x日前の表記(dayjs(), v)) || '',
+    最後の液肥: optionalCall(item.snapshot.最後の液肥.日時, v => x日前の表記(dayjs(), v)) || '',
+  } as const;
+
   const 日光の強度設定 = _強度?.[現在の季節];
   const 上部補足情報 = (() => {
     const msg: string[] = [];
@@ -135,13 +141,19 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
     >
       <Image {...imageProps} />
       {上部補足情報 ? <span className="上部補足情報 表示">{上部補足情報}</span> : null}
-      {最後の灌水からの経過日数 ? (
+      {経過日数.最後の灌水 ? (
         <span
           className="最後の灌水からの経過日数 表示"
-          style={{ color: 経過日数アラート色(最後の灌水からの経過日数.日数, 水切れ日数) }}
+          style={{ color: 経過日数アラート色(経過日数.最後の灌水.日数, 水切れ日数) }}
         >
           <ICONS.灌水 />
-          {最後の灌水からの経過日数.表記}
+          {経過日数.最後の灌水.表記}
+        </span>
+      ) : null}
+      {経過日数.最後の液肥 ? (
+        <span className="最後の液肥からの経過日数 表示">
+          <OPERATION_ICONS.肥料 />
+          {経過日数.最後の液肥.表記}
         </span>
       ) : null}
     </div>

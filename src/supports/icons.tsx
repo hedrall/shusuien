@@ -36,7 +36,7 @@ export const OPERATION_ICONS = {
   ),
   FLOAT_MENU: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faPlus} style={{ ...p.style }} />,
   設定: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faGear} style={{ ...p.style }} />,
-  肥料: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faPills} style={{ ...p.style }} />,
+  肥料: (p: { style?: CSSProperties }) => <span style={{ ...p.style }}>💊</span>,
 };
 
 export const SYMBOL_ICONS = {

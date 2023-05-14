@@ -32,6 +32,13 @@
     overflow-x: hidden;
   }
 
+  .最後の液肥からの経過日数 {
+    left: 0;
+    bottom: 0;
+    display: flex;
+    gap: 2px;
+  }
+
   &.一括灌水モード {
     border: 3px solid v.$color-blue;
     border-radius: 3px;
