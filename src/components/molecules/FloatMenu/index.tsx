@@ -1,22 +1,31 @@
 import { FloatButton } from 'antd';
 import React, { useRef } from 'react';
 import { ICONS, OPERATION_ICONS, SYMBOL_ICONS } from '@frontend/supports/icons';
-import { use一括灌水モード設定 } from '@frontend/store/operation/action';
+import { use一括灌水モード設定 } from '@frontend/store/一括灌水/action';
 import { 便利機能モーダル } from '@frontend/components/molecules/UtilityModal';
 import { useFilter } from '@frontend/store/filter/action';
+import { use灌水時の施肥有無設定 } from '@frontend/store/灌水時の施肥有無設定/action';
 
 export type FloatMenuProps = {};
 
 export const FloatMenu: React.FC<FloatMenuProps> = props => {
   const ref = useRef<便利機能モーダル.Ref | null>(null);
   const { filter, set: setFilter } = useFilter();
-  const {
-    state: { ON },
-    isをトグル,
-  } = use一括灌水モード設定();
+
+  const 一括灌水モード = use一括灌水モード設定();
+  const 灌水時の施肥有無設定 = use灌水時の施肥有無設定();
 
   return (
     <>
+      {灌水時の施肥有無設定.is ? (
+        <div className="FloatMenu 状態表示">
+          <p>
+            <OPERATION_ICONS.肥料 style={{ marginRight: 4 }} />
+            灌水時に施肥を記録
+          </p>
+        </div>
+      ) : null}
+
       <FloatButton.Group shape="circle" style={{ right: 84 }}>
         <FloatButton
           icon={<SYMBOL_ICONS.FILTER />}
@@ -31,7 +40,16 @@ export const FloatMenu: React.FC<FloatMenuProps> = props => {
         className="FloatMenu"
         icon={<OPERATION_ICONS.FLOAT_MENU />}
       >
-        <FloatButton icon={<ICONS.灌水 />} onClick={isをトグル} type={ON ? 'primary' : 'default'} />
+        <FloatButton
+          icon={<OPERATION_ICONS.肥料 />}
+          onClick={灌水時の施肥有無設定.toggle}
+          type={灌水時の施肥有無設定.is ? 'primary' : 'default'}
+        />
+        <FloatButton
+          icon={<ICONS.灌水 />}
+          onClick={一括灌水モード.toggle}
+          type={一括灌水モード.is ? 'primary' : 'default'}
+        />
         <FloatButton icon={<OPERATION_ICONS.設定 />} type="primary" onClick={ref.current?.open} />
       </FloatButton.Group>
 

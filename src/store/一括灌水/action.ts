@@ -1,5 +1,5 @@
 import { selector, useRecoilState } from 'recoil';
-import { OPERATION_STATE_ATOM, OperationState } from '@frontend/store/operation/atom';
+import { OPERATION_STATE_ATOM, OperationState } from '@frontend/store/一括灌水/atom';
 import { 履歴の内容 } from '@frontend/domain/model/履歴';
 import { Subject } from 'rxjs';
 
@@ -22,11 +22,12 @@ export const use一括灌水モード設定 = () => {
   const [state, set] = useRecoilState(一括灌水モード設定Selector);
 
   return {
-    isをトグル: () => {
+    toggle: () => {
       console.log('ON', state);
       set(pre => ({ ...pre, ON: !pre.ON }));
     },
+    is: state.ON,
     灌水量をセット: (灌水量: 履歴の内容.灌水.量のKey型) => set({ ...state, 灌水量 }),
-    state,
+    灌水量: state.灌水量,
   };
 };

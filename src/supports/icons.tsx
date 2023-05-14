@@ -14,6 +14,7 @@ import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { faPills } from '@fortawesome/free-solid-svg-icons';
 import { 履歴の内容 } from '@frontend/domain/model/履歴';
 
 export const ICONS = {
@@ -35,6 +36,7 @@ export const OPERATION_ICONS = {
   ),
   FLOAT_MENU: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faPlus} style={{ ...p.style }} />,
   設定: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faGear} style={{ ...p.style }} />,
+  肥料: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faPills} style={{ ...p.style }} />,
 };
 
 export const SYMBOL_ICONS = {

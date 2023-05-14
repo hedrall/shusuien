@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { Subscription } from 'rxjs';
 import { 鉢 } from 'src/domain/model/鉢';
 import { notification } from 'antd';
-import { 一括灌水モードイベント } from '@frontend/store/operation/action';
+import { 一括灌水モードイベント } from '@frontend/store/一括灌水/action';
+import { 灌水時の施肥有無設定イベント } from '@frontend/store/灌水時の施肥有無設定/action';
 
 export const useEventSubscriber = () => {
   const [api, contextHolder] = notification.useNotification();
@@ -38,17 +39,28 @@ export const useEventSubscriber = () => {
         api.success({ message: `${type}しました。`, placement: 'bottomRight' });
       }),
     );
-    // unSubs.push(
-    //   一括灌水モードイベント.subscribe(ON => {
-    //     if (ON) {
-    //       api.info({
-    //         message: `一括灌水モードをON!`,
-    //         description: '鉢をダブルクリックすると灌水されます。\n(灌水量は設定から変更可能)',
-    //         placement: 'bottomRight',
-    //       });
-    //     }
-    //   }),
-    // );
+    unSubs.push(
+      一括灌水モードイベント.subscribe(ON => {
+        if (ON) {
+          api.info({
+            message: `一括灌水モードをON!`,
+            description: '鉢をダブルクリックすると灌水されます。\n(灌水量は設定から変更可能)',
+            placement: 'bottomRight',
+          });
+        }
+      }),
+    );
+    unSubs.push(
+      灌水時の施肥有無設定イベント.subscribe(ON => {
+        if (ON) {
+          api.info({
+            message: `灌水時の施肥をON`,
+            description: '灌水時に液肥を施したことが記録されます。',
+            placement: 'bottomRight',
+          });
+        }
+      }),
+    );
     return () => {
       unSubs.map(us => us.unsubscribe());
     };

@@ -8,9 +8,10 @@ import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢, 鉢Id } from 'src/domain/model/鉢';
 import { 鉢一覧の要素, 鉢一覧の要素Props } from '@frontend/components/atoms/ItemListCell';
 import { 鉢管理モーダル } from '@frontend/components/organisms/OperateItemModal';
-import { use一括灌水モード設定 } from '@frontend/store/operation/action';
+import { use一括灌水モード設定 } from '@frontend/store/一括灌水/action';
 import dayjs from 'dayjs';
 import { UserId } from '@frontend/domain/model/user';
+import { use灌水時の施肥有無設定 } from '@frontend/store/灌水時の施肥有無設定/action';
 
 export type ItemListProps = {
   棚Id: 棚ID;
@@ -37,6 +38,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
   const 鉢操作モーダルRef = useRef<鉢作成モーダル.Ref | null>(null);
   const 鉢管理モーダルRef = useRef<鉢管理モーダル.Ref | null>(null);
   const 一括灌水モード設定 = use一括灌水モード設定();
+  const 灌水時の施肥有無設定 = use灌水時の施肥有無設定();
   const [api, notElem] = notification.useNotification();
 
   const 鉢作成モーダルを開く = () => 鉢操作モーダルRef.current?.open();
@@ -47,6 +49,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
       鉢管理モーダルRef.current?.open(item);
       return;
     }
+
     // 一括灌水モードの場合
     const 最後の灌水 = item.snapshot.最後の灌水;
     if (最後の灌水 && 最後の灌水.日時.format('YYYYMMDD') === dayjs().format('YYYYMMDD')) {
@@ -57,7 +60,8 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
     await 鉢.管理.灌水({
       item,
       userId,
-      灌水量: 一括灌水モード設定.state.灌水量,
+      灌水量: 一括灌水モード設定.灌水量,
+      液肥入り: 灌水時の施肥有無設定.is,
     });
   };
 
@@ -74,7 +78,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
         {鉢一覧.map(鉢 => {
           return (
             <Col key={鉢.id} lg={2} sm={4} xs={8}>
-              <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} 一括灌水モード={一括灌水モード設定.state.ON} />
+              <鉢一覧の要素 item={鉢} 鉢を選択={鉢を選択} 一括灌水モード={一括灌水モード設定.is} />
             </Col>
           );
         })}

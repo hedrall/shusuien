@@ -9,8 +9,8 @@ import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { VerticalRadioGroup } from '@frontend/components/atoms/VerticalRadioGroup';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 import { 灌水量の選択肢 } from '@frontend/supports/selections';
-import { OperationState } from '@frontend/store/operation/atom';
-import { use一括灌水モード設定 } from '@frontend/store/operation/action';
+import { OperationState } from '@frontend/store/一括灌水/atom';
+import { use一括灌水モード設定 } from '@frontend/store/一括灌水/action';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { ICONS } from '@frontend/supports/icons';
 
@@ -48,7 +48,7 @@ export const 便利機能モーダル = forwardRef<便利機能モーダル.Ref,
 
   const selectProps: SelectProps = {
     options,
-    value: 一括灌水モード.state.灌水量,
+    value: 一括灌水モード.灌水量,
     onChange: e => {
       一括灌水モード.灌水量をセット(e);
     },
@@ -64,14 +64,12 @@ export const 便利機能モーダル = forwardRef<便利機能モーダル.Ref,
               <ICONS.灌水 /> 一括灌水モード
             </div>
           }
-          onClick={一括灌水モード.isをトグル}
-          style={{ background: 一括灌水モード.state.ON ? '#0063F8' : '#525252' }}
+          onClick={一括灌水モード.toggle}
+          style={{ background: 一括灌水モード.is ? '#0063F8' : '#525252' }}
         />
         <Select {...selectProps} />
       </div>
-      {一括灌水モード.state.ON ? (
-        <p className="一括灌水モードの補足">⚠️ 鉢のアイコンを押すと灌水を実行します。</p>
-      ) : null}
+      {一括灌水モード.is ? <p className="一括灌水モードの補足">⚠️ 鉢のアイコンを押すと灌水を実行します。</p> : null}
     </Modal>
   );
 });

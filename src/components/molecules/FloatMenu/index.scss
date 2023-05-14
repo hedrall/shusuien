@@ -1,2 +1,17 @@
+@use '../../../assets/variables' as v;
+
 .FloatMenu {
+  &.状態表示 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 8px 16px;
+    background: v.$color-blue;
+    border-radius: 0 4px 0 0;
+    color: white;
+    z-index: 100;
+    p {
+      margin: 0;
+    }
+  }
 }
