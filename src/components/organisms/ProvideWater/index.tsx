@@ -5,11 +5,11 @@ import { Modal, ModalProps } from 'antd';
 import { 鉢 } from 'src/domain/model/鉢';
 import { 履歴の内容 } from '@frontend/domain/model/履歴';
 import { Control, useController, useForm } from 'react-hook-form';
-import { RadioGroupOption } from '@frontend/components/atoms/RadioGroup';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { VerticalRadioGroup } from '@frontend/components/atoms/VerticalRadioGroup';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 import { 灌水量の選択肢 } from '@frontend/supports/selections';
+import { MySwitch } from '@frontend/components/atoms/MySwitch';
 
 export namespace 灌水モーダル {
   export type Ref = {
@@ -19,20 +19,25 @@ export namespace 灌水モーダル {
 }
 
 type Input = {
-  amount: 履歴の内容.灌水.量のKey型;
+  灌水量: 履歴の内容.灌水.量のKey型;
+  液肥入り: boolean;
 };
 
 const DEFAULT_VALUES = (): Partial<Input> => ({
-  amount: 履歴の内容.灌水.量の定義['鉢いっぱい'].key,
+  灌水量: 履歴の内容.灌水.量の定義['鉢いっぱい'].key,
 });
 
 const createController = (control: Control<Input, any>) => {
-  const amount = useController({
+  const 灌水量 = useController({
     control,
-    name: 'amount',
+    name: '灌水量',
     rules: { required: true },
   });
-  return { amount };
+  const 液肥入り = useController({
+    control,
+    name: '液肥入り',
+  });
+  return { 灌水量, 液肥入り };
 };
 
 export const 灌水モーダル = forwardRef<灌水モーダル.Ref, 灌水モーダル.Props>((props, ref) => {
@@ -47,23 +52,20 @@ export const 灌水モーダル = forwardRef<灌水モーダル.Ref, 灌水モ�
     defaultValues: DEFAULT_VALUES(),
   });
 
-  const { amount } = createController(control);
+  const { 灌水量, 液肥入り } = createController(control);
 
   const close = () => {
     setIsOpen(false);
     setItem(null);
     reset();
   };
+
   const 灌水を実行する = async () => {
     if (!user || !item) return;
     await withLoading(async () => {
-      const { amount } = getValues();
+      const { 灌水量, 液肥入り } = getValues();
 
-      await 鉢.管理.灌水({
-        userId: user.id,
-        item,
-        灌水量: amount,
-      });
+      await 鉢.管理.灌水({ userId: user.id, item, 灌水量, 液肥入り });
       close();
     });
   };
@@ -100,7 +102,11 @@ export const 灌水モーダル = forwardRef<灌水モーダル.Ref, 灌水モ�
           {
             label: '灌水量',
             // @ts-ignore
-            input: <VerticalRadioGroup field={amount.field} options={灌水量の選択肢} />,
+            input: <VerticalRadioGroup field={灌水量.field} options={灌水量の選択肢} />,
+          },
+          {
+            label: '液肥入り',
+            input: <MySwitch field={液肥入り.field} />,
           },
         ]}
       />

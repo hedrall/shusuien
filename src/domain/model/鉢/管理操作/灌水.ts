@@ -1,7 +1,6 @@
 import { UserId } from '@frontend/domain/model/user';
-import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/履歴';
-import dayjs, { Dayjs } from 'dayjs';
-import { StorageRepository } from '@frontend/domain/repository/storage';
+import { 履歴, 履歴の内容 } from '@frontend/domain/model/履歴';
+import dayjs from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 鉢 } from 'src/domain/model/鉢';
 
@@ -9,10 +8,11 @@ export type _灌水操作Params = {
   item: 鉢;
   userId: UserId;
   灌水量: 履歴の内容.灌水.量のKey型;
+  液肥入り: boolean;
 };
 
 export const _灌水する = async (params: _灌水操作Params) => {
-  const { item, userId, 灌水量 } = params;
+  const { item, userId, 灌水量, 液肥入り } = params;
 
   const 鉢Id = item.id!;
   const date = dayjs();
@@ -25,7 +25,7 @@ export const _灌水する = async (params: _灌水操作Params) => {
       対象の棚のID: undefined,
       対象の鉢のID: 鉢Id,
     },
-    内容: { 灌水量 },
+    内容: { 灌水量, 液肥入り },
   });
 
   console.log('2. 鉢の情報を更新する');

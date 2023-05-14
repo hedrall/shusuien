@@ -57,6 +57,7 @@ export namespace 履歴の内容 {
   export type 灌水 = {
     type: '灌水';
     灌水量: 灌水.量のKey型;
+    液肥入り: boolean | undefined;
   };
 
   // 成長の記録
@@ -103,10 +104,7 @@ const _成長の記録履歴を作成 = async (params: NewProps<履歴の内容.
     id: undefined,
     削除済み: false,
     ...props,
-    内容: {
-      type: '成長の記録',
-      ...内容,
-    },
+    内容: { type: '成長の記録', ...内容 },
   });
   return await 作成(新規履歴);
 };
@@ -131,15 +129,12 @@ const _植替え履歴を作成 = async (params: NewProps<履歴の内容.植替
 
 const _灌水履歴を作成 = async (params: NewProps<履歴の内容.灌水>) => {
   const { props, 内容 } = params;
-  const { 灌水量 } = 内容;
+  const { 灌水量, 液肥入り } = 内容;
   const 新規履歴 = new 履歴({
     id: undefined,
     削除済み: false,
     ...props,
-    内容: {
-      type: '灌水',
-      灌水量,
-    },
+    内容: { type: '灌水', 灌水量, 液肥入り },
   });
   return await 作成(新規履歴);
 };

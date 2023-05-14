@@ -61,7 +61,10 @@ const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
       return (
         <div>
           <p className="Item行">{一行目}</p>
-          <p className="Item行">{i.内容.灌水量}</p>
+          <p className="Item行">
+            {i.内容.灌水量}
+            {i.内容.液肥入り ? ' (💊液肥入り)' : null}
+          </p>
         </div>
       );
     case '植替え': {
