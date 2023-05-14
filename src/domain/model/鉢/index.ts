@@ -10,7 +10,6 @@ import { _灌水する } from '@frontend/domain/model/鉢/管理操作/灌水';
 import { _成長を記録する } from '@frontend/domain/model/鉢/管理操作/成長を記録';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { Subject } from 'rxjs';
-import fs from 'firebase/firestore';
 import { 季節 } from '@frontend/domain/const/季節';
 import { 今日 } from '@frontend/supports/date';
 
@@ -23,6 +22,7 @@ type Snapshot = {
     日時: Dayjs;
     量: 履歴の内容.灌水.量のKey型;
   };
+  最後の液肥: { 日時?: Dayjs };
   画像のURL?: string;
   small画像のURL?: string;
   更新日時: Dayjs;
@@ -102,6 +102,9 @@ export class 鉢のBase {
         日時: dayjs(v.日時),
         量: v.量,
       })),
+      最後の液肥: {
+        日時: optionalCall(props.snapshot.最後の液肥?.日時, dayjs),
+      },
       画像のURL: props.snapshot.画像のURL,
       small画像のURL: props.snapshot.small画像のURL,
       更新日時: dayjs(props.snapshot.更新日時),
@@ -160,6 +163,7 @@ function _履歴を適用(this: 鉢, 履歴: 履歴, small画像のURL: string |
             日時: 履歴.作成日時,
             量: 履歴.内容.灌水量,
           },
+          最後の液肥: { 日時: 履歴.内容.液肥入り ? 履歴.作成日時 : this.snapshot.最後の液肥?.日時 },
         },
         履歴.作成日時,
       );

@@ -69,6 +69,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
       更新日時: now,
       画像のURL,
       small画像のURL,
+      最後の液肥: { 日時: undefined },
     },
     作成日時: now,
   });

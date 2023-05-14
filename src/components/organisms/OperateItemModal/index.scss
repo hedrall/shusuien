@@ -1,3 +1,5 @@
+@use '../../../assets/variables' as v;
+
 .鉢管理モーダル {
   .見出し {
     font-size: 16px;
@@ -9,5 +11,10 @@
   }
   .鉢の情報 {
     margin-bottom: 16px;
+  }
+  .液肥の表示 {
+    display: flex;
+    justify-content: end;
+    color: v.$color-grey;
   }
 }
