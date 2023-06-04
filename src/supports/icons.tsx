@@ -1,20 +1,22 @@
 import React, { CSSProperties } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDroplet } from '@fortawesome/free-solid-svg-icons';
-import { faSpoon } from '@fortawesome/free-solid-svg-icons';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
-import { faTableCells } from '@fortawesome/free-solid-svg-icons';
-import { faTableList } from '@fortawesome/free-solid-svg-icons';
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { faPills } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAnglesRight,
+  faAngleUp,
+  faCircleCheck,
+  faCircleXmark,
+  faDroplet,
+  faEllipsis,
+  faFilter,
+  faGear,
+  faPen,
+  faPenToSquare,
+  faPlus,
+  faSpoon,
+  faTableCells,
+  faTableList,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 import { 履歴の内容 } from '@frontend/domain/model/履歴';
 
 export const ICONS = {
@@ -31,6 +33,7 @@ export const OPERATION_ICONS = {
   EDIT: (p: { style?: CSSProperties }) => (
     <FontAwesomeIcon icon={faPenToSquare} style={{ ...p.style, color: '#525252' }} />
   ),
+  MORE: (p: { style?: CSSProperties }) => <FontAwesomeIcon icon={faAnglesRight} style={{ ...p.style }} />,
   完了: (p: { style?: CSSProperties }) => (
     <FontAwesomeIcon icon={faCircleCheck} style={{ ...p.style, color: '#0ACF84' }} />
   ),

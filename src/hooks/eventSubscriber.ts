@@ -8,7 +8,7 @@ import { 灌水時の施肥有無設定イベント } from '@frontend/store/灌�
 export const useEventSubscriber = () => {
   const [api, contextHolder] = notification.useNotification();
 
-  notification.config({ maxCount: 3 });
+  notification.config({ maxCount: 3, duration: 2 });
   useEffect(() => {
     const unSubs: Subscription[] = [];
     unSubs.push(
