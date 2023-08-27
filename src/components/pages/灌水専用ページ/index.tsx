@@ -4,7 +4,7 @@ import { use棚一覧, 灌水が必要な鉢一覧 } from '@frontend/store/data/
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢一覧View } from '@frontend/components/molecules/ItemList';
 import { 鉢 } from '@frontend/domain/model/鉢';
-import { 棚ID } from '@frontend/domain/model/棚';
+import { 棚, 棚ID } from '@frontend/domain/model/棚';
 import { useNavigate } from 'react-router-dom';
 import { TOPに戻るリンク } from '@frontend/components/atoms/MyLink';
 import { この棚の鉢一覧モーダル } from '@frontend/components/organisms/この棚の鉢一覧モーダル';
@@ -14,7 +14,21 @@ export namespace 灌水専用ページ {
   export type Props = {};
 }
 
-type 棚ごと = { [棚名: string]: 鉢[] };
+const 棚名by鉢Id = (id: 棚ID, 棚一覧: 棚[]) => {
+  return 棚一覧.find(棚 => 棚.id === id)?.name || 'unknown';
+};
+
+type T棚ごと = { [棚名: string]: 鉢[] };
+namespace T棚ごと {
+  export const Default = (棚一覧: 棚[]): T棚ごと => {
+    return 棚一覧.reduce<T棚ごと>((pre, 棚) => {
+      return {
+        ...pre,
+        [棚.name]: [],
+      };
+    }, {});
+  };
+}
 
 export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = props => {
   const { user } = useAuthState();
@@ -23,14 +37,12 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = prop
   const { 要灌水, それ以外 } = 灌水が必要な鉢一覧(user);
   const ref = useRef<この棚の鉢一覧モーダル.Ref>(null);
 
-  const 棚名byId = (id: 棚ID) => {
-    return 棚一覧.find(棚 => 棚.id === id)?.name || 'unknown';
-  };
   // 棚でgroup化
-  const 棚ごと = 要灌水.reduce<棚ごと>((pre, 鉢) => {
-    const 棚名 = 棚名byId(鉢.棚Id);
+  const 棚ごと = 要灌水.reduce<T棚ごと>((pre, 鉢) => {
+    const 棚名 = 棚名by鉢Id(鉢.棚Id, 棚一覧);
     return { ...pre, [棚名]: [...(pre[棚名] || []), 鉢] };
-  }, {});
+  }, T棚ごと.Default(棚一覧));
+
   return (
     <div className="灌水専用ページ">
       <TOPに戻るリンク navigator={navigator} />
