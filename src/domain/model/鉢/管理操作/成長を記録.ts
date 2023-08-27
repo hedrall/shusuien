@@ -3,7 +3,7 @@ import { 履歴, 鉢サイズ } from '@frontend/domain/model/履歴';
 import dayjs, { Dayjs } from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢 } from 'src/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { 小画像の生成 } from '@frontend/domain/model/鉢/管理操作/新規作成';
 
 export namespace _成長を記録する {

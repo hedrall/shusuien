@@ -1,13 +1,14 @@
 import React, { useRef } from 'react';
+import './index.scss';
 import { use棚一覧, 灌水が必要な鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢一覧View } from '@frontend/components/molecules/ItemList';
-import { 鉢 } from 'src/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { 棚ID } from '@frontend/domain/model/棚';
 import { useNavigate } from 'react-router-dom';
 import { TOPに戻るリンク } from '@frontend/components/atoms/MyLink';
 import { この棚の鉢一覧モーダル } from '@frontend/components/organisms/この棚の鉢一覧モーダル';
-import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
+import { OPERATION_ICONS } from '@frontend/supports/icons';
 
 export namespace 灌水専用ページ {
   export type Props = {};

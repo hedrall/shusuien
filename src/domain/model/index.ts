@@ -1,4 +1,4 @@
-import { 鉢 } from 'src/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { 棚 } from '@frontend/domain/model/棚';
 import { 履歴 } from '@frontend/domain/model/履歴';
 import { User } from '@frontend/domain/model/user';

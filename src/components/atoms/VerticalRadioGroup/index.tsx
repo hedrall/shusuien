@@ -1,4 +1,5 @@
 import { Radio, Space } from 'antd';
+import './index.scss';
 import React from 'react';
 import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 

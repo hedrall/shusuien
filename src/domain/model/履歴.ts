@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { 棚ID } from '@frontend/domain/model/棚';
-import { 鉢Id } from 'src/domain/model/鉢';
+import { 鉢Id } from '@frontend/domain/model/鉢';
 import { Opaque, ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';

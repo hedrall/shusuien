@@ -1,5 +1,6 @@
 import { Switch } from 'antd';
 import React from 'react';
+import './index.scss';
 import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 
 export type MySwitchProps = {

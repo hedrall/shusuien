@@ -19,14 +19,20 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - uses: actions/checkout@v2
-      - run: npm i && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+
+      - name: ビルド
+        run: npm i && npm run build
+
+      - name: デプロイ
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SHUSUIEN_DEE8F }}'
           channelId: live
           projectId: shusuien-dee8f
+
       - name: 完了をSlackに通知
         uses: slackapi/slack-github-action@v1.23.0
         with:

@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss';
 import cn from 'classnames';
 import { Alert, AlertProps } from 'antd';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss';
 import { 棚 } from '@frontend/domain/model/棚';
 import { Collapse, Dropdown, MenuProps, Popconfirm } from 'antd';
 import { 鉢一覧 } from '@frontend/components/molecules/ItemList';

@@ -1,5 +1,5 @@
 import { 棚 as Domainの棚 } from '@frontend/domain/model/棚';
-import { 鉢 as Domainの鉢 } from 'src/domain/model/鉢';
+import { 鉢 as Domainの鉢 } from '@frontend/domain/model/鉢';
 import { 履歴 as Domainの履歴 } from '@frontend/domain/model/履歴';
 import { User as DomainのUser } from '@frontend/domain/model/user';
 import { 植物ごとのデフォルト設定 as Domainの植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';

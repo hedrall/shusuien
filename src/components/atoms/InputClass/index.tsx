@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './index.scss';
 import { AutoComplete, AutoCompleteProps } from 'antd';
 import { Master } from '@frontend/components/atoms/InputClass/master';
 import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';

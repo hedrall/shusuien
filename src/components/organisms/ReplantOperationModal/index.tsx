@@ -1,8 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import './index.scss';
 import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
-import { 鉢 } from 'src/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { 履歴の内容, 鉢サイズ } from '@frontend/domain/model/履歴';
 import dayjs from 'dayjs';
 import { Control, useController, useForm } from 'react-hook-form';

@@ -1,10 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import './index.scss';
 import { Modal, ModalProps } from 'antd';
 import { useController, useForm } from 'react-hook-form';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useWithLoading } from '@frontend/supports/ui';
 import { UploadImage } from '@frontend/components/atoms/UploadImage';
-import { 鉢 } from 'src/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
 import { 棚ID } from '@frontend/domain/model/棚';

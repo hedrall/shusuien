@@ -3,7 +3,7 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
 import { UserId } from '@frontend/domain/model/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
-import { 鉢, 鉢Id, 鉢のBase } from 'src/domain/model/鉢';
+import { 鉢, 鉢Id, 鉢のBase } from '@frontend/domain/model/鉢';
 import { 棚ID } from '@frontend/domain/model/棚';
 import { Dayjs } from 'dayjs';
 import { basicToFirestore } from '@frontend/domain/repository/firestore/converters/app';

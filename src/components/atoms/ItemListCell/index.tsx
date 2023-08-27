@@ -1,6 +1,7 @@
 import React, { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
+import './index.scss';
 import { Image, ImageProps } from 'antd';
-import { 日光の強度の短縮表現, 鉢, 鉢Id } from 'src/domain/model/鉢';
+import { 日光の強度の短縮表現, 鉢, 鉢Id } from '@frontend/domain/model/鉢';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';

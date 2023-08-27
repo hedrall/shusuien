@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import './index.scss';
 import { Modal, ModalProps } from 'antd';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 import { 棚ID } from '@frontend/domain/model/棚';

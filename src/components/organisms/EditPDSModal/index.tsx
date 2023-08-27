@@ -1,6 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import './index.scss';
 import { Descriptions, Modal, ModalProps } from 'antd';
-import { 日光の強度 } from 'src/domain/model/鉢';
+import { 日光の強度 } from '@frontend/domain/model/鉢';
 import { 植物ごとのデフォルト設定Id } from '@frontend/domain/model/植物のデフォルト設定';
 import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './layout.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@frontend/settings/routes';

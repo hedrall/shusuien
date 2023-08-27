@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import { 履歴の内容 } from '@frontend/domain/model/履歴';
 

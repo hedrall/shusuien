@@ -1,5 +1,5 @@
 import React from 'react';
-import { 育成タイプ } from 'src/domain/model/鉢';
+import { 育成タイプ } from '@frontend/domain/model/鉢';
 import { Select, SelectProps } from 'antd';
 
 export namespace 育成タイプSelect {

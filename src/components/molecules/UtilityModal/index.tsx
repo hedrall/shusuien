@@ -1,15 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { useWithLoading } from '@frontend/supports/ui';
-import { useAuthState } from '@frontend/store/auth/action';
+import './index.scss';
 import { Modal, ModalProps, Select, SelectProps } from 'antd';
-import { 鉢 } from 'src/domain/model/鉢';
-import { 履歴の内容 } from '@frontend/domain/model/履歴';
-import { Control, useController, useForm } from 'react-hook-form';
-import { MyFormLayout } from '@frontend/components/molecules/MyForm';
-import { VerticalRadioGroup } from '@frontend/components/atoms/VerticalRadioGroup';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 import { 灌水量の選択肢 } from '@frontend/supports/selections';
-import { OperationState } from '@frontend/store/一括灌水/atom';
 import { use一括灌水モード設定 } from '@frontend/store/一括灌水/action';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { ICONS } from '@frontend/supports/icons';

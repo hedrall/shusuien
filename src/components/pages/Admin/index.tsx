@@ -1,7 +1,8 @@
 import React from 'react';
+import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢, 鉢Id } from 'src/domain/model/鉢';
+import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import * as fs from 'firebase/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';

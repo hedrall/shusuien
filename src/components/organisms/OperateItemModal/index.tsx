@@ -1,7 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Image, Modal, ModalProps, Popconfirm } from 'antd';
-import { 鉢, 鉢Id } from 'src/domain/model/鉢';
+import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 植替え操作モーダル } from '@frontend/components/organisms/ReplantOperationModal';
 import { 鉢の情報 } from '@frontend/components/molecules/ItemDesc';
@@ -14,7 +15,7 @@ import { 成長記録モーダル } from '@frontend/components/organisms/DocGrow
 import { Button } from 'antd';
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
-import { 水切れ日数簡易入力 } from 'src/components/atoms/水切れ日数簡易入力';
+import { 水切れ日数簡易入力 } from '@frontend/components/atoms/水切れ日数簡易入力';
 
 export namespace 鉢管理モーダル {
   export type Ref = {

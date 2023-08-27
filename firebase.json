@@ -1,6 +1,7 @@
 {
+  "$schema": "node_modules/firebase-tools/schema/firebase-config.json",
   "hosting": {
-    "public": "public",
+    "public": "dist",
     "ignore": [],
     "rewrites": [
       {

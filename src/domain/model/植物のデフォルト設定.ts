@@ -1,5 +1,5 @@
 import { Opaque } from 'type-fest';
-import { 日光の強度設定, 育成タイプ, 鉢 } from 'src/domain/model/鉢';
+import { 日光の強度設定, 育成タイプ, 鉢 } from '@frontend/domain/model/鉢';
 import { Subject } from 'rxjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { UserId } from '@frontend/domain/model/user';

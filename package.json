@@ -5,16 +5,13 @@
   "main": "index.js",
   "repository": "https://github.com/hedrall/react-sass-esbuild-template",
   "scripts": {
-    "build": "npm-run-all -p build:*",
-    "build:js": "node --require esbuild-register build.ts",
-    "build:style": "node --require esbuild-register buildStyle.ts",
-    "dev": "concurrently --prefix \"{time}\" -t \"HH:mm:ss\" -c \"bgCyan.bold,bgGreen.bold,bgGrey.bold,bgMagenta.bold\" -n \"esbuild,BrowserSync,Express\" \"npm run dev:js\" \"npm run browser:reload\" \"npm run serve:local\" \"npm run dev:style\"",
-    "dev:js": "WATCH=true npm run build:js",
-    "dev:style": "nodemon --watch src --ext scss --exec \"node -r esbuild-register buildStyle.ts\"",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
     "serve:local": "node --require esbuild-register local.ts",
     "browser:reload": "wait-on public/index.js && browser-sync start --notify=false --proxy 'http://localhost:3030' --files 'public/*' --port 3000",
     "dev:jest": "jest . --watch --verbose",
-    "format": "eslint . --fix",
     "create:component": "node --require esbuild-register scripts/createComponent.ts"
   },
   "keywords": [
@@ -41,6 +38,7 @@
     "@types/react-window": "^1.8.5",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
+    "@vitejs/plugin-react": "^4.0.4",
     "browser-sync": "^2.27.10",
     "change-case": "^4.1.2",
     "concurrently": "^7.6.0",
@@ -64,6 +62,7 @@
     "sass": "^1.56.2",
     "type-fest": "^3.4.0",
     "typescript": "^4.9.4",
+    "vite": "^4.4.9",
     "wait-on": "^6.0.1"
   },
   "dependencies": {

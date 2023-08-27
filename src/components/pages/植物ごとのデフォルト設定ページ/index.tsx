@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import './index.scss';
 import { useNavigate } from 'react-router-dom';
 import { TOPに戻るリンク } from '@frontend/components/atoms/MyLink';
 import { 植物ごとのデフォルト設定の新規作成モーダル } from '@frontend/components/organisms/CreatePlantDefaultSettingModal';
@@ -9,7 +10,7 @@ import { Editable } from '@frontend/components/atoms/Editable';
 import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
 import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
-import { 日光の強度 } from 'src/domain/model/鉢';
+import { 日光の強度 } from '@frontend/domain/model/鉢';
 import { uniqueArray } from '@frontend/supports/array';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
 

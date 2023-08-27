@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Subscription } from 'rxjs';
-import { 鉢 } from 'src/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { notification } from 'antd';
 import { 一括灌水モードイベント } from '@frontend/store/一括灌水/action';
 import { 灌水時の施肥有無設定イベント } from '@frontend/store/灌水時の施肥有無設定/action';

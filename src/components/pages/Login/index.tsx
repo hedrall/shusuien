@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './index.scss';
 import cn from 'classnames';
 import 'firebaseui/dist/firebaseui.css';
 import { FirstStep } from '@frontend/components/pages/Login/steps/firstStep';

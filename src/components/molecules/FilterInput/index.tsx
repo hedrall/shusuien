@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import './index.scss';
 import { useFilter } from '@frontend/store/filter/action';
 import { Col, Input, InputNumber, InputNumberProps, InputProps, Row, Slider } from 'antd';
-import { 日光の強度 } from 'src/domain/model/鉢';
+import { 日光の強度 } from '@frontend/domain/model/鉢';
 import { SliderRangeProps } from 'antd/es/slider';
 import { optionalValue } from '@frontend/supports/functions';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';

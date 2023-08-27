@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import './index.scss';
 import { Modal, ModalProps } from 'antd';
 import { useController, useForm } from 'react-hook-form';
 import { MyInput } from '@frontend/components/atoms/MyInput';

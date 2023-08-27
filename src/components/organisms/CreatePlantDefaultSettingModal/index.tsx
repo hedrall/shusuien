@@ -1,8 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import './index.scss';
 import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
-import { 日光の強度, 日光の強度設定 } from 'src/domain/model/鉢';
+import { 日光の強度, 日光の強度設定 } from '@frontend/domain/model/鉢';
 import { Control, useController, UseControllerReturn, useForm } from 'react-hook-form';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';

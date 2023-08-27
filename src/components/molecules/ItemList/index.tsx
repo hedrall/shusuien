@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
+import './index.scss';
 import { Col, notification, Row } from 'antd';
 import { 棚ID } from '@frontend/domain/model/棚';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 鉢作成モーダル } from '@frontend/components/organisms/CreateItemModal';
 import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
-import { 鉢, 鉢Id } from 'src/domain/model/鉢';
+import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
 import { 鉢一覧の要素, 鉢一覧の要素Props } from '@frontend/components/atoms/ItemListCell';
 import { 鉢管理モーダル } from '@frontend/components/organisms/OperateItemModal';
 import { use一括灌水モード設定 } from '@frontend/store/一括灌水/action';

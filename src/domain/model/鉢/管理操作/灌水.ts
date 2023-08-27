@@ -2,7 +2,7 @@ import { UserId } from '@frontend/domain/model/user';
 import { 履歴, 履歴の内容 } from '@frontend/domain/model/履歴';
 import dayjs from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢 } from 'src/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 
 export type _灌水操作Params = {
   item: 鉢;

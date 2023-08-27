@@ -1,5 +1,6 @@
 import { Radio } from 'antd';
 import React from 'react';
+import './index.scss';
 import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 import { SizeType } from 'antd/es/config-provider/SizeContext';
 

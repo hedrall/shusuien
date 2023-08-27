@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { 棚, 棚ID } from '@frontend/domain/model/棚';
-import { 鉢 } from 'src/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 
 export type DataState = {
   棚一覧: 棚[];

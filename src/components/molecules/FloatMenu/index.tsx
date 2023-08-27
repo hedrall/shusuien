@@ -1,5 +1,6 @@
 import { FloatButton } from 'antd';
 import React, { useRef } from 'react';
+import './index.scss';
 import { ICONS, OPERATION_ICONS, SYMBOL_ICONS } from '@frontend/supports/icons';
 import { use一括灌水モード設定 } from '@frontend/store/一括灌水/action';
 import { 便利機能モーダル } from '@frontend/components/molecules/UtilityModal';

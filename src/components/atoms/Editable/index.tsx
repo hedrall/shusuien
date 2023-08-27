@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './index.scss';
 import { OPERATION_ICONS } from '@frontend/supports/icons';
 import { useController, useForm } from 'react-hook-form';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';

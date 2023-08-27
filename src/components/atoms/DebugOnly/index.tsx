@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './index.scss';
 import { atom, useRecoilState } from 'recoil';
 
 export type DebugOnlyProps = {

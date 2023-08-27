@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss';
 import { Image, Upload, UploadFile } from 'antd';
 import type { UploadChangeParam, UploadProps } from 'antd/es/upload';
 import { CameraOutlined, LoadingOutlined } from '@ant-design/icons';

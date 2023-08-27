@@ -1,5 +1,6 @@
 import React from 'react';
-import { 日光の強度 } from 'src/domain/model/鉢';
+import './index.scss';
+import { 日光の強度 } from '@frontend/domain/model/鉢';
 import { Select, SelectProps } from 'antd';
 
 export namespace 日光の強度Select {

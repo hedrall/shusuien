@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss';
 import cn from 'classnames';
 import { Path, UseControllerReturn } from 'react-hook-form';
 import { Input } from 'antd';

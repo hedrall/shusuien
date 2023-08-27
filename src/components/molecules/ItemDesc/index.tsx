@@ -1,5 +1,6 @@
-import { 日光の強度, 日光の強度設定, 育成タイプ, 鉢 } from 'src/domain/model/鉢';
 import React, { useRef } from 'react';
+import './index.scss';
+import { 日光の強度, 日光の強度設定, 育成タイプ, 鉢 } from '@frontend/domain/model/鉢';
 import { Button, Descriptions, Select, SelectProps } from 'antd';
 import { isDefined, optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 鉢サイズ } from '@frontend/domain/model/履歴';

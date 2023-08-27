@@ -4,7 +4,7 @@ import { UserId } from '@frontend/domain/model/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { 履歴, 履歴ID, 履歴の内容 } from '@frontend/domain/model/履歴';
-import { 鉢Id } from 'src/domain/model/鉢';
+import { 鉢Id } from '@frontend/domain/model/鉢';
 
 type 購読Options = {
   filter: 履歴の内容.Type[];

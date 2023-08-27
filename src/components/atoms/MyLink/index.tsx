@@ -1,4 +1,5 @@
 import React, { MouseEventHandler, ReactNode } from 'react';
+import './index.scss';
 import { NavigateFunction } from 'react-router-dom';
 import { ROUTES } from '@frontend/settings/routes';
 

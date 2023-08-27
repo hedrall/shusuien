@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss';
 import { ControllerRenderProps } from 'react-hook-form/dist/types/controller';
 import { 履歴の内容 } from '@frontend/domain/model/履歴';
 import { ICONS } from '@frontend/supports/icons';

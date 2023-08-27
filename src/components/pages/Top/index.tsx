@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import './index.scss';
 import { 棚作成モーダル } from '@frontend/components/organisms/CreateTanaModal';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useNavigate } from 'react-router-dom';
