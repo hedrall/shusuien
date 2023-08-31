@@ -55,6 +55,8 @@ export const 一括灌水モーダル = forwardRef<一括灌水モーダル.Ref,
 
     progress.start(灌水する鉢一覧.length);
     棚の一括灌水State.start();
+
+    let 処理済み = 0;
     try {
       for (const item of 灌水する鉢一覧) {
         await sleep(100);
@@ -64,7 +66,8 @@ export const 一括灌水モーダル = forwardRef<一括灌水モーダル.Ref,
           灌水量: 一括灌水モード設定.灌水量,
           液肥入り: 灌水時の施肥有無設定.is,
         });
-        progress.increment();
+
+        progress.progress(++処理済み);
       }
     } catch (e: any) {
       console.error(e);
@@ -73,7 +76,7 @@ export const 一括灌水モーダル = forwardRef<一括灌水モーダル.Ref,
     } finally {
       // stateが更新される様にnextTickで実行
       setTimeout(() => {
-        棚の一括灌水State.end(progress.state.done);
+        棚の一括灌水State.end(処理済み);
       }, 200);
     }
     close();

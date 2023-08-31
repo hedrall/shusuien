@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription, withLatestFrom } from 'rxjs';
 import { 鉢 } from '@frontend/domain/model/鉢';
 import { notification } from 'antd';
 import { 一括灌水モードイベント } from '@frontend/store/一括灌水/action';
@@ -39,12 +39,12 @@ export const useEventSubscriber = () => {
       }),
     );
     unSubs.push(
-      鉢.events.管理.subscribe(({ type }) => {
-        // console.log('@@@', { type, is: 棚の一括灌水State.is灌水中 });
-        const 通知しないパターン = type === '灌水' && 棚の一括灌水State.is灌水中;
+      鉢.events.管理.pipe(withLatestFrom(棚の一括灌水State.event)).subscribe(([管理イベント, 棚の一括灌水イベント]) => {
+        console.log('@@@', { 管理イベント, 棚の一括灌水イベント });
+        const 通知しないパターン = 管理イベント.type === '灌水' && 棚の一括灌水イベント.type === 'start';
         if (通知しないパターン) return;
 
-        api.success({ message: `${type}しました。`, placement: 'bottomRight' });
+        api.success({ message: `${管理イベント.type}しました。`, placement: 'bottomRight' });
       }),
     );
     unSubs.push(

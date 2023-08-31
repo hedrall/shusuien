@@ -1,8 +1,11 @@
 import { useRecoilState } from 'recoil';
 import { 棚の一括灌水State } from '@frontend/store/棚の一括灌水/atom';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 type Event =
+  | {
+      type: 'init';
+    }
   | {
       type: 'start';
     }
@@ -13,7 +16,7 @@ type Event =
   | {
       type: 'error';
     };
-const 棚の一括灌水Event = new Subject<Event>();
+const 棚の一括灌水Event = new BehaviorSubject<Event>({ type: 'init' });
 export const use棚の一括灌水State = () => {
   const [state, set] = useRecoilState(棚の一括灌水State);
 

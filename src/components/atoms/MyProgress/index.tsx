@@ -25,7 +25,7 @@ export const useProgress = () => {
       console.log('progress start', total);
       setState({ ...State.initial(), total });
     },
-    increment: (n = 1) => setState(cur => ({ ...cur, done: cur.done + n })),
+    progress: (n: number) => setState(cur => ({ ...cur, done: cur.done + n })),
     error: () => setState(cur => ({ ...cur, status: 'exception' })),
   };
 };
@@ -43,13 +43,8 @@ export const MyProgress: React.FC<MyProgress.Props> = props => {
     type: 'circle',
     percent: Math.ceil((state.done / state.total) * 100),
     status: state.status || 'normal',
+    size: 'small',
     style,
   };
-  return (
-    <div>
-      done: {state.done}
-      total: {state.total}
-      <Progress {...progressProps} />
-    </div>
-  );
+  return <Progress {...progressProps} />;
 };
