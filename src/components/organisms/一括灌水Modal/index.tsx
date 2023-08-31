@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Col, Modal, ModalProps, Row } from 'antd';
@@ -9,8 +9,7 @@ import { use一括灌水モード設定 } from '@frontend/store/一括灌水/act
 import { use灌水時の施肥有無設定 } from '@frontend/store/灌水時の施肥有無設定/action';
 import { MyProgress, useProgress } from '@frontend/components/atoms/MyProgress';
 import { sleep } from '@frontend/supports/functions';
-import react from '@vitejs/plugin-react';
-import { use棚の一括灌水State } from '@frontend/store/棚の一括灌水/action';
+import { use棚の一括灌水State } from '@frontend/eventBasedStore/棚の一括灌水/action';
 
 type State = { 棚: 棚; 鉢一覧: 鉢[] };
 export namespace 一括灌水モーダル {

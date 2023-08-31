@@ -4,7 +4,7 @@ import { 鉢 } from '@frontend/domain/model/鉢';
 import { notification } from 'antd';
 import { 一括灌水モードイベント } from '@frontend/store/一括灌水/action';
 import { 灌水時の施肥有無設定イベント } from '@frontend/store/灌水時の施肥有無設定/action';
-import { use棚の一括灌水State } from '@frontend/store/棚の一括灌水/action';
+import { use棚の一括灌水State } from '@frontend/eventBasedStore/棚の一括灌水/action';
 
 // なぜかmaxCountの効果がない
 notification.config({ maxCount: 1, duration: 2 });
