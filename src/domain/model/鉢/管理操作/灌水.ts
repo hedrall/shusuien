@@ -17,7 +17,7 @@ export const _灌水する = async (params: _灌水操作Params) => {
   const 鉢Id = item.id!;
   const date = dayjs();
 
-  console.log('1. 灌水の履歴を作成');
+  // console.log('1. 灌水の履歴を作成');
   const 灌水履歴 = await 履歴.新規作成.灌水({
     props: {
       userId,
@@ -28,7 +28,7 @@ export const _灌水する = async (params: _灌水操作Params) => {
     内容: { 灌水量, 液肥入り },
   });
 
-  console.log('2. 鉢の情報を更新する');
+  // console.log('2. 鉢の情報を更新する');
   const 更新後の鉢 = item.履歴を適用(灌水履歴, undefined);
   console.log({ 更新後の鉢 });
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);

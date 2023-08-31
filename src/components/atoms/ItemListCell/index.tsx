@@ -16,6 +16,12 @@ export type 鉢一覧の要素Props = {
   item: 鉢;
   鉢を選択: (鉢: 鉢, eventType: 'click' | 'doubleClick') => void;
   一括灌水モード: boolean;
+  style?: {
+    // グレースケールで表示する
+    grey?: boolean;
+    // 画像に被せて見せるアイテム
+    overlapItem?: React.ReactNode;
+  };
 };
 
 type Color = readonly [number, number, number];
@@ -96,7 +102,7 @@ export function useDoubleTap<Target = Element, Callback extends DoubleTapCallbac
 }
 
 export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
-  const { item, 鉢を選択, 一括灌水モード } = props;
+  const { item, 鉢を選択, 一括灌水モード, style } = props;
   const _鉢を選択 = 鉢を選択.bind(null, item);
   const bind = useDoubleTap(() => _鉢を選択('doubleClick'), 300, {
     onSingleTap: () => _鉢を選択('click'),
@@ -118,18 +124,21 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
     return msg.join();
   })();
 
-  const imageProps: ImageProps = {
-    className: '鉢一覧の要素',
-    preview: false,
-    src: item.snapshot.small画像のURL || item.snapshot.画像のURL || NO_IMAGE,
-    style: { borderRadius: 7, aspectRatio: '1', objectFit: 'cover' },
-    onContextMenu: e => {
+  const imageContainerProps = {
+    className: 'ImageContainer',
+    onContextMenu: (e: any) => {
       e.preventDefault();
     },
     ...bind,
+    ...onKeyEnter(() => _鉢を選択('click')),
+  };
+  const imageProps: ImageProps = {
+    className: cn('鉢一覧の要素', { GreyScale: style?.grey }),
+    preview: false,
+    src: item.snapshot.small画像のURL || item.snapshot.画像のURL || NO_IMAGE,
+    style: { borderRadius: 7, aspectRatio: '1', objectFit: 'cover' },
     role: 'button',
     tabIndex: 0,
-    ...onKeyEnter(() => _鉢を選択('click')),
   };
 
   return (
@@ -140,7 +149,10 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
         e.stopPropagation();
       }}
     >
-      <Image {...imageProps} />
+      <div {...imageContainerProps}>
+        <Image {...imageProps} />
+        {style?.overlapItem ? <div className="OverlapItem">{style.overlapItem}</div> : null}
+      </div>
       {上部補足情報 ? <span className="上部補足情報 表示">{上部補足情報}</span> : null}
       {経過日数.最後の灌水 ? (
         <span

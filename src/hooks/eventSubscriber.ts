@@ -4,11 +4,15 @@ import { 鉢 } from '@frontend/domain/model/鉢';
 import { notification } from 'antd';
 import { 一括灌水モードイベント } from '@frontend/store/一括灌水/action';
 import { 灌水時の施肥有無設定イベント } from '@frontend/store/灌水時の施肥有無設定/action';
+import { use棚の一括灌水State } from '@frontend/store/棚の一括灌水/action';
+
+// なぜかmaxCountの効果がない
+notification.config({ maxCount: 1, duration: 2 });
 
 export const useEventSubscriber = () => {
   const [api, contextHolder] = notification.useNotification();
+  const 棚の一括灌水State = use棚の一括灌水State();
 
-  notification.config({ maxCount: 3, duration: 2 });
   useEffect(() => {
     const unSubs: Subscription[] = [];
     unSubs.push(
@@ -36,6 +40,10 @@ export const useEventSubscriber = () => {
     );
     unSubs.push(
       鉢.events.管理.subscribe(({ type }) => {
+        // console.log('@@@', { type, is: 棚の一括灌水State.is灌水中 });
+        const 通知しないパターン = type === '灌水' && 棚の一括灌水State.is灌水中;
+        if (通知しないパターン) return;
+
         api.success({ message: `${type}しました。`, placement: 'bottomRight' });
       }),
     );
@@ -58,6 +66,20 @@ export const useEventSubscriber = () => {
             description: '灌水時に液肥を施したことが記録されます。',
             placement: 'bottomRight',
           });
+        }
+      }),
+    );
+    unSubs.push(
+      棚の一括灌水State.event.subscribe(event => {
+        switch (event.type) {
+          case 'start':
+            return;
+          case 'done':
+            api.success({ message: `${event.処理数}鉢に一括灌水しました。`, placement: 'bottomRight' });
+            return;
+          case 'error':
+            api.error({ message: `一括灌水に失敗しました。`, placement: 'bottomRight' });
+            return;
         }
       }),
     );

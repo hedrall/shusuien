@@ -6,7 +6,7 @@ import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 鉢作成モーダル } from '@frontend/components/organisms/CreateItemModal';
 import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
-import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { 鉢一覧の要素, 鉢一覧の要素Props } from '@frontend/components/atoms/ItemListCell';
 import { 鉢管理モーダル } from '@frontend/components/organisms/OperateItemModal';
 import { use一括灌水モード設定 } from '@frontend/store/一括灌水/action';
@@ -86,7 +86,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
       </Row>
       {/* 新規作成ボタン */}
       {灌水ページから ? null : (
-        <div className="Section">
+        <div className="Section 新規作成ボタンcontainer">
           <MyButton title={'⨁ 鉢を追加する'} onClick={鉢作成モーダルを開く} />
         </div>
       )}

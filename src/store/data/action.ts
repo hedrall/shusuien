@@ -110,7 +110,7 @@ const use全ての鉢一覧 = (user: User | undefined) => {
 
   const 鉢を購読 = (userId: UserId) => {
     return FSAppRepository.鉢.全て購読(userId, items => {
-      console.log('[購読]: 全ての鉢を購読', items);
+      // console.log('[購読]: 全ての鉢を購読', items);
       set(鉢Service.並び替える(items.map(i => i.value)));
     });
   };
