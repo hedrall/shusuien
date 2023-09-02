@@ -57,8 +57,8 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () =
   const 棚作成モーダルを開く = () => {
     棚作成モーダルのRef.current?.open();
   };
-  const この棚の鉢一覧モーダルを開く = (棚Id: 棚ID) => {
-    この棚の鉢一覧モーダルref.current?.open(棚Id);
+  const この棚の鉢一覧モーダルを開く = (棚: 棚) => {
+    この棚の鉢一覧モーダルref.current?.open(棚);
   };
   const 一括灌水モーダルを開く = (棚: 棚, 鉢一覧: 鉢[]) => {
     一括灌水モーダルref.current?.open({ 棚, 鉢一覧 });
@@ -66,8 +66,6 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () =
 
   return (
     <div className="灌水専用ページ">
-      <TOPに戻るリンク navigator={navigator} />
-      <h2>要灌水ページ</h2>
       <h3 className="SectionTitle">絞り込み</h3>
       <div className="Section">
         <フィルタ条件の入力 />
@@ -93,8 +91,8 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () =
                 ) : null}
               </div>
               <鉢一覧View userId={user?.id} 鉢一覧={鉢一覧} 棚Id={undefined} />
-              <div className="この棚の鉢一覧" onClick={() => この棚の鉢一覧モーダルを開く(棚.id!)}>
-                <OPERATION_ICONS.MORE /> この棚の鉢一覧
+              <div className="すべての鉢" onClick={() => この棚の鉢一覧モーダルを開く(棚)}>
+                <OPERATION_ICONS.MORE /> すべての鉢
               </div>
             </div>
           );
