@@ -1,6 +1,10 @@
 @use '../../../assets/variables' as v;
 
 .灌水専用ページ {
+  .Section {
+    margin: 16px 0;
+  }
+
   .棚名 {
     font-weight: bold;
     color: v.$color-black;

@@ -11,6 +11,9 @@ import { この棚の鉢一覧モーダル } from '@frontend/components/organism
 import { OPERATION_ICONS } from '@frontend/supports/icons';
 import { 一括灌水モーダル } from '@frontend/components/organisms/一括灌水Modal';
 import { Button } from 'antd';
+import { フィルタ条件の入力 } from '@frontend/components/molecules/FilterInput';
+import { MyButton } from '@frontend/components/atoms/MyButton';
+import { 棚作成モーダル } from '@frontend/components/organisms/CreateTanaModal';
 
 const 棚名by鉢Id = (id: 棚ID, 棚一覧: 棚[]) => {
   return 棚一覧.find(棚 => 棚.id === id)?.name || 'unknown';
@@ -32,12 +35,16 @@ export namespace 灌水専用ページ {
   export type Props = {};
 }
 export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () => {
-  const { user } = useAuthState();
+  // --- hooks ---
   const navigator = useNavigate();
+  const { user } = useAuthState();
   const { 棚一覧 } = use棚一覧.一覧を利用();
   const { 要灌水 } = 灌水が必要な鉢一覧(user);
+
+  // --- refs ---
   const この棚の鉢一覧モーダルref = useRef<この棚の鉢一覧モーダル.Ref>(null);
   const 一括灌水モーダルref = useRef<一括灌水モーダル.Ref>(null);
+  const 棚作成モーダルのRef = useRef<棚作成モーダル.Ref>(null);
 
   // 棚でgroup化
   const 棚ごと = 要灌水.reduce<T棚ごと>((pre, 鉢) => {
@@ -45,10 +52,13 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () =
     return { ...pre, [棚名]: [...(pre[棚名] || []), 鉢] };
   }, T棚ごと.Default(棚一覧));
 
+  // --- modal操作 ---
+  const 棚作成モーダルを開く = () => {
+    棚作成モーダルのRef.current?.open();
+  };
   const この棚の鉢一覧モーダルを開く = (棚Id: 棚ID) => {
     この棚の鉢一覧モーダルref.current?.open(棚Id);
   };
-
   const 一括灌水モーダルを開く = (棚: 棚, 鉢一覧: 鉢[]) => {
     一括灌水モーダルref.current?.open({ 棚, 鉢一覧 });
   };
@@ -57,6 +67,10 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () =
     <div className="灌水専用ページ">
       <TOPに戻るリンク navigator={navigator} />
       <h2>要灌水ページ</h2>
+      <h3 className="SectionTitle">絞り込み</h3>
+      <div className="Section">
+        <フィルタ条件の入力 />
+      </div>
       {Object.entries(棚ごと)
         .filter(([棚名]) => 棚名 !== 'unknown')
         .sort((pre, cur) => {
@@ -85,9 +99,14 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () =
           );
         })}
 
+      <div className="Section">
+        <MyButton title={'⨁ 棚を作成する'} onClick={棚作成モーダルを開く} />
+      </div>
+
       {/* modals */}
       <この棚の鉢一覧モーダル ref={この棚の鉢一覧モーダルref} />
       <一括灌水モーダル ref={一括灌水モーダルref} />
+      <棚作成モーダル ref={棚作成モーダルのRef} />
     </div>
   );
 };
