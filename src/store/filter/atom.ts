@@ -25,6 +25,13 @@ export namespace FilterState {
     最後の灌水からの経過日数: undefined,
     enabled: false,
   });
+  export const isデフォルトのフィルタ条件 = (item: FilterState) => {
+    if (item.耐寒温度) return false;
+    if (item.日光の強度) return false;
+    if (item.keyword) return false;
+    if (item.最後の灌水からの経過日数) return false;
+    return true;
+  };
 }
 
 export const FILTER_STATE_ATOM = atom<FilterState>({

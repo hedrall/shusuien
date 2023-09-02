@@ -7,11 +7,12 @@ import { use灌水時の施肥有無設定 } from '@frontend/store/灌水時の�
 
 export type FloatMenuProps = {};
 
-export const FloatMenu: React.FC<FloatMenuProps> = props => {
-  const { filter, set: setFilter } = useFilter();
+export const FloatMenu: React.FC<FloatMenuProps> = () => {
+  const { filter, set: setFilter, isデフォルトのフィルタ条件 } = useFilter();
 
   const 灌水時の施肥有無設定 = use灌水時の施肥有無設定();
 
+  const フィルタのOnOffが可能 = !isデフォルトのフィルタ条件();
   return (
     <>
       {灌水時の施肥有無設定.is ? (
@@ -23,13 +24,20 @@ export const FloatMenu: React.FC<FloatMenuProps> = props => {
         </div>
       ) : null}
 
+      {/* フィルターの ON/OFF */}
       <FloatButton.Group shape="circle" style={{ right: 84 }}>
         <FloatButton
           icon={<SYMBOL_ICONS.FILTER />}
-          onClick={setFilter.toggleEnabled}
+          onClick={() => {
+            if (!フィルタのOnOffが可能) return;
+            setFilter.toggleEnabled();
+          }}
           type={filter.enabled ? 'primary' : 'default'}
+          style={{ opacity: フィルタのOnOffが可能 ? 1 : 0.5 }}
         />
       </FloatButton.Group>
+
+      {/* +ボタン */}
       <FloatButton.Group
         trigger="click"
         type="primary"

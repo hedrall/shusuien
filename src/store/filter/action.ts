@@ -28,6 +28,7 @@ export const useFilter = () => {
 
   return {
     filter: state,
+    isデフォルトのフィルタ条件: () => FilterState.isデフォルトのフィルタ条件(state),
     set: {
       耐寒温度: (start: number | undefined, end: number | undefined) =>
         set(pre => ({ ...pre, 耐寒温度: { start, end }, enabled: true })),
