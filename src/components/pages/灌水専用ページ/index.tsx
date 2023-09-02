@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { TOPに戻るリンク } from '@frontend/components/atoms/MyLink';
 import { この棚の鉢一覧モーダル } from '@frontend/components/organisms/この棚の鉢一覧モーダル';
 import { OPERATION_ICONS } from '@frontend/supports/icons';
-import { 一括灌水モーダル } from 'src/components/organisms/この棚の一括灌水Modal';
+import { 一括灌水モーダル } from '@frontend/components/organisms/この棚の一括灌水Modal';
 import { Button } from 'antd';
 import { フィルタ条件の入力 } from '@frontend/components/molecules/FilterInput';
 import { MyButton } from '@frontend/components/atoms/MyButton';
