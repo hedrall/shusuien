@@ -40,7 +40,6 @@ export const useEventSubscriber = () => {
     );
     unSubs.push(
       鉢.events.管理.pipe(withLatestFrom(棚の一括灌水State.event)).subscribe(([管理イベント, 棚の一括灌水イベント]) => {
-        console.log('@@@', { 管理イベント, 棚の一括灌水イベント });
         const 通知しないパターン = 管理イベント.type === '灌水' && 棚の一括灌水イベント.type === 'start';
         if (通知しないパターン) return;
 

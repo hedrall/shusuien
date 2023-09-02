@@ -12,10 +12,6 @@ import { OPERATION_ICONS } from '@frontend/supports/icons';
 import { 一括灌水モーダル } from '@frontend/components/organisms/一括灌水Modal';
 import { Button } from 'antd';
 
-export namespace 灌水専用ページ {
-  export type Props = {};
-}
-
 const 棚名by鉢Id = (id: 棚ID, 棚一覧: 棚[]) => {
   return 棚一覧.find(棚 => 棚.id === id)?.name || 'unknown';
 };
@@ -32,11 +28,14 @@ namespace T棚ごと {
   };
 }
 
-export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = props => {
+export namespace 灌水専用ページ {
+  export type Props = {};
+}
+export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () => {
   const { user } = useAuthState();
   const navigator = useNavigate();
   const { 棚一覧 } = use棚一覧.一覧を利用();
-  const { 要灌水, それ以外 } = 灌水が必要な鉢一覧(user);
+  const { 要灌水 } = 灌水が必要な鉢一覧(user);
   const この棚の鉢一覧モーダルref = useRef<この棚の鉢一覧モーダル.Ref>(null);
   const 一括灌水モーダルref = useRef<一括灌水モーダル.Ref>(null);
 
@@ -85,9 +84,8 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = prop
             </div>
           );
         })}
-      <hr />
-      <p>それ以外</p>
-      <鉢一覧View userId={user?.id} 鉢一覧={それ以外} 棚Id={undefined} />
+
+      {/* modals */}
       <この棚の鉢一覧モーダル ref={この棚の鉢一覧モーダルref} />
       <一括灌水モーダル ref={一括灌水モーダルref} />
     </div>

@@ -62,12 +62,11 @@ export const TopPage: React.FC<TopPageProps> = props => {
   }
   return (
     <div className="Top">
+      <div className="灌水専用ページへのリンク">
+        <MyLink path={ROUTES.灌水専用ページ.PATH} navigator={navigator} text="要灌水一覧" />
+      </div>
       <h2 className="SectionTitle">表示形式</h2>
       <div className="表示形式の内容">
-        <div className="灌水専用ページへのリンク">
-          <p className="New">NEW</p>
-          <MyLink path={ROUTES.灌水専用ページ.PATH} navigator={navigator} text="要灌水一覧" />
-        </div>
         <div className="Section コントロール">
           {/* @ts-ignore*/}
           <RadioGroup field={C表示モード.field} options={表示モードのOption} size="small" />
