@@ -5,7 +5,6 @@ import { Col, Modal, ModalProps, Row } from 'antd';
 import { 鉢 } from '@frontend/domain/model/鉢';
 import { 棚 } from '@frontend/domain/model/棚';
 import { 鉢一覧の要素 } from '@frontend/components/atoms/ItemListCell';
-import { use一括灌水モード設定 } from '@frontend/store/一括灌水/action';
 import { use灌水時の施肥有無設定 } from '@frontend/store/灌水時の施肥有無設定/action';
 import { MyProgress, useProgress } from '@frontend/components/atoms/MyProgress';
 import { sleep } from '@frontend/supports/functions';
@@ -28,7 +27,6 @@ export const 一括灌水モーダル = forwardRef<一括灌水モーダル.Ref,
 
   // ---- hooks ----
   const { user } = useAuthState();
-  const 一括灌水モード設定 = use一括灌水モード設定();
   const 灌水時の施肥有無設定 = use灌水時の施肥有無設定();
   const 棚の一括灌水State = use棚の一括灌水State();
 
@@ -62,7 +60,7 @@ export const 一括灌水モーダル = forwardRef<一括灌水モーダル.Ref,
         await 鉢.管理.灌水({
           item,
           userId: user.id,
-          灌水量: 一括灌水モード設定.灌水量,
+          灌水量: '鉢いっぱい',
           液肥入り: 灌水時の施肥有無設定.is,
         });
 
@@ -138,7 +136,6 @@ export const 一括灌水モーダル = forwardRef<一括灌水モーダル.Ref,
               <鉢一覧の要素
                 item={鉢}
                 鉢を選択={鉢を選択}
-                一括灌水モード={false}
                 style={{ grey: is除外, overlapItem: is除外 ? <span style={{ fontSize: 32 }}>❌</span> : undefined }}
               />
             </Col>

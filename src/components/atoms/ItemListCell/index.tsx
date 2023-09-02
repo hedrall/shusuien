@@ -15,7 +15,6 @@ import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
 export type 鉢一覧の要素Props = {
   item: 鉢;
   鉢を選択: (鉢: 鉢, eventType: 'click' | 'doubleClick') => void;
-  一括灌水モード: boolean;
   style?: {
     // グレースケールで表示する
     grey?: boolean;
@@ -102,7 +101,7 @@ export function useDoubleTap<Target = Element, Callback extends DoubleTapCallbac
 }
 
 export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
-  const { item, 鉢を選択, 一括灌水モード, style } = props;
+  const { item, 鉢を選択, style } = props;
   const _鉢を選択 = 鉢を選択.bind(null, item);
   const bind = useDoubleTap(() => _鉢を選択('doubleClick'), 300, {
     onSingleTap: () => _鉢を選択('click'),
@@ -143,7 +142,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
 
   return (
     <div
-      className={cn('鉢一覧の要素', { 一括灌水モード })}
+      className={cn('鉢一覧の要素')}
       onContextMenu={e => {
         e.preventDefault();
         e.stopPropagation();

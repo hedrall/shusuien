@@ -14,6 +14,7 @@ import { Button } from 'antd';
 import { フィルタ条件の入力 } from '@frontend/components/molecules/FilterInput';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 棚作成モーダル } from '@frontend/components/organisms/CreateTanaModal';
+import { FloatMenu } from '@frontend/components/molecules/FloatMenu';
 
 const 棚名by鉢Id = (id: 棚ID, 棚一覧: 棚[]) => {
   return 棚一覧.find(棚 => 棚.id === id)?.name || 'unknown';
@@ -102,6 +103,8 @@ export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () =
       <div className="Section">
         <MyButton title={'⨁ 棚を作成する'} onClick={棚作成モーダルを開く} />
       </div>
+
+      <FloatMenu />
 
       {/* modals */}
       <この棚の鉢一覧モーダル ref={この棚の鉢一覧モーダルref} />

@@ -51,6 +51,7 @@ export namespace 履歴の内容 {
         表示名: string;
       };
     };
+    // todo: 灌水量に変える
     export type 量のKey型 = ValueOf<typeof 量の定義>['key'];
     export const 量のKey = Object.values(量の定義).map(i => i.key);
   }
