@@ -44,6 +44,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.42.1
     version: 7.42.1(react@18.2.0)
+  react-ripples:
+    specifier: ^2.2.1
+    version: 2.2.1
   react-router-dom:
     specifier: ^6.4.5
     version: 6.4.5(react-dom@18.2.0)(react@18.2.0)
@@ -9238,6 +9241,10 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-ripples@2.2.1:
+    resolution: {integrity: sha512-TfLjgZICQlsYCN2iX4fdeZNjoDzhJVC7r+R3irqyaNvCtWezouS9j+sE+nwSk747irtV8RKRDHmwMmsNBOw8Qg==}
+    dev: false
 
   /react-router-dom@6.4.5(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-a7HsgikBR0wNfroBHcZUCd9+mLRqZS8R5U1Z1mzLWxFXEkUT3vR1XXmSIVoVpxVX8Bar0nQYYYc9Yipq8dWwAA==}

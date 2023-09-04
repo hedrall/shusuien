@@ -8,6 +8,7 @@ import { AuthRepository } from '@frontend/domain/repository/auth';
 import { use棚一覧 } from '@frontend/store/data/action';
 import { useEventSubscriber } from '@frontend/hooks/eventSubscriber';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
+import { 左メニュー } from '@frontend/components/organisms/左メニュー';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuthState();
@@ -43,7 +44,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     <div className="Layout">
       {contextHolder}
       <div className="Header">
-        趣水園
+        <div className="Left">
+          <左メニュー />
+          趣水園
+        </div>
         {user && <LogoutOutlined onClick={signOut} />}
       </div>
       <div className="Main">{children}</div>
