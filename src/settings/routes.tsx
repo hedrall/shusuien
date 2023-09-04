@@ -6,12 +6,11 @@ import { LoginPage } from '@frontend/components/pages/Login';
 import { AdminPage } from '@frontend/components/pages/Admin';
 import { 植物ごとのデフォルト設定ページ } from '@frontend/components/pages/植物ごとのデフォルト設定ページ';
 import { 灌水専用ページ } from '@frontend/components/pages/灌水専用ページ';
-import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 
 export const ROUTES = {
   TOP: {
-    PATH: '/',
-    NAME: 'top',
+    PATH: '/old',
+    NAME: '(旧) トップページ',
     COMPONENT: TopPage,
   },
   LOGIN: {
@@ -36,7 +35,7 @@ export const ROUTES = {
     ICON: <span>🔧</span>,
   },
   灌水専用ページ: {
-    PATH: '/provide-water',
+    PATH: '/',
     NAME: '要灌水一覧 (TOP)',
     COMPONENT: 灌水専用ページ,
     ICON: <span>💧</span>,

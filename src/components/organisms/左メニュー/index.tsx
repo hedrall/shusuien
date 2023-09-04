@@ -15,6 +15,11 @@ const メニュー: Item[] = [
     link: ROUTES.植物ごとのデフォルト設定ページ.PATH,
     icon: ROUTES.植物ごとのデフォルト設定ページ.ICON,
   },
+  {
+    title: ROUTES.TOP.NAME,
+    link: ROUTES.TOP.PATH,
+    icon: '',
+  },
 ];
 type ListProps = { navigate: NavigateFunction; 閉じる: () => void };
 const renderList = ({ navigate, 閉じる }: ListProps) => {
@@ -30,7 +35,7 @@ const renderList = ({ navigate, 閉じる }: ListProps) => {
       itemLayout="horizontal"
       renderItem={i => {
         return (
-          <Ripples style={{ width: '100%' }}>
+          <Ripples>
             <List.Item
               onClick={() => onClickLink(i)}
               style={{ display: 'flex', gap: 4, justifyContent: 'flex-start', width: '100%' }}
