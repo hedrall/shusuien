@@ -4,14 +4,14 @@ import { useAuthState } from '@frontend/store/auth/action';
 import { Image, Modal, ModalProps, Popconfirm } from 'antd';
 import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
-import { 植替え操作モーダル } from '@frontend/components/organisms/ReplantOperationModal';
-import { 鉢の情報 } from '@frontend/components/molecules/ItemDesc';
+import { 植替モーダル } from '@frontend/components/organisms/植替モーダル';
+import { 鉢の情報 } from 'src/components/molecules/鉢の情報';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { use鉢単体 } from '@frontend/store/data/action';
-import { 鉢の履歴 } from '@frontend/components/molecules/HistoryTimeline';
-import { 灌水モーダル } from '@frontend/components/organisms/ProvideWater';
+import { 鉢の履歴 } from 'src/components/molecules/鉢の履歴';
+import { 灌水モーダル } from 'src/components/organisms/灌水モーダル';
 import { ICONS } from '@frontend/supports/icons';
-import { 成長記録モーダル } from '@frontend/components/organisms/DocGrowthModal';
+import { 成長記録モーダル } from '@frontend/components/organisms/成長記録モーダル';
 import { Button } from 'antd';
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
@@ -30,7 +30,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
   const { user } = useAuthState();
   const { item, setItem } = use鉢単体(id, user?.id);
 
-  const 植替え操作モーダルRef = useRef<植替え操作モーダル.Ref | null>(null);
+  const 植替え操作モーダルRef = useRef<植替モーダル.Ref | null>(null);
   const 灌水操作モーダルRef = useRef<灌水モーダル.Ref | null>(null);
   const 成長記録操作モーダルRef = useRef<成長記録モーダル.Ref | null>(null);
 
@@ -154,7 +154,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
       <鉢の履歴 鉢={item} />
 
       {/* 以下、モーダル用のスロット */}
-      <植替え操作モーダル ref={植替え操作モーダルRef} />
+      <植替モーダル ref={植替え操作モーダルRef} />
       <灌水モーダル ref={灌水操作モーダルRef} />
       <成長記録モーダル ref={成長記録操作モーダルRef} />
     </Modal>

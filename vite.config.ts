@@ -8,6 +8,7 @@ export default defineConfig({
       // '@/': `${__dirname}/src/`,
       // '~/': `${__dirname}/public/`,
       '@frontend/': `${__dirname}/src/`,
+      'src/': `${__dirname}/src/`,
     },
   },
   plugins: [react()],

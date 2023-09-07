@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import { 棚作成モーダル } from '@frontend/components/organisms/CreateTanaModal';
+import { 棚作成モーダル } from '@frontend/components/organisms/棚作成モーダル';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useNavigate } from 'react-router-dom';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { ROUTES } from '@frontend/settings/routes';
 import { use棚一覧 } from '@frontend/store/data/action';
-import { 棚一覧表示, 表示モード } from '@frontend/components/organisms/TanaList';
+import { 棚一覧表示, 表示モード } from 'src/components/organisms/棚一覧表示';
 import { Divider } from 'antd';
 import { FloatMenu } from '@frontend/components/molecules/FloatMenu';
 import { MyLink } from '@frontend/components/atoms/MyLink';
@@ -14,8 +14,6 @@ import { RadioGroup } from '@frontend/components/atoms/RadioGroup';
 import { useController, useForm } from 'react-hook-form';
 import { SYMBOL_ICONS } from '@frontend/supports/icons';
 import { フィルタ条件の入力 } from '@frontend/components/molecules/FilterInput';
-
-export type TopPageProps = {};
 
 type Input = {
   表示モード: 表示モード;
@@ -33,7 +31,8 @@ const 表示モードのOption = Object.values(表示モード).map(i => {
     value: key,
   };
 });
-export const TopPage: React.FC<TopPageProps> = props => {
+// TODO: 削除するページ
+export const 旧TopPage: React.FC<{}> = () => {
   const { user } = useAuthState();
   const { 棚一覧 } = use棚一覧.一覧を利用();
   const navigator = useNavigate();
@@ -63,7 +62,7 @@ export const TopPage: React.FC<TopPageProps> = props => {
   return (
     <div className="Top">
       <div className="灌水専用ページへのリンク">
-        <MyLink path={ROUTES.灌水専用ページ.PATH} navigator={navigator} text="要灌水一覧" />
+        <MyLink path={ROUTES.TOP.PATH} navigator={navigator} text="要灌水一覧" />
       </div>
       <h2 className="SectionTitle">表示形式</h2>
       <div className="表示形式の内容">

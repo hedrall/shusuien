@@ -17,9 +17,9 @@ import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
-import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/SelectFromDefaultSettingModal';
+import { デフォルト設定から選択するモーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/選択';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
-import { 植物ごとのデフォルト設定編集モーダル } from '@frontend/components/organisms/EditPDSModal';
+import { 植物ごとのデフォルト設定編集モーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/編集';
 
 const F = DATE_READONLY_FORMAT;
 

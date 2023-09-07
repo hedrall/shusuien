@@ -1,6 +1,6 @@
 import React from 'react';
 import { ValueOf } from 'type-fest';
-import { TopPage } from '@frontend/components/pages/Top';
+import { 旧TopPage } from '@frontend/components/pages/旧Top';
 import { Error } from '@frontend/components/pages/Error';
 import { LoginPage } from '@frontend/components/pages/Login';
 import { AdminPage } from '@frontend/components/pages/Admin';
@@ -11,7 +11,7 @@ export const ROUTES = {
   OLD: {
     PATH: '/old',
     NAME: '(旧) トップページ',
-    COMPONENT: TopPage,
+    COMPONENT: 旧TopPage,
   },
   LOGIN: {
     PATH: '/login',

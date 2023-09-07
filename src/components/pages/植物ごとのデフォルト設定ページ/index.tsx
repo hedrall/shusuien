@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import { 植物ごとのデフォルト設定の新規作成モーダル } from '@frontend/components/organisms/CreatePlantDefaultSettingModal';
+import { 植物ごとのデフォルト設定の新規作成モーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/新規作成';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 import { Table, TableColumnsType } from 'antd';

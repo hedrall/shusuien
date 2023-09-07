@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import './index.scss';
 import { use棚一覧, 灌水が必要な鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
-import { 鉢一覧View } from '@frontend/components/molecules/ItemList';
+import { 鉢一覧View } from 'src/components/molecules/鉢一覧';
 import { 鉢 } from '@frontend/domain/model/鉢';
 import { 棚, 棚ID } from '@frontend/domain/model/棚';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ import { 一括灌水モーダル } from '@frontend/components/organisms/この�
 import { Button } from 'antd';
 import { フィルタ条件の入力 } from '@frontend/components/molecules/FilterInput';
 import { MyButton } from '@frontend/components/atoms/MyButton';
-import { 棚作成モーダル } from '@frontend/components/organisms/CreateTanaModal';
+import { 棚作成モーダル } from 'src/components/organisms/棚作成モーダル';
 import { FloatMenu } from '@frontend/components/molecules/FloatMenu';
 
 const 棚名by鉢Id = (id: 棚ID, 棚一覧: 棚[]) => {

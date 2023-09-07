@@ -8,34 +8,12 @@ import { 鉢 } from '@frontend/domain/model/鉢';
 import { User } from '@frontend/domain/model/user';
 import { Editable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';
-import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/SelectFromDefaultSettingModal';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { デフォルト設定から選択するモーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/選択';
+import { useRecoilValue } from 'recoil';
 
 export type TableViewProps = {
   棚一覧: 棚[];
 };
-
-interface DataType {
-  key: React.Key;
-  name: string;
-  platform: string;
-  version: string;
-  upgradeNum: number;
-  creator: string;
-  createdAt: string;
-}
-
-interface ExpandedDataType {
-  key: React.Key;
-  date: string;
-  name: string;
-  upgradeNum: string;
-}
-
-const items = [
-  { key: '1', label: 'Action 1' },
-  { key: '2', label: 'Action 2' },
-];
 
 const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
   function 詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(鉢: 鉢, key: Key) {

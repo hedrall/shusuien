@@ -16,13 +16,6 @@ import { ValidationRule } from 'react-hook-form/dist/types/validator';
 import { DATE_TIME_FORMAT } from '@frontend/supports';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 
-export namespace 植替え操作モーダル {
-  export type Ref = {
-    open: (鉢: 鉢) => void;
-  };
-  export type Props = {};
-}
-
 type Input = {
   size: 鉢サイズ.番号;
   isLong: boolean;
@@ -74,7 +67,14 @@ const 鉢サイズの選択肢: RadioGroupOption<鉢サイズ.番号>[] = 鉢サ
     value: num,
   };
 });
-export const 植替え操作モーダル = forwardRef<植替え操作モーダル.Ref, 植替え操作モーダル.Props>((props, ref) => {
+
+export namespace 植替モーダル {
+  export type Ref = {
+    open: (鉢: 鉢) => void;
+  };
+  export type Props = {};
+}
+export const 植替モーダル = forwardRef<植替モーダル.Ref, 植替モーダル.Props>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoading, withLoading } = useWithLoading();
   const [item, setItem] = useState<鉢 | null>(null);
