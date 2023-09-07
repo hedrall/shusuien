@@ -9,7 +9,7 @@ import { ROUTES } from '@frontend/settings/routes';
 type Item = { title: string; link: string; icon: React.ReactNode };
 const メニュー: Item[] = [
   // { title: ROUTES.植物ごとのデフォルト設定ページ.NAME, link: ROUTES.植物ごとのデフォルト設定ページ.PATH },
-  { title: ROUTES.灌水専用ページ.NAME, link: ROUTES.灌水専用ページ.PATH, icon: ROUTES.灌水専用ページ.ICON },
+  { title: ROUTES.TOP.NAME, link: ROUTES.TOP.PATH, icon: ROUTES.TOP.ICON },
   {
     title: ROUTES.植物ごとのデフォルト設定ページ.NAME,
     link: ROUTES.植物ごとのデフォルト設定ページ.PATH,

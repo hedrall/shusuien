@@ -8,7 +8,7 @@ import { 植物ごとのデフォルト設定ページ } from '@frontend/compone
 import { 灌水専用ページ } from '@frontend/components/pages/灌水専用ページ';
 
 export const ROUTES = {
-  TOP: {
+  OLD: {
     PATH: '/old',
     NAME: '(旧) トップページ',
     COMPONENT: TopPage,
@@ -34,7 +34,7 @@ export const ROUTES = {
     COMPONENT: 植物ごとのデフォルト設定ページ,
     ICON: <span>🔧</span>,
   },
-  灌水専用ページ: {
+  TOP: {
     PATH: '/',
     NAME: '要灌水一覧 (TOP)',
     COMPONENT: 灌水専用ページ,
