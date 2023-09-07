@@ -95,7 +95,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
   return (
     <Modal {...modalProps}>
       <h1>鉢のお手入れ</h1>
-      <div>
+      <div className="ImageContainer">
         <Image
           style={{ maxWidth: '100%', maxHeight: 250, minHeight: 174, objectFit: 'contain' }}
           src={item?.snapshot.画像のURL || NO_IMAGE}

@@ -40,6 +40,9 @@
   }
 
   .ImageContainer {
+    display: flex;
+    justify-content: center;
+
     .鉢一覧の要素 {
       position: relative;
     }
