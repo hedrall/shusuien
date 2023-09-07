@@ -34,7 +34,9 @@ body {
   background: white;
 }
 
-input.ant-input {
+input.ant-input,
+.ant-select-selector .ant-select-selection-item,
+.ant-select-selector .ant-select-selection-search {
   font-size: 16px;
   scale: 0.9;
 }

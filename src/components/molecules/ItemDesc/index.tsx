@@ -36,7 +36,6 @@ const 最後の灌水の表示 = (最後の灌水: 鉢['snapshot']['最後の灌
 };
 
 const 指定なし = '';
-const 日光の強度一覧 = [...Object.values(日光の強度), 指定なし];
 export const 鉢の情報: React.FC<MyDescProps> = props => {
   const now = dayjs();
   const { 鉢 } = props;
@@ -72,6 +71,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
     loading: isLoading,
     style: { width: '100%' },
     listHeight: 300,
+    size: 'small',
   };
   function 日光の強度を更新<Key extends keyof 日光の強度設定, V = 日光の強度設定[Key]>(key: Key) {
     return async (value: V) => {

@@ -24,7 +24,6 @@ export namespace 鉢管理モーダル {
   export type Props = {};
 }
 
-const 水切れ日数のDEFAULT = 6;
 export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢管理モーダル.Props>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [id, setId] = useState<鉢Id | undefined>(undefined);
