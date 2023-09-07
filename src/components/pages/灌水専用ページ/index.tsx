@@ -37,7 +37,6 @@ export namespace 灌水専用ページ {
 }
 export const 灌水専用ページ: React.FC<灌水専用ページ.Props> = () => {
   // --- hooks ---
-  const navigator = useNavigate();
   const { user } = useAuthState();
   const { 棚一覧 } = use棚一覧.一覧を利用();
   const { 要灌水 } = 灌水が必要な鉢一覧(user);

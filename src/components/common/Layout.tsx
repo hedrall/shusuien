@@ -20,17 +20,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   use棚一覧.購読(userId);
   use植物ごとのデフォルト設定.購読を開始(userId);
 
-  // ズームを禁止する
-  document.body.addEventListener(
-    'touchmove',
-    e => {
-      if (e.touches.length > 1) {
-        e.preventDefault();
-      }
-    },
-    { passive: false },
-  );
-
   useEffect(() => {
     if (location.pathname === ROUTES.LOGIN.PATH && user) {
       const params = new URLSearchParams(location.search);
