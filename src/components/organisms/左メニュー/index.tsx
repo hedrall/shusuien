@@ -8,16 +8,20 @@ import { ROUTES } from '@frontend/settings/routes';
 
 type Item = { title: string; link: string; icon: React.ReactNode };
 const メニュー: Item[] = [
-  // { title: ROUTES.植物ごとのデフォルト設定ページ.NAME, link: ROUTES.植物ごとのデフォルト設定ページ.PATH },
   { title: ROUTES.TOP.NAME, link: ROUTES.TOP.PATH, icon: ROUTES.TOP.ICON },
+  {
+    title: ROUTES.棚の設定.NAME,
+    link: ROUTES.棚の設定.PATH,
+    icon: ROUTES.棚の設定.ICON,
+  },
   {
     title: ROUTES.植物ごとのデフォルト設定ページ.NAME,
     link: ROUTES.植物ごとのデフォルト設定ページ.PATH,
     icon: ROUTES.植物ごとのデフォルト設定ページ.ICON,
   },
   {
-    title: ROUTES.TOP.NAME,
-    link: ROUTES.TOP.PATH,
+    title: ROUTES.OLD.NAME,
+    link: ROUTES.OLD.PATH,
     icon: '',
   },
 ];

@@ -1,0 +1,11 @@
+@use '../../../assets/variables' as v;
+
+.棚の設定ページ {
+  .Section {
+    margin: 16px 0;
+  }
+
+  .SortableItem {
+    border: 1px solid v.$color-grey;
+  }
+}
