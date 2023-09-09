@@ -2,24 +2,23 @@ import React, { useRef } from 'react';
 import './index.scss';
 import { 日光の強度, 日光の強度設定, 育成タイプ, 鉢 } from '@frontend/domain/model/鉢';
 import { Button, Descriptions, Select, SelectProps } from 'antd';
-import { isDefined, optionalCall, optionalValue } from '@frontend/supports/functions';
+import { optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 鉢サイズ } from '@frontend/domain/model/履歴';
 import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date';
-import { MyEditable, EditableProps } from '@frontend/components/atoms/Editable';
+import { MyEditable } from '@frontend/components/atoms/Editable';
 import dayjs, { Dayjs } from 'dayjs';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import { 棚ID } from '@frontend/domain/model/棚';
 import { useRecoilState } from 'recoil';
 import { 棚Selector } from '@frontend/store/data/action';
 import { useWithLoading } from '@frontend/supports/ui';
-import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
-import { デフォルト設定から選択するモーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/選択';
+import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/植物ごとのデフォルト設定モーダル/選択';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
-import { 植物ごとのデフォルト設定編集モーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/編集';
+import { 植物ごとのデフォルト設定編集モーダル } from '@frontend/components/organisms/植物ごとのデフォルト設定モーダル/編集';
 
 const F = DATE_READONLY_FORMAT;
 

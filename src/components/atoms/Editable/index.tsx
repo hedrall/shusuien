@@ -98,9 +98,9 @@ export function MyEditable<T extends 'text' | 'number' = 'text', V = T extends '
   );
 }
 
-export namespace Editable {
+export namespace MyEditable {
   export const Number = (props: Omit<EditableProps<'number', number | undefined>, 'type'>) => {
-    const Elem = Editable<'number'>;
+    const Elem = MyEditable<'number'>;
     return <Elem {...props} type="number" />;
   };
 
