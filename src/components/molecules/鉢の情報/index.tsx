@@ -19,6 +19,7 @@ import { use植物ごとのデフォルト設定 } from '@frontend/store/master/
 import { デフォルト設定から選択するモーダル } from '@frontend/components/organisms/植物ごとのデフォルト設定モーダル/選択';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
 import { 植物ごとのデフォルト設定編集モーダル } from '@frontend/components/organisms/植物ごとのデフォルト設定モーダル/編集';
+import { 棚移動モーダル } from 'src/components/organisms/棚移動モーダル';
 
 const F = DATE_READONLY_FORMAT;
 
@@ -39,8 +40,22 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
   const now = dayjs();
   const { 鉢 } = props;
   const { name, 詳細, snapshot, 作成日時, 補足 } = 鉢;
+
+  // --- refs ---
   const デフォルト設定から選択するモーダルref = useRef<デフォルト設定から選択するモーダル.Ref | null>(null);
   const 植物ごとのデフォルト設定編集モーダルref = useRef<植物ごとのデフォルト設定編集モーダル.Ref | null>(null);
+  const 棚移動モーダルref = useRef<棚移動モーダル.Ref | null>(null);
+
+  const 棚を変更 = async (id: 棚ID) => {
+    await withLoading(async () => {
+      await 鉢.フィールドを更新('棚Id', id);
+    });
+  };
+  const on移動先の棚を選択 = 棚を変更;
+  const 棚移動モーダルを開く = () => {
+    棚移動モーダルref.current?.open();
+  };
+
   const 鉢のサイズ = optionalCall(snapshot.鉢のサイズ, 鉢サイズ.toString);
   const 最後の灌水 = 最後の灌水の表示(snapshot.最後の灌水, now);
   const 最後の植替え = [snapshot.最後の植替え?.format(F)].filter(Boolean).join(', ');
@@ -57,21 +72,9 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
   }
 
   const { isLoading, withLoading } = useWithLoading();
-  const 棚を変更 = async (id: 棚ID) => {
-    await withLoading(async () => {
-      await 鉢.フィールドを更新('棚Id', id);
-    });
-  };
+
   const [棚一覧] = useRecoilState(棚Selector);
-  const 棚SelectProps: SelectProps = {
-    options: 棚一覧.map(i => ({ value: i.id, label: i.name })),
-    onChange: e => 棚を変更(e as 棚ID),
-    value: 鉢.棚Id,
-    loading: isLoading,
-    style: { width: '100%' },
-    listHeight: 300,
-    size: 'small',
-  };
+
   function 日光の強度を更新<Key extends keyof 日光の強度設定, V = 日光の強度設定[Key]>(key: Key) {
     return async (value: V) => {
       await 鉢.日光の強度を更新(key, value === 指定なし ? undefined : value);
@@ -140,7 +143,12 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           <MyEditable value={name || ''} name="name" onSubmit={フィールドを更新('name')} />
         </Descriptions.Item>
         <Descriptions.Item label="棚">
-          <Select {...棚SelectProps} />
+          <div className="棚Select">
+            {棚一覧.find(i => i.id === 鉢.棚Id)?.name}
+            <div onClick={棚移動モーダルを開く}>
+              <OPERATION_ICONS.EDIT />
+            </div>
+          </div>
         </Descriptions.Item>
         <Descriptions.Item label="科/属/種" className="科属種">
           <div className="項目">
@@ -245,6 +253,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       </Descriptions>
       <デフォルト設定から選択するモーダル ref={デフォルト設定から選択するモーダルref} />
       <植物ごとのデフォルト設定編集モーダル ref={植物ごとのデフォルト設定編集モーダルref} />
+      <棚移動モーダル ref={棚移動モーダルref} on移動先の棚を選択={on移動先の棚を選択} />
     </>
   );
 };

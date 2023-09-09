@@ -18,7 +18,7 @@ export const useEventSubscriber = () => {
       鉢.events.フィールドを更新.subscribe(({ フィールド名, 更新後のValue }) => {
         api.success({
           message: `"${フィールド名}" を更新しました。`,
-          description: `${更新後のValue}`,
+          // description: `${更新後のValue}`,
           placement: 'bottomRight',
         });
       }),

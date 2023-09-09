@@ -97,7 +97,7 @@ type Input = {
   filter: 履歴の内容.Type[];
 };
 const DEFAULT_VALUES = (): Input => {
-  return { filter: [] };
+  return { filter: ['成長の記録', '植替え'] };
 };
 
 export const 鉢の履歴: React.FC<鉢の履歴Props> = props => {

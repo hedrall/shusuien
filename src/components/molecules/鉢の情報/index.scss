@@ -5,6 +5,11 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+  .棚Select {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+  }
   .科属種 {
     .項目 {
       word-break: keep-all;
