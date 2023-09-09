@@ -1,21 +1,19 @@
-import { useRecoilState, selector, selectorFamily } from 'recoil';
+import { selector, selectorFamily, useRecoilState } from 'recoil';
 import { 棚, 棚ID } from '@frontend/domain/model/棚';
 import { DATA_STATE_ATOM, DataState } from '@frontend/store/data/atom';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { User, UserId } from '@frontend/domain/model/user';
-import { 日光の強度設定, 鉢, 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
 import { useEffect, useState } from 'react';
 import { MASTER_STATE_ATOM } from '@frontend/store/master/atom';
-import { isDefined, optionalCall, optionalValue } from '@frontend/supports/functions';
+import { isDefined } from '@frontend/supports/functions';
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
-import { 季節, 現在の季節 } from '@frontend/domain/const/季節';
+import { 現在の季節 } from '@frontend/domain/const/季節';
 import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
-import { NOW, x日前の表記, 今日 } from '@frontend/supports/date';
 import { 鉢Service } from '@frontend/domain/service/item';
 import { ひらがなtoカタカナ } from '@frontend/supports/string';
-import dayjs from 'dayjs';
 import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
+import { 棚の並び順 } from '@frontend/domain/model/棚の並び順';
 
 const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
   if (!filter.enabled) return true;
@@ -195,37 +193,40 @@ export namespace use棚一覧 {
   };
 }
 
-export const useDataState = () => {
-  const [state, setState] = useRecoilState(DATA_STATE_ATOM);
-
-  const set = {
-    棚: (棚一覧: 棚[]) => {
-      setState(pre => {
-        return { ...pre, 棚一覧 } satisfies DataState;
-      });
-    },
-    鉢: (棚Id: 棚ID, items: 鉢[]) => {
-      setState(pre => {
-        return {
-          ...pre,
-          鉢一覧: {
-            ...pre.鉢一覧,
-            [棚Id]: items,
-          },
-        };
-      });
-    },
-  };
-
-  const 棚を購読 = (userId: UserId) => {
-    return FSAppRepository.棚.購読(userId, items => {
-      set.棚(items.map(i => i.value));
+export const 棚の並び順Selector = selector<DataState['棚の並び順']>({
+  key: '棚の並び順Selector',
+  get: ({ get }) => {
+    return get(DATA_STATE_ATOM).棚の並び順;
+  },
+  set: ({ set }, item) => {
+    set(DATA_STATE_ATOM, pre => {
+      return { ...pre, 棚の並び順: item as 棚の並び順 };
     });
+  },
+});
+
+export namespace use棚の並び順 {
+  export const 購読 = (userId: UserId | undefined) => {
+    const [, set] = useRecoilState(棚の並び順Selector);
+
+    const 購読 = (userId: UserId) => {
+      return FSAppRepository.棚の並び順.購読(userId, item => {
+        console.log('棚の並び順をlisten', item);
+        set(item.value);
+      });
+    };
+
+    useEffect(() => {
+      if (!userId) return;
+      const { unsubscribe } = 購読(userId);
+      return () => unsubscribe();
+    }, [userId]);
   };
 
-  return {
-    棚一覧: state.棚一覧,
-    棚をSet: set.棚,
-    棚を購読,
+  export const 利用 = () => {
+    const [state] = useRecoilState(棚の並び順Selector);
+    return { 棚の並び順: state };
   };
-};
+}
+
+// TODO: ばらして整理する

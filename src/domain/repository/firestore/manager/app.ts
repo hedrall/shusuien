@@ -34,4 +34,9 @@ export namespace FsAppManager {
       super(appConverters.植物ごとのデフォルト設定);
     }
   }
+  export class 棚の並び順 extends FsManager.棚の並び順<typeof appConverters.棚の並び順> {
+    constructor() {
+      super(appConverters.棚の並び順);
+    }
+  }
 }

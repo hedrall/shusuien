@@ -3,6 +3,7 @@ import { 鉢 as Domainの鉢 } from '@frontend/domain/model/鉢';
 import { 履歴 as Domainの履歴 } from '@frontend/domain/model/履歴';
 import { User as DomainのUser } from '@frontend/domain/model/user';
 import { 植物ごとのデフォルト設定 as Domainの植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
+import { 棚の並び順 as Domainの棚の並び順 } from '@frontend/domain/model/棚の並び順';
 import fs from 'firebase/firestore';
 import { Entity } from '@frontend/domain/model';
 
@@ -68,6 +69,17 @@ export namespace FsManager {
     constructor(converter: C) {
       this.converter = converter;
       this.path = 植物ごとのデフォルト設定.createPath();
+    }
+  }
+  export class 棚の並び順<C extends Converter<Domainの棚の並び順>> implements FsManager<Domainの棚の並び順, C> {
+    static _name = '棚の並び順';
+    static createPath = () => 棚の並び順._name;
+    path: string;
+    converter: C;
+
+    constructor(converter: C) {
+      this.converter = converter;
+      this.path = 棚の並び順.createPath();
     }
   }
 }

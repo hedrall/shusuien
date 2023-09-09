@@ -8,6 +8,8 @@ import { closestCenter, DndContext } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { DragEndEvent } from '@dnd-kit/core/dist/types';
+import { 棚の並び順 } from 'src/domain/model/棚の並び順';
+import { 棚, 棚ID } from 'src/domain/model/棚';
 
 const 棚のソートアイテム = (props: { id: string; name: string }) => {
   const { id, name } = props;
@@ -32,21 +34,28 @@ export namespace 棚の設定ページ {
 export const 棚の設定ページ: React.FC<棚の設定ページ.Props> = () => {
   // --- hooks ---
   const { user } = useAuthState();
-  const { 棚一覧 } = use棚一覧.一覧を利用();
-  const [items, setItems] = useState([1, 2, 3]);
+  const { 棚一覧: t } = use棚一覧.一覧を利用();
+  const 棚一覧 = t as (棚 & { id: string /* sort用にidが必須 */ })[];
+  const 棚Ids = 棚一覧.map(棚 => 棚.id!);
 
-  const handleDragEnd = (event: DragEndEvent) => {
+  // TODO: 変更時にloadingしたい
+
+  const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (!active?.id || !over?.id) return;
+    if (!user?.id) return;
 
+    // active => overへ移動させる
     if (active.id !== over.id) {
-      setItems(items => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
+      const items = 棚Ids.slice();
+      const oldIndex = items.indexOf(active.id as 棚ID);
+      const newIndex = items.indexOf(over.id as 棚ID);
 
-        return arrayMove(items, oldIndex, newIndex);
-      });
+      const movedIds = arrayMove(items, oldIndex, newIndex);
+      const moved棚一覧 = movedIds.map(id => 棚一覧.find(棚 => 棚.id === id)!);
+
+      await 棚の並び順.更新({ userId: user.id, 棚一覧: moved棚一覧 });
     }
   };
 
@@ -62,7 +71,7 @@ export const 棚の設定ページ: React.FC<棚の設定ページ.Props> = () =
     <div className="棚の設定ページ">
       <div>
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={items} disabled={false} strategy={verticalListSortingStrategy}>
+          <SortableContext items={棚一覧} disabled={false} strategy={verticalListSortingStrategy}>
             {棚一覧.map(i => (
               <棚のソートアイテム key={i.name} id={i.id!} name={i.name} />
             ))}

@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '@frontend/settings/routes';
 import { LogoutOutlined } from '@ant-design/icons';
 import { AuthRepository } from '@frontend/domain/repository/auth';
-import { use棚一覧 } from '@frontend/store/data/action';
+import { use棚の並び順, use棚一覧 } from '@frontend/store/data/action';
 import { useEventSubscriber } from '@frontend/hooks/eventSubscriber';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 import { 左メニュー } from '@frontend/components/organisms/左メニュー';
@@ -18,6 +18,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   const userId = user?.id;
   use棚一覧.購読(userId);
+  use棚の並び順.購読(userId);
   use植物ごとのデフォルト設定.購読を開始(userId);
 
   useEffect(() => {
