@@ -10,6 +10,8 @@ import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } 
 import { DragEndEvent } from '@dnd-kit/core/dist/types';
 import { 棚の並び順 } from 'src/domain/model/棚の並び順';
 import { 棚, 棚ID } from 'src/domain/model/棚';
+import { useSubscribeState } from 'src/eventBasedStore';
+import { Card } from 'antd';
 
 const 棚のソートアイテム = (props: { id: string; name: string }) => {
   const { id, name } = props;
@@ -22,9 +24,17 @@ const 棚のソートアイテム = (props: { id: string; name: string }) => {
   };
 
   return (
-    <div className="SortableItem" ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <Card
+      className="SortableItem"
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      size="small"
+      bordered={false}
+    >
       {name}
-    </div>
+    </Card>
   );
 };
 
@@ -38,7 +48,8 @@ export const 棚の設定ページ: React.FC<棚の設定ページ.Props> = () =
   const 棚一覧 = t as (棚 & { id: string /* sort用にidが必須 */ })[];
   const 棚Ids = 棚一覧.map(棚 => 棚.id!);
 
-  // TODO: 変更時にloadingしたい
+  const 更新状態 = useSubscribeState(棚の並び順.events.更新);
+  const isLoading = 更新状態 === '開始';
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
@@ -71,7 +82,7 @@ export const 棚の設定ページ: React.FC<棚の設定ページ.Props> = () =
     <div className="棚の設定ページ">
       <div>
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={棚一覧} disabled={false} strategy={verticalListSortingStrategy}>
+          <SortableContext items={棚一覧} disabled={isLoading} strategy={verticalListSortingStrategy}>
             {棚一覧.map(i => (
               <棚のソートアイテム key={i.name} id={i.id!} name={i.name} />
             ))}
