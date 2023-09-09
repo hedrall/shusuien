@@ -5,7 +5,7 @@ import { Button, Descriptions, Select, SelectProps } from 'antd';
 import { isDefined, optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 鉢サイズ } from '@frontend/domain/model/履歴';
 import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date';
-import { Editable, EditableProps } from '@frontend/components/atoms/Editable';
+import { MyEditable, EditableProps } from '@frontend/components/atoms/Editable';
 import dayjs, { Dayjs } from 'dayjs';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import { 棚ID } from '@frontend/domain/model/棚';
@@ -138,20 +138,20 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         column={{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }}
       >
         <Descriptions.Item label="名前">
-          <Editable value={name || ''} name="name" onSubmit={フィールドを更新('name')} />
+          <MyEditable value={name || ''} name="name" onSubmit={フィールドを更新('name')} />
         </Descriptions.Item>
         <Descriptions.Item label="棚">
           <Select {...棚SelectProps} />
         </Descriptions.Item>
         <Descriptions.Item label="科/属/種" className="科属種">
           <div className="項目">
-            科: <Editable value={詳細.科 || ''} name="科" onSubmit={詳細を更新('科')} />
+            科: <MyEditable value={詳細.科 || ''} name="科" onSubmit={詳細を更新('科')} />
           </div>
           <div className="項目">
-            属: <Editable value={詳細.属 || ''} name="属" onSubmit={詳細を更新('属')} />
+            属: <MyEditable value={詳細.属 || ''} name="属" onSubmit={詳細を更新('属')} />
           </div>
           <div className="項目">
-            種名: <Editable value={詳細.種名 || ''} name="種名" onSubmit={詳細を更新('種名')} />
+            種名: <MyEditable value={詳細.種名 || ''} name="種名" onSubmit={詳細を更新('種名')} />
           </div>
           <div className="候補となっているデフォルト設定">
             ※ 候補となっているデフォルト設定
@@ -197,7 +197,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           <育成タイプSelect {...育成タイプSelectProps} />
         </Descriptions.Item>
         <Descriptions.Item label="耐寒温度">
-          <Editable.Number
+          <MyEditable.Number
             value={optionalValue(詳細.耐寒温度, undefined)}
             name="耐寒温度"
             onSubmit={詳細を更新('耐寒温度')}
@@ -205,7 +205,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           />
         </Descriptions.Item>
         <Descriptions.Item label="水切れ日数">
-          <Editable.Number
+          <MyEditable.Number
             value={optionalValue(詳細.水切れ日数, undefined)}
             name="水切れ日数"
             onSubmit={詳細を更新('水切れ日数')}
@@ -214,13 +214,13 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         </Descriptions.Item>
         <Descriptions.Item label="追加日時">{作成日時.format(F)}</Descriptions.Item>
         <Descriptions.Item label="入手元">
-          <Editable value={詳細.入手元 || ''} name="入手元" onSubmit={詳細を更新('入手元')} />
+          <MyEditable value={詳細.入手元 || ''} name="入手元" onSubmit={詳細を更新('入手元')} />
         </Descriptions.Item>
         <Descriptions.Item label="金額">
-          <Editable.Number value={詳細.金額} name="金額" onSubmit={詳細を更新('金額')} />
+          <MyEditable.Number value={詳細.金額} name="金額" onSubmit={詳細を更新('金額')} />
         </Descriptions.Item>
         <Descriptions.Item label="補足">
-          <Editable value={補足 || ''} name="補足" onSubmit={フィールドを更新('補足')} />
+          <MyEditable value={補足 || ''} name="補足" onSubmit={フィールドを更新('補足')} />
         </Descriptions.Item>
         <Descriptions.Item label="鉢のサイズ">{鉢のサイズ}</Descriptions.Item>
         <Descriptions.Item

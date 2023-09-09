@@ -6,7 +6,7 @@ import { 植物ごとのデフォルト設定Id } from '@frontend/domain/model/�
 import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
-import { Editable } from '@frontend/components/atoms/Editable';
+import { MyEditable } from '@frontend/components/atoms/Editable';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 
 export namespace 植物ごとのデフォルト設定編集モーダル {
@@ -92,14 +92,14 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
           <育成タイプSelect {...育成タイプSelectProps} />
         </Descriptions.Item>
         <Descriptions.Item label="耐寒温度">
-          <Editable.Number
+          <MyEditable.Number
             value={設定['耐寒温度']}
             name={'耐寒温度'}
             onSubmit={e => 設定.更新.ルートプロパティ('耐寒温度', e)}
           />
         </Descriptions.Item>
         <Descriptions.Item label="水切れ日数">
-          <Editable.Number
+          <MyEditable.Number
             value={設定['水切れ日数']}
             name={'水切れ日数'}
             onSubmit={e => 設定.更新.ルートプロパティ('水切れ日数', e)}

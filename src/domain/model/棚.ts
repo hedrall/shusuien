@@ -35,6 +35,10 @@ export class 棚 extends 棚Base {
     await FSAppRepository.棚.作成(新規棚);
   }
 
+  static 名前を更新 = async (id: 棚ID, name: string) => {
+    await FSAppRepository.棚.更新(id, { name });
+  };
+
   constructor(props: 棚Base) {
     super(props);
   }

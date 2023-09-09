@@ -17,7 +17,7 @@ export type EditableProps<T, V> = {
 type Value = string | number | undefined;
 
 const maxLength: ValidationRule<number> = { value: 40, message: '最大40文字までです。' };
-export function Editable<T extends 'text' | 'number' = 'text', V = T extends 'text' ? string : number | undefined>(
+export function MyEditable<T extends 'text' | 'number' = 'text', V = T extends 'text' ? string : number | undefined>(
   props: EditableProps<T, V>,
 ) {
   const { type = 'text', value, name, onSubmit, placeholder } = props;
@@ -56,6 +56,7 @@ export function Editable<T extends 'text' | 'number' = 'text', V = T extends 'te
       await onSubmit(value);
     };
     const onClick = async () => {
+      console.log('click my editable');
       await submitValue();
       setIsEditing(false);
     };

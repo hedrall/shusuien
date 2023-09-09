@@ -6,7 +6,7 @@ import { use鉢一覧, 棚Selector } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢 } from '@frontend/domain/model/鉢';
 import { User } from '@frontend/domain/model/user';
-import { Editable } from '@frontend/components/atoms/Editable';
+import { MyEditable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { デフォルト設定から選択するモーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/選択';
 import { useRecoilValue } from 'recoil';
@@ -29,7 +29,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
 
   const getRender = (key: keyof 鉢['詳細']) => (_: unknown, 鉢: 鉢) => {
     const value = 鉢.詳細[key] || '';
-    return <Editable value={value} name={key} onSubmit={詳細を更新(鉢, key)} />;
+    return <MyEditable value={value} name={key} onSubmit={詳細を更新(鉢, key)} />;
   };
 
   const columns: TableColumnsType<鉢> = [
@@ -74,7 +74,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       dataIndex: 'name',
       key: 'name',
       render: (_, 鉢) => {
-        return <Editable value={鉢.name} name="name" onSubmit={e => 鉢.フィールドを更新('name', e)} />;
+        return <MyEditable value={鉢.name} name="name" onSubmit={e => 鉢.フィールドを更新('name', e)} />;
       },
     },
     {

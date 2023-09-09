@@ -1,4 +1,4 @@
-import React, { CSSProperties, useRef, useState } from 'react';
+import React, { CSSProperties, useRef } from 'react';
 import './index.scss';
 import { use棚一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
@@ -12,8 +12,10 @@ import { 棚の並び順 } from 'src/domain/model/棚の並び順';
 import { 棚, 棚ID } from 'src/domain/model/棚';
 import { useSubscribeState } from 'src/eventBasedStore';
 import { Card } from 'antd';
+import { MyEditable } from 'src/components/atoms/Editable';
+import { SYMBOL_ICONS } from 'src/supports/icons';
 
-const 棚のソートアイテム = (props: { id: string; name: string }) => {
+const 棚のソートアイテム = (props: { id: 棚ID; name: string }) => {
   const { id, name } = props;
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
@@ -23,17 +25,17 @@ const 棚のソートアイテム = (props: { id: string; name: string }) => {
     touchAction: 'none',
   };
 
+  const 棚の名前を更新 = async (updatedName: string | undefined) => {
+    if (!updatedName) return;
+    await 棚.名前を更新(id, updatedName);
+  };
+
   return (
-    <Card
-      className="SortableItem"
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      size="small"
-      bordered={false}
-    >
-      {name}
+    <Card className="SortableItem" ref={setNodeRef} style={style} size="small" bordered={false}>
+      <div {...attributes} {...listeners}>
+        <SYMBOL_ICONS.左メニュー />
+      </div>
+      <MyEditable value={name || ''} name="name" onSubmit={棚の名前を更新} />
     </Card>
   );
 };

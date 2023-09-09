@@ -4,7 +4,7 @@ import { 植物ごとのデフォルト設定の新規作成モーダル } from 
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 import { Table, TableColumnsType } from 'antd';
-import { Editable } from '@frontend/components/atoms/Editable';
+import { MyEditable } from '@frontend/components/atoms/Editable';
 import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
 import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
@@ -60,7 +60,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
         dataIndex: '種',
         key: '種',
         render: (_: any, 設定: 植物ごとのデフォルト設定) => {
-          return <Editable.Number value={設定[key]} name={key} onSubmit={v => 設定.更新.ルートプロパティ(key, v)} />;
+          return <MyEditable.Number value={設定[key]} name={key} onSubmit={v => 設定.更新.ルートプロパティ(key, v)} />;
         },
         width: 80,
       };
