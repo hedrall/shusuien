@@ -160,7 +160,18 @@ export const use鉢単体 = (id: 鉢Id | undefined, userId: UserId | undefined) 
 export const 棚Selector = selector<棚[]>({
   key: '棚Selector',
   get: ({ get }) => {
-    return get(DATA_STATE_ATOM).棚一覧 || [];
+    const 棚一覧 = get(DATA_STATE_ATOM).棚一覧 || [];
+    const 棚の並び順 = get(DATA_STATE_ATOM).棚の並び順;
+    if (!棚の並び順) return 棚一覧;
+
+    return [
+      ...棚の並び順.棚ID一覧.flatMap(棚Id => {
+        const found = 棚一覧.find(i => i.id === 棚Id);
+        return found ? [found] : [];
+      }),
+      // 並び順に登録されていない棚
+      ...棚一覧.filter(i => !棚の並び順.棚ID一覧.includes(i.id!)),
+    ];
   },
   set: ({ set }, items) => {
     set(DATA_STATE_ATOM, pre => {
