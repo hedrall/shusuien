@@ -60,7 +60,11 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
         dataIndex: '種',
         key: '種',
         render: (_: any, 設定: 植物ごとのデフォルト設定) => {
-          return <MyEditable.Number value={設定[key]} name={key} onSubmit={v => 設定.更新.ルートプロパティ(key, v)} />;
+          return (
+            <div style={{ width: 100 }}>
+              <MyEditable.Number value={設定[key]} name={key} onSubmit={v => 設定.更新.ルートプロパティ(key, v)} />
+            </div>
+          );
         },
         width: 80,
       };
@@ -102,7 +106,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
 
   const この科の種 = 設定一覧.filter(i => i.科 === 科);
   const data = この科の種.map(i => ({ ...i, key: i.order }));
-  return <Table key={科} columns={columns} dataSource={data} />;
+  return <Table key={科} columns={columns} dataSource={data} pagination={false} />;
 };
 
 export const 植物ごとのデフォルト設定ページ: React.FC<植物ごとのデフォルト設定ページ.Props> = props => {

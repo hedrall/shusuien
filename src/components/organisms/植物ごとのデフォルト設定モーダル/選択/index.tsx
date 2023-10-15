@@ -76,6 +76,11 @@ export const デフォルト設定から選択するモーダル = forwardRef<
 
       <Table
         columns={[
+          // {
+          //   title: 'id',
+          //   key: 'id',
+          //   dataIndex: 'id',
+          // },
           ...['科', '属', '種'].map(key => {
             return {
               title: key,

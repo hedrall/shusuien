@@ -104,6 +104,14 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       },
       width: 300,
     },
+    {
+      title: '耐寒',
+      key: '耐寒',
+      render: (_: unknown, 鉢: 鉢) => {
+        return <p>{鉢.詳細.耐寒温度 ?? '(-) 未設定'}</p>;
+      },
+      width: 300,
+    },
   ];
   console.log({ 鉢一覧 });
   return (
@@ -112,7 +120,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
         key={棚.id}
         columns={columns}
         dataSource={鉢一覧.map(鉢 => {
-          return Object.assign(鉢, { key: 鉢.id });
+          return Object.assign({ ...鉢 }, { key: 鉢.id });
         })}
         pagination={false}
       />
@@ -145,7 +153,7 @@ export const テーブル表示: React.FC<TableViewProps> = props => {
         expandable={{ expandedRowRender: expandedRowRender(user) }}
         pagination={undefined}
         dataSource={棚一覧.map(棚 => {
-          return Object.assign(棚, { key: 棚.id });
+          return Object.assign({ ...棚 }, { key: 棚.id });
         })}
       />
     </div>
