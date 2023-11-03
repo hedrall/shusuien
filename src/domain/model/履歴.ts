@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { 棚ID } from '@frontend/domain/model/棚';
-import { 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { Opaque, ValueOf } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
@@ -144,7 +144,7 @@ export class 履歴のBase {
   id: 履歴ID | undefined;
   userId: UserId;
   対象の棚のID: 棚ID | undefined;
-  対象の鉢のID: 鉢Id | undefined;
+  対象の鉢のID: 鉢.Id | undefined;
   内容: 履歴の内容;
   作成日時: Dayjs;
   削除済み: boolean;

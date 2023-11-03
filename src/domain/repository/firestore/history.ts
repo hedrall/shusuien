@@ -4,7 +4,7 @@ import { UserId } from '@frontend/domain/model/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { 履歴, 履歴ID, 履歴の内容 } from '@frontend/domain/model/履歴';
-import { 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 
 type 購読Options = {
   filter: 履歴の内容.Type[];
@@ -17,7 +17,12 @@ export namespace _FsApp履歴Repository {
     return { id: ref.id as 履歴ID, ref };
   };
 
-  export const 購読 = (id: 鉢Id, userId: UserId, options: 購読Options, onListen: (items: RefValue<履歴>[]) => void) => {
+  export const 購読 = (
+    id: 鉢.Id,
+    userId: UserId,
+    options: 購読Options,
+    onListen: (items: RefValue<履歴>[]) => void,
+  ) => {
     const manager = new FsAppManager.履歴();
     const { filter } = options;
     const { unsubscribe } = FSAppRepository.listenList(

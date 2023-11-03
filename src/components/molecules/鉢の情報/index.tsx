@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import { 育成タイプ, 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { Button, Descriptions, Select, SelectProps } from 'antd';
 import { optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 鉢サイズ } from '@frontend/domain/model/履歴';
@@ -22,6 +22,7 @@ import { 植物ごとのデフォルト設定編集モーダル } from '@fronten
 import { 棚移動モーダル } from 'src/components/organisms/棚移動モーダル';
 import { 日光の強度設定 } from 'src/domain/model/鉢/日光の強度設定';
 import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
+import { 育成タイプ } from 'src/domain/model/鉢/育成タイプ';
 
 const F = DATE_READONLY_FORMAT;
 

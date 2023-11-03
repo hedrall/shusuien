@@ -1,7 +1,7 @@
-import { Opaque, ValueOf } from 'type-fest';
+import { Opaque } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import dayjs, { Dayjs } from 'dayjs';
-import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/履歴';
+import { 履歴, 履歴の内容 } from '@frontend/domain/model/履歴';
 import { 棚ID } from '@frontend/domain/model/棚';
 import { optionalCall } from '@frontend/supports/functions';
 import { _植替えする } from '@frontend/domain/model/鉢/管理操作/植替';
@@ -12,28 +12,10 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { Subject } from 'rxjs';
 import { 今日 } from '@frontend/supports/date';
 import { 日光の強度設定 } from 'src/domain/model/鉢/日光の強度設定';
+import { 育成タイプ } from 'src/domain/model/鉢/育成タイプ';
+import { _Snapshot } from 'src/domain/model/鉢/Snapshot';
 
-export type 鉢Id = Opaque<string, '鉢ID'>;
-
-type Snapshot = {
-  鉢のサイズ?: 鉢サイズ;
-  最後の植替え?: Dayjs;
-  最後の灌水?: {
-    日時: Dayjs;
-    量: 履歴の内容.灌水.量のKey型;
-  };
-  最後の液肥: { 日時?: Dayjs };
-  画像のURL?: string;
-  small画像のURL?: string;
-  更新日時: Dayjs;
-};
-
-export const 育成タイプ = {
-  冬: '冬',
-  春秋: '春秋',
-  夏: '夏',
-} as const;
-export type 育成タイプ = ValueOf<typeof 育成タイプ>;
+type 鉢Id = Opaque<string, '鉢ID'>;
 export class 鉢のBase {
   id: 鉢Id | undefined;
   userId: UserId;
@@ -51,8 +33,8 @@ export class 鉢のBase {
     金額?: number;
   };
   補足?: string;
-  // 履歴を畳み込んで得られるもの
-  snapshot: Snapshot;
+  // 現在の状態 (履歴を畳み込んで得られる)
+  snapshot: _Snapshot;
   作成日時: Dayjs;
   削除済み: boolean;
 
@@ -103,7 +85,7 @@ const update = (cur: 鉢, 更新するsnapshotの項目: Partial<鉢['snapshot']
   });
 };
 
-function _履歴を適用(this: 鉢, 履歴: 履歴, small画像のURL: string | undefined, 画像を更新する = true) {
+export function _履歴を適用(this: 鉢, 履歴: 履歴, small画像のURL: string | undefined, 画像を更新する = true) {
   const type = 履歴.内容.type;
   const common = { ...(画像を更新する && small画像のURL ? { small画像のURL } : {}) };
   switch (type) {
@@ -239,8 +221,8 @@ export class 鉢 extends 鉢のBase {
   };
 }
 
-type _S = Snapshot;
 export namespace 鉢 {
-  export type Snapshot = _S;
+  export type Id = 鉢Id;
+  export type Snapshot = _Snapshot;
   export type デフォルト設定可能な鉢のプロパティ = Pick<鉢['詳細'], '耐寒温度' | '日光の強度設定'>;
 }

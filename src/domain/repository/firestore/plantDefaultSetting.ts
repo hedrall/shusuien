@@ -4,7 +4,6 @@ import { 植物ごとのデフォルト設定, 植物ごとのデフォルト設
 import { UserId } from '@frontend/domain/model/user';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import * as fs from 'firebase/firestore';
-import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
 
 type 設定 = 植物ごとのデフォルト設定;
 export namespace _FsApp植物ごとのデフォルト設定Repository {

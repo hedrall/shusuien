@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Image, Modal, ModalProps, Popconfirm } from 'antd';
-import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 植替モーダル } from '@frontend/components/organisms/植替モーダル';
 import { 鉢の情報 } from 'src/components/molecules/鉢の情報';
@@ -26,7 +26,7 @@ export namespace 鉢管理モーダル {
 
 export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢管理モーダル.Props>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [id, setId] = useState<鉢Id | undefined>(undefined);
+  const [id, setId] = useState<鉢.Id | undefined>(undefined);
   const { user } = useAuthState();
   const { item, setItem } = use鉢単体(id, user?.id);
 

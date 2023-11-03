@@ -2,7 +2,7 @@ import React from 'react';
 import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import * as fs from 'firebase/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
@@ -182,7 +182,7 @@ export const AdminPage: React.FC<TopPageProps> = props => {
       const { small画像のURL } = await 小画像の生成(dataUrl, {
         userId: userId!,
         datetime: date,
-        itemId: ref.id as 鉢Id,
+        itemId: ref.id as 鉢.Id,
       });
       await fs.updateDoc(ref, {
         'snapshot.small画像のURL': small画像のURL,

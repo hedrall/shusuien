@@ -3,7 +3,7 @@ import { 棚, 棚ID } from '@frontend/domain/model/棚';
 import { DATA_STATE_ATOM, DataState } from '@frontend/store/data/atom';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { User, UserId } from '@frontend/domain/model/user';
-import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { useEffect, useState } from 'react';
 import { MASTER_STATE_ATOM } from '@frontend/store/master/atom';
 import { isDefined } from '@frontend/supports/functions';
@@ -142,7 +142,7 @@ export const 灌水が必要な鉢一覧 = (user: User | undefined) => {
   );
 };
 
-export const use鉢単体 = (id: 鉢Id | undefined, userId: UserId | undefined) => {
+export const use鉢単体 = (id: 鉢.Id | undefined, userId: UserId | undefined) => {
   const [item, setItem] = useState<鉢 | undefined>(undefined);
 
   useEffect(() => {
