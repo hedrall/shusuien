@@ -1,35 +1,42 @@
-import { NewProps, Super履歴, Super履歴Base } from 'src/domain/entity/鉢/entity/履歴/base';
+import { NewProps, Super履歴 } from 'src/domain/entity/鉢/entity/履歴/base';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 
-type _成長の記録Base = Super履歴Base & {
-  内容: {
-    type: '成長の記録';
-    画像のURL: string | undefined;
-    memo: string | undefined;
-  };
-};
-
-export class _成長の記録 extends Super履歴 implements _成長の記録Base {
-  内容: {
-    type: '成長の記録';
-    画像のURL: string | undefined;
-    memo: string | undefined;
+export namespace _成長の記録 {
+  export type Props = Super履歴.Props & {
+    内容: {
+      type: '成長の記録';
+      画像のURL: string | undefined;
+      memo: string | undefined;
+    };
   };
 
-  static create = async (params: NewProps<_成長の記録Base>) => {
+  export const construct = (props: Props) => {
+    return {
+      ...Super履歴.construct(props),
+      ...props,
+    } as const;
+  };
+
+  export const create = async (params: NewProps<Props>) => {
     const { props, 内容 } = params;
-    const 新規履歴 = new _成長の記録({
+    const 新規履歴 = construct({
       id: undefined,
       削除済み: false,
       ...props,
       内容: { type: '成長の記録', ...内容 },
     });
     const { id } = await FSAppRepository.履歴.作成(新規履歴);
-    return new _成長の記録({ ...新規履歴, id });
+    return construct({ ...新規履歴, id });
   };
-
-  constructor(props: _成長の記録Base) {
-    super(props);
-    this.内容 = props.内容;
-  }
 }
+export type _成長の記録 = ReturnType<typeof _成長の記録.construct>;
+
+// export class _成長の記録 extends Super履歴 implements _成長の記録Base {
+//   内容: {
+//     type: '成長の記録';
+//     画像のURL: string | undefined;
+//     memo: string | undefined;
+//   };
+//
+//
+// }

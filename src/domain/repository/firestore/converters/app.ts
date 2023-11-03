@@ -77,11 +77,11 @@ export const 履歴Converter: fs.FirestoreDataConverter<履歴> = {
     const id = snapshot.ref.id;
     switch (data.内容.type) {
       case '成長の記録':
-        return new 履歴.成長の記録({ ...(data as 履歴.成長の記録), id: id as 履歴ID }) as T;
+        return 履歴.成長の記録.construct({ ...(data as 履歴.成長の記録), id: id as 履歴ID }) as T;
       case '植替え':
-        return new 履歴.植替え({ ...(data as 履歴.植替え), id: id as 履歴ID }) as T;
+        return 履歴.植替え.construct({ ...(data as 履歴.植替え), id: id as 履歴ID }) as T;
       case '灌水':
-        return new 履歴.灌水({ ...(data as 履歴.灌水), id: id as 履歴ID }) as T;
+        return 履歴.灌水.construct({ ...(data as 履歴.灌水), id: id as 履歴ID }) as T;
     }
     // @ts-expect-error
     throw new Error(`履歴Converter > fromFirestore > 予期せぬタイプ ${data.内容.type}`);

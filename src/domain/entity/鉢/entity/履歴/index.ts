@@ -1,8 +1,8 @@
 import { Opaque, ValueOf } from 'type-fest';
 import { tObjectKeys } from 'src/supports/functions';
 import { _灌水履歴 } from 'src/domain/entity/鉢/entity/履歴/灌水';
-import { _植替え履歴 } from 'src/domain/entity/鉢/entity/履歴/植替え';
 import { _成長の記録 } from 'src/domain/entity/鉢/entity/履歴/成長の記録';
+import { _植替え履歴 } from 'src/domain/entity/鉢/entity/履歴/植替え';
 
 export type 履歴ID = Opaque<string, '履歴ID'>;
 
@@ -46,20 +46,8 @@ export namespace 履歴 {
     植替え: undefined,
   } as const satisfies { [Key in 履歴.Type]: undefined });
 
-  export class 灌水 extends _灌水履歴 {}
-  export namespace 灌水 {
-    export type 灌水量 = _灌水履歴.灌水量;
-  }
-
-  export class 成長の記録 extends _成長の記録 {}
-
-  export class 植替え extends _植替え履歴 {}
-  export namespace 植替え {
-    export namespace 鉢サイズ {
-      export type 番号 = _植替え履歴.鉢サイズ['番号'];
-      export type タイプ = _植替え履歴.鉢サイズ['タイプ'];
-    }
-    export type 鉢サイズ = _植替え履歴.鉢サイズ;
-  }
+  export import 成長の記録 = _成長の記録;
+  export import 植替え = _植替え履歴;
+  export import 灌水 = _灌水履歴;
 }
-export type 履歴 = 履歴.灌水 | 履歴.成長の記録 | 履歴.植替え;
+export type 履歴 = 履歴.成長の記録 | 履歴.植替え | 履歴.灌水;
