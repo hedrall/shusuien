@@ -3,8 +3,8 @@ import { 棚ID } from 'src/domain/entity/棚';
 import { 鉢 } from 'src/domain/entity/鉢';
 import { Opaque, ValueOf } from 'type-fest';
 import { UserId } from 'src/domain/entity/user';
-import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { tObjectKeys } from '@frontend/supports/functions';
+import { FSAppRepository } from 'src/domain/repository/firestore';
+import { tObjectKeys } from 'src/supports/functions';
 
 export type 履歴ID = Opaque<string, '履歴ID'>;
 

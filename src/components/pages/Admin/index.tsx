@@ -8,7 +8,7 @@ import * as fs from 'firebase/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import dayjs from 'dayjs';
 import { 小画像の生成 } from 'src/domain/entity/鉢/管理操作/新規作成';
-import { 履歴 } from 'src/domain/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
 import { 棚 } from 'src/domain/entity/棚';
 

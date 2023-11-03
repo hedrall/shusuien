@@ -1,7 +1,7 @@
 import { Opaque } from 'type-fest';
 import { UserId } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
-import { 履歴の内容 } from 'src/domain/entity/履歴';
+import { 履歴の内容 } from 'src/domain/entity/鉢/entity/履歴';
 import { 棚ID } from 'src/domain/entity/棚';
 import { optionalCall } from '@frontend/supports/functions';
 import { _植替えする } from 'src/domain/entity/鉢/管理操作/植替';

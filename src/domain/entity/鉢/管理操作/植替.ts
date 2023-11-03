@@ -1,5 +1,5 @@
 import { UserId } from 'src/domain/entity/user';
-import { 履歴, 鉢サイズ } from 'src/domain/entity/履歴';
+import { 履歴, 鉢サイズ } from 'src/domain/entity/鉢/entity/履歴';
 import { Dayjs } from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';

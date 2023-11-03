@@ -4,7 +4,7 @@ import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
 import { 鉢 } from 'src/domain/entity/鉢';
-import { 履歴の内容 } from 'src/domain/entity/履歴';
+import { 履歴の内容 } from 'src/domain/entity/鉢/entity/履歴';
 import { Control, useController, useForm } from 'react-hook-form';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { VerticalRadioGroup } from '@frontend/components/atoms/VerticalRadioGroup';

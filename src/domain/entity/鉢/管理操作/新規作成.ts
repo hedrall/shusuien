@@ -2,7 +2,7 @@ import { 鉢, 鉢のBase } from 'src/domain/entity/鉢';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
-import { 履歴 } from 'src/domain/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { BrowserRepository } from '@frontend/domain/repository/browser';
 import { UserId } from 'src/domain/entity/user';
 

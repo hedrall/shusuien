@@ -1,4 +1,4 @@
-import { 履歴の内容 } from 'src/domain/entity/履歴';
+import { 履歴の内容 } from 'src/domain/entity/鉢/entity/履歴';
 import React from 'react';
 
 const 量のアイコン: { [k in 履歴の内容.灌水.量のKey型]: React.ReactNode } = {
