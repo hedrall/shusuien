@@ -1,9 +1,9 @@
-import { NewProps, 履歴のBase, 履歴のBaseBase } from 'src/domain/entity/鉢/entity/履歴/base';
+import { NewProps, Super履歴, Super履歴Base } from 'src/domain/entity/鉢/entity/履歴/base';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 import { _鉢サイズ } from 'src/domain/entity/鉢/entity/履歴/植替え/鉢サイズ';
 
-type _植替え履歴Base = 履歴のBaseBase & {
+type _植替え履歴Base = Super履歴Base & {
   内容: {
     type: '植替え';
     植替え日時: Dayjs;
@@ -16,7 +16,7 @@ type _植替え履歴Base = 履歴のBaseBase & {
 export namespace _植替え履歴 {
   export type 鉢サイズ = _鉢サイズ;
 }
-export class _植替え履歴 extends 履歴のBase implements _植替え履歴Base {
+export class _植替え履歴 extends Super履歴 implements _植替え履歴Base {
   内容: {
     type: '植替え';
     植替え日時: Dayjs;

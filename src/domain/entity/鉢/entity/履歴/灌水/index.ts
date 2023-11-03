@@ -1,9 +1,9 @@
-import { NewProps, 履歴のBase, 履歴のBaseBase } from 'src/domain/entity/鉢/entity/履歴/base';
+import { NewProps, Super履歴, Super履歴Base } from 'src/domain/entity/鉢/entity/履歴/base';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 import { 履歴の内容 } from 'src/domain/entity/鉢/entity/履歴';
 import { _灌水量 } from 'src/domain/entity/鉢/entity/履歴/灌水/灌水量';
 
-type _灌水履歴Base = 履歴のBaseBase & {
+type _灌水履歴Base = Super履歴Base & {
   内容: {
     type: '灌水';
     灌水量: 履歴の内容.灌水.量のKey型;
@@ -14,7 +14,7 @@ type _灌水履歴Base = 履歴のBaseBase & {
 export namespace _灌水履歴 {
   export type 灌水量 = _灌水量;
 }
-export class _灌水履歴 extends 履歴のBase implements _灌水履歴Base {
+export class _灌水履歴 extends Super履歴 implements _灌水履歴Base {
   内容: {
     type: '灌水';
     灌水量: 履歴の内容.灌水.量のKey型;

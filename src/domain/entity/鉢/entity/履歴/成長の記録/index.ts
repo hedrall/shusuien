@@ -1,7 +1,7 @@
-import { NewProps, 履歴のBase, 履歴のBaseBase } from 'src/domain/entity/鉢/entity/履歴/base';
+import { NewProps, Super履歴, Super履歴Base } from 'src/domain/entity/鉢/entity/履歴/base';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 
-type _成長の記録Base = 履歴のBaseBase & {
+type _成長の記録Base = Super履歴Base & {
   内容: {
     type: '成長の記録';
     画像のURL: string | undefined;
@@ -9,7 +9,7 @@ type _成長の記録Base = 履歴のBaseBase & {
   };
 };
 
-export class _成長の記録 extends 履歴のBase implements _成長の記録Base {
+export class _成長の記録 extends Super履歴 implements _成長の記録Base {
   内容: {
     type: '成長の記録';
     画像のURL: string | undefined;
