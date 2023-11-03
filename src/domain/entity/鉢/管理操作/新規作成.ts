@@ -17,7 +17,6 @@ export const 小画像の生成 = async (
   // 小さい画像も生成する
   const small画像DataUrl = await BrowserRepository.Image.canvasImageCompressor(dataUrl);
   console.log({ small画像DataUrl: small画像DataUrl.length });
-  // throw new Error('temp');
   const { 画像のPATH: small画像のPATH } = await StorageRepository.uploadImageByBase64String({
     dataUrl: small画像DataUrl,
     path: StorageRepository.storagePath({
