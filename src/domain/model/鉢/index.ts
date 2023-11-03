@@ -1,7 +1,7 @@
 import { Opaque } from 'type-fest';
 import { UserId } from '@frontend/domain/model/user';
 import dayjs, { Dayjs } from 'dayjs';
-import { 履歴, 履歴の内容 } from '@frontend/domain/model/履歴';
+import { 履歴の内容 } from '@frontend/domain/model/履歴';
 import { 棚ID } from '@frontend/domain/model/棚';
 import { optionalCall } from '@frontend/supports/functions';
 import { _植替えする } from '@frontend/domain/model/鉢/管理操作/植替';
@@ -14,6 +14,8 @@ import { 今日 } from '@frontend/supports/date';
 import { 日光の強度設定 } from 'src/domain/model/鉢/日光の強度設定';
 import { 育成タイプ } from 'src/domain/model/鉢/育成タイプ';
 import { _Snapshot } from 'src/domain/model/鉢/Snapshot';
+
+import { _履歴を適用 } from 'src/domain/model/鉢/管理操作/common';
 
 type 鉢Id = Opaque<string, '鉢ID'>;
 export class 鉢のBase {
@@ -74,62 +76,6 @@ export class 鉢のBase {
   }
 }
 
-const update = (cur: 鉢, 更新するsnapshotの項目: Partial<鉢['snapshot']>, 履歴の作成日時: Dayjs) => {
-  return new 鉢({
-    ...cur,
-    snapshot: {
-      ...cur.snapshot,
-      ...更新するsnapshotの項目,
-      更新日時: 履歴の作成日時,
-    },
-  });
-};
-
-export function _履歴を適用(this: 鉢, 履歴: 履歴, small画像のURL: string | undefined, 画像を更新する = true) {
-  const type = 履歴.内容.type;
-  const common = { ...(画像を更新する && small画像のURL ? { small画像のURL } : {}) };
-  switch (type) {
-    case '植替え':
-      // [更新項目] 鉢サイズ, 最後の植替え, 画像
-      return update(
-        this,
-        {
-          ...common,
-          鉢のサイズ: 履歴.内容.鉢のサイズ,
-          最後の植替え: 履歴.内容.植替え日時,
-          ...(画像を更新する ? { 画像のURL: 履歴.内容.植替え後の画像のURL } : {}),
-        },
-        履歴.作成日時,
-      );
-    case '灌水':
-      // [更新項目] 最後の灌水
-      return update(
-        this,
-        {
-          ...common,
-          最後の灌水: {
-            日時: 履歴.作成日時,
-            量: 履歴.内容.灌水量,
-          },
-          最後の液肥: { 日時: 履歴.内容.液肥入り ? 履歴.作成日時 : this.snapshot.最後の液肥?.日時 },
-        },
-        履歴.作成日時,
-      );
-    case '成長の記録':
-      // [更新項目] 画像?
-      return update(
-        this,
-        {
-          ...common,
-          ...(画像を更新する && 履歴.内容.画像のURL ? { 画像のURL: 履歴.内容.画像のURL } : {}),
-        },
-        履歴.作成日時,
-      );
-    default:
-      throw new Error(`実装されていません。type: ${type}`);
-  }
-}
-
 async function _削除(this: 鉢) {
   // isDeletedを True にする
   // 一旦論理削除のみ
@@ -180,8 +126,6 @@ async function _フィールドを更新<Key extends 鉢の更新可能なフィ
 }
 
 export class 鉢 extends 鉢のBase {
-  履歴を適用 = _履歴を適用;
-
   削除 = _削除;
   詳細を更新 = _詳細を更新;
   日光の強度を更新 = _日光の強度を更新;

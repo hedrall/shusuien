@@ -5,6 +5,7 @@ import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 鉢 } from '@frontend/domain/model/鉢';
 import { 小画像の生成 } from '@frontend/domain/model/鉢/管理操作/新規作成';
+import { _履歴を適用 } from 'src/domain/model/鉢/管理操作/common';
 
 export type _植替えするParams = {
   item: 鉢;
@@ -50,7 +51,7 @@ export const _植替えする = async (params: _植替えするParams) => {
   });
 
   console.log('3. 鉢の情報を更新する');
-  const 更新後の鉢 = item.履歴を適用(植替え履歴, small画像のURL);
+  const 更新後の鉢 = _履歴を適用(item, 植替え履歴, small画像のURL);
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);
   鉢.events.管理.next({ type: '植替え' });
 };

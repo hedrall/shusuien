@@ -3,6 +3,7 @@ import { 履歴, 履歴の内容 } from '@frontend/domain/model/履歴';
 import dayjs from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 鉢 } from '@frontend/domain/model/鉢';
+import { _履歴を適用 } from 'src/domain/model/鉢/管理操作/common';
 
 export type _灌水操作Params = {
   item: 鉢;
@@ -29,7 +30,7 @@ export const _灌水する = async (params: _灌水操作Params) => {
   });
 
   // console.log('2. 鉢の情報を更新する');
-  const 更新後の鉢 = item.履歴を適用(灌水履歴, undefined);
+  const 更新後の鉢 = _履歴を適用(item, 灌水履歴, undefined);
   console.log({ 更新後の鉢 });
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);
   鉢.events.管理.next({ type: '灌水' });
