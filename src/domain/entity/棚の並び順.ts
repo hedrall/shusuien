@@ -1,13 +1,13 @@
 import { UserId } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 棚, 棚ID } from 'src/domain/entity/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { BehaviorSubject } from 'rxjs';
 
 export class 棚の並び順Base {
   id: UserId;
   userId: UserId;
-  棚ID一覧: 棚ID[];
+  棚ID一覧: 棚.Id[];
   _棚の名称での表示_デバッグ用: string[];
   更新日時: Dayjs;
 

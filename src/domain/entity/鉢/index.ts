@@ -2,7 +2,7 @@ import { Opaque } from 'type-fest';
 import { UserId } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
-import { 棚ID } from 'src/domain/entity/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { optionalCall } from '@frontend/supports/functions';
 import { _植替えする } from 'src/domain/entity/鉢/管理操作/植替';
 import { _新規作成する } from 'src/domain/entity/鉢/管理操作/新規作成';
@@ -26,7 +26,7 @@ export namespace 鉢 {
     id: 鉢Id | undefined;
     userId: UserId;
     name: string | undefined;
-    棚Id: 棚ID;
+    棚Id: 棚.Id;
 
     詳細: _詳細.Props;
     // 現在の状態 (履歴を畳み込んで得られる)

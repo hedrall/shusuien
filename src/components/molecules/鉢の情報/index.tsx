@@ -7,7 +7,7 @@ import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date'
 import { MyEditable } from '@frontend/components/atoms/Editable';
 import dayjs, { Dayjs } from 'dayjs';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
-import { 棚ID } from 'src/domain/entity/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { useRecoilState } from 'recoil';
 import { 棚Selector } from '@frontend/store/data/action';
 import { useWithLoading } from '@frontend/supports/ui';
@@ -46,7 +46,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
   const 植物ごとのデフォルト設定編集モーダルref = useRef<植物ごとのデフォルト設定編集モーダル.Ref | null>(null);
   const 棚移動モーダルref = useRef<棚移動モーダル.Ref | null>(null);
 
-  const 棚を変更 = async (id: 棚ID) => {
+  const 棚を変更 = async (id: 棚.Id) => {
     await withLoading(async () => {
       await 鉢.フィールドを更新('棚Id', id);
     });

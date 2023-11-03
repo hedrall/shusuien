@@ -8,12 +8,12 @@ import { UploadImage } from '@frontend/components/atoms/UploadImage';
 import { 鉢 } from 'src/domain/entity/鉢';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
-import { 棚ID } from 'src/domain/entity/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 
 export namespace 鉢作成モーダル {
   export type Props = {
-    棚Id: 棚ID | undefined;
+    棚Id: 棚.Id | undefined;
   };
   export type Ref = {
     open: () => void;

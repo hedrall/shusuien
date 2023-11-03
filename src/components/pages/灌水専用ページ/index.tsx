@@ -4,9 +4,7 @@ import { use棚一覧, 灌水が必要な鉢一覧 } from '@frontend/store/data/
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢一覧View } from 'src/components/molecules/鉢一覧';
 import { 鉢 } from 'src/domain/entity/鉢';
-import { 棚, 棚ID } from 'src/domain/entity/棚';
-import { useNavigate } from 'react-router-dom';
-import { TOPに戻るリンク } from '@frontend/components/atoms/MyLink';
+import { 棚 } from 'src/domain/entity/棚';
 import { この棚の鉢一覧モーダル } from '@frontend/components/organisms/この棚の鉢一覧モーダル';
 import { OPERATION_ICONS } from '@frontend/supports/icons';
 import { 一括灌水モーダル } from '@frontend/components/organisms/この棚の一括灌水Modal';
@@ -16,7 +14,7 @@ import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 棚作成モーダル } from 'src/components/organisms/棚作成モーダル';
 import { FloatMenu } from '@frontend/components/molecules/FloatMenu';
 
-const 棚名by鉢Id = (id: 棚ID, 棚一覧: 棚[]) => {
+const 棚名by鉢Id = (id: 棚.Id, 棚一覧: 棚[]) => {
   return 棚一覧.find(棚 => 棚.id === id)?.name || 'unknown';
 };
 

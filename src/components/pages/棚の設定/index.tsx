@@ -9,13 +9,13 @@ import { CSS } from '@dnd-kit/utilities';
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { DragEndEvent } from '@dnd-kit/core/dist/types';
 import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
-import { 棚, 棚ID } from 'src/domain/entity/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { useSubscribeState } from 'src/eventBasedStore';
 import { Card, Popconfirm } from 'antd';
 import { MyEditable } from 'src/components/atoms/Editable';
 import { OPERATION_ICONS, SYMBOL_ICONS } from 'src/supports/icons';
 
-type 棚のソートアイテムParams = { id: 棚ID; name: string; on棚を削除: (id: 棚ID) => void };
+type 棚のソートアイテムParams = { id: 棚.Id; name: string; on棚を削除: (id: 棚.Id) => void };
 const 棚のソートアイテム = (props: 棚のソートアイテムParams) => {
   const { id, name, on棚を削除 } = props;
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
@@ -80,8 +80,8 @@ export const 棚の設定ページ: React.FC<棚の設定ページ.Props> = () =
     // active => overへ移動させる
     if (active.id !== over.id) {
       const items = 棚Ids.slice();
-      const oldIndex = items.indexOf(active.id as 棚ID);
-      const newIndex = items.indexOf(over.id as 棚ID);
+      const oldIndex = items.indexOf(active.id as 棚.Id);
+      const newIndex = items.indexOf(over.id as 棚.Id);
 
       const movedIds = arrayMove(items, oldIndex, newIndex);
       const moved棚一覧 = movedIds.map(id => 棚一覧.find(棚 => 棚.id === id)!);
@@ -99,7 +99,7 @@ export const 棚の設定ページ: React.FC<棚の設定ページ.Props> = () =
   };
 
   // --- handlers ---
-  const 棚を削除 = async (id: 棚ID) => {
+  const 棚を削除 = async (id: 棚.Id) => {
     const 棚 = 棚一覧.find(棚 => 棚.id === id);
     if (!棚) return;
     await 棚.削除();

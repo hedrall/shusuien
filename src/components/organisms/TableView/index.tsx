@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import { 棚, 棚ID } from 'src/domain/entity/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { Button, Image, ImageProps, Select, SelectProps, Table, TableColumnsType } from 'antd';
 import { use鉢一覧, 棚Selector } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
@@ -90,12 +90,12 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       dataIndex: '棚',
       key: '棚',
       render: (_: unknown, 鉢: 鉢) => {
-        const 棚を変更 = async (id: 棚ID) => {
+        const 棚を変更 = async (id: 棚.Id) => {
           await 鉢.フィールドを更新('棚Id', id);
         };
         const 棚SelectProps: SelectProps = {
           options: 棚一覧.map(i => ({ value: i.id, label: i.name })),
-          onChange: e => 棚を変更(e as 棚ID),
+          onChange: e => 棚を変更(e as 棚.Id),
           value: 鉢.棚Id,
           style: { width: '100%' },
           listHeight: 300,

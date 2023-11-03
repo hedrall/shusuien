@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import './index.scss';
 import { Col, notification, Row } from 'antd';
-import { 棚ID } from 'src/domain/entity/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 鉢作成モーダル } from '@frontend/components/organisms/鉢作成モーダル';
 import { use鉢一覧 } from '@frontend/store/data/action';
@@ -14,7 +14,7 @@ import { UserId } from 'src/domain/entity/user';
 import { use灌水時の施肥有無設定 } from '@frontend/store/灌水時の施肥有無設定/action';
 
 export type ItemListProps = {
-  棚Id: 棚ID;
+  棚Id: 棚.Id;
 };
 
 export const 鉢一覧: React.FC<ItemListProps> = props => {
@@ -29,7 +29,7 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
 type 鉢一覧ViewProps = {
   鉢一覧: 鉢[];
-  棚Id: 棚ID | undefined;
+  棚Id: 棚.Id | undefined;
   userId: UserId | undefined;
 };
 export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {

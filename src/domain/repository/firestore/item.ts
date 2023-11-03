@@ -4,7 +4,7 @@ import { UserId } from 'src/domain/entity/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { 鉢 } from 'src/domain/entity/鉢';
-import { 棚ID } from 'src/domain/entity/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { Dayjs } from 'dayjs';
 import { basicToFirestore } from '@frontend/domain/repository/firestore/converters/app';
 
@@ -45,7 +45,7 @@ export namespace _FsApp鉢Repository {
     await snapshotを更新(id, { 画像のURL }, date);
   };
 
-  type 購読Params = { userId: UserId; 棚Id: 棚ID };
+  type 購読Params = { userId: UserId; 棚Id: 棚.Id };
   export const 一覧購読 = (params: 購読Params, onListen: (items: RefValue<鉢>[]) => void) => {
     const { userId, 棚Id } = params;
     const manager = new FsAppManager.鉢();

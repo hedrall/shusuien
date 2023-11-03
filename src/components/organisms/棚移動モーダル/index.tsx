@@ -1,14 +1,12 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import './index.scss';
 import { Card, Modal, ModalProps } from 'antd';
-import { useWithLoading } from '@frontend/supports/ui';
-import { 棚ID } from 'src/domain/entity/棚';
-import { 鉢 } from 'src/domain/entity/鉢';
+import { 棚 } from 'src/domain/entity/棚';
 import { use棚一覧 } from 'src/store/data/action';
 
 export namespace 棚移動モーダル {
   export type Props = {
-    on移動先の棚を選択: (id: 棚ID) => void;
+    on移動先の棚を選択: (id: 棚.Id) => void;
   };
   export type Ref = {
     open: () => void;
@@ -25,7 +23,7 @@ export const 棚移動モーダル = forwardRef<棚移動モーダル.Ref, 棚�
     setIsOpen(false);
   };
 
-  const 移動先を選択 = (id: 棚ID) => {
+  const 移動先を選択 = (id: 棚.Id) => {
     on移動先の棚を選択(id);
     close();
   };
