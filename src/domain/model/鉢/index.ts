@@ -10,8 +10,8 @@ import { _灌水する } from '@frontend/domain/model/鉢/管理操作/灌水';
 import { _成長を記録する } from '@frontend/domain/model/鉢/管理操作/成長を記録';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { Subject } from 'rxjs';
-import { 季節 } from '@frontend/domain/const/季節';
 import { 今日 } from '@frontend/supports/date';
+import { 日光の強度設定 } from 'src/domain/model/鉢/日光の強度設定';
 
 export type 鉢Id = Opaque<string, '鉢ID'>;
 
@@ -26,40 +26,6 @@ type Snapshot = {
   画像のURL?: string;
   small画像のURL?: string;
   更新日時: Dayjs;
-};
-
-export const 日光の強度 = {
-  直射日光: '直射日光',
-  '20%遮光': '20%遮光',
-  '30%遮光': '30%遮光',
-  '40%遮光': '40%遮光',
-  '50%遮光': '50%遮光',
-  '60%遮光': '60%遮光',
-  半日陰: '半日陰',
-} as const;
-export type 日光の強度 = ValueOf<typeof 日光の強度>;
-export const 日光の強度の短縮表現 = {
-  直射日光: '直',
-  '20%遮光': '-20%',
-  '30%遮光': '-30%',
-  '40%遮光': '-40%',
-  '50%遮光': '-50%',
-  '60%遮光': '-60%',
-  半日陰: '半日陰',
-} as const satisfies Record<日光の強度, string>;
-export namespace 日光の強度設定 {
-  export const Default: Record<季節, 日光の強度 | undefined> = {
-    春: undefined,
-    夏: undefined,
-    秋: undefined,
-    冬: undefined,
-  };
-}
-export type 日光の強度設定 = {
-  春?: 日光の強度;
-  夏?: 日光の強度;
-  秋?: 日光の強度;
-  冬?: 日光の強度;
 };
 
 export const 育成タイプ = {

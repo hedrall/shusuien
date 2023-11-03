@@ -1,7 +1,7 @@
 import React, { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
 import './index.scss';
 import { Image, ImageProps } from 'antd';
-import { 日光の強度の短縮表現, 鉢, 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢 } from '@frontend/domain/model/鉢';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';
@@ -11,6 +11,7 @@ import cn from 'classnames';
 import { 現在の季節 } from '@frontend/domain/const/季節';
 import { onKeyEnter } from '@frontend/supports/keyboardAction';
 import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
+import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
 
 export type 鉢一覧の要素Props = {
   item: 鉢;
@@ -119,7 +120,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const 上部補足情報 = (() => {
     const msg: string[] = [];
     if (isDefined(耐寒温度)) msg.push(`🌡${耐寒温度}℃`);
-    if (isDefined(日光の強度設定)) msg.push(`☀️${日光の強度の短縮表現[日光の強度設定]}`);
+    if (isDefined(日光の強度設定)) msg.push(`☀️${日光の強度[日光の強度設定].短縮表現}`);
     return msg.join();
   })();
 
