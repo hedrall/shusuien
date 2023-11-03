@@ -1,7 +1,7 @@
 import { Opaque } from 'type-fest';
 import { Subject } from 'rxjs';
 import { FSAppRepository } from 'src/domain/repository/firestore';
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import { 鉢 } from 'src/domain/entity/鉢';
 import { _ルートプロパティを更新, _日光の強度設定を更新 } from 'src/domain/entity/植物のデフォルト設定/更新';
 
@@ -14,7 +14,7 @@ export namespace 植物ごとのデフォルト設定 {
 
   export type Props = {
     id: Id | undefined;
-    userId: UserId;
+    userId: User.Id;
     科: string | undefined;
     属: string | undefined;
     種: string | undefined;

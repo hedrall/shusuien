@@ -1,4 +1,4 @@
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import { 棚 } from 'src/domain/entity/棚';
 import { 鉢 } from 'src/domain/entity/鉢';
 import dayjs, { Dayjs } from 'dayjs';
@@ -10,7 +10,7 @@ import { _植替え履歴 } from 'src/domain/entity/鉢/entity/履歴/植替え'
 export namespace 履歴Base {
   export type Props = {
     id: string | undefined;
-    userId: UserId;
+    userId: User.Id;
     対象の棚のID: 棚.Id | undefined;
     対象の鉢のID: 鉢.Id | undefined;
     作成日時: Dayjs;

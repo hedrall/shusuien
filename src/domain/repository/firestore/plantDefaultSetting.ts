@@ -1,7 +1,7 @@
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
 import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import * as fs from 'firebase/firestore';
 
@@ -17,7 +17,7 @@ export namespace _FsApp植物ごとのデフォルト設定Repository {
     await FSAppRepository.update(manager, id, data);
   };
 
-  export const 購読 = (userId: UserId, onListen: (items: RefValue<植物ごとのデフォルト設定>[]) => void) => {
+  export const 購読 = (userId: User.Id, onListen: (items: RefValue<植物ごとのデフォルト設定>[]) => void) => {
     const manager = new FsAppManager.植物ごとのデフォルト設定();
     const { unsubscribe } = FSAppRepository.listenList(
       manager,

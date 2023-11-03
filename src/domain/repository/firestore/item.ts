@@ -1,6 +1,6 @@
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { 鉢 } from 'src/domain/entity/鉢';
@@ -45,7 +45,7 @@ export namespace _FsApp鉢Repository {
     await snapshotを更新(id, { 画像のURL }, date);
   };
 
-  type 購読Params = { userId: UserId; 棚Id: 棚.Id };
+  type 購読Params = { userId: User.Id; 棚Id: 棚.Id };
   export const 一覧購読 = (params: 購読Params, onListen: (items: RefValue<鉢>[]) => void) => {
     const { userId, 棚Id } = params;
     const manager = new FsAppManager.鉢();
@@ -59,7 +59,7 @@ export namespace _FsApp鉢Repository {
     );
     return { unsubscribe };
   };
-  export const 全て購読 = (userId: UserId, onListen: (items: RefValue<鉢>[]) => void) => {
+  export const 全て購読 = (userId: User.Id, onListen: (items: RefValue<鉢>[]) => void) => {
     const manager = new FsAppManager.鉢();
     const { unsubscribe } = FSAppRepository.listenList(
       manager,

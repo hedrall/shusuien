@@ -1,5 +1,5 @@
 import { Opaque } from 'type-fest';
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { 棚 } from 'src/domain/entity/棚';
@@ -24,7 +24,7 @@ export namespace 鉢 {
 
   export type Props = {
     id: 鉢Id | undefined;
-    userId: UserId;
+    userId: User.Id;
     name: string | undefined;
     棚Id: 棚.Id;
 

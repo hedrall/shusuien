@@ -1,6 +1,6 @@
 import { selector, useRecoilState } from 'recoil';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import { useEffect, useState } from 'react';
 import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
 import { MASTER_STATE_ATOM } from '@frontend/store/master/atom';
@@ -19,10 +19,10 @@ const 植物ごとのデフォルト設定Selector = selector<植物ごとのデ
 });
 
 export namespace use植物ごとのデフォルト設定 {
-  export const 購読を開始 = (userId: UserId | undefined) => {
+  export const 購読を開始 = (userId: User.Id | undefined) => {
     const [, set] = useRecoilState(植物ごとのデフォルト設定Selector);
 
-    const 購読 = (userId: UserId) => {
+    const 購読 = (userId: User.Id) => {
       return FSAppRepository.植物ごとのデフォルト設定.購読(userId, items => {
         console.log('植物ごとのデフォルト設定をlisten', items);
         set(items.map(i => i.value));

@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { AUTH_STATE } from '@frontend/store/auth/atom';
-import { User, UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import { User as AuthUser } from 'firebase/auth';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
@@ -32,7 +32,7 @@ export const useAuthState = () => {
     // detect sign in
     const manager = new FsAppManager.User();
     try {
-      const res = FSAppRepository.listenById(manager, authUser.uid as UserId, user => {
+      const res = FSAppRepository.listenById(manager, authUser.uid as User.Id, user => {
         console.log('listen user data');
         setUser(user.value);
       });

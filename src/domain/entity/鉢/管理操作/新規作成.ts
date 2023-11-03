@@ -4,12 +4,12 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { BrowserRepository } from '@frontend/domain/repository/browser';
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 
 export const 小画像の生成 = async (
   dataUrl: string,
   PathParamBase: {
-    userId: UserId;
+    userId: User.Id;
     datetime: Dayjs;
     itemId: 鉢.Id;
   },

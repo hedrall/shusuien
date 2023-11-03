@@ -1,4 +1,4 @@
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { Dayjs } from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
@@ -10,7 +10,7 @@ import { _履歴を適用 } from 'src/domain/entity/鉢/管理操作/common';
 export type _植替えする = (this: 鉢, params: _植替えするParams) => Promise<void>;
 export type _植替えするParams = {
   imageDataUrl: string;
-  userId: UserId;
+  userId: User.Id;
   鉢のサイズ: 履歴.植替え.鉢サイズ;
   memo: string | undefined;
   date: Dayjs;

@@ -1,4 +1,4 @@
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import dayjs from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
@@ -9,7 +9,7 @@ import { _履歴を適用 } from 'src/domain/entity/鉢/管理操作/common';
 
 export namespace _成長を記録する {
   export type Params = {
-    userId: UserId;
+    userId: User.Id;
     imageDataUrl: string | undefined;
     memo: string | undefined;
     画像を更新する: boolean;

@@ -1,4 +1,4 @@
-import { ClassEntity, Entity, MixinEntity } from 'src/domain/entity';
+import { ClassEntity, MixinEntity } from 'src/domain/entity';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { 鉢 } from 'src/domain/entity/鉢';
 import { 棚 } from 'src/domain/entity/棚';
@@ -49,23 +49,6 @@ export const basicToFirestore = <T extends object>(item: T): fs.DocumentData => 
   return JSON.parse(JSON.stringify(mod));
 };
 
-export const basicFromFirestore = <T extends ClassEntity>(construct: new (...args: any[]) => T) => {
-  return (snapshot: fs.QueryDocumentSnapshot<fs.DocumentData>): T => {
-    const data = snapshot.data() as T;
-    const id = snapshot.ref.id;
-    return new construct({ ...data, id });
-  };
-};
-
-export const basicConverter = <T extends ClassEntity>(
-  construct: new (...args: any[]) => T,
-): fs.FirestoreDataConverter<T> => {
-  return {
-    toFirestore: basicToFirestore,
-    fromFirestore: basicFromFirestore(construct),
-  };
-};
-
 export const mixinBasicToFirestore = <T extends object>(item: T): fs.DocumentData => {
   const mod = dateToFirestore(dropUndefined(removeId({ ...item })));
   return JSON.parse(JSON.stringify(mod));
@@ -113,7 +96,7 @@ export const appConverters = {
   棚: mixinBasicConverter(棚.construct),
   鉢: mixinBasicConverter(鉢.construct),
   履歴: 履歴Converter,
-  User: basicConverter(User),
+  User: mixinBasicConverter(User.construct),
   植物ごとのデフォルト設定: mixinBasicConverter(植物ごとのデフォルト設定.construct),
   棚の並び順: mixinBasicConverter(棚の並び順.construct),
 } as const;

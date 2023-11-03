@@ -1,10 +1,10 @@
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 import { 棚 } from 'src/domain/entity/棚';
 import { BehaviorSubject } from 'rxjs';
 
-const _更新 = async function 更新(props: { userId: UserId; 棚一覧: 棚[] }) {
+const _更新 = async function 更新(props: { userId: User.Id; 棚一覧: 棚[] }) {
   const { userId, 棚一覧 } = props;
 
   棚の並び順.events.更新.next('開始');
@@ -22,8 +22,8 @@ const _更新 = async function 更新(props: { userId: UserId; 棚一覧: 棚[] 
 
 export namespace 棚の並び順 {
   export type Props = {
-    id: UserId;
-    userId: UserId;
+    id: User.Id;
+    userId: User.Id;
     棚ID一覧: 棚.Id[];
     更新日時: Dayjs;
     _棚の名称での表示_デバッグ用: string[];

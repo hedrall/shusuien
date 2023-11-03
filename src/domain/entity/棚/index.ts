@@ -1,5 +1,5 @@
 import { Opaque } from 'type-fest';
-import { UserId } from 'src/domain/entity/user';
+import { User } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 
@@ -12,7 +12,7 @@ export namespace 棚 {
   export type Props = {
     id: Id | undefined;
     name: string;
-    userId: UserId;
+    userId: User.Id;
     作成日時: Dayjs;
     削除済み: boolean;
   };
