@@ -75,7 +75,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
   await FSAppRepository.鉢.作成(新規鉢, 鉢ID);
 
   console.log('3. 成長記録履歴を作成');
-  await 履歴.新規作成.成長記録({
+  await 履歴.成長の記録.create({
     props: {
       作成日時: now,
       userId,

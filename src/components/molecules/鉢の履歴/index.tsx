@@ -4,11 +4,10 @@ import { use鉢の履歴一覧 } from '@frontend/hooks/itemHistory';
 import { 鉢 } from 'src/domain/entity/鉢';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Image, Timeline, TimelineProps } from 'antd';
-import { 履歴, 履歴の内容, 鉢サイズ } from 'src/domain/entity/鉢/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { ICONS } from '@frontend/supports/icons';
 import { useController, useForm } from 'react-hook-form';
 import { 履歴のタイプでの絞り込みフィルターグループ } from '@frontend/components/atoms/HistoryTypeFilterButtonGroup';
-import { StorageRepository } from '@frontend/domain/repository/storage';
 import { NO_IMAGE } from '@frontend/supports/image';
 
 export type 鉢の履歴Props = {
@@ -20,7 +19,7 @@ type TLItem = {
   dot?: React.ReactNode;
   children: React.ReactNode;
 };
-const 履歴ごとの色 = (type: 履歴の内容.Type) => {
+const 履歴ごとの色 = (type: 履歴.Type) => {
   switch (type) {
     case '成長の記録':
       return 'grey';
@@ -69,7 +68,7 @@ const 履歴ごとの表示内容 = (i: 履歴): React.ReactNode => {
         </div>
       );
     case '植替え': {
-      const size = 鉢サイズ.toString(i.内容.鉢のサイズ);
+      const size = 履歴.植替え.鉢サイズ.toString(i.内容.鉢のサイズ);
       const memo = i.内容.memo;
       return (
         <画像と表示
@@ -94,7 +93,7 @@ const Timelineのアイテムへ変換 = (i: 履歴): TLItem => {
 };
 
 type Input = {
-  filter: 履歴の内容.Type[];
+  filter: 履歴.Type[];
 };
 const DEFAULT_VALUES = (): Input => {
   return { filter: ['成長の記録', '植替え'] };

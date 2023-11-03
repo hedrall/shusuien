@@ -42,7 +42,7 @@ export const _成長を記録する = async (params: _成長を記録する.Para
   }
 
   console.log('2. 成長記録履歴を作成');
-  const 植替え履歴 = await 履歴.新規作成.成長記録({
+  const 植替え履歴 = await 履歴.成長の記録.create({
     props: {
       userId,
       作成日時: date,

@@ -3,7 +3,7 @@ import './index.scss';
 import { 鉢 } from 'src/domain/entity/鉢';
 import { Button, Descriptions, Select, SelectProps } from 'antd';
 import { optionalCall, optionalValue } from '@frontend/supports/functions';
-import { 鉢サイズ } from 'src/domain/entity/鉢/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date';
 import { MyEditable } from '@frontend/components/atoms/Editable';
 import dayjs, { Dayjs } from 'dayjs';
@@ -59,7 +59,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
     棚移動モーダルref.current?.open();
   };
 
-  const 鉢のサイズ = optionalCall(snapshot.鉢のサイズ, 鉢サイズ.toString);
+  const 鉢のサイズ = optionalCall(snapshot.鉢のサイズ, 履歴.植替え.鉢サイズ.toString);
   const 最後の灌水 = 最後の灌水の表示(snapshot.最後の灌水, now);
   const 最後の植替え = [snapshot.最後の植替え?.format(F)].filter(Boolean).join(', ');
   const { 植物ごとのデフォルト設定一覧 } = use植物ごとのデフォルト設定.一覧を利用();

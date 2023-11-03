@@ -1,5 +1,5 @@
 import { UserId } from 'src/domain/entity/user';
-import { 履歴, 鉢サイズ } from 'src/domain/entity/鉢/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { Dayjs } from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
@@ -11,7 +11,7 @@ export type _植替えするParams = {
   item: 鉢;
   imageDataUrl: string;
   userId: UserId;
-  鉢のサイズ: 鉢サイズ;
+  鉢のサイズ: 履歴.植替え.鉢サイズ;
   memo: string | undefined;
   date: Dayjs;
 };
@@ -35,7 +35,7 @@ export const _植替えする = async (params: _植替えするParams) => {
   const { small画像のURL } = await 小画像の生成(imageDataUrl, pathBaseParams);
 
   console.log('2. 植替えの履歴を作成');
-  const 植替え履歴 = await 履歴.新規作成.植替え({
+  const 植替え履歴 = await 履歴.植替え.create({
     props: {
       userId,
       作成日時: date,

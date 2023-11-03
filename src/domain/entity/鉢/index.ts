@@ -1,7 +1,7 @@
 import { Opaque } from 'type-fest';
 import { UserId } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
-import { 履歴の内容 } from 'src/domain/entity/鉢/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { 棚ID } from 'src/domain/entity/棚';
 import { optionalCall } from '@frontend/supports/functions';
 import { _植替えする } from 'src/domain/entity/鉢/管理操作/植替';
@@ -14,8 +14,6 @@ import { 今日 } from '@frontend/supports/date';
 import { 日光の強度設定 } from 'src/domain/entity/鉢/日光の強度設定';
 import { 育成タイプ } from 'src/domain/entity/鉢/育成タイプ';
 import { _Snapshot } from 'src/domain/entity/鉢/Snapshot';
-
-import { _履歴を適用 } from 'src/domain/entity/鉢/管理操作/common';
 
 type 鉢Id = Opaque<string, '鉢ID'>;
 export class 鉢のBase {
@@ -151,7 +149,7 @@ export class 鉢 extends 鉢のBase {
     フィールドを更新: new Subject<{ フィールド名: string; 更新後のValue: any }>(),
     詳細を更新: new Subject<{ プロパティ名: string; 更新後のValue: any }>(),
     削除: new Subject<{ item: 鉢 }>(),
-    管理: new Subject<{ type: 履歴の内容.Type | '新規作成' }>(),
+    管理: new Subject<{ type: 履歴.Type | '新規作成' }>(),
   };
 
   static create = () => {

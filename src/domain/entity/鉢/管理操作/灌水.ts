@@ -19,7 +19,7 @@ export const _灌水する = async (params: _灌水操作Params) => {
   const date = dayjs();
 
   // console.log('1. 灌水の履歴を作成');
-  const 灌水履歴 = await 履歴.新規作成.灌水({
+  const 灌水履歴 = await 履歴.灌水.create({
     props: {
       userId,
       作成日時: date,
