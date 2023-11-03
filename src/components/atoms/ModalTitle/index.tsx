@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
-import { 履歴の内容 } from '@frontend/domain/model/履歴';
+import { 履歴の内容 } from 'src/domain/entity/履歴';
 
 export type ModalTitleProps = {
   type: 履歴の内容.Type | '機能' | '植物ごとのデフォルト設定' | 'デフォルト設定から選択';

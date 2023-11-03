@@ -2,8 +2,8 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import './index.scss';
 import { Card, Modal, ModalProps } from 'antd';
 import { useWithLoading } from '@frontend/supports/ui';
-import { 棚ID } from '@frontend/domain/model/棚';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 棚ID } from 'src/domain/entity/棚';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { use棚一覧 } from 'src/store/data/action';
 
 export namespace 棚移動モーダル {

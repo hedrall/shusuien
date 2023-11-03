@@ -1,5 +1,5 @@
 import { Opaque } from 'type-fest';
-import { UserId } from '@frontend/domain/model/user';
+import { UserId } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 

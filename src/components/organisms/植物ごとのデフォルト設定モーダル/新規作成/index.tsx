@@ -9,10 +9,10 @@ import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 import { 季節 } from '@frontend/domain/const/季節';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
+import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
-import { 日光の強度設定 } from 'src/domain/model/鉢/日光の強度設定';
-import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
+import { 日光の強度設定 } from 'src/domain/entity/鉢/日光の強度設定';
+import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
 
 export namespace 植物ごとのデフォルト設定の新規作成モーダル {
   export type Ref = {

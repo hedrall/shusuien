@@ -1,10 +1,10 @@
-import { 鉢, 鉢のBase } from '@frontend/domain/model/鉢';
+import { 鉢, 鉢のBase } from 'src/domain/entity/鉢';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
-import { 履歴 } from '@frontend/domain/model/履歴';
+import { 履歴 } from 'src/domain/entity/履歴';
 import { BrowserRepository } from '@frontend/domain/repository/browser';
-import { UserId } from '@frontend/domain/model/user';
+import { UserId } from 'src/domain/entity/user';
 
 export const 小画像の生成 = async (
   dataUrl: string,

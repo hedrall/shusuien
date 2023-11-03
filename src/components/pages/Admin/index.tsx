@@ -2,15 +2,15 @@ import React from 'react';
 import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import * as fs from 'firebase/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import dayjs from 'dayjs';
-import { 小画像の生成 } from '@frontend/domain/model/鉢/管理操作/新規作成';
-import { 履歴 } from '@frontend/domain/model/履歴';
+import { 小画像の生成 } from 'src/domain/entity/鉢/管理操作/新規作成';
+import { 履歴 } from 'src/domain/entity/履歴';
 import querySnapshotToRefValues = FSAppRepository.querySnapshotToRefValues;
-import { 棚 } from 'src/domain/model/棚';
+import { 棚 } from 'src/domain/entity/棚';
 
 export type TopPageProps = {};
 

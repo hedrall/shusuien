@@ -5,7 +5,7 @@ import { useController, useForm } from 'react-hook-form';
 import { MyInput } from '@frontend/components/atoms/MyInput';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useWithLoading } from '@frontend/supports/ui';
-import { 棚 } from '@frontend/domain/model/棚';
+import { 棚 } from 'src/domain/entity/棚';
 
 export namespace 棚作成モーダル {
   export type Props = {};

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { MyInput } from '@frontend/components/atoms/MyInput';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { useAuthState } from '@frontend/store/auth/action';
-import { UserId } from '@frontend/domain/model/user';
+import { UserId } from 'src/domain/entity/user';
 import { AuthRepository } from '@frontend/domain/repository/auth';
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';

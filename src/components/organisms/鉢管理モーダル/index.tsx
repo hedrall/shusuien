@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Image, Modal, ModalProps, Popconfirm } from 'antd';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 植替モーダル } from '@frontend/components/organisms/植替モーダル';
 import { 鉢の情報 } from 'src/components/molecules/鉢の情報';

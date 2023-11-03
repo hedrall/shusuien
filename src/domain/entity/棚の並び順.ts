@@ -1,7 +1,7 @@
-import { UserId } from '@frontend/domain/model/user';
+import { UserId } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 棚, 棚ID } from 'src/domain/model/棚';
+import { 棚, 棚ID } from 'src/domain/entity/棚';
 import { BehaviorSubject } from 'rxjs';
 
 export class 棚の並び順Base {

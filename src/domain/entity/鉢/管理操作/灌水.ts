@@ -1,9 +1,9 @@
-import { UserId } from '@frontend/domain/model/user';
-import { 履歴, 履歴の内容 } from '@frontend/domain/model/履歴';
+import { UserId } from 'src/domain/entity/user';
+import { 履歴, 履歴の内容 } from 'src/domain/entity/履歴';
 import dayjs from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢 } from '@frontend/domain/model/鉢';
-import { _履歴を適用 } from 'src/domain/model/鉢/管理操作/common';
+import { 鉢 } from 'src/domain/entity/鉢';
+import { _履歴を適用 } from 'src/domain/entity/鉢/管理操作/common';
 
 export type _灌水操作Params = {
   item: 鉢;

@@ -18,7 +18,7 @@ import {
   faTrash,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
-import { 履歴の内容 } from '@frontend/domain/model/履歴';
+import { 履歴の内容 } from 'src/domain/entity/履歴';
 
 export const ICONS = {
   灌水: () => <FontAwesomeIcon icon={faDroplet} />,

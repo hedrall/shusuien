@@ -1,4 +1,4 @@
-import { 履歴の内容, 鉢サイズ } from 'src/domain/model/履歴';
+import { 履歴の内容, 鉢サイズ } from 'src/domain/entity/履歴';
 import { Dayjs } from 'dayjs';
 
 // 鉢の現在の状態を記録する部分

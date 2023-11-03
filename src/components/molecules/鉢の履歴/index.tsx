@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.scss';
 import { use鉢の履歴一覧 } from '@frontend/hooks/itemHistory';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Image, Timeline, TimelineProps } from 'antd';
-import { 履歴, 履歴の内容, 鉢サイズ } from '@frontend/domain/model/履歴';
+import { 履歴, 履歴の内容, 鉢サイズ } from 'src/domain/entity/履歴';
 import { ICONS } from '@frontend/supports/icons';
 import { useController, useForm } from 'react-hook-form';
 import { 履歴のタイプでの絞り込みフィルターグループ } from '@frontend/components/atoms/HistoryTypeFilterButtonGroup';

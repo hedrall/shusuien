@@ -1,7 +1,7 @@
-import { 棚, 棚ID } from '@frontend/domain/model/棚';
+import { 棚, 棚ID } from 'src/domain/entity/棚';
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
-import { UserId } from '@frontend/domain/model/user';
+import { UserId } from 'src/domain/entity/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 

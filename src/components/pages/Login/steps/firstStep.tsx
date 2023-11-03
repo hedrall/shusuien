@@ -9,7 +9,7 @@ import { StepProps } from '@frontend/components/pages/Login/steps/common';
 import { MyInput } from '@frontend/components/atoms/MyInput';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useNavigate } from 'react-router-dom';
-import { User, UserId } from '@frontend/domain/model/user';
+import { User, UserId } from 'src/domain/entity/user';
 import { AuthRepository } from '@frontend/domain/repository/auth';
 import { ROUTES } from '@frontend/settings/routes';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';

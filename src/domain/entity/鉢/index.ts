@@ -1,21 +1,21 @@
 import { Opaque } from 'type-fest';
-import { UserId } from '@frontend/domain/model/user';
+import { UserId } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
-import { 履歴の内容 } from '@frontend/domain/model/履歴';
-import { 棚ID } from '@frontend/domain/model/棚';
+import { 履歴の内容 } from 'src/domain/entity/履歴';
+import { 棚ID } from 'src/domain/entity/棚';
 import { optionalCall } from '@frontend/supports/functions';
-import { _植替えする } from '@frontend/domain/model/鉢/管理操作/植替';
-import { _新規作成する } from '@frontend/domain/model/鉢/管理操作/新規作成';
-import { _灌水する } from '@frontend/domain/model/鉢/管理操作/灌水';
-import { _成長を記録する } from '@frontend/domain/model/鉢/管理操作/成長を記録';
+import { _植替えする } from 'src/domain/entity/鉢/管理操作/植替';
+import { _新規作成する } from 'src/domain/entity/鉢/管理操作/新規作成';
+import { _灌水する } from 'src/domain/entity/鉢/管理操作/灌水';
+import { _成長を記録する } from 'src/domain/entity/鉢/管理操作/成長を記録';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { Subject } from 'rxjs';
 import { 今日 } from '@frontend/supports/date';
-import { 日光の強度設定 } from 'src/domain/model/鉢/日光の強度設定';
-import { 育成タイプ } from 'src/domain/model/鉢/育成タイプ';
-import { _Snapshot } from 'src/domain/model/鉢/Snapshot';
+import { 日光の強度設定 } from 'src/domain/entity/鉢/日光の強度設定';
+import { 育成タイプ } from 'src/domain/entity/鉢/育成タイプ';
+import { _Snapshot } from 'src/domain/entity/鉢/Snapshot';
 
-import { _履歴を適用 } from 'src/domain/model/鉢/管理操作/common';
+import { _履歴を適用 } from 'src/domain/entity/鉢/管理操作/common';
 
 type 鉢Id = Opaque<string, '鉢ID'>;
 export class 鉢のBase {

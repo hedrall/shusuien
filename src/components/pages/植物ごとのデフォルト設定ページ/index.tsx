@@ -5,12 +5,12 @@ import { MyButton } from '@frontend/components/atoms/MyButton';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 import { Table, TableColumnsType } from 'antd';
 import { MyEditable } from '@frontend/components/atoms/Editable';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
+import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
 import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { uniqueArray } from '@frontend/supports/array';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
-import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
+import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
 
 export namespace 植物ごとのデフォルト設定ページ {
   export type Props = {};

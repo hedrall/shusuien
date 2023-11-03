@@ -1,6 +1,6 @@
 import { 季節 } from 'src/domain/const/季節';
 
-import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
+import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
 
 export namespace 日光の強度設定 {
   export const Default: Record<季節, 日光の強度 | undefined> = {

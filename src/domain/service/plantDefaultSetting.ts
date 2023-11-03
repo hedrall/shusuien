@@ -1,9 +1,9 @@
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { isDefined, optionalValue } from '@frontend/supports/functions';
 import { 季節, 現在の季節 } from '@frontend/domain/const/季節';
 import { NonUndefined } from 'react-hook-form';
-import { 日光の強度設定 } from 'src/domain/model/鉢/日光の強度設定';
+import { 日光の強度設定 } from 'src/domain/entity/鉢/日光の強度設定';
 
 export namespace 植物ごとのデフォルト設定サービス {
   /**

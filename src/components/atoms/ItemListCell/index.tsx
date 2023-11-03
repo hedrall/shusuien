@@ -1,7 +1,7 @@
 import React, { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
 import './index.scss';
 import { Image, ImageProps } from 'antd';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
 import dayjs from 'dayjs';
@@ -11,7 +11,7 @@ import cn from 'classnames';
 import { 現在の季節 } from '@frontend/domain/const/季節';
 import { onKeyEnter } from '@frontend/supports/keyboardAction';
 import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
-import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
+import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
 
 export type 鉢一覧の要素Props = {
   item: 鉢;

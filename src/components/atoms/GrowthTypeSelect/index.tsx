@@ -1,6 +1,6 @@
 import React from 'react';
 import { Select, SelectProps } from 'antd';
-import { 育成タイプ } from 'src/domain/model/鉢/育成タイプ';
+import { 育成タイプ } from 'src/domain/entity/鉢/育成タイプ';
 
 export namespace 育成タイプSelect {
   export type Props = {

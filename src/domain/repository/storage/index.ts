@@ -7,7 +7,7 @@ import {
   StorageReference,
   uploadString,
 } from 'firebase/storage';
-import { UserId } from '@frontend/domain/model/user';
+import { UserId } from 'src/domain/entity/user';
 import { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 

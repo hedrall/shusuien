@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { AUTH_STATE } from '@frontend/store/auth/atom';
-import { User, UserId } from '@frontend/domain/model/user';
+import { User, UserId } from 'src/domain/entity/user';
 import { User as AuthUser } from 'firebase/auth';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';

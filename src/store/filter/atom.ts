@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
+import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
 
 export type FilterState = {
   耐寒温度:

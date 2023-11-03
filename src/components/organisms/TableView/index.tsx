@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import { 棚, 棚ID } from '@frontend/domain/model/棚';
+import { 棚, 棚ID } from 'src/domain/entity/棚';
 import { Button, Image, ImageProps, Select, SelectProps, Table, TableColumnsType } from 'antd';
 import { use鉢一覧, 棚Selector } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
-import { 鉢 } from '@frontend/domain/model/鉢';
-import { User } from '@frontend/domain/model/user';
+import { 鉢 } from 'src/domain/entity/鉢';
+import { User } from 'src/domain/entity/user';
 import { MyEditable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { デフォルト設定から選択するモーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/選択';

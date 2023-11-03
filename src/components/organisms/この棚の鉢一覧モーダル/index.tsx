@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import './index.scss';
 import { Modal, ModalProps } from 'antd';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
-import { 棚 } from '@frontend/domain/model/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { 鉢一覧 } from 'src/components/molecules/鉢一覧';
 
 export namespace この棚の鉢一覧モーダル {

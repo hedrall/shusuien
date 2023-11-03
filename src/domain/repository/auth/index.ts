@@ -9,7 +9,7 @@ import {
   onAuthStateChanged,
   User as AuthUser,
 } from 'firebase/auth';
-import { User, UserId } from '@frontend/domain/model/user';
+import { User, UserId } from 'src/domain/entity/user';
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 

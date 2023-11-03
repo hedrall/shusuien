@@ -1,5 +1,5 @@
-import { Entity } from '@frontend/domain/model';
-import { 棚の並び順 } from 'src/domain/model/棚の並び順';
+import { Entity } from 'src/domain/entity';
+import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
 
 export const findById = <T extends Exclude<Entity, 棚の並び順>>(arr: T[], idToFind: string | undefined | number) => {
   return arr.find(i => i.id === idToFind);

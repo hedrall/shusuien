@@ -1,7 +1,7 @@
 import { selector, useRecoilState } from 'recoil';
 import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { isDefined } from '@frontend/supports/functions';
-import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
+import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
 
 const isEmpty = (item: FilterState) => {
   const { enabled, ...rest } = item;

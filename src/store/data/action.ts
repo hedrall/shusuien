@@ -1,9 +1,9 @@
 import { selector, selectorFamily, useRecoilState } from 'recoil';
-import { 棚, 棚ID } from '@frontend/domain/model/棚';
+import { 棚, 棚ID } from 'src/domain/entity/棚';
 import { DATA_STATE_ATOM, DataState } from '@frontend/store/data/atom';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { User, UserId } from '@frontend/domain/model/user';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { User, UserId } from 'src/domain/entity/user';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { useEffect, useState } from 'react';
 import { MASTER_STATE_ATOM } from '@frontend/store/master/atom';
 import { isDefined } from '@frontend/supports/functions';
@@ -13,7 +13,7 @@ import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { 鉢Service } from '@frontend/domain/service/item';
 import { ひらがなtoカタカナ } from '@frontend/supports/string';
 import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
-import { 棚の並び順 } from '@frontend/domain/model/棚の並び順';
+import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
 
 const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
   if (!filter.enabled) return true;

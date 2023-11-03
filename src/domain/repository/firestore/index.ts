@@ -1,5 +1,5 @@
 import * as fs from 'firebase/firestore';
-import { Entity } from '@frontend/domain/model';
+import { Entity } from 'src/domain/entity';
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { MayBeArray, toArray } from '@frontend/supports/array';

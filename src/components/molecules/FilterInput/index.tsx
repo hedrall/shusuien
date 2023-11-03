@@ -9,7 +9,7 @@ import { SYMBOL_ICONS } from '@frontend/supports/icons';
 import cn from 'classnames';
 import { DebugOnly } from '@frontend/components/atoms/DebugOnly';
 import { onClickOrEnter, onKeyEnter } from '@frontend/supports/keyboardAction';
-import { 日光の強度 } from 'src/domain/model/鉢/日光の強度';
+import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
 
 namespace フィルタ条件の入力 {
   export type Props = {};

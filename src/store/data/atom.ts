@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
-import { 棚, 棚ID } from '@frontend/domain/model/棚';
-import { 鉢 } from '@frontend/domain/model/鉢';
-import { 棚の並び順 } from '@frontend/domain/model/棚の並び順';
+import { 棚, 棚ID } from 'src/domain/entity/棚';
+import { 鉢 } from 'src/domain/entity/鉢';
+import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
 
 export type DataState = {
   棚一覧: 棚[];

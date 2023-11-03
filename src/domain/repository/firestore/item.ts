@@ -1,10 +1,10 @@
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
-import { UserId } from '@frontend/domain/model/user';
+import { UserId } from 'src/domain/entity/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
-import { 鉢, 鉢のBase } from '@frontend/domain/model/鉢';
-import { 棚ID } from '@frontend/domain/model/棚';
+import { 鉢, 鉢のBase } from 'src/domain/entity/鉢';
+import { 棚ID } from 'src/domain/entity/棚';
 import { Dayjs } from 'dayjs';
 import { basicToFirestore } from '@frontend/domain/repository/firestore/converters/app';
 

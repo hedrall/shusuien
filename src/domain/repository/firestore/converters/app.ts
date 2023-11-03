@@ -1,12 +1,12 @@
-import { Entity } from '@frontend/domain/model';
-import { 履歴 } from '@frontend/domain/model/履歴';
-import { 鉢 } from '@frontend/domain/model/鉢';
-import { 棚 } from '@frontend/domain/model/棚';
+import { Entity } from 'src/domain/entity';
+import { 履歴 } from 'src/domain/entity/履歴';
+import { 鉢 } from 'src/domain/entity/鉢';
+import { 棚 } from 'src/domain/entity/棚';
 import type fs from 'firebase/firestore';
-import { User } from '@frontend/domain/model/user';
+import { User } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
-import { 棚の並び順 } from 'src/domain/model/棚の並び順';
+import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
+import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
 
 export const dropUndefined = (obj: { [key: string]: any }) => {
   Object.keys(obj).map(key => {
