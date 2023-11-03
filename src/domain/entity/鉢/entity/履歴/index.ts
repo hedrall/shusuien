@@ -1,12 +1,11 @@
-import { Opaque } from 'type-fest';
 import { tObjectKeys } from 'src/supports/functions';
 import { _灌水履歴 } from 'src/domain/entity/鉢/entity/履歴/灌水';
 import { _成長の記録 } from 'src/domain/entity/鉢/entity/履歴/成長の記録';
 import { _植替え履歴 } from 'src/domain/entity/鉢/entity/履歴/植替え';
 
-export type 履歴ID = Opaque<string, '履歴ID'>;
-
 export namespace 履歴 {
+  export type Id = _成長の記録.Id | _植替え履歴.Id | _灌水履歴.Id;
+
   export type Type = 履歴['内容']['type'];
   export const Type = tObjectKeys({
     灌水: undefined,

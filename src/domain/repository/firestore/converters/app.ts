@@ -1,5 +1,5 @@
 import { Entity } from 'src/domain/entity';
-import { 履歴, 履歴ID } from 'src/domain/entity/鉢/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { 鉢 } from 'src/domain/entity/鉢';
 import { 棚 } from 'src/domain/entity/棚';
 import type fs from 'firebase/firestore';
@@ -7,7 +7,6 @@ import { User } from 'src/domain/entity/user';
 import dayjs, { Dayjs } from 'dayjs';
 import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
 import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
-import { _成長の記録 } from 'src/domain/entity/鉢/entity/履歴/成長の記録';
 
 export const dropUndefined = (obj: { [key: string]: any }) => {
   Object.keys(obj).map(key => {
@@ -77,11 +76,11 @@ export const 履歴Converter: fs.FirestoreDataConverter<履歴> = {
     const id = snapshot.ref.id;
     switch (data.内容.type) {
       case '成長の記録':
-        return 履歴.成長の記録.construct({ ...(data as 履歴.成長の記録), id: id as 履歴ID }) as T;
+        return 履歴.成長の記録.construct({ ...(data as 履歴.成長の記録), id: id as 履歴.成長の記録.Id }) as T;
       case '植替え':
-        return 履歴.植替え.construct({ ...(data as 履歴.植替え), id: id as 履歴ID }) as T;
+        return 履歴.植替え.construct({ ...(data as 履歴.植替え), id: id as 履歴.植替え.Id }) as T;
       case '灌水':
-        return 履歴.灌水.construct({ ...(data as 履歴.灌水), id: id as 履歴ID }) as T;
+        return 履歴.灌水.construct({ ...(data as 履歴.灌水), id: id as 履歴.灌水.Id }) as T;
     }
     // @ts-expect-error
     throw new Error(`履歴Converter > fromFirestore > 予期せぬタイプ ${data.内容.type}`);

@@ -3,7 +3,7 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
 import { UserId } from 'src/domain/entity/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
-import { 履歴, 履歴ID } from 'src/domain/entity/鉢/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { 鉢 } from 'src/domain/entity/鉢';
 
 type 購読Options = {
@@ -11,10 +11,10 @@ type 購読Options = {
 };
 
 export namespace _FsApp履歴Repository {
-  export const 作成 = async (新規履歴: 履歴) => {
+  export const 作成 = async <T extends 履歴>(新規履歴: T) => {
     const manager = new FsAppManager.履歴();
     const ref = await FSAppRepository.addItem(manager, 新規履歴);
-    return { id: ref.id as 履歴ID, ref };
+    return { id: ref.id as T['id'], ref };
   };
 
   export const 購読 = (

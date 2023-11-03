@@ -1,15 +1,15 @@
 import { UserId } from 'src/domain/entity/user';
 import { 棚ID } from 'src/domain/entity/棚';
 import { 鉢 } from 'src/domain/entity/鉢';
-import { Dayjs } from 'dayjs';
-import { 履歴, 履歴ID } from 'src/domain/entity/鉢/entity/履歴/index';
+import dayjs, { Dayjs } from 'dayjs';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴/index';
 import { _灌水履歴 } from 'src/domain/entity/鉢/entity/履歴/灌水';
 import { _成長の記録 } from 'src/domain/entity/鉢/entity/履歴/成長の記録';
 import { _植替え履歴 } from 'src/domain/entity/鉢/entity/履歴/植替え';
 
 export namespace Super履歴 {
   export type Props = {
-    id: 履歴ID | undefined;
+    id: string | undefined;
     userId: UserId;
     対象の棚のID: 棚ID | undefined;
     対象の鉢のID: 鉢.Id | undefined;
@@ -20,6 +20,7 @@ export namespace Super履歴 {
   export const construct = (props: Props) => {
     return {
       ...props,
+      作成日時: dayjs(props.作成日時),
     } as const;
   };
   export const Guard = {

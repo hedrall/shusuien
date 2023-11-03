@@ -1,8 +1,12 @@
 import { NewProps, Super履歴 } from 'src/domain/entity/鉢/entity/履歴/base';
 import { FSAppRepository } from 'src/domain/repository/firestore';
+import { Opaque } from 'type-fest';
 
 export namespace _成長の記録 {
+  export type Id = Opaque<string, '成長の記録ID'>;
+
   export type Props = Super履歴.Props & {
+    id: Id | undefined;
     内容: {
       type: '成長の記録';
       画像のURL: string | undefined;
