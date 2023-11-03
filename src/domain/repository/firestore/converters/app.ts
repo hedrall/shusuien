@@ -1,4 +1,4 @@
-import { Entity } from 'src/domain/entity';
+import { ClassEntity, Entity } from 'src/domain/entity';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { 鉢 } from 'src/domain/entity/鉢';
 import { 棚 } from 'src/domain/entity/棚';
@@ -49,7 +49,7 @@ export const basicToFirestore = <T extends object>(item: T): fs.DocumentData => 
   return JSON.parse(JSON.stringify(mod));
 };
 
-export const basicFromFirestore = <T extends Entity>(construct: new (...args: any[]) => T) => {
+export const basicFromFirestore = <T extends ClassEntity>(construct: new (...args: any[]) => T) => {
   return (snapshot: fs.QueryDocumentSnapshot<fs.DocumentData>): T => {
     const data = snapshot.data() as T;
     const id = snapshot.ref.id;
@@ -57,12 +57,32 @@ export const basicFromFirestore = <T extends Entity>(construct: new (...args: an
   };
 };
 
-export const basicConverter = <T extends Entity>(
+export const basicConverter = <T extends ClassEntity>(
   construct: new (...args: any[]) => T,
 ): fs.FirestoreDataConverter<T> => {
   return {
     toFirestore: basicToFirestore,
     fromFirestore: basicFromFirestore(construct),
+  };
+};
+
+export const mixinBasicToFirestore = <T extends object>(item: T): fs.DocumentData => {
+  const mod = dateToFirestore(dropUndefined(removeId({ ...item })));
+  return JSON.parse(JSON.stringify(mod));
+};
+
+export const mixinBasicFromFirestore = <T extends 鉢>(construct: (...args: any[]) => T) => {
+  return (snapshot: fs.QueryDocumentSnapshot<fs.DocumentData>): T => {
+    const data = snapshot.data() as T;
+    const id = snapshot.ref.id;
+    return construct({ ...data, id });
+  };
+};
+
+export const mixinBasicConverter = <T extends 鉢>(construct: (...args: any[]) => T): fs.FirestoreDataConverter<T> => {
+  return {
+    toFirestore: mixinBasicToFirestore,
+    fromFirestore: mixinBasicFromFirestore(construct),
   };
 };
 
@@ -89,7 +109,7 @@ export const 履歴Converter: fs.FirestoreDataConverter<履歴> = {
 
 export const appConverters = {
   棚: basicConverter(棚),
-  鉢: basicConverter(鉢),
+  鉢: mixinBasicConverter(鉢.construct),
   履歴: 履歴Converter,
   User: basicConverter(User),
   植物ごとのデフォルト設定: basicConverter(植物ごとのデフォルト設定),

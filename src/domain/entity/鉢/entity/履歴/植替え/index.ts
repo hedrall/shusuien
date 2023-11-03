@@ -23,7 +23,7 @@ export namespace _植替え履歴 {
   export const construct = (props: Props) => {
     return {
       ...Super履歴.construct(props),
-      ...props,
+      id: props.id,
       内容: {
         ...props.内容,
         植替え日時: props.内容.植替え日時 && dayjs(props.内容.植替え日時),

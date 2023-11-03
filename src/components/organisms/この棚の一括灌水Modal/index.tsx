@@ -57,8 +57,7 @@ export const 一括灌水モーダル = forwardRef<一括灌水モーダル.Ref,
     try {
       for (const item of 灌水する鉢一覧) {
         await sleep(100);
-        await 鉢.管理.灌水({
-          item,
+        await item.灌水({
           userId: user.id,
           灌水量: '鉢いっぱい',
           液肥入り: 灌水時の施肥有無設定.is,

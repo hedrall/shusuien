@@ -12,7 +12,7 @@ function getOrder(i: Base) {
 }
 export type 植物ごとのデフォルト設定Id = Opaque<string, '植物ごとのデフォルト設定'>;
 export namespace 植物ごとのデフォルト設定 {
-  export type 更新可能なプロパティ = '耐寒温度' | `日光の強度設定`;
+  export type 更新可能なプロパティ = '耐寒温度' | '日光の強度設定';
 }
 class Base implements 鉢.デフォルト設定可能な鉢のプロパティ {
   id: 植物ごとのデフォルト設定Id | undefined;
@@ -21,9 +21,9 @@ class Base implements 鉢.デフォルト設定可能な鉢のプロパティ {
   属: string | undefined;
   種: string | undefined;
   育成タイプ?: 育成タイプ;
-  耐寒温度?: number;
-  水切れ日数?: number;
-  日光の強度設定?: 日光の強度設定;
+  水切れ日数: number | undefined;
+  耐寒温度: number | undefined;
+  日光の強度設定: 日光の強度設定 | undefined;
   order: string;
 
   // ルーム

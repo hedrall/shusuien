@@ -88,8 +88,7 @@ export const 成長記録モーダル = forwardRef<成長記録モーダル.Ref,
     await withLoading(async () => {
       const { imageDataUrl, memo, isUpdateImage } = getValues();
 
-      await 鉢.管理.成長を記録({
-        item,
+      await item.成長を記録({
         userId: user.id,
         imageDataUrl,
         memo,

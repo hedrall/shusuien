@@ -1,4 +1,4 @@
-import { 鉢, 鉢のBase } from 'src/domain/entity/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
@@ -31,7 +31,7 @@ export const 小画像の生成 = async (
 };
 export type 新規作成のParams = {
   imageDataUrl: string;
-  props: Omit<鉢のBase, 'id' | 'snapshot' | '作成日時' | '削除済み'>;
+  props: Omit<鉢.Props, 'id' | 'snapshot' | '作成日時' | '削除済み'>;
 };
 export const _新規作成する = async (params: 新規作成のParams) => {
   const { imageDataUrl, props } = params;
@@ -60,7 +60,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
   console.log({ 画像のPATH, 画像のURL, small画像のURL });
 
   console.log('2. 鉢を作成する');
-  const 新規鉢 = new 鉢({
+  const 新規鉢 = 鉢.construct({
     ...props,
     id: undefined,
     削除済み: false,

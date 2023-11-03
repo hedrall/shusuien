@@ -45,7 +45,7 @@ const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
   }
   const 最後の灌水からの経過日数Start = 最後の灌水からの経過日数?.start;
   if (isDefined(最後の灌水からの経過日数Start)) {
-    const 経過日数 = i.最後の灌水からの経過日数;
+    const 経過日数 = i.最後の灌水からの経過日数();
     const is = !isDefined(経過日数) || 経過日数 >= 最後の灌水からの経過日数Start;
     if (!is) return false;
   }
@@ -131,7 +131,7 @@ export const 灌水が必要な鉢一覧 = (user: User | undefined) => {
 
   return 鉢一覧.reduce<Res>(
     (pre, 鉢) => {
-      const 最後の灌水からの経過日数 = 鉢.最後の灌水からの経過日数;
+      const 最後の灌水からの経過日数 = 鉢.最後の灌水からの経過日数();
       const is要灌水 =
         !isDefined(最後の灌水からの経過日数) ||
         最後の灌水からの経過日数 >= (鉢.詳細.水切れ日数 || 水切れのデフォルト日数);

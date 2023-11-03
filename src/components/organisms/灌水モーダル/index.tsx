@@ -66,7 +66,7 @@ export const 灌水モーダル = forwardRef<灌水モーダル.Ref, 灌水モ�
     await withLoading(async () => {
       const { 灌水量, 液肥入り } = getValues();
 
-      await 鉢.管理.灌水({ userId: user.id, item, 灌水量, 液肥入り });
+      await item.灌水({ userId: user.id, 灌水量, 液肥入り });
       close();
     });
   };

@@ -67,7 +67,7 @@ export namespace 植物ごとのデフォルト設定サービス {
       if (isDefined(デフォルト設定から)) {
         return {
           一致Type: item.一致Type,
-          value: デフォルト設定から,
+          value: デフォルト設定から as any, // TODO
           デフォルトを適用: true,
         };
       }
@@ -132,7 +132,7 @@ export namespace 植物ごとのデフォルト設定サービス {
         水切れ日数,
       },
     };
-    const デフォルトを適用した鉢 = new 鉢(mod);
+    const デフォルトを適用した鉢 = 鉢.construct(mod);
     return デフォルトを適用した鉢;
   };
 }

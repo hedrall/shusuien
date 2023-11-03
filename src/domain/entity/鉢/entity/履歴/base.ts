@@ -21,7 +21,7 @@ export namespace Super履歴 {
     return {
       ...props,
       作成日時: dayjs(props.作成日時),
-    } as const;
+    } as const satisfies Props;
   };
   export const Guard = {
     is灌水: (i: 履歴): i is _灌水履歴 => i.内容.type === '灌水',

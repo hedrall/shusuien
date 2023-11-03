@@ -21,7 +21,8 @@ export namespace _灌水履歴 {
   export const construct = (props: Props) => {
     return {
       ...Super履歴.construct(props),
-      ...props,
+      id: props.id,
+      内容: props.内容,
     } as const;
   };
 

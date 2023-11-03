@@ -59,8 +59,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
       return;
     }
     if (!userId) return;
-    await 鉢.管理.灌水({
-      item,
+    await item.灌水({
       userId,
       灌水量: '鉢いっぱい',
       液肥入り: 灌水時の施肥有無設定.is,

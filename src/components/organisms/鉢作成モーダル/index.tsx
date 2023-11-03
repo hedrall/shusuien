@@ -102,7 +102,7 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
       const { imageDataUrl, name, ...詳細 } = getValues();
       console.warn({ getValues: getValues() });
       if (!棚Id || !imageDataUrl) return;
-      await 鉢.管理.新規作成({
+      await 鉢.新規作成({
         imageDataUrl,
         props: {
           userId: user?.id,

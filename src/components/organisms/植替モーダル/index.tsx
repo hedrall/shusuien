@@ -99,10 +99,9 @@ export const 植替モーダル = forwardRef<植替モーダル.Ref, 植替モ�
     await withLoading(async () => {
       const { imageDataUrl, size, isLong, date, memo } = getValues();
 
-      await 鉢.管理.植替え({
+      await item.植替え({
         imageDataUrl,
         userId: user.id,
-        item,
         date: dayjs(date),
         鉢のサイズ: {
           番号: size,

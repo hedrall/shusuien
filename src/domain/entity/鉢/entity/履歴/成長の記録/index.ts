@@ -17,7 +17,10 @@ export namespace _成長の記録 {
   export const construct = (props: Props) => {
     return {
       ...Super履歴.construct(props),
-      ...props,
+      id: props.id,
+      内容: {
+        ...props.内容,
+      },
     } as const;
   };
 
@@ -34,13 +37,3 @@ export namespace _成長の記録 {
   };
 }
 export type _成長の記録 = ReturnType<typeof _成長の記録.construct>;
-
-// export class _成長の記録 extends Super履歴 implements _成長の記録Base {
-//   内容: {
-//     type: '成長の記録';
-//     画像のURL: string | undefined;
-//     memo: string | undefined;
-//   };
-//
-//
-// }

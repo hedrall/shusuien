@@ -3,7 +3,7 @@ import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { Dayjs } from 'dayjs';
 
 export const update = (cur: 鉢, 更新するsnapshotの項目: Partial<鉢['snapshot']>, 履歴の作成日時: Dayjs) => {
-  return new 鉢({
+  return 鉢.construct({
     ...cur,
     snapshot: {
       ...cur.snapshot,

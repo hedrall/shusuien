@@ -3,7 +3,7 @@ import { FSAppRepository } from '@frontend/domain/repository/firestore/index';
 import { UserId } from 'src/domain/entity/user';
 import * as fs from 'firebase/firestore';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
-import { 鉢, 鉢のBase } from 'src/domain/entity/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { 棚ID } from 'src/domain/entity/棚';
 import { Dayjs } from 'dayjs';
 import { basicToFirestore } from '@frontend/domain/repository/firestore/converters/app';
@@ -19,7 +19,7 @@ export namespace _FsApp鉢Repository {
     await FSAppRepository.addItemWithId(manager, 新規鉢, id);
   };
 
-  export const 更新 = async (id: 鉢.Id, props: fs.UpdateData<鉢のBase>) => {
+  export const 更新 = async (id: 鉢.Id, props: fs.UpdateData<鉢.Props>) => {
     const manager = new FsAppManager.鉢();
     await FSAppRepository.update(manager, id, props);
   };
