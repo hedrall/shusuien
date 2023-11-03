@@ -1,15 +1,15 @@
 import { NewProps, Super履歴 } from 'src/domain/entity/鉢/entity/履歴/base';
-import { 履歴の内容 } from 'src/domain/entity/鉢/entity/履歴';
 import { _灌水量 } from 'src/domain/entity/鉢/entity/履歴/灌水/灌水量';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 
 export namespace _灌水履歴 {
+  export const 灌水量 = _灌水量;
   export type 灌水量 = _灌水量;
 
   export type Props = Super履歴.Props & {
     内容: {
       type: '灌水';
-      灌水量: 履歴の内容.灌水.量のKey型;
+      灌水量: _灌水量;
       液肥入り: boolean | undefined;
     };
   };

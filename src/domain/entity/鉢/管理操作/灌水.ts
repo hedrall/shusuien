@@ -1,5 +1,5 @@
 import { UserId } from 'src/domain/entity/user';
-import { 履歴, 履歴の内容 } from 'src/domain/entity/鉢/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import dayjs from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { 鉢 } from 'src/domain/entity/鉢';
@@ -8,7 +8,7 @@ import { _履歴を適用 } from 'src/domain/entity/鉢/管理操作/common';
 export type _灌水操作Params = {
   item: 鉢;
   userId: UserId;
-  灌水量: 履歴の内容.灌水.量のKey型;
+  灌水量: 履歴.灌水.灌水量;
   液肥入り: boolean;
 };
 

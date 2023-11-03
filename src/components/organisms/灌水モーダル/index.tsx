@@ -4,7 +4,7 @@ import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
 import { 鉢 } from 'src/domain/entity/鉢';
-import { 履歴の内容 } from 'src/domain/entity/鉢/entity/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { Control, useController, useForm } from 'react-hook-form';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { VerticalRadioGroup } from '@frontend/components/atoms/VerticalRadioGroup';
@@ -20,12 +20,12 @@ export namespace 灌水モーダル {
 }
 
 type Input = {
-  灌水量: 履歴の内容.灌水.量のKey型;
+  灌水量: 履歴.灌水.灌水量;
   液肥入り: boolean;
 };
 
 const DEFAULT_VALUES = (): Partial<Input> => ({
-  灌水量: 履歴の内容.灌水.量の定義['鉢いっぱい'].key,
+  灌水量: 履歴.灌水.灌水量['鉢いっぱい'].key,
 });
 
 const createController = (control: Control<Input, any>) => {
