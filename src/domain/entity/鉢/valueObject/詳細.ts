@@ -1,14 +1,14 @@
-import { 日光の強度設定 } from '../日光の強度設定';
-import { 育成タイプ } from '../育成タイプ';
+import { _日光の強度設定 } from '../consts/日光の強度設定';
+import { _育成タイプ } from '../consts/育成タイプ';
 
 export namespace _詳細 {
   export type Props = {
     科?: string;
     属?: string;
     種名?: string;
-    育成タイプ?: 育成タイプ;
+    育成タイプ?: _育成タイプ;
     耐寒温度?: number;
-    日光の強度設定?: 日光の強度設定;
+    日光の強度設定?: _日光の強度設定;
     水切れ日数?: number;
     入手元?: string;
     金額?: number;

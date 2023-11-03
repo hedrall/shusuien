@@ -10,7 +10,7 @@ import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { uniqueArray } from '@frontend/supports/array';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
-import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 export namespace 植物ごとのデフォルト設定ページ {
   export type Props = {};
@@ -78,7 +78,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
       render: (_, 設定) => {
         const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
           return {
-            onChange: e => 設定.更新.日光の強度設定(e as 日光の強度, 季節),
+            onChange: e => 設定.更新.日光の強度設定(e as 鉢.日光の強度, 季節),
             value: 設定.日光の強度設定?.[季節],
             isLoading: false,
             size: 'small',

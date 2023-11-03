@@ -1,7 +1,7 @@
 import { selector, useRecoilState } from 'recoil';
 import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { isDefined } from '@frontend/supports/functions';
-import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 const isEmpty = (item: FilterState) => {
   const { enabled, ...rest } = item;
@@ -32,7 +32,7 @@ export const useFilter = () => {
     set: {
       耐寒温度: (start: number | undefined, end: number | undefined) =>
         set(pre => ({ ...pre, 耐寒温度: { start, end }, enabled: true })),
-      日光の強度: (v?: 日光の強度) => set(pre => ({ ...pre, 日光の強度: v, enabled: true })),
+      日光の強度: (v?: 鉢.日光の強度) => set(pre => ({ ...pre, 日光の強度: v, enabled: true })),
       keyword: (v?: string) => set(pre => ({ ...pre, keyword: v, enabled: true })),
       最後の灌水からの経過日数: (v: number | undefined) => {
         console.log({ update: v });

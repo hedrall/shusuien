@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import { 鉢 } from 'src/domain/entity/鉢';
 import { Button, Descriptions, Select, SelectProps } from 'antd';
 import { optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
@@ -20,9 +19,7 @@ import { デフォルト設定から選択するモーダル } from '@frontend/c
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
 import { 植物ごとのデフォルト設定編集モーダル } from '@frontend/components/organisms/植物ごとのデフォルト設定モーダル/編集';
 import { 棚移動モーダル } from 'src/components/organisms/棚移動モーダル';
-import { 日光の強度設定 } from 'src/domain/entity/鉢/日光の強度設定';
-import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
-import { 育成タイプ } from 'src/domain/entity/鉢/育成タイプ';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 const F = DATE_READONLY_FORMAT;
 
@@ -78,7 +75,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
 
   const [棚一覧] = useRecoilState(棚Selector);
 
-  function 日光の強度を更新<Key extends keyof 日光の強度設定, V = 日光の強度設定[Key]>(key: Key) {
+  function 日光の強度を更新<Key extends keyof 鉢.日光の強度設定, V = 鉢.日光の強度設定[Key]>(key: Key) {
     return async (value: V) => {
       await 鉢.日光の強度を更新(key, value === 指定なし ? undefined : value);
     };
@@ -104,7 +101,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         季節,
       );
     return {
-      onChange: e => 日光の強度を更新(季節)(e as 日光の強度),
+      onChange: e => 日光の強度を更新(季節)(e as 鉢.日光の強度),
       value: 強度,
       isLoading,
       size: 'small',
@@ -119,7 +116,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       デフォルトを適用,
     } = 植物ごとのデフォルト設定サービス.デフォルト直を加味した直の取得(デフォルト設定一覧, 鉢, '育成タイプ');
     return {
-      onChange: e => 詳細を更新('育成タイプ')(e as 育成タイプ),
+      onChange: e => 詳細を更新('育成タイプ')(e as 鉢.育成タイプ),
       value,
       isLoading,
       size: 'small',

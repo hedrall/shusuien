@@ -7,7 +7,7 @@ import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSel
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
 import { MyEditable } from '@frontend/components/atoms/Editable';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
-import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 export namespace 植物ごとのデフォルト設定編集モーダル {
   export type Ref = {
@@ -54,7 +54,7 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
 
   const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
     return {
-      onChange: e => 設定.更新.日光の強度設定(e as 日光の強度, 季節),
+      onChange: e => 設定.更新.日光の強度設定(e as 鉢.日光の強度, 季節),
       value: 設定.日光の強度設定?.[季節],
       isLoading: false,
       size: 'small',

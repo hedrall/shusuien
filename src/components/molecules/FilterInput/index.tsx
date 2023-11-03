@@ -8,8 +8,8 @@ import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSel
 import { SYMBOL_ICONS } from '@frontend/supports/icons';
 import cn from 'classnames';
 import { DebugOnly } from '@frontend/components/atoms/DebugOnly';
-import { onClickOrEnter, onKeyEnter } from '@frontend/supports/keyboardAction';
-import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
+import { onClickOrEnter } from '@frontend/supports/keyboardAction';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 namespace フィルタ条件の入力 {
   export type Props = {};
@@ -18,7 +18,7 @@ namespace フィルタ条件の入力 {
       start?: number;
       end?: number;
     };
-    日光の強度?: 日光の強度;
+    日光の強度?: 鉢.日光の強度;
     keyword?: string;
   };
 }
@@ -66,7 +66,7 @@ export const フィルタ条件の入力: React.FC<フィルタ条件の入力.P
 
   const 強度 = filter.日光の強度;
   const 日光の強度SelectProps: 日光の強度Select.Props = {
-    onChange: e => set.日光の強度(e ? (e as 日光の強度) : undefined),
+    onChange: e => set.日光の強度(e ? (e as 鉢.日光の強度) : undefined),
     value: 強度,
     size: 'small',
   };

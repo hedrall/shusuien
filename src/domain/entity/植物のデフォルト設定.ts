@@ -1,11 +1,9 @@
 import { Opaque } from 'type-fest';
-import { 鉢 } from 'src/domain/entity/鉢';
 import { Subject } from 'rxjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { UserId } from 'src/domain/entity/user';
 import { 季節 } from '@frontend/domain/const/季節';
-import { 日光の強度設定 } from 'src/domain/entity/鉢/日光の強度設定';
-import { 育成タイプ } from 'src/domain/entity/鉢/育成タイプ';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 function getOrder(i: Base) {
   return [i.科, i.属, i.種].filter(Boolean).join('-');
@@ -20,10 +18,10 @@ class Base implements 鉢.デフォルト設定可能な鉢のプロパティ {
   科: string | undefined;
   属: string | undefined;
   種: string | undefined;
-  育成タイプ?: 育成タイプ;
+  育成タイプ?: 鉢.育成タイプ;
   水切れ日数: number | undefined;
   耐寒温度: number | undefined;
-  日光の強度設定: 日光の強度設定 | undefined;
+  日光の強度設定: 鉢.日光の強度設定 | undefined;
   order: string;
 
   // ルーム
@@ -68,7 +66,7 @@ export class 植物ごとのデフォルト設定 extends Base {
       console.log('ルートプロパティ', { key, value });
       await FSAppRepository.植物ごとのデフォルト設定.更新(this.id!, { [key]: value });
     },
-    日光の強度設定: async (value: 日光の強度設定[季節], 季節: 季節) => {
+    日光の強度設定: async (value: 鉢.日光の強度設定[季節], 季節: 季節) => {
       await FSAppRepository.植物ごとのデフォルト設定.更新(this.id!, {
         [`日光の強度設定.${季節}`]: value,
       });

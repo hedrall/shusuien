@@ -11,7 +11,6 @@ import cn from 'classnames';
 import { 現在の季節 } from '@frontend/domain/const/季節';
 import { onKeyEnter } from '@frontend/supports/keyboardAction';
 import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
-import { 日光の強度 } from 'src/domain/entity/鉢/日光の強度';
 
 export type 鉢一覧の要素Props = {
   item: 鉢;
@@ -120,7 +119,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const 上部補足情報 = (() => {
     const msg: string[] = [];
     if (isDefined(耐寒温度)) msg.push(`🌡${耐寒温度}℃`);
-    if (isDefined(日光の強度設定)) msg.push(`☀️${日光の強度[日光の強度設定].短縮表現}`);
+    if (isDefined(日光の強度設定)) msg.push(`☀️${鉢.日光の強度[日光の強度設定].短縮表現}`);
     return msg.join();
   })();
 
