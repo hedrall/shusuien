@@ -1,4 +1,4 @@
-import { NewProps, Super履歴 } from 'src/domain/entity/鉢/entity/履歴/base';
+import { NewProps, 履歴Base } from 'src/domain/entity/鉢/entity/履歴/base';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 import { _鉢サイズ } from 'src/domain/entity/鉢/entity/履歴/植替え/鉢サイズ';
@@ -8,7 +8,7 @@ export namespace _植替え履歴 {
   export import 鉢サイズ = _鉢サイズ;
 
   export type Id = Opaque<string, '植替え履歴ID'>;
-  export type Props = Super履歴.Props & {
+  export type Props = 履歴Base.Props & {
     id: Id | undefined;
     内容: {
       type: '植替え';
@@ -22,7 +22,7 @@ export namespace _植替え履歴 {
   // constructor
   export const construct = (props: Props) => {
     return {
-      ...Super履歴.construct(props),
+      ...履歴Base.construct(props),
       id: props.id,
       内容: {
         ...props.内容,

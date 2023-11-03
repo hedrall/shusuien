@@ -1,4 +1,4 @@
-import { NewProps, Super履歴 } from 'src/domain/entity/鉢/entity/履歴/base';
+import { NewProps, 履歴Base } from 'src/domain/entity/鉢/entity/履歴/base';
 import { _灌水量 } from 'src/domain/entity/鉢/entity/履歴/灌水/灌水量';
 import { FSAppRepository } from 'src/domain/repository/firestore';
 import { Opaque } from 'type-fest';
@@ -8,7 +8,7 @@ export namespace _灌水履歴 {
   export type 灌水量 = _灌水量;
 
   export type Id = Opaque<string, '灌水履歴ID'>;
-  export type Props = Super履歴.Props & {
+  export type Props = 履歴Base.Props & {
     id: Id | undefined;
     内容: {
       type: '灌水';
@@ -20,7 +20,7 @@ export namespace _灌水履歴 {
   // constructor
   export const construct = (props: Props) => {
     return {
-      ...Super履歴.construct(props),
+      ...履歴Base.construct(props),
       id: props.id,
       内容: props.内容,
     } as const;

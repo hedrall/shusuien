@@ -7,7 +7,7 @@ import { _灌水履歴 } from 'src/domain/entity/鉢/entity/履歴/灌水';
 import { _成長の記録 } from 'src/domain/entity/鉢/entity/履歴/成長の記録';
 import { _植替え履歴 } from 'src/domain/entity/鉢/entity/履歴/植替え';
 
-export namespace Super履歴 {
+export namespace 履歴Base {
   export type Props = {
     id: string | undefined;
     userId: UserId;
@@ -29,7 +29,7 @@ export namespace Super履歴 {
     is植替え: (i: 履歴): i is _植替え履歴 => i.内容.type === '植替え',
   };
 }
-export type Super履歴 = ReturnType<typeof Super履歴.construct>;
+export type 履歴Base = ReturnType<typeof 履歴Base.construct>;
 
 export type NewProps<履歴Base extends object & { 内容: object }> = {
   props: Omit<履歴Base, 'id' | '内容' | '削除済み'>;
