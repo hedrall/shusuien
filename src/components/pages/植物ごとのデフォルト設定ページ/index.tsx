@@ -49,7 +49,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
       render: (_, 設定) => {
         const props: 育成タイプSelect.Props = {
           value: 設定['育成タイプ'],
-          onChange: e => 設定.更新.ルートプロパティ('育成タイプ', e),
+          onChange: e => 設定.ルートプロパティを更新('育成タイプ', e),
         };
         return <育成タイプSelect {...props} />;
       },
@@ -62,7 +62,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
         render: (_: any, 設定: 植物ごとのデフォルト設定) => {
           return (
             <div style={{ width: 100 }}>
-              <MyEditable.Number value={設定[key]} name={key} onSubmit={v => 設定.更新.ルートプロパティ(key, v)} />
+              <MyEditable.Number value={設定[key]} name={key} onSubmit={v => 設定.ルートプロパティを更新(key, v)} />
             </div>
           );
         },
@@ -78,7 +78,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
       render: (_, 設定) => {
         const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
           return {
-            onChange: e => 設定.更新.日光の強度設定(e as 鉢.日光の強度, 季節),
+            onChange: e => 設定.日光の強度設定を更新(e as 鉢.日光の強度, 季節),
             value: 設定.日光の強度設定?.[季節],
             isLoading: false,
             size: 'small',

@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import './index.scss';
 import { Descriptions, Modal, ModalProps } from 'antd';
-import { 植物ごとのデフォルト設定Id } from 'src/domain/entity/植物のデフォルト設定';
+import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
 import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
@@ -11,7 +11,7 @@ import { 鉢 } from 'src/domain/entity/鉢';
 
 export namespace 植物ごとのデフォルト設定編集モーダル {
   export type Ref = {
-    open: (id: 植物ごとのデフォルト設定Id) => void;
+    open: (id: 植物ごとのデフォルト設定.Id) => void;
   };
   export type Props = {};
 }
@@ -21,7 +21,7 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
   植物ごとのデフォルト設定編集モーダル.Props
 >((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [設定Id, set設定Id] = useState<植物ごとのデフォルト設定Id | undefined>(undefined);
+  const [設定Id, set設定Id] = useState<植物ごとのデフォルト設定.Id | undefined>(undefined);
   const { 設定 } = use植物ごとのデフォルト設定.単一購読(設定Id);
 
   const close = () => {
@@ -44,7 +44,7 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
 
   useImperativeHandle(ref, () => {
     return {
-      open: (id: 植物ごとのデフォルト設定Id) => {
+      open: (id: 植物ごとのデフォルト設定.Id) => {
         set設定Id(id);
         setIsOpen(true);
       },
@@ -54,7 +54,7 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
 
   const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
     return {
-      onChange: e => 設定.更新.日光の強度設定(e as 鉢.日光の強度, 季節),
+      onChange: e => 設定.日光の強度設定を更新(e as 鉢.日光の強度, 季節),
       value: 設定.日光の強度設定?.[季節],
       isLoading: false,
       size: 'small',
@@ -62,7 +62,7 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
   };
   const 育成タイプSelectProps: 育成タイプSelect.Props = {
     value: 設定['育成タイプ'],
-    onChange: e => 設定.更新.ルートプロパティ('育成タイプ', e),
+    onChange: e => 設定.ルートプロパティを更新('育成タイプ', e),
   };
 
   return (
@@ -74,7 +74,7 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
         size={'small'}
         bordered
         column={{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }}
-        title={設定.order.split('-').join(' - ')}
+        title={設定.order().split('-').join(' - ')}
       >
         <Descriptions.Item label="日光の強度" className="日光の強度">
           <div className="側">
@@ -95,14 +95,14 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
           <MyEditable.Number
             value={設定['耐寒温度']}
             name={'耐寒温度'}
-            onSubmit={e => 設定.更新.ルートプロパティ('耐寒温度', e)}
+            onSubmit={e => 設定?.ルートプロパティを更新('耐寒温度', e)}
           />
         </Descriptions.Item>
         <Descriptions.Item label="水切れ日数">
           <MyEditable.Number
             value={設定['水切れ日数']}
             name={'水切れ日数'}
-            onSubmit={e => 設定.更新.ルートプロパティ('水切れ日数', e)}
+            onSubmit={e => 設定?.ルートプロパティを更新('水切れ日数', e)}
           />
         </Descriptions.Item>
       </Descriptions>

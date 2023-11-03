@@ -71,7 +71,7 @@ export const mixinBasicToFirestore = <T extends object>(item: T): fs.DocumentDat
   return JSON.parse(JSON.stringify(mod));
 };
 
-export const mixinBasicFromFirestore = <T extends 鉢>(construct: (...args: any[]) => T) => {
+export const mixinBasicFromFirestore = <T extends 鉢 | 植物ごとのデフォルト設定>(construct: (...args: any[]) => T) => {
   return (snapshot: fs.QueryDocumentSnapshot<fs.DocumentData>): T => {
     const data = snapshot.data() as T;
     const id = snapshot.ref.id;
@@ -79,7 +79,9 @@ export const mixinBasicFromFirestore = <T extends 鉢>(construct: (...args: any[
   };
 };
 
-export const mixinBasicConverter = <T extends 鉢>(construct: (...args: any[]) => T): fs.FirestoreDataConverter<T> => {
+export const mixinBasicConverter = <T extends 鉢 | 植物ごとのデフォルト設定>(
+  construct: (...args: any[]) => T,
+): fs.FirestoreDataConverter<T> => {
   return {
     toFirestore: mixinBasicToFirestore,
     fromFirestore: mixinBasicFromFirestore(construct),
@@ -112,6 +114,6 @@ export const appConverters = {
   鉢: mixinBasicConverter(鉢.construct),
   履歴: 履歴Converter,
   User: basicConverter(User),
-  植物ごとのデフォルト設定: basicConverter(植物ごとのデフォルト設定),
+  植物ごとのデフォルト設定: mixinBasicConverter(植物ごとのデフォルト設定.construct),
   棚の並び順: basicConverter(棚の並び順),
 } as const;

@@ -6,7 +6,8 @@ import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物�
 import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
 
 export type Entity = 鉢 | 棚 | 履歴 | User | 植物ごとのデフォルト設定 | 棚の並び順;
-export type ClassEntity = 棚 | User | 植物ごとのデフォルト設定 | 棚の並び順;
+export type ClassEntity = 棚 | User | 棚の並び順;
+export type MixinEntity = Exclude<Entity, ClassEntity>;
 export type EntityHasId = User | 植物ごとのデフォルト設定 | 棚の並び順 | 棚;
 export type EntityId<T extends Entity> = T extends EntityHasId
   ? NonNullable<T['id']>

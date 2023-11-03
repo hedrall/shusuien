@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import { Button, Descriptions, Select, SelectProps } from 'antd';
+import { Button, Descriptions } from 'antd';
 import { optionalCall, optionalValue } from '@frontend/supports/functions';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date';
@@ -165,9 +165,9 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
             {デフォルト設定一覧.map((設定, index) => {
               const onClick = () => 植物ごとのデフォルト設定編集モーダルref.current?.open?.(設定.デフォルト設定.id!);
               return (
-                <div className="Item" key={設定.デフォルト設定.order}>
+                <div className="Item" key={設定.デフォルト設定.order()}>
                   <p>
-                    {index + 1}: {設定.デフォルト設定.order.split('-').join(' - ')}
+                    {index + 1}: {設定.デフォルト設定.order().split('-').join(' - ')}
                   </p>
                   <div onClick={onClick} onKeyDown={e => e.key === 'Enter' && onClick()} role="button" tabIndex={0}>
                     <OPERATION_ICONS.EDIT />
