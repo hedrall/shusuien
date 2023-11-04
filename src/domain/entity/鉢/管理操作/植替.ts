@@ -15,7 +15,7 @@ export type _植替えするParams = {
   memo: string | undefined;
   date: Dayjs;
 };
-export async function _植替えする(this: 鉢, params: _植替えするParams) {
+export async function _植替えする(this: 鉢.Resource, params: _植替えするParams) {
   const { imageDataUrl, userId, 鉢のサイズ, date, memo } = params;
 
   console.log('1. 画像をuploadする');

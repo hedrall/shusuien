@@ -11,7 +11,7 @@ export type _灌水操作Params = {
   液肥入り: boolean;
 };
 
-export async function _灌水する(this: 鉢, params: _灌水操作Params) {
+export async function _灌水する(this: 鉢.Resource, params: _灌水操作Params) {
   const { userId, 灌水量, 液肥入り } = params;
 
   const 鉢Id = this.id!;

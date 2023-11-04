@@ -18,7 +18,7 @@ export type TableViewProps = {
 const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
   function 詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(鉢: 鉢, key: Key) {
     return async (value: V) => {
-      await 鉢.詳細を更新(key, value);
+      await 鉢.更新.詳細(key, value);
     };
   }
 
@@ -87,7 +87,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       dataIndex: 'name',
       key: 'name',
       render: (_, 鉢) => {
-        return <MyEditable value={鉢.name} name="name" onSubmit={e => 鉢.フィールドを更新('name', e)} />;
+        return <MyEditable value={鉢.name} name="name" onSubmit={e => 鉢.更新.フィールド('name', e)} />;
       },
     },
     {
@@ -107,12 +107,12 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
           // 複数選択中の場合は一括で変更する
           if (選択された鉢.length) {
             for (const 鉢 of 選択された鉢) {
-              await 鉢.フィールドを更新('棚Id', id);
+              await 鉢.更新.フィールド('棚Id', id);
             }
             set選択された鉢([]);
             return;
           }
-          await 鉢.フィールドを更新('棚Id', id);
+          await 鉢.更新.フィールド('棚Id', id);
         };
         const 棚SelectProps: SelectProps = {
           options: 棚一覧.map(i => ({ value: i.id, label: i.name })),

@@ -15,7 +15,7 @@ export namespace _成長を記録する {
     画像を更新する: boolean;
   };
 }
-export async function _成長を記録する(this: 鉢, params: _成長を記録する.Params) {
+export async function _成長を記録する(this: 鉢.Resource, params: _成長を記録する.Params) {
   const { userId, imageDataUrl, memo, 画像を更新する } = params;
   const 鉢Id = this.id!;
   const date = dayjs();

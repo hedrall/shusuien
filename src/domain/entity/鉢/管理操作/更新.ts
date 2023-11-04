@@ -1,8 +1,8 @@
 import { FSAppRepository } from 'src/domain/repository/firestore';
 import { 鉢 } from 'src/domain/entity/鉢';
 
-export async function _詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(
-  this: 鉢,
+export async function _詳細を更新<Key extends keyof 鉢.Resource['詳細'], V = 鉢['詳細'][Key]>(
+  this: 鉢.Resource,
   key: Key,
   value: V,
   suppressEmit = false,
@@ -16,7 +16,7 @@ export async function _詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢[
 }
 
 export async function _日光の強度を更新<Key extends keyof 鉢.日光の強度設定, V = 鉢.日光の強度設定[Key]>(
-  this: 鉢,
+  this: 鉢.Resource,
   key: Key,
   value: V,
 ) {
@@ -34,7 +34,7 @@ export async function _日光の強度を更新<Key extends keyof 鉢.日光の�
 }
 
 export async function _フィールドを更新<Key extends 鉢.更新可能なフィールドのKey, V = 鉢[Key]>(
-  this: 鉢,
+  this: 鉢.Resource,
   key: Key,
   value: V,
 ) {

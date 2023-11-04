@@ -59,9 +59,9 @@ export const デフォルト設定から選択するモーダル = forwardRef<
     if (!鉢) return;
     await withLoading(async () => {
       const { 科, 属, 種 } = 設定;
-      if (科) await 鉢.詳細を更新('科', 科);
-      if (属) await 鉢.詳細を更新('属', 属);
-      if (種) await 鉢.詳細を更新('種名', 種);
+      if (科) await 鉢.更新.詳細('科', 科);
+      if (属) await 鉢.更新.詳細('属', 属);
+      if (種) await 鉢.更新.詳細('種名', 種);
     });
     close();
   };

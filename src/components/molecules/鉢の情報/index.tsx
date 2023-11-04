@@ -48,7 +48,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
 
   const 棚を変更 = async (id: 棚.Id) => {
     await withLoading(async () => {
-      await 鉢.フィールドを更新('棚Id', id);
+      await 鉢.更新.フィールド('棚Id', id);
     });
   };
   const on移動先の棚を選択 = 棚を変更;
@@ -62,12 +62,12 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
   const { 植物ごとのデフォルト設定一覧 } = use植物ごとのデフォルト設定.一覧を利用();
   function 詳細を更新<Key extends keyof 鉢['詳細'], V = 鉢['詳細'][Key]>(key: Key) {
     return async (value: V) => {
-      await 鉢.詳細を更新(key, value);
+      await 鉢.更新.詳細(key, value);
     };
   }
   function フィールドを更新<Key extends 'name' | '補足', V = 鉢[Key]>(key: Key) {
     return async (value: V) => {
-      await 鉢.フィールドを更新(key, value);
+      await 鉢.更新.フィールド(key, value);
     };
   }
 
@@ -77,7 +77,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
 
   function 日光の強度を更新<Key extends keyof 鉢.日光の強度設定, V = 鉢.日光の強度設定[Key]>(key: Key) {
     return async (value: V) => {
-      await 鉢.日光の強度を更新(key, value === 指定なし ? undefined : value);
+      await 鉢.更新.日光の強度(key, value === 指定なし ? undefined : value);
     };
   }
   const デフォルト設定一覧 = 植物ごとのデフォルト設定サービス.鉢の設定を特定(植物ごとのデフォルト設定一覧, 鉢);

@@ -30,7 +30,7 @@ export const 小画像の生成 = async (
 };
 export type 新規作成のParams = {
   imageDataUrl: string;
-  props: Omit<鉢.Props, 'id' | 'snapshot' | '作成日時' | '削除済み'>;
+  props: Omit<鉢.Resource, 'id' | 'snapshot' | '作成日時' | '削除済み'>;
 };
 export const _新規作成する = async (params: 新規作成のParams) => {
   const { imageDataUrl, props } = params;

@@ -2,7 +2,7 @@ import { 鉢 } from 'src/domain/entity/鉢';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { Dayjs } from 'dayjs';
 
-export const update = (cur: 鉢, 更新するsnapshotの項目: Partial<鉢['snapshot']>, 履歴の作成日時: Dayjs) => {
+export const update = (cur: 鉢.Resource, 更新するsnapshotの項目: Partial<鉢['snapshot']>, 履歴の作成日時: Dayjs) => {
   return 鉢.construct({
     ...cur,
     snapshot: {
@@ -14,7 +14,7 @@ export const update = (cur: 鉢, 更新するsnapshotの項目: Partial<鉢['sna
 };
 
 // 履歴を新規に追加した際に、鉢の状態(主にsnapshot)に履歴を適用して、状態を最新に更新する
-export const _履歴を適用 = (鉢: 鉢, 履歴: 履歴, small画像のURL: string | undefined, 画像を更新する = true) => {
+export const _履歴を適用 = (鉢: 鉢.Resource, 履歴: 履歴, small画像のURL: string | undefined, 画像を更新する = true) => {
   const type = 履歴.内容.type;
   const common = { ...(画像を更新する && small画像のURL ? { small画像のURL } : {}) };
   switch (type) {

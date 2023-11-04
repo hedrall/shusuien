@@ -18,11 +18,40 @@ import { _日光の強度 } from 'src/domain/entity/鉢/consts/日光の強度';
 import { _日光の強度設定 } from 'src/domain/entity/鉢/consts/日光の強度設定';
 import { _育成タイプ } from 'src/domain/entity/鉢/consts/育成タイプ';
 
+type Thisを指定したFn<R extends object> = (this: R, ...args: any[]) => any;
+function EntityにMethodを追加<R extends object, K extends string, M extends Thisを指定したFn<R>>(
+  key: K,
+  method: M,
+  resource: R,
+): asserts resource is R & { [Key in K]: M } {
+  // Thisにリソースを固定する
+  const boundedMethod = method.bind(resource);
+  Object.defineProperty(resource, key, {
+    value: boundedMethod,
+    enumerable: false,
+    configurable: false,
+    writable: false,
+  });
+}
+function EntityにObjectを追加<R extends object, K extends string, O extends object>(
+  key: K,
+  obj: O,
+  resource: R,
+): asserts resource is R & { [Key in K]: O } {
+  Object.defineProperty(resource, key, {
+    value: obj,
+    enumerable: false,
+    configurable: false,
+    writable: false,
+  });
+}
+
 type 鉢Id = Opaque<string, '鉢ID'>;
 export namespace 鉢 {
   export type Id = 鉢Id;
 
-  export type Props = {
+  // 鉢Entityのプロパティ部分
+  export type Resource = {
     id: 鉢Id | undefined;
     userId: User.Id;
     name: string | undefined;
@@ -37,37 +66,47 @@ export namespace 鉢 {
     削除済み: boolean;
   };
 
-  export const construct = (props: Props) => {
+  const createResource = (props: Resource) => {
     return {
       ...props,
-
       snapshot: _Snapshot.construct(props.snapshot),
       詳細: _詳細.construct(props.詳細),
-
       作成日時: dayjs(props.作成日時),
+    };
+  };
 
-      // --- computed ---
-      最後の灌水からの経過日数(): number | undefined {
-        const 日時 = this.snapshot.最後の灌水?.日時;
-        return optionalCall(日時, v => 今日.diff(v.startOf('day'), 'days'));
+  const addMethods = (resource: Resource) => {
+    const 最後の灌水からの経過日数 = function (this: Resource): number | undefined {
+      const 日時 = this.snapshot.最後の灌水?.日時;
+      return optionalCall(日時, v => 今日.diff(v.startOf('day'), 'days'));
+    };
+
+    EntityにMethodを追加('最後の灌水からの経過日数', 最後の灌水からの経過日数, resource);
+    EntityにMethodを追加('削除', _削除, resource);
+    EntityにObjectを追加(
+      '更新',
+      {
+        日光の強度: _日光の強度を更新.bind(resource),
+        フィールド: _フィールドを更新.bind(resource),
+        詳細: _詳細を更新.bind(resource),
       },
+      resource,
+    );
+    EntityにMethodを追加('植替え', _植替えする, resource);
+    EntityにMethodを追加('灌水', _灌水する, resource);
+    EntityにMethodを追加('成長を記録', _成長を記録する, resource);
+    return resource;
+  };
 
-      // --- methods ---
-      削除: _削除,
-      // TODO 更新系をまとめてnestしたいが、型エラーが発生する
-      詳細を更新: _詳細を更新,
-      日光の強度を更新: _日光の強度を更新,
-      フィールドを更新: _フィールドを更新,
-      植替え: _植替えする,
-      灌水: _灌水する,
-      成長を記録: _成長を記録する,
-    } as const;
+  export const construct = (props: Resource) => {
+    const resource = createResource(props);
+    return addMethods(resource);
   };
 
   export const events = {
     フィールドを更新: new Subject<{ フィールド名: string; 更新後のValue: any }>(),
     詳細を更新: new Subject<{ プロパティ名: string; 更新後のValue: any }>(),
-    削除: new Subject<{ item: 鉢 }>(),
+    削除: new Subject<{ item: 鉢.Resource }>(),
     管理: new Subject<{ type: 履歴.Type | '新規作成' }>(),
   };
   export const 新規作成 = _新規作成する;
@@ -79,7 +118,7 @@ export namespace 鉢 {
   export const 育成タイプ = _育成タイプ;
   export type 育成タイプ = _育成タイプ;
 
-  export type 更新可能なフィールドのKey = Extract<keyof 鉢, 'name' | '補足' | '棚Id'>;
+  export type 更新可能なフィールドのKey = Extract<keyof 鉢.Resource, 'name' | '補足' | '棚Id'>;
   export type デフォルト設定可能な鉢のプロパティ = Pick<鉢['詳細'], '耐寒温度' | '日光の強度設定'>;
 }
 export type 鉢 = ReturnType<typeof 鉢.construct>;
