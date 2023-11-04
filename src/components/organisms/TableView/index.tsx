@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './index.scss';
 import { 棚 } from 'src/domain/entity/棚';
-import { Button, Image, ImageProps, Select, SelectProps, Table, TableColumnsType } from 'antd';
+import { Button, Image, ImageProps, Select, SelectProps, Table, TableColumnsType, TableProps } from 'antd';
 import { use鉢一覧, 棚Selector } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
 import { 鉢 } from 'src/domain/entity/鉢';
@@ -30,6 +30,18 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
   const getRender = (key: keyof 鉢['詳細']) => (_: unknown, 鉢: 鉢) => {
     const value = 鉢.詳細[key] || '';
     return <MyEditable value={value} name={key} onSubmit={詳細を更新(鉢, key)} />;
+  };
+
+  // check boxの設定
+  const [選択された鉢, set選択された鉢] = useState<鉢[]>([]);
+  const rowSelection: TableProps<鉢>['rowSelection'] = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      set選択された鉢(selectedRows);
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    columnTitle: '場所を一括修正',
+    columnWidth: 120,
+    selectedRowKeys: 選択された鉢.map(鉢 => 鉢.id!),
   };
 
   const columns: TableColumnsType<鉢> = [
@@ -91,6 +103,14 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       key: '棚',
       render: (_: unknown, 鉢: 鉢) => {
         const 棚を変更 = async (id: 棚.Id) => {
+          // 複数選択中の場合は一括で変更する
+          if (選択された鉢.length) {
+            console.warn('@@@');
+            for (const 鉢 of 選択された鉢) {
+              await 鉢.フィールドを更新('棚Id', id);
+            }
+            return;
+          }
           await 鉢.フィールドを更新('棚Id', id);
         };
         const 棚SelectProps: SelectProps = {
@@ -113,7 +133,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       width: 300,
     },
   ];
-  console.log({ 鉢一覧 });
+
   return (
     <>
       <Table
@@ -124,6 +144,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
           return Object.assign({ ...鉢 }, { key: 鉢.id });
         })}
         pagination={false}
+        rowSelection={rowSelection}
       />
       <デフォルト設定から選択するモーダル ref={ref} />
     </>
