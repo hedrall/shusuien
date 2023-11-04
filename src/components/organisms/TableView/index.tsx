@@ -42,6 +42,7 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
     columnTitle: '場所を一括修正',
     columnWidth: 120,
     selectedRowKeys: 選択された鉢.map(鉢 => 鉢.id!),
+    hideSelectAll: false,
   };
 
   const columns: TableColumnsType<鉢> = [
@@ -105,10 +106,10 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
         const 棚を変更 = async (id: 棚.Id) => {
           // 複数選択中の場合は一括で変更する
           if (選択された鉢.length) {
-            console.warn('@@@');
             for (const 鉢 of 選択された鉢) {
               await 鉢.フィールドを更新('棚Id', id);
             }
+            set選択された鉢([]);
             return;
           }
           await 鉢.フィールドを更新('棚Id', id);
@@ -173,7 +174,7 @@ export const テーブル表示: React.FC<TableViewProps> = props => {
       <Table
         columns={columns}
         expandable={{ expandedRowRender: expandedRowRender(user) }}
-        pagination={undefined}
+        pagination={false}
         // @ts-ignore
         dataSource={棚一覧.map(棚 => {
           return Object.assign({ ...棚 }, { key: 棚.id });
