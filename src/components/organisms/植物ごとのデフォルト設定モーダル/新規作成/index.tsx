@@ -3,15 +3,15 @@ import './index.scss';
 import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
-import { 日光の強度, 日光の強度設定 } from '@frontend/domain/model/鉢';
 import { Control, useController, UseControllerReturn, useForm } from 'react-hook-form';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 import { 季節 } from '@frontend/domain/const/季節';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
+import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 export namespace 植物ごとのデフォルト設定の新規作成モーダル {
   export type Ref = {
@@ -26,7 +26,7 @@ type Input = {
   種: string | undefined;
   耐寒温度: number | undefined;
   水切れ日数: number | undefined;
-  日光の強度設定: 日光の強度設定;
+  日光の強度設定: 鉢.日光の強度設定;
 };
 
 const DEFAULT_VALUES = (): Partial<Input> => ({
@@ -136,7 +136,7 @@ export const 植物ごとのデフォルト設定の新規作成モーダル = f
   const 日光の強度SelectProps = (key: 季節): 日光の強度Select.Props => {
     const field = 日光の強度設定[key].field;
     return {
-      onChange: e => field.onChange(e as 日光の強度),
+      onChange: e => field.onChange(e as 鉢.日光の強度),
       value: field.value,
       isLoading,
       size: 'small',

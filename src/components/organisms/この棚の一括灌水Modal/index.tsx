@@ -2,8 +2,8 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Col, Modal, ModalProps, Row } from 'antd';
-import { 鉢 } from '@frontend/domain/model/鉢';
-import { 棚 } from '@frontend/domain/model/棚';
+import { 鉢 } from 'src/domain/entity/鉢';
+import { 棚 } from 'src/domain/entity/棚';
 import { 鉢一覧の要素 } from '@frontend/components/atoms/ItemListCell';
 import { use灌水時の施肥有無設定 } from '@frontend/store/灌水時の施肥有無設定/action';
 import { MyProgress, useProgress } from '@frontend/components/atoms/MyProgress';
@@ -57,8 +57,7 @@ export const 一括灌水モーダル = forwardRef<一括灌水モーダル.Ref,
     try {
       for (const item of 灌水する鉢一覧) {
         await sleep(100);
-        await 鉢.管理.灌水({
-          item,
+        await item.灌水({
           userId: user.id,
           灌水量: '鉢いっぱい',
           液肥入り: 灌水時の施肥有無設定.is,

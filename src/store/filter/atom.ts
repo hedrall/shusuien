@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
-import { 日光の強度 } from '@frontend/domain/model/鉢';
+
+import { 鉢 } from 'src/domain/entity/鉢';
 
 export type FilterState = {
   耐寒温度:
@@ -8,7 +9,7 @@ export type FilterState = {
         end?: number;
       }
     | undefined;
-  日光の強度: 日光の強度 | undefined;
+  日光の強度: 鉢.日光の強度 | undefined;
   keyword: string | undefined;
   最後の灌水からの経過日数:
     | {

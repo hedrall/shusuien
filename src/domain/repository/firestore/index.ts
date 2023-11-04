@@ -1,5 +1,5 @@
 import * as fs from 'firebase/firestore';
-import { Entity } from '@frontend/domain/model';
+import { Entity, EntityId } from 'src/domain/entity';
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { RefValue } from '@frontend/domain/repository/firestore/type';
 import { MayBeArray, toArray } from '@frontend/supports/array';
@@ -21,7 +21,8 @@ export namespace FSAppRepository {
     return collection.withConverter<T>(manager.converter);
   };
 
-  type Id<T extends Entity> = NonNullable<T['id']>;
+  // TODO
+  type Id<T extends Entity> = EntityId<T>;
   export const getId = <T extends Entity>(manager: FsAppManager<T>): Id<T> => {
     const collection = getCollection(manager);
     return fs.doc(collection).id as Id<T>;
@@ -103,11 +104,7 @@ export namespace FSAppRepository {
     return await fs.addDoc(collection, entity);
   };
 
-  export const addItemWithId = async <T extends Entity>(
-    manager: FsAppManager<T>,
-    entity: T,
-    id: NonNullable<T['id']>,
-  ) => {
+  export const addItemWithId = async <T extends Entity>(manager: FsAppManager<T>, entity: T, id: Id<T>) => {
     const collection = getCollection(manager);
     const doc = fs.doc(collection, id);
     await fs.setDoc(doc, entity);

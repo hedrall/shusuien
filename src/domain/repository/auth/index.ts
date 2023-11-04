@@ -9,7 +9,7 @@ import {
   onAuthStateChanged,
   User as AuthUser,
 } from 'firebase/auth';
-import { User, UserId } from '@frontend/domain/model/user';
+import { User } from 'src/domain/entity/user';
 import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 
@@ -40,7 +40,7 @@ export namespace AuthRepository {
       const uid = result.user.uid;
 
       const manager = new FsAppManager.User();
-      const user = await FSAppRepository.getItem(manager, uid as UserId);
+      const user = await FSAppRepository.getItem(manager, uid as User.Id);
       if (user.value) {
         return { dbUser: user.value, uid };
       }

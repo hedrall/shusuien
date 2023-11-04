@@ -1,7 +1,7 @@
-import { 履歴の内容 } from '@frontend/domain/model/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import React from 'react';
 
-const 量のアイコン: { [k in 履歴の内容.灌水.量のKey型]: React.ReactNode } = {
+const 量のアイコン: { [k in 履歴.灌水.灌水量]: React.ReactNode } = {
   表面が濡れる程度: (
     <div className="灌水量アイコンの側">
       <div className="空 ぽち" />
@@ -32,9 +32,8 @@ const 量のアイコン: { [k in 履歴の内容.灌水.量のKey型]: React.Re
   ),
 };
 
-export const 灌水量の選択肢: { name: React.ReactNode; value: 履歴の内容.灌水.量のKey型 }[] = Object.values(
-  履歴の内容.灌水.量の定義,
-)
+type Option = { name: React.ReactNode; value: 履歴.灌水.灌水量 };
+export const 灌水量の選択肢: Option[] = Object.values(履歴.灌水.灌水量)
   .reverse()
   .map(def => {
     return {

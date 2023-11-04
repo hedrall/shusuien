@@ -1,20 +1,20 @@
 import React, { useRef } from 'react';
 import './index.scss';
 import { Col, notification, Row } from 'antd';
-import { 棚ID } from '@frontend/domain/model/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 鉢作成モーダル } from '@frontend/components/organisms/鉢作成モーダル';
 import { use鉢一覧 } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { 鉢一覧の要素, 鉢一覧の要素Props } from '@frontend/components/atoms/ItemListCell';
 import { 鉢管理モーダル } from 'src/components/organisms/鉢管理モーダル';
 import dayjs from 'dayjs';
-import { UserId } from '@frontend/domain/model/user';
+import { User } from 'src/domain/entity/user';
 import { use灌水時の施肥有無設定 } from '@frontend/store/灌水時の施肥有無設定/action';
 
 export type ItemListProps = {
-  棚Id: 棚ID;
+  棚Id: 棚.Id;
 };
 
 export const 鉢一覧: React.FC<ItemListProps> = props => {
@@ -29,8 +29,8 @@ export const 鉢一覧: React.FC<ItemListProps> = props => {
 
 type 鉢一覧ViewProps = {
   鉢一覧: 鉢[];
-  棚Id: 棚ID | undefined;
-  userId: UserId | undefined;
+  棚Id: 棚.Id | undefined;
+  userId: User.Id | undefined;
 };
 export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
   const { userId, 鉢一覧, 棚Id } = props;
@@ -59,8 +59,7 @@ export const 鉢一覧View: React.FC<鉢一覧ViewProps> = props => {
       return;
     }
     if (!userId) return;
-    await 鉢.管理.灌水({
-      item,
+    await item.灌水({
       userId,
       灌水量: '鉢いっぱい',
       液肥入り: 灌水時の施肥有無設定.is,

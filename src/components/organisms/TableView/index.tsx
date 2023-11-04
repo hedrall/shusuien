@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './index.scss';
-import { 棚, 棚ID } from '@frontend/domain/model/棚';
-import { Button, Image, ImageProps, Select, SelectProps, Table, TableColumnsType } from 'antd';
+import { 棚 } from 'src/domain/entity/棚';
+import { Button, Image, ImageProps, Select, SelectProps, Table, TableColumnsType, TableProps } from 'antd';
 import { use鉢一覧, 棚Selector } from '@frontend/store/data/action';
 import { useAuthState } from '@frontend/store/auth/action';
-import { 鉢 } from '@frontend/domain/model/鉢';
-import { User } from '@frontend/domain/model/user';
+import { 鉢 } from 'src/domain/entity/鉢';
+import { User } from 'src/domain/entity/user';
 import { MyEditable } from '@frontend/components/atoms/Editable';
 import { NO_IMAGE } from '@frontend/supports/image';
 import { デフォルト設定から選択するモーダル } from 'src/components/organisms/植物ごとのデフォルト設定モーダル/選択';
@@ -30,6 +30,19 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
   const getRender = (key: keyof 鉢['詳細']) => (_: unknown, 鉢: 鉢) => {
     const value = 鉢.詳細[key] || '';
     return <MyEditable value={value} name={key} onSubmit={詳細を更新(鉢, key)} />;
+  };
+
+  // check boxの設定
+  const [選択された鉢, set選択された鉢] = useState<鉢[]>([]);
+  const rowSelection: TableProps<鉢>['rowSelection'] = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      set選択された鉢(selectedRows);
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    columnTitle: '場所を一括修正',
+    columnWidth: 120,
+    selectedRowKeys: 選択された鉢.map(鉢 => 鉢.id!),
+    hideSelectAll: false,
   };
 
   const columns: TableColumnsType<鉢> = [
@@ -90,12 +103,20 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       dataIndex: '棚',
       key: '棚',
       render: (_: unknown, 鉢: 鉢) => {
-        const 棚を変更 = async (id: 棚ID) => {
+        const 棚を変更 = async (id: 棚.Id) => {
+          // 複数選択中の場合は一括で変更する
+          if (選択された鉢.length) {
+            for (const 鉢 of 選択された鉢) {
+              await 鉢.フィールドを更新('棚Id', id);
+            }
+            set選択された鉢([]);
+            return;
+          }
           await 鉢.フィールドを更新('棚Id', id);
         };
         const 棚SelectProps: SelectProps = {
           options: 棚一覧.map(i => ({ value: i.id, label: i.name })),
-          onChange: e => 棚を変更(e as 棚ID),
+          onChange: e => 棚を変更(e as 棚.Id),
           value: 鉢.棚Id,
           style: { width: '100%' },
           listHeight: 300,
@@ -113,16 +134,18 @@ const Row: React.FC<{ 棚: 棚; user: User | undefined }> = props => {
       width: 300,
     },
   ];
-  console.log({ 鉢一覧 });
+
   return (
     <>
       <Table
         key={棚.id}
+        // @ts-ignore
         columns={columns}
         dataSource={鉢一覧.map(鉢 => {
           return Object.assign({ ...鉢 }, { key: 鉢.id });
         })}
         pagination={false}
+        rowSelection={rowSelection}
       />
       <デフォルト設定から選択するモーダル ref={ref} />
     </>
@@ -151,7 +174,8 @@ export const テーブル表示: React.FC<TableViewProps> = props => {
       <Table
         columns={columns}
         expandable={{ expandedRowRender: expandedRowRender(user) }}
-        pagination={undefined}
+        pagination={false}
+        // @ts-ignore
         dataSource={棚一覧.map(棚 => {
           return Object.assign({ ...棚 }, { key: 棚.id });
         })}

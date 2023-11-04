@@ -1,14 +1,13 @@
 import React, { useRef } from 'react';
 import './index.scss';
-import { 日光の強度, 日光の強度設定, 育成タイプ, 鉢 } from '@frontend/domain/model/鉢';
-import { Button, Descriptions, Select, SelectProps } from 'antd';
+import { Button, Descriptions } from 'antd';
 import { optionalCall, optionalValue } from '@frontend/supports/functions';
-import { 鉢サイズ } from '@frontend/domain/model/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { DATE_READONLY_FORMAT, x日前の表記 } from '@frontend/supports/date';
 import { MyEditable } from '@frontend/components/atoms/Editable';
 import dayjs, { Dayjs } from 'dayjs';
 import { ICONS, OPERATION_ICONS } from '@frontend/supports/icons';
-import { 棚ID } from '@frontend/domain/model/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { useRecoilState } from 'recoil';
 import { 棚Selector } from '@frontend/store/data/action';
 import { useWithLoading } from '@frontend/supports/ui';
@@ -20,6 +19,7 @@ import { デフォルト設定から選択するモーダル } from '@frontend/c
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
 import { 植物ごとのデフォルト設定編集モーダル } from '@frontend/components/organisms/植物ごとのデフォルト設定モーダル/編集';
 import { 棚移動モーダル } from 'src/components/organisms/棚移動モーダル';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 const F = DATE_READONLY_FORMAT;
 
@@ -46,7 +46,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
   const 植物ごとのデフォルト設定編集モーダルref = useRef<植物ごとのデフォルト設定編集モーダル.Ref | null>(null);
   const 棚移動モーダルref = useRef<棚移動モーダル.Ref | null>(null);
 
-  const 棚を変更 = async (id: 棚ID) => {
+  const 棚を変更 = async (id: 棚.Id) => {
     await withLoading(async () => {
       await 鉢.フィールドを更新('棚Id', id);
     });
@@ -56,7 +56,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
     棚移動モーダルref.current?.open();
   };
 
-  const 鉢のサイズ = optionalCall(snapshot.鉢のサイズ, 鉢サイズ.toString);
+  const 鉢のサイズ = optionalCall(snapshot.鉢のサイズ, 履歴.植替え.鉢サイズ.toString);
   const 最後の灌水 = 最後の灌水の表示(snapshot.最後の灌水, now);
   const 最後の植替え = [snapshot.最後の植替え?.format(F)].filter(Boolean).join(', ');
   const { 植物ごとのデフォルト設定一覧 } = use植物ごとのデフォルト設定.一覧を利用();
@@ -75,7 +75,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
 
   const [棚一覧] = useRecoilState(棚Selector);
 
-  function 日光の強度を更新<Key extends keyof 日光の強度設定, V = 日光の強度設定[Key]>(key: Key) {
+  function 日光の強度を更新<Key extends keyof 鉢.日光の強度設定, V = 鉢.日光の強度設定[Key]>(key: Key) {
     return async (value: V) => {
       await 鉢.日光の強度を更新(key, value === 指定なし ? undefined : value);
     };
@@ -101,7 +101,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
         季節,
       );
     return {
-      onChange: e => 日光の強度を更新(季節)(e as 日光の強度),
+      onChange: e => 日光の強度を更新(季節)(e as 鉢.日光の強度),
       value: 強度,
       isLoading,
       size: 'small',
@@ -116,7 +116,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
       デフォルトを適用,
     } = 植物ごとのデフォルト設定サービス.デフォルト直を加味した直の取得(デフォルト設定一覧, 鉢, '育成タイプ');
     return {
-      onChange: e => 詳細を更新('育成タイプ')(e as 育成タイプ),
+      onChange: e => 詳細を更新('育成タイプ')(e as 鉢.育成タイプ),
       value,
       isLoading,
       size: 'small',
@@ -165,9 +165,9 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
             {デフォルト設定一覧.map((設定, index) => {
               const onClick = () => 植物ごとのデフォルト設定編集モーダルref.current?.open?.(設定.デフォルト設定.id!);
               return (
-                <div className="Item" key={設定.デフォルト設定.order}>
+                <div className="Item" key={設定.デフォルト設定.order()}>
                   <p>
-                    {index + 1}: {設定.デフォルト設定.order.split('-').join(' - ')}
+                    {index + 1}: {設定.デフォルト設定.order().split('-').join(' - ')}
                   </p>
                   <div onClick={onClick} onKeyDown={e => e.key === 'Enter' && onClick()} role="button" tabIndex={0}>
                     <OPERATION_ICONS.EDIT />

@@ -1,23 +1,25 @@
-import { UserId } from '@frontend/domain/model/user';
-import { 履歴, 鉢サイズ } from '@frontend/domain/model/履歴';
+import { User } from 'src/domain/entity/user';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { Dayjs } from 'dayjs';
 import { StorageRepository } from '@frontend/domain/repository/storage';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { 鉢 } from '@frontend/domain/model/鉢';
-import { 小画像の生成 } from '@frontend/domain/model/鉢/管理操作/新規作成';
+import { 鉢 } from 'src/domain/entity/鉢';
+import { 小画像の生成 } from 'src/domain/entity/鉢/管理操作/新規作成';
+import { _履歴を適用 } from 'src/domain/entity/鉢/管理操作/common';
 
+export type _植替えする = (this: 鉢, params: _植替えするParams) => Promise<void>;
 export type _植替えするParams = {
-  item: 鉢;
   imageDataUrl: string;
-  userId: UserId;
-  鉢のサイズ: 鉢サイズ;
+  userId: User.Id;
+  鉢のサイズ: 履歴.植替え.鉢サイズ;
   memo: string | undefined;
   date: Dayjs;
 };
-export const _植替えする = async (params: _植替えするParams) => {
-  const { item, imageDataUrl, userId, 鉢のサイズ, date, memo } = params;
+export async function _植替えする(this: 鉢, params: _植替えするParams) {
+  const { imageDataUrl, userId, 鉢のサイズ, date, memo } = params;
+
   console.log('1. 画像をuploadする');
-  const 鉢Id = item.id!;
+  const 鉢Id = this.id!;
   const pathBaseParams = {
     userId,
     datetime: date,
@@ -34,7 +36,7 @@ export const _植替えする = async (params: _植替えするParams) => {
   const { small画像のURL } = await 小画像の生成(imageDataUrl, pathBaseParams);
 
   console.log('2. 植替えの履歴を作成');
-  const 植替え履歴 = await 履歴.新規作成.植替え({
+  const 植替え履歴 = await 履歴.植替え.create({
     props: {
       userId,
       作成日時: date,
@@ -50,7 +52,7 @@ export const _植替えする = async (params: _植替えするParams) => {
   });
 
   console.log('3. 鉢の情報を更新する');
-  const 更新後の鉢 = item.履歴を適用(植替え履歴, small画像のURL);
+  const 更新後の鉢 = _履歴を適用(this, 植替え履歴, small画像のURL);
   await FSAppRepository.鉢.snapshotを更新(鉢Id, 更新後の鉢.snapshot, date);
   鉢.events.管理.next({ type: '植替え' });
-};
+}

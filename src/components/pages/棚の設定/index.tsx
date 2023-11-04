@@ -8,15 +8,16 @@ import { closestCenter, DndContext } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { DragEndEvent } from '@dnd-kit/core/dist/types';
-import { 棚の並び順 } from 'src/domain/model/棚の並び順';
-import { 棚, 棚ID } from 'src/domain/model/棚';
+import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
+import { 棚 } from 'src/domain/entity/棚';
 import { useSubscribeState } from 'src/eventBasedStore';
-import { Card } from 'antd';
+import { Card, Popconfirm } from 'antd';
 import { MyEditable } from 'src/components/atoms/Editable';
-import { SYMBOL_ICONS } from 'src/supports/icons';
+import { OPERATION_ICONS, SYMBOL_ICONS } from 'src/supports/icons';
 
-const 棚のソートアイテム = (props: { id: 棚ID; name: string }) => {
-  const { id, name } = props;
+type 棚のソートアイテムParams = { id: 棚.Id; name: string; on棚を削除: (id: 棚.Id) => void };
+const 棚のソートアイテム = (props: 棚のソートアイテムParams) => {
+  const { id, name, on棚を削除 } = props;
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   const style: CSSProperties = {
@@ -32,10 +33,27 @@ const 棚のソートアイテム = (props: { id: 棚ID; name: string }) => {
 
   return (
     <Card className="SortableItem" ref={setNodeRef} style={style} size="small" bordered={false}>
-      <div {...attributes} {...listeners}>
-        <SYMBOL_ICONS.左メニュー />
+      <div className="Content">
+        <div className="Left">
+          <div {...attributes} {...listeners}>
+            <SYMBOL_ICONS.左メニュー />
+          </div>
+          <MyEditable value={name || ''} name="name" onSubmit={棚の名前を更新} />
+        </div>
+        <div className="Right">
+          <Popconfirm
+            title="本当に削除してもよろしいですか？"
+            onConfirm={() => on棚を削除(id)}
+            okText="削除"
+            cancelText="キャンセル"
+          >
+            <span onClick={e => e.stopPropagation()}>
+              <OPERATION_ICONS.DELETE style={{ marginRight: 4 }} />
+              削除
+            </span>
+          </Popconfirm>
+        </div>
       </div>
-      <MyEditable value={name || ''} name="name" onSubmit={棚の名前を更新} />
     </Card>
   );
 };
@@ -62,8 +80,8 @@ export const 棚の設定ページ: React.FC<棚の設定ページ.Props> = () =
     // active => overへ移動させる
     if (active.id !== over.id) {
       const items = 棚Ids.slice();
-      const oldIndex = items.indexOf(active.id as 棚ID);
-      const newIndex = items.indexOf(over.id as 棚ID);
+      const oldIndex = items.indexOf(active.id as 棚.Id);
+      const newIndex = items.indexOf(over.id as 棚.Id);
 
       const movedIds = arrayMove(items, oldIndex, newIndex);
       const moved棚一覧 = movedIds.map(id => 棚一覧.find(棚 => 棚.id === id)!);
@@ -80,13 +98,20 @@ export const 棚の設定ページ: React.FC<棚の設定ページ.Props> = () =
     棚作成モーダルのRef.current?.open();
   };
 
+  // --- handlers ---
+  const 棚を削除 = async (id: 棚.Id) => {
+    const 棚 = 棚一覧.find(棚 => 棚.id === id);
+    if (!棚) return;
+    await 棚.削除();
+  };
+
   return (
     <div className="棚の設定ページ">
       <div>
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={棚一覧} disabled={isLoading} strategy={verticalListSortingStrategy}>
             {棚一覧.map(i => (
-              <棚のソートアイテム key={i.name} id={i.id!} name={i.name} />
+              <棚のソートアイテム key={i.name} id={i.id!} name={i.name} on棚を削除={棚を削除} />
             ))}
           </SortableContext>
         </DndContext>

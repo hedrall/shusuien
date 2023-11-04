@@ -1,8 +1,8 @@
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
-import { 日光の強度設定, 鉢 } from '@frontend/domain/model/鉢';
-import { isDefined, optionalValue } from '@frontend/supports/functions';
+import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
+import { isDefined } from '@frontend/supports/functions';
 import { 季節, 現在の季節 } from '@frontend/domain/const/季節';
 import { NonUndefined } from 'react-hook-form';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 export namespace 植物ごとのデフォルト設定サービス {
   /**
@@ -66,7 +66,7 @@ export namespace 植物ごとのデフォルト設定サービス {
       if (isDefined(デフォルト設定から)) {
         return {
           一致Type: item.一致Type,
-          value: デフォルト設定から,
+          value: デフォルト設定から as any, // TODO
           デフォルトを適用: true,
         };
       }
@@ -131,7 +131,7 @@ export namespace 植物ごとのデフォルト設定サービス {
         水切れ日数,
       },
     };
-    const デフォルトを適用した鉢 = new 鉢(mod);
+    const デフォルトを適用した鉢 = 鉢.construct(mod);
     return デフォルトを適用した鉢;
   };
 }

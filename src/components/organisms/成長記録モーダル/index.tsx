@@ -3,7 +3,7 @@ import './index.scss';
 import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Checkbox, Modal, ModalProps } from 'antd';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { Control, useController, useForm } from 'react-hook-form';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { MyFormLayout } from '@frontend/components/molecules/MyForm';
@@ -88,8 +88,7 @@ export const 成長記録モーダル = forwardRef<成長記録モーダル.Ref,
     await withLoading(async () => {
       const { imageDataUrl, memo, isUpdateImage } = getValues();
 
-      await 鉢.管理.成長を記録({
-        item,
+      await item.成長を記録({
         userId: user.id,
         imageDataUrl,
         memo,

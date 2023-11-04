@@ -1,13 +1,13 @@
-import { UserId } from '@frontend/domain/model/user';
+import { User } from 'src/domain/entity/user';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { useEffect, useState } from 'react';
-import { 履歴, 履歴の内容 } from '@frontend/domain/model/履歴';
-import { 鉢Id } from '@frontend/domain/model/鉢';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 type Options = {
-  filter: 履歴の内容.Type[];
+  filter: 履歴.Type[];
 };
-export const use鉢の履歴一覧 = (id: 鉢Id | undefined, userId: UserId | undefined, options: Options) => {
+export const use鉢の履歴一覧 = (id: 鉢.Id | undefined, userId: User.Id | undefined, options: Options) => {
   const [state, setState] = useState<履歴[]>([]);
 
   useEffect(() => {

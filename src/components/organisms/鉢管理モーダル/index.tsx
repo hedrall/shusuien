@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import './index.scss';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Image, Modal, ModalProps, Popconfirm } from 'antd';
-import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { 植替モーダル } from '@frontend/components/organisms/植替モーダル';
 import { 鉢の情報 } from 'src/components/molecules/鉢の情報';
@@ -26,7 +26,7 @@ export namespace 鉢管理モーダル {
 
 export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢管理モーダル.Props>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [id, setId] = useState<鉢Id | undefined>(undefined);
+  const [id, setId] = useState<鉢.Id | undefined>(undefined);
   const { user } = useAuthState();
   const { item, setItem } = use鉢単体(id, user?.id);
 
@@ -131,7 +131,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
       <水切れ日数簡易入力
         鉢={item}
         鉢のデフォルト設定={デフォルト設定}
-        onChange={value => item.詳細を更新('水切れ日数', value, true)}
+        onChange={value => item?.詳細を更新('水切れ日数', value, true)}
       />
       <div className="液肥の表示">
         {item.snapshot.最後の液肥.日時 ? `(液肥: ${item.snapshot.最後の液肥.日時.format('MM月DD日')})` : null}

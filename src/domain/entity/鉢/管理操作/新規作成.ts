@@ -1,24 +1,22 @@
-import { 鉢, 鉢Id, 鉢のBase } from '@frontend/domain/model/鉢';
-import { _成長を記録する } from '@frontend/domain/model/鉢/管理操作/成長を記録';
+import { 鉢 } from 'src/domain/entity/鉢';
 import dayjs, { Dayjs } from 'dayjs';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
 import { StorageRepository } from '@frontend/domain/repository/storage';
-import { 履歴 } from '@frontend/domain/model/履歴';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import { BrowserRepository } from '@frontend/domain/repository/browser';
-import { UserId } from '@frontend/domain/model/user';
+import { User } from 'src/domain/entity/user';
 
 export const 小画像の生成 = async (
   dataUrl: string,
   PathParamBase: {
-    userId: UserId;
+    userId: User.Id;
     datetime: Dayjs;
-    itemId: 鉢Id;
+    itemId: 鉢.Id;
   },
 ) => {
   // 小さい画像も生成する
   const small画像DataUrl = await BrowserRepository.Image.canvasImageCompressor(dataUrl);
   console.log({ small画像DataUrl: small画像DataUrl.length });
-  // throw new Error('temp');
   const { 画像のPATH: small画像のPATH } = await StorageRepository.uploadImageByBase64String({
     dataUrl: small画像DataUrl,
     path: StorageRepository.storagePath({
@@ -32,7 +30,7 @@ export const 小画像の生成 = async (
 };
 export type 新規作成のParams = {
   imageDataUrl: string;
-  props: Omit<鉢のBase, 'id' | 'snapshot' | '作成日時' | '削除済み'>;
+  props: Omit<鉢.Props, 'id' | 'snapshot' | '作成日時' | '削除済み'>;
 };
 export const _新規作成する = async (params: 新規作成のParams) => {
   const { imageDataUrl, props } = params;
@@ -61,7 +59,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
   console.log({ 画像のPATH, 画像のURL, small画像のURL });
 
   console.log('2. 鉢を作成する');
-  const 新規鉢 = new 鉢({
+  const 新規鉢 = 鉢.construct({
     ...props,
     id: undefined,
     削除済み: false,
@@ -76,7 +74,7 @@ export const _新規作成する = async (params: 新規作成のParams) => {
   await FSAppRepository.鉢.作成(新規鉢, 鉢ID);
 
   console.log('3. 成長記録履歴を作成');
-  await 履歴.新規作成.成長記録({
+  await 履歴.成長の記録.create({
     props: {
       作成日時: now,
       userId,

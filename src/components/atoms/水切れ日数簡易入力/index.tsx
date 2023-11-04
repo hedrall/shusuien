@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { 植物ごとのデフォルト設定サービス } from '@frontend/domain/service/plantDefaultSetting';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { CaretDownOutlined, CaretUpOutlined, UpOutlined } from '@ant-design/icons';
 import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
 export type 水切れ日数簡易入力Props = {

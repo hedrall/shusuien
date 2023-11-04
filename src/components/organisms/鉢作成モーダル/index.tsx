@@ -5,15 +5,15 @@ import { useController, useForm } from 'react-hook-form';
 import { useAuthState } from '@frontend/store/auth/action';
 import { useWithLoading } from '@frontend/supports/ui';
 import { UploadImage } from '@frontend/components/atoms/UploadImage';
-import { 鉢 } from '@frontend/domain/model/鉢';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
 import { ValidationRule } from 'react-hook-form/dist/types/validator';
-import { 棚ID } from '@frontend/domain/model/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { MyButton } from '@frontend/components/atoms/MyButton';
 
 export namespace 鉢作成モーダル {
   export type Props = {
-    棚Id: 棚ID | undefined;
+    棚Id: 棚.Id | undefined;
   };
   export type Ref = {
     open: () => void;
@@ -102,7 +102,7 @@ export const 鉢作成モーダル = forwardRef<鉢作成モーダル.Ref, 鉢�
       const { imageDataUrl, name, ...詳細 } = getValues();
       console.warn({ getValues: getValues() });
       if (!棚Id || !imageDataUrl) return;
-      await 鉢.管理.新規作成({
+      await 鉢.新規作成({
         imageDataUrl,
         props: {
           userId: user?.id,

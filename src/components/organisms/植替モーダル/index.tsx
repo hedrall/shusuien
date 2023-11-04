@@ -3,8 +3,8 @@ import './index.scss';
 import { useWithLoading } from '@frontend/supports/ui';
 import { useAuthState } from '@frontend/store/auth/action';
 import { Modal, ModalProps } from 'antd';
-import { 鉢 } from '@frontend/domain/model/鉢';
-import { 履歴の内容, 鉢サイズ } from '@frontend/domain/model/履歴';
+import { 鉢 } from 'src/domain/entity/鉢';
+import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 import dayjs from 'dayjs';
 import { Control, useController, useForm } from 'react-hook-form';
 import { MyInputWithAlert } from '@frontend/components/atoms/MyInputWithAlert';
@@ -17,11 +17,11 @@ import { DATE_TIME_FORMAT } from '@frontend/supports';
 import { モーダルの見出し } from '@frontend/components/atoms/ModalTitle';
 
 type Input = {
-  size: 鉢サイズ.番号;
+  size: 履歴.植替え.鉢サイズ.番号;
   isLong: boolean;
-  imageDataUrl: 履歴の内容.植替え['植替え後の画像のURL'];
+  imageDataUrl: 履歴.植替え['内容']['植替え後の画像のURL'];
   date: string;
-  memo: 履歴の内容.植替え['memo'];
+  memo: 履歴.植替え['内容']['memo'];
 };
 
 const DEFAULT_VALUES = (): Partial<Input> => ({
@@ -61,7 +61,7 @@ const createController = (control: Control<Input, any>) => {
   return { size, isLong, imageDataUrl, date, memo };
 };
 
-const 鉢サイズの選択肢: RadioGroupOption<鉢サイズ.番号>[] = 鉢サイズ.番号.map(num => {
+const 鉢サイズの選択肢: RadioGroupOption<履歴.植替え.鉢サイズ.番号>[] = 履歴.植替え.鉢サイズ.番号.map(num => {
   return {
     name: `${num}号`,
     value: num,
@@ -99,10 +99,9 @@ export const 植替モーダル = forwardRef<植替モーダル.Ref, 植替モ�
     await withLoading(async () => {
       const { imageDataUrl, size, isLong, date, memo } = getValues();
 
-      await 鉢.管理.植替え({
+      await item.植替え({
         imageDataUrl,
         userId: user.id,
-        item,
         date: dayjs(date),
         鉢のサイズ: {
           番号: size,

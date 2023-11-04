@@ -5,12 +5,12 @@ import { MyButton } from '@frontend/components/atoms/MyButton';
 import { use植物ごとのデフォルト設定 } from '@frontend/store/master/action';
 import { Table, TableColumnsType } from 'antd';
 import { MyEditable } from '@frontend/components/atoms/Editable';
-import { 植物ごとのデフォルト設定 } from '@frontend/domain/model/植物のデフォルト設定';
+import { 植物ごとのデフォルト設定 } from 'src/domain/entity/植物のデフォルト設定';
 import { 季節 } from '@frontend/domain/const/季節';
 import { 日光の強度Select } from '@frontend/components/atoms/SunStrengthSelect';
-import { 日光の強度 } from '@frontend/domain/model/鉢';
 import { uniqueArray } from '@frontend/supports/array';
 import { 育成タイプSelect } from '@frontend/components/atoms/GrowthTypeSelect';
+import { 鉢 } from 'src/domain/entity/鉢';
 
 export namespace 植物ごとのデフォルト設定ページ {
   export type Props = {};
@@ -49,7 +49,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
       render: (_, 設定) => {
         const props: 育成タイプSelect.Props = {
           value: 設定['育成タイプ'],
-          onChange: e => 設定.更新.ルートプロパティ('育成タイプ', e),
+          onChange: e => 設定.ルートプロパティを更新('育成タイプ', e),
         };
         return <育成タイプSelect {...props} />;
       },
@@ -62,7 +62,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
         render: (_: any, 設定: 植物ごとのデフォルト設定) => {
           return (
             <div style={{ width: 100 }}>
-              <MyEditable.Number value={設定[key]} name={key} onSubmit={v => 設定.更新.ルートプロパティ(key, v)} />
+              <MyEditable.Number value={設定[key]} name={key} onSubmit={v => 設定.ルートプロパティを更新(key, v)} />
             </div>
           );
         },
@@ -78,7 +78,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
       render: (_, 設定) => {
         const 日光の強度SelectProps = (季節: 季節): 日光の強度Select.Props => {
           return {
-            onChange: e => 設定.更新.日光の強度設定(e as 日光の強度, 季節),
+            onChange: e => 設定.日光の強度設定を更新(e as 鉢.日光の強度, 季節),
             value: 設定.日光の強度設定?.[季節],
             isLoading: false,
             size: 'small',

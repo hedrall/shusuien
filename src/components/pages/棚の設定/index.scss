@@ -1,20 +1,33 @@
 @use '../../../assets/variables' as v;
 
 .棚の設定ページ {
+  /* 中央に寄せる */
+  max-width: 600px;
+  margin: auto;
+
   .Section {
     margin: 16px 0;
   }
 
   .SortableItem {
     margin: 8px 0;
-    .ant-card-body {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 8px;
 
-      input {
-        margin: 0;
+    .ant-card-body {
+
+      .Content {
+        display: flex;
+        justify-content: space-between;
+        
+        .Left {
+          display: flex;
+          justify-content: flex-start;
+          gap: 8px;
+          align-items: center;
+        }
+
+        input {
+          margin: 0;
+        }
       }
     }
   }

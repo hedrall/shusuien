@@ -7,13 +7,12 @@ import {
   StorageReference,
   uploadString,
 } from 'firebase/storage';
-import { UserId } from '@frontend/domain/model/user';
+import { User } from 'src/domain/entity/user';
 import { Dayjs } from 'dayjs';
-import { useEffect, useState } from 'react';
 
 export namespace StorageRepository {
   type StorageDirPathParams = {
-    userId: UserId;
+    userId: User.Id;
     type: '鉢';
     datetime: Dayjs;
     itemId: string;

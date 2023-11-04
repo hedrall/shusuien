@@ -1,9 +1,9 @@
 import { selector, selectorFamily, useRecoilState } from 'recoil';
-import { 棚, 棚ID } from '@frontend/domain/model/棚';
+import { 棚 } from 'src/domain/entity/棚';
 import { DATA_STATE_ATOM, DataState } from '@frontend/store/data/atom';
 import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { User, UserId } from '@frontend/domain/model/user';
-import { 鉢, 鉢Id } from '@frontend/domain/model/鉢';
+import { User } from 'src/domain/entity/user';
+import { 鉢 } from 'src/domain/entity/鉢';
 import { useEffect, useState } from 'react';
 import { MASTER_STATE_ATOM } from '@frontend/store/master/atom';
 import { isDefined } from '@frontend/supports/functions';
@@ -13,7 +13,7 @@ import { FILTER_STATE_ATOM, FilterState } from '@frontend/store/filter/atom';
 import { 鉢Service } from '@frontend/domain/service/item';
 import { ひらがなtoカタカナ } from '@frontend/supports/string';
 import { 水切れのデフォルト日数 } from '@frontend/supports/settings';
-import { 棚の並び順 } from '@frontend/domain/model/棚の並び順';
+import { 棚の並び順 } from 'src/domain/entity/棚の並び順';
 
 const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
   if (!filter.enabled) return true;
@@ -45,14 +45,14 @@ const フィルタを適用 = (i: 鉢, filter: FilterState): boolean => {
   }
   const 最後の灌水からの経過日数Start = 最後の灌水からの経過日数?.start;
   if (isDefined(最後の灌水からの経過日数Start)) {
-    const 経過日数 = i.最後の灌水からの経過日数;
+    const 経過日数 = i.最後の灌水からの経過日数();
     const is = !isDefined(経過日数) || 経過日数 >= 最後の灌水からの経過日数Start;
     if (!is) return false;
   }
   return true;
 };
 
-const 鉢一覧Selector = selectorFamily<鉢[], 棚ID>({
+const 鉢一覧Selector = selectorFamily<鉢[], 棚.Id>({
   key: '鉢一覧Selector',
   get:
     棚ID =>
@@ -80,11 +80,11 @@ const 鉢一覧Selector = selectorFamily<鉢[], 棚ID>({
     },
 });
 
-export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
+export const use鉢一覧 = (棚Id: 棚.Id, user: User | undefined) => {
   // デフォルト直が適用されているので注意
   const [state, set] = useRecoilState(鉢一覧Selector(棚Id));
 
-  const 鉢を購読 = (userId: UserId, 棚Id: 棚ID) => {
+  const 鉢を購読 = (userId: User.Id, 棚Id: 棚.Id) => {
     return FSAppRepository.鉢.一覧購読({ userId, 棚Id }, items => {
       console.log('[購読]: 鉢一覧', items);
       set(鉢Service.並び替える(items.map(i => i.value)));
@@ -104,9 +104,9 @@ export const use鉢一覧 = (棚Id: 棚ID, user: User | undefined) => {
 
 const use全ての鉢一覧 = (user: User | undefined) => {
   // デフォルト直が適用されているので注意
-  const [state, set] = useRecoilState(鉢一覧Selector('#@$$@#all' as 棚ID));
+  const [state, set] = useRecoilState(鉢一覧Selector('#@$$@#all' as 棚.Id));
 
-  const 鉢を購読 = (userId: UserId) => {
+  const 鉢を購読 = (userId: User.Id) => {
     return FSAppRepository.鉢.全て購読(userId, items => {
       // console.log('[購読]: 全ての鉢を購読', items);
       set(鉢Service.並び替える(items.map(i => i.value)));
@@ -131,7 +131,7 @@ export const 灌水が必要な鉢一覧 = (user: User | undefined) => {
 
   return 鉢一覧.reduce<Res>(
     (pre, 鉢) => {
-      const 最後の灌水からの経過日数 = 鉢.最後の灌水からの経過日数;
+      const 最後の灌水からの経過日数 = 鉢.最後の灌水からの経過日数();
       const is要灌水 =
         !isDefined(最後の灌水からの経過日数) ||
         最後の灌水からの経過日数 >= (鉢.詳細.水切れ日数 || 水切れのデフォルト日数);
@@ -142,7 +142,7 @@ export const 灌水が必要な鉢一覧 = (user: User | undefined) => {
   );
 };
 
-export const use鉢単体 = (id: 鉢Id | undefined, userId: UserId | undefined) => {
+export const use鉢単体 = (id: 鉢.Id | undefined, userId: User.Id | undefined) => {
   const [item, setItem] = useState<鉢 | undefined>(undefined);
 
   useEffect(() => {
@@ -181,10 +181,10 @@ export const 棚Selector = selector<棚[]>({
 });
 
 export namespace use棚一覧 {
-  export const 購読 = (userId: UserId | undefined) => {
+  export const 購読 = (userId: User.Id | undefined) => {
     const [, set] = useRecoilState(棚Selector);
 
-    const 棚を購読 = (userId: UserId) => {
+    const 棚を購読 = (userId: User.Id) => {
       return FSAppRepository.棚.購読(userId, items => {
         console.log('棚をlisten', items);
         set(items.map(i => i.value));
@@ -217,10 +217,10 @@ export const 棚の並び順Selector = selector<DataState['棚の並び順']>({
 });
 
 export namespace use棚の並び順 {
-  export const 購読 = (userId: UserId | undefined) => {
+  export const 購読 = (userId: User.Id | undefined) => {
     const [, set] = useRecoilState(棚の並び順Selector);
 
-    const 購読 = (userId: UserId) => {
+    const 購読 = (userId: User.Id) => {
       return FSAppRepository.棚の並び順.購読(userId, item => {
         console.log('棚の並び順をlisten', item);
         set(item.value);
