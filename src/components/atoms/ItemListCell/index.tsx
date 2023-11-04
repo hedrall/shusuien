@@ -168,6 +168,11 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
           {経過日数.最後の液肥.表記}
         </span>
       ) : null}
+      {item.snapshot.植替待ち && (
+        <span className="植替待ち 表示">
+          <ICONS.植替待設定 /> 植替待ち
+        </span>
+      )}
     </div>
   );
 };

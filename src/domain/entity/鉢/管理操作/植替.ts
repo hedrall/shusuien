@@ -7,8 +7,7 @@ import { 鉢 } from 'src/domain/entity/鉢';
 import { 小画像の生成 } from 'src/domain/entity/鉢/管理操作/新規作成';
 import { _履歴を適用 } from 'src/domain/entity/鉢/管理操作/common';
 
-export type _植替えする = (this: 鉢, params: _植替えするParams) => Promise<void>;
-export type _植替えするParams = {
+type _植替えするParams = {
   imageDataUrl: string;
   userId: User.Id;
   鉢のサイズ: 履歴.植替え.鉢サイズ;

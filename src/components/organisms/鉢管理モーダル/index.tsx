@@ -86,6 +86,11 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
     close();
   };
 
+  const 植替待にする = async () => {
+    if (!user?.id) return;
+    await item?.植替待にする({ userId: user.id });
+  };
+
   const { 植物ごとのデフォルト設定一覧 } = use植物ごとのデフォルト設定.一覧を利用();
 
   if (!item) return null;
@@ -101,6 +106,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
           src={item?.snapshot.画像のURL || NO_IMAGE}
         />
       </div>
+
       <h2 className="見出し">管理</h2>
       <div className="管理ボタン">
         <MyButton
@@ -128,6 +134,21 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
           onClick={成長記録モーダルを開く}
         />
       </div>
+
+      <h2 className="見出し">印をつける</h2>
+      <div className="印をつける">
+        <MyButton
+          title={
+            <div>
+              <ICONS.植替待設定 /> 植替待ち
+            </div>
+          }
+          size={'small'}
+          onClick={植替待にする}
+        />
+      </div>
+
+      <h2 className="見出し">水切れ日数簡易入力</h2>
       <水切れ日数簡易入力
         鉢={item}
         鉢のデフォルト設定={デフォルト設定}
@@ -137,6 +158,7 @@ export const 鉢管理モーダル = forwardRef<鉢管理モーダル.Ref, 鉢�
         {item.snapshot.最後の液肥.日時 ? `(液肥: ${item.snapshot.最後の液肥.日時.format('MM月DD日')})` : null}
       </div>
 
+      <h2 className="見出し">鉢の情報</h2>
       {item && <鉢の情報 鉢={item} />}
       <div>
         <Popconfirm

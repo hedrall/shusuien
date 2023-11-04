@@ -14,6 +14,7 @@ export namespace _Snapshot {
     画像のURL?: string;
     small画像のURL?: string;
     更新日時: Dayjs;
+    植替待ち?: boolean;
   };
   export const construct = (props: Props) => {
     return {

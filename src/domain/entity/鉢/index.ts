@@ -17,6 +17,7 @@ import { _詳細 } from 'src/domain/entity/鉢/valueObject/詳細';
 import { _日光の強度 } from 'src/domain/entity/鉢/consts/日光の強度';
 import { _日光の強度設定 } from 'src/domain/entity/鉢/consts/日光の強度設定';
 import { _育成タイプ } from 'src/domain/entity/鉢/consts/育成タイプ';
+import { _植替待にする } from 'src/domain/entity/鉢/管理操作/植替待設定';
 
 type 鉢Id = Opaque<string, '鉢ID'>;
 export namespace 鉢 {
@@ -61,6 +62,7 @@ export namespace 鉢 {
       植替え: _植替えする,
       灌水: _灌水する,
       成長を記録: _成長を記録する,
+      植替待にする: _植替待にする,
     } as const;
   };
 
@@ -78,7 +80,6 @@ export namespace 鉢 {
   export type 日光の強度設定 = _日光の強度設定;
   export const 育成タイプ = _育成タイプ;
   export type 育成タイプ = _育成タイプ;
-
   export type 更新可能なフィールドのKey = Extract<keyof 鉢, 'name' | '補足' | '棚Id'>;
   export type デフォルト設定可能な鉢のプロパティ = Pick<鉢['詳細'], '耐寒温度' | '日光の強度設定'>;
 }

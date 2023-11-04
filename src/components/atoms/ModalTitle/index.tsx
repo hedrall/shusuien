@@ -30,6 +30,14 @@ const 成長記録 = () => {
     </h1>
   );
 };
+const 植替待設定 = () => {
+  return (
+    <h1 className="モーダルの見出し">
+      <ICONS.植替待設定 />
+      植替待設定
+    </h1>
+  );
+};
 const 機能 = () => {
   return (
     <h1 className="機能設定">
@@ -60,6 +68,8 @@ export const モーダルの見出し: React.FC<ModalTitleProps> = props => {
       return 植替え();
     case '成長の記録':
       return 成長記録();
+    case '植替待設定':
+      return 植替待設定();
     case '植物ごとのデフォルト設定':
       return 植物ごとのデフォルト設定();
     case 'デフォルト設定から選択':

@@ -86,6 +86,8 @@ export const 履歴Converter: fs.FirestoreDataConverter<履歴> = {
         return 履歴.植替え.construct({ ...(data as 履歴.植替え), id: id as 履歴.植替え.Id }) as T;
       case '灌水':
         return 履歴.灌水.construct({ ...(data as 履歴.灌水), id: id as 履歴.灌水.Id }) as T;
+      case '植替待設定':
+        return 履歴.植替待設定.construct({ ...(data as 履歴.植替待設定), id: id as 履歴.植替待設定.Id }) as T;
     }
     // @ts-expect-error
     throw new Error(`履歴Converter > fromFirestore > 予期せぬタイプ ${data.内容.type}`);

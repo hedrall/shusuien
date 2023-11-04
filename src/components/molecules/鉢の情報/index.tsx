@@ -134,7 +134,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
     <>
       <Descriptions
         className="鉢の情報"
-        title="鉢の情報"
+        title=""
         size={'small'}
         bordered
         column={{ xxl: 2, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }}

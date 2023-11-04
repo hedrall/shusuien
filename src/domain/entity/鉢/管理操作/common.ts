@@ -27,6 +27,7 @@ export const _履歴を適用 = (鉢: 鉢, 履歴: 履歴, small画像のURL: st
           鉢のサイズ: 履歴.内容.鉢のサイズ,
           最後の植替え: 履歴.内容.植替え日時,
           ...(画像を更新する ? { 画像のURL: 履歴.内容.植替え後の画像のURL } : {}),
+          植替待ち: false,
         },
         履歴.作成日時,
       );
@@ -54,6 +55,8 @@ export const _履歴を適用 = (鉢: 鉢, 履歴: 履歴, small画像のURL: st
         },
         履歴.作成日時,
       );
+    case '植替待設定':
+      return update(鉢, { ...common, 植替待ち: true }, 履歴.作成日時);
     default:
       throw new Error(`実装されていません。type: ${type}`);
   }

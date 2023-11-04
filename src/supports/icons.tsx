@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAnglesRight,
   faAngleUp,
+  faBars,
   faCircleCheck,
   faCircleXmark,
   faDroplet,
@@ -16,7 +17,6 @@ import {
   faTableCells,
   faTableList,
   faTrash,
-  faBars,
 } from '@fortawesome/free-solid-svg-icons';
 import { 履歴 } from 'src/domain/entity/鉢/entity/履歴';
 
@@ -24,6 +24,7 @@ export const ICONS = {
   灌水: () => <FontAwesomeIcon icon={faDroplet} />,
   植替え: () => <FontAwesomeIcon icon={faSpoon} />,
   成長の記録: () => <FontAwesomeIcon icon={faPen} />,
+  植替待設定: () => <FontAwesomeIcon icon={faSpoon} />,
 } satisfies { [Key in 履歴.Type]: React.FC };
 
 export const OPERATION_ICONS = {

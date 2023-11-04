@@ -38,7 +38,6 @@ export const 水切れ日数簡易入力: React.FC<水切れ日数簡易入力Pr
 
   return (
     <div className="水切れ日数簡易入力">
-      <span>水切れ日数</span>
       <div className="コントロール">
         <CaretUpOutlined className="上矢印" onClick={() => onChangeHandler('up')} role="button" tabIndex={0} />
         <div className="数値部分">
