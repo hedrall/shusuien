@@ -2,7 +2,6 @@ import React from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { AuthError } from 'firebase/auth';
 import { Button, Divider, Input } from 'antd';
-const InputGroup = Input.Group;
 import { MyButton } from '@frontend/components/atoms/MyButton';
 import { MyAlert } from '@frontend/components/atoms/MyAlert';
 import { StepProps } from '@frontend/components/pages/Login/steps/common';
@@ -12,8 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { User } from 'src/domain/entity/user';
 import { AuthRepository } from '@frontend/domain/repository/auth';
 import { ROUTES } from '@frontend/settings/routes';
-import { FSAppRepository } from '@frontend/domain/repository/firestore';
-import { FsAppManager } from '@frontend/domain/repository/firestore/manager/app';
+
+const InputGroup = Input.Group;
 
 export const isValidEmail = (email: string) =>
   // eslint-disable-next-line no-useless-escape
@@ -95,8 +94,7 @@ export const FirstStep: React.FC<StepProps> = props => {
         return;
       }
 
-      // create new user to firestore
-      await FSAppRepository.addItemWithId(new FsAppManager.User(), User.createDefault(uid), uid as User.Id);
+      await User.新規ユーザを作成(uid);
       setStep('setUserName', '');
     } catch (_error: any) {
       if ('code' in _error) {

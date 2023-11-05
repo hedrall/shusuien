@@ -8,6 +8,7 @@ import { _FsApp鉢Repository } from '@frontend/domain/repository/firestore/item'
 import { _FsApp履歴Repository } from '@frontend/domain/repository/firestore/history';
 import { _FsApp植物ごとのデフォルト設定Repository } from '@frontend/domain/repository/firestore/plantDefaultSetting';
 import { _FsApp棚の並び順Repository } from 'src/domain/repository/firestore/棚の並び順';
+import { _FsAppUserRepository } from 'src/domain/repository/firestore/user';
 
 export namespace FSAppRepository {
   type DocumentSnapshot<T> = fs.DocumentSnapshot<T>;
@@ -173,4 +174,5 @@ export namespace FSAppRepository {
   export import 履歴 = _FsApp履歴Repository;
   export import 植物ごとのデフォルト設定 = _FsApp植物ごとのデフォルト設定Repository;
   export import 棚の並び順 = _FsApp棚の並び順Repository;
+  export import User = _FsAppUserRepository;
 }
