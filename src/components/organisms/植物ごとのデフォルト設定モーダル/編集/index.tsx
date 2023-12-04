@@ -61,7 +61,7 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
     };
   };
   const 育成タイプSelectProps: 育成タイプSelect.Props = {
-    value: 設定['育成タイプ'],
+    value: 設定.育成タイプ,
     onChange: e => 設定.ルートプロパティを更新('育成タイプ', e),
   };
 
@@ -92,15 +92,15 @@ export const 植物ごとのデフォルト設定編集モーダル = forwardRef
           <育成タイプSelect {...育成タイプSelectProps} />
         </Descriptions.Item>
         <Descriptions.Item label="耐寒温度">
-          <MyEditable.Number
-            value={設定['耐寒温度']}
+          <MyEditable.NumberComp
+            value={設定.耐寒温度}
             name={'耐寒温度'}
             onSubmit={e => 設定?.ルートプロパティを更新('耐寒温度', e)}
           />
         </Descriptions.Item>
         <Descriptions.Item label="水切れ日数">
-          <MyEditable.Number
-            value={設定['水切れ日数']}
+          <MyEditable.NumberComp
+            value={設定.水切れ日数}
             name={'水切れ日数'}
             onSubmit={e => 設定?.ルートプロパティを更新('水切れ日数', e)}
           />

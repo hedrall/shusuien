@@ -73,8 +73,8 @@ const 鉢の画像PATHをURLに載せ替える = async (userId: string) => {
 
   for (const item of values) {
     const value = item.value;
-    if (value.snapshot['画像のPATH']) {
-      const url = await StorageRepository.getDownloadUrls(value.snapshot['画像のPATH']);
+    if (value.snapshot.画像のPATH) {
+      const url = await StorageRepository.getDownloadUrls(value.snapshot.画像のPATH);
       console.log('download url');
       if (!url) throw new Error('url nasi');
       console.log('update', item.ref.id);
@@ -96,9 +96,9 @@ const 履歴の画像PATHをURLに載せ替える = async (userId: string) => {
 
   for (const item of values) {
     const value = item.value;
-    const key = value['内容']['植替え後の画像のPATH'] ? '植替え後の画像のURL' : '画像のURL';
-    const path = value['内容']['植替え後の画像のPATH'] || value['内容']['画像のPATH'];
-    if (path && path.includes('http')) continue;
+    const key = value.内容.植替え後の画像のPATH ? '植替え後の画像のURL' : '画像のURL';
+    const path = value.内容.植替え後の画像のPATH || value.内容.画像のPATH;
+    if (path?.includes('http')) continue;
     if (path) {
       console.log('download url', path);
       const url = await StorageRepository.getDownloadUrls(path);
@@ -163,7 +163,7 @@ export const AdminPage: React.FC<TopPageProps> = props => {
 
     for (const item of values) {
       const { ref, value } = item;
-      const snapshot = value['snapshot'] as 鉢['snapshot'];
+      const snapshot = value.snapshot as 鉢['snapshot'];
       if (snapshot.small画像のURL) {
         console.log(`${ref.id}: skip 1`);
         continue;

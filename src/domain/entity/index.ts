@@ -12,7 +12,7 @@ export type EntityHasId = User | 植物ごとのデフォルト設定 | 棚の�
 export type EntityId<T extends Entity> = T extends EntityHasId
   ? NonNullable<T['id']>
   : T extends 鉢
-  ? 鉢.Id
-  : T extends 履歴
-  ? 履歴.Id
-  : never;
+    ? 鉢.Id
+    : T extends 履歴
+      ? 履歴.Id
+      : never;

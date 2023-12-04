@@ -9,7 +9,7 @@ export const _鉢サイズ = {
   },
 };
 export namespace _鉢サイズ {
-  export type 番号 = typeof _鉢サイズ.番号[number];
-  export type タイプ = typeof _鉢サイズ.タイプ[number];
+  export type 番号 = (typeof _鉢サイズ.番号)[number];
+  export type タイプ = (typeof _鉢サイズ.タイプ)[number];
 }
 export type _鉢サイズ = { 番号: _鉢サイズ.番号; タイプ: _鉢サイズ.タイプ };

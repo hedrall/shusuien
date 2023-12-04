@@ -99,7 +99,7 @@ export function MyEditable<T extends 'text' | 'number' = 'text', V = T extends '
 }
 
 export namespace MyEditable {
-  export const Number = (props: Omit<EditableProps<'number', number | undefined>, 'type'>) => {
+  export const NumberComp = (props: Omit<EditableProps<'number', number | undefined>, 'type'>) => {
     const Elem = MyEditable<'number'>;
     return <Elem {...props} type="number" />;
   };

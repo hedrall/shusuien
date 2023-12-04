@@ -16,7 +16,7 @@ export const DebugOnly: React.FC<DebugOnlyProps> = props => {
 
   useEffect(() => {
     // @ts-ignore
-    window['DEBUG'] = () => setIsDebugMode(pre => !pre);
+    window.DEBUG = () => setIsDebugMode(pre => !pre);
     console.warn(`デバッグモードが有効。デバッグモードを起動するには, 'DEBUG()'を実行してください。`);
   }, []);
 

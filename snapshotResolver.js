@@ -17,12 +17,11 @@ module.exports = {
    * => dist/src/index.test.js
    */
   resolveTestPath: (snapshotFilePath, snapshotExtension) => {
-    return (
-      snapshotFilePath
-        .replace('src/', 'dist/src/')
-        .replace('__snapshots__/', '')
-        .replace(`.tsx${snapshotExtension}`, '') + '.js'
-    );
+    return `${snapshotFilePath
+      .replace('src/', 'dist/src/')
+      .replace('__snapshots__/', '')
+      .replace(`.tsx${snapshotExtension}`, '')}.js"
+ `;
   },
 
   /**

@@ -68,7 +68,7 @@ export const FirstStep: React.FC<StepProps> = props => {
         case 'registered-with-google':
           setError('result', { message: 'Googleアカウントにて登録されています。' });
           return;
-        case 'with-email':
+        // case 'with-email':
         default:
           // can sign in with password
           setStep('inputPassword', email);

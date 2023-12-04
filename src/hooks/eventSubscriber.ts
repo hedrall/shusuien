@@ -34,22 +34,24 @@ export const useEventSubscriber = () => {
     );
     unSubs.push(
       鉢.events.削除.subscribe(({ item }) => {
-        api.success({ message: `削除しました。`, placement: 'bottomRight' });
+        api.success({ message: '削除しました。', placement: 'bottomRight' });
       }),
     );
     unSubs.push(
-      鉢.events.管理.pipe(withLatestFrom(棚の一括灌水State.event)).subscribe(([管理イベント, 棚の一括灌水イベント]) => {
-        const 通知しないパターン = 管理イベント.type === '灌水' && 棚の一括灌水イベント.type === 'start';
-        if (通知しないパターン) return;
+      鉢.events.管理
+        .pipe(withLatestFrom(棚の一括灌水State.event))
+        .subscribe(([管理イベント, 棚の一括灌水イベント]) => {
+          const 通知しないパターン = 管理イベント.type === '灌水' && 棚の一括灌水イベント.type === 'start';
+          if (通知しないパターン) return;
 
-        api.success({ message: `${管理イベント.type}しました。`, placement: 'bottomRight' });
-      }),
+          api.success({ message: `${管理イベント.type}しました。`, placement: 'bottomRight' });
+        }),
     );
     unSubs.push(
       灌水時の施肥有無設定イベント.subscribe(ON => {
         if (ON) {
           api.info({
-            message: `灌水時の施肥をON`,
+            message: '灌水時の施肥をON',
             description: '灌水時に液肥を施したことが記録されます。',
             placement: 'bottomRight',
           });
@@ -65,7 +67,7 @@ export const useEventSubscriber = () => {
             api.success({ message: `${event.処理数}鉢に一括灌水しました。`, placement: 'bottomRight' });
             return;
           case 'error':
-            api.error({ message: `一括灌水に失敗しました。`, placement: 'bottomRight' });
+            api.error({ message: '一括灌水に失敗しました。', placement: 'bottomRight' });
             return;
         }
       }),
