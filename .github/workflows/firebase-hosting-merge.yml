@@ -31,7 +31,7 @@ jobs:
         name: Install pnpm
         with:
           version: 8
-          run_install: false
+          run_install: true
 
       - name: ビルド
         run: npm run build
@@ -53,3 +53,12 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
