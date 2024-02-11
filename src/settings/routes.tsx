@@ -1,7 +1,7 @@
 import React from 'react';
 import { ValueOf } from 'type-fest';
 import { 旧TopPage } from '@frontend/components/pages/旧Top';
-import { Error } from '@frontend/components/pages/Error';
+import { ErrorPage } from '@frontend/components/pages/Error';
 import { LoginPage } from '@frontend/components/pages/Login';
 import { AdminPage } from '@frontend/components/pages/Admin';
 import { 植物ごとのデフォルト設定ページ } from '@frontend/components/pages/植物ごとのデフォルト設定ページ';
@@ -22,7 +22,7 @@ export const ROUTES = {
   ERROR: {
     PATH: '/error',
     NAME: 'top',
-    COMPONENT: Error,
+    COMPONENT: ErrorPage,
   },
   Admin: {
     PATH: '/admin',

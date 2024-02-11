@@ -47,11 +47,7 @@ export namespace Master {
   export const 科 = Object.keys(DEF);
   const _属 = Object.values(DEF);
   export const 属 = Object.keys(_属);
-  export const 種 = _属
-    .map(i => Object.values(i))
-    .flat()
-    .map(i => Object.keys(i))
-    .flat();
+  export const 種 = _属.flatMap(i => Object.values(i)).flatMap(i => Object.keys(i));
   export const get = (レベル: レベル) => {
     switch (レベル) {
       case '科':

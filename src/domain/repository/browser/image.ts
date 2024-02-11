@@ -39,21 +39,20 @@ export namespace _BrowserRepository_Image {
       // 100kb未満はそのまま
       const dataUrl = await loadFileAsDataUrl(file);
       return { file, dataUrl };
-    } else {
-      console.warn(`compress ${file.size} to ${limitSize}`);
-      // 100kb以上は圧縮する
-      const newFileBlob = await imageCompression(file, {
-        // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
-        // maxWidthOrHeight: 400,
-        maxSizeMB: maxFileSizeMb,
-      });
-      const newFileDataUrl = await imageCompression.getDataUrlFromFile(newFileBlob);
-      await imageCompression.getFilefromDataUrl(newFileDataUrl, 'new');
-      return {
-        file: newFileBlob,
-        dataUrl: newFileDataUrl,
-      };
     }
+    console.warn(`compress ${file.size} to ${limitSize}`);
+    // 100kb以上は圧縮する
+    const newFileBlob = await imageCompression(file, {
+      // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
+      // maxWidthOrHeight: 400,
+      maxSizeMB: maxFileSizeMb,
+    });
+    const newFileDataUrl = await imageCompression.getDataUrlFromFile(newFileBlob);
+    await imageCompression.getFilefromDataUrl(newFileDataUrl, 'new');
+    return {
+      file: newFileBlob,
+      dataUrl: newFileDataUrl,
+    };
   };
 
   export const canvasImageCompressor = async (imageDataUrl: string, size = 240): Promise<string> => {
@@ -61,7 +60,7 @@ export namespace _BrowserRepository_Image {
 
     return new Promise(resolve => {
       const img = new Image();
-      img.onload = function () {
+      img.onload = () => {
         // 画像のonloadで, width, heightが読み取れるようになっている
         const { width, height } = img;
 

@@ -48,7 +48,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
       width: 140,
       render: (_, 設定) => {
         const props: 育成タイプSelect.Props = {
-          value: 設定['育成タイプ'],
+          value: 設定.育成タイプ,
           onChange: e => 設定.ルートプロパティを更新('育成タイプ', e),
         };
         return <育成タイプSelect {...props} />;
@@ -62,7 +62,7 @@ const expandedRowRender = (設定一覧: 植物ごとのデフォルト設定[])
         render: (_: any, 設定: 植物ごとのデフォルト設定) => {
           return (
             <div style={{ width: 100 }}>
-              <MyEditable.Number value={設定[key]} name={key} onSubmit={v => 設定.ルートプロパティを更新(key, v)} />
+              <MyEditable.NumberComp value={設定[key]} name={key} onSubmit={v => 設定.ルートプロパティを更新(key, v)} />
             </div>
           );
         },
@@ -122,7 +122,7 @@ export const 植物ごとのデフォルト設定ページ: React.FC<植物ご�
         expandable={{ expandedRowRender: expandedRowRender(設定一覧) }}
         dataSource={科一覧}
         pagination={false}
-      ></Table>
+      />
 
       <div className="Section">
         <MyButton title={'⨁ 設定を作成する'} onClick={() => 新規作成モーダルのRef.current?.open()} />

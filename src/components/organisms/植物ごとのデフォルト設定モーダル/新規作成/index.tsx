@@ -68,16 +68,19 @@ const createController = (control: Control<Input, any>) => {
     control,
     name: '水切れ日数',
   });
-  const 日光の強度設定 = Object.values(季節).reduce((pre, s) => {
-    return {
-      ...pre,
-      [s]: useController({
-        control,
-        name: `日光の強度設定.${s}`,
-        rules: { maxLength },
-      }),
-    };
-  }, {} as Record<季節, UseControllerReturn<Input['日光の強度設定'], 季節>>);
+  const 日光の強度設定 = Object.values(季節).reduce(
+    (pre, s) => {
+      return {
+        ...pre,
+        [s]: useController({
+          control,
+          name: `日光の強度設定.${s}`,
+          rules: { maxLength },
+        }),
+      };
+    },
+    {} as Record<季節, UseControllerReturn<Input['日光の強度設定'], 季節>>,
+  );
 
   return { 科, 属, 種, 耐寒温度, 水切れ日数, 日光の強度設定 };
 };

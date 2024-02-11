@@ -25,7 +25,7 @@ type Input = {
 };
 
 const DEFAULT_VALUES = (): Partial<Input> => ({
-  灌水量: 履歴.灌水.灌水量['鉢いっぱい'].key,
+  灌水量: 履歴.灌水.灌水量.鉢いっぱい.key,
 });
 
 const createController = (control: Control<Input, any>) => {

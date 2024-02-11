@@ -3,6 +3,6 @@ import './index.scss';
 
 export type ErrorProps = {};
 
-export const Error: React.FC<ErrorProps> = props => {
+export const ErrorPage: React.FC<ErrorProps> = props => {
   return <div className="Error">Error page</div>;
 };

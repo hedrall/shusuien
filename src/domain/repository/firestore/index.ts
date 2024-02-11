@@ -33,6 +33,8 @@ export namespace FSAppRepository {
     const refValue: RefValue<T>[] = [];
 
     let lastDocSnapshot: DocumentSnapshot<unknown> | undefined = undefined;
+
+    // biome-ignore lint/complexity/noForEach: <explanation>
     snapshot.forEach(item => {
       lastDocSnapshot = item;
       refValue.push({

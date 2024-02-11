@@ -204,7 +204,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           <育成タイプSelect {...育成タイプSelectProps} />
         </Descriptions.Item>
         <Descriptions.Item label="耐寒温度">
-          <MyEditable.Number
+          <MyEditable.NumberComp
             value={optionalValue(詳細.耐寒温度, undefined)}
             name="耐寒温度"
             onSubmit={詳細を更新('耐寒温度')}
@@ -212,7 +212,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           />
         </Descriptions.Item>
         <Descriptions.Item label="水切れ日数">
-          <MyEditable.Number
+          <MyEditable.NumberComp
             value={optionalValue(詳細.水切れ日数, undefined)}
             name="水切れ日数"
             onSubmit={詳細を更新('水切れ日数')}
@@ -224,7 +224,7 @@ export const 鉢の情報: React.FC<MyDescProps> = props => {
           <MyEditable value={詳細.入手元 || ''} name="入手元" onSubmit={詳細を更新('入手元')} />
         </Descriptions.Item>
         <Descriptions.Item label="金額">
-          <MyEditable.Number value={詳細.金額} name="金額" onSubmit={詳細を更新('金額')} />
+          <MyEditable.NumberComp value={詳細.金額} name="金額" onSubmit={詳細を更新('金額')} />
         </Descriptions.Item>
         <Descriptions.Item label="補足">
           <MyEditable value={補足 || ''} name="補足" onSubmit={フィールドを更新('補足')} />

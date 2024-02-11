@@ -63,8 +63,8 @@ export type DoubleTapResult<Target, Callback> = Callback extends CallbackFunctio
       onClick: CallbackFunction<Target>;
     }
   : Callback extends null
-  ? {}
-  : never;
+    ? {}
+    : never;
 
 export function useDoubleTap<Target = Element, Callback extends DoubleTapCallback<Target> = DoubleTapCallback<Target>>(
   callback: Callback,
@@ -85,7 +85,7 @@ export function useDoubleTap<Target = Element, Callback extends DoubleTapCallbac
       } else {
         clearTimeout(timer.current);
         timer.current = null;
-        callback && callback(event);
+        callback?.(event);
       }
     },
     [callback, threshold, options.onSingleTap],
@@ -119,7 +119,7 @@ export const 鉢一覧の要素: React.FC<鉢一覧の要素Props> = props => {
   const 上部補足情報 = (() => {
     const msg: string[] = [];
     if (isDefined(耐寒温度)) msg.push(`🌡${耐寒温度}℃`);
-    if (isDefined(日光の強度設定)) msg.push(`☀️${鉢.日光の強度[日光の強度設定].短縮表現}`);
+    if (isDefined(日光の強度設定)) msg.push(`☀${鉢.日光の強度[日光の強度設定].短縮表現}`);
     return msg.join();
   })();
 

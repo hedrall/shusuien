@@ -28,7 +28,7 @@ export async function _日光の強度を更新<Key extends keyof 鉢.日光の�
     delete updated[key];
   }
   await FSAppRepository.鉢.更新(this.id!, {
-    [`詳細.日光の強度設定`]: updated,
+    '詳細.日光の強度設定': updated,
   });
   鉢.events.詳細を更新.next({ プロパティ名: key, 更新後のValue: value });
 }
