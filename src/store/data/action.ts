@@ -103,6 +103,7 @@ export const use鉢一覧 = (棚Id: 棚.Id, user: User | undefined) => {
   };
 };
 
+/** @deprecated */
 const use全ての鉢一覧 = (user: User | undefined) => {
   // デフォルト直が適用されているので注意
   const [state, set] = useRecoilState(鉢一覧Selector('#@$$@#all' as 棚.Id));
