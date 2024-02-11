@@ -20,6 +20,8 @@ import { _育成タイプ } from 'src/domain/entity/鉢/consts/育成タイプ';
 import { _植替待にする } from 'src/domain/entity/鉢/管理操作/植替待設定';
 
 type 鉢Id = Opaque<string, '鉢ID'>;
+
+export type 鉢 = ReturnType<typeof 鉢.construct>;
 export namespace 鉢 {
   export type Id = 鉢Id;
 
@@ -83,4 +85,3 @@ export namespace 鉢 {
   export type 更新可能なフィールドのKey = Extract<keyof 鉢, 'name' | '補足' | '棚Id'>;
   export type デフォルト設定可能な鉢のプロパティ = Pick<鉢['詳細'], '耐寒温度' | '日光の強度設定'>;
 }
-export type 鉢 = ReturnType<typeof 鉢.construct>;

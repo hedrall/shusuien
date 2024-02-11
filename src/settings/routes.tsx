@@ -7,6 +7,7 @@ import { AdminPage } from '@frontend/components/pages/Admin';
 import { 植物ごとのデフォルト設定ページ } from '@frontend/components/pages/植物ごとのデフォルト設定ページ';
 import { 灌水専用ページ } from '@frontend/components/pages/灌水専用ページ';
 import { 棚の設定ページ } from 'src/components/pages/棚の設定';
+import { お手入れページ } from 'src/components/pages/お手入れ';
 
 export const ROUTES = {
   OLD: {
@@ -46,6 +47,12 @@ export const ROUTES = {
     NAME: '棚の設定',
     COMPONENT: 棚の設定ページ,
     ICON: <span>📦</span>,
+  },
+  お手入れ: {
+    PATH: '/item/care',
+    NAME: 'お手入れ',
+    COMPONENT: お手入れページ,
+    ICON: <span>🪴</span>,
   },
 } as const satisfies {
   [K: string]: {

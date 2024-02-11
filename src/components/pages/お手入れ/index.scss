@@ -1,0 +1,23 @@
+@use '../../../assets/variables' as v;
+
+.灌水専用ページ {
+  .Section {
+    margin: 16px 0;
+  }
+
+  .棚名 {
+    font-weight: bold;
+    color: v.$color-black;
+    padding-bottom: 8px;
+  }
+  .一括灌水ボタン {
+    margin-left: 16px;
+  }
+  .すべての鉢 {
+    width: 100%;
+    text-align: right;
+    padding: 8px 0;
+    color: v.$color-blue;
+    font-size: v.$font-size-small;
+  }
+}

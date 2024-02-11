@@ -59,6 +59,7 @@ const 鉢一覧Selector = selectorFamily<鉢[], 棚.Id>({
     ({ get }) => {
       const 鉢一覧 = get(DATA_STATE_ATOM).鉢一覧[棚ID] || [];
       const デフォルト設定一覧 = get(MASTER_STATE_ATOM).植物のデフォルト設定;
+      // TODO: ここでフィルタされるのがわかりにくい...
       const filter = get(FILTER_STATE_ATOM);
 
       return 鉢一覧
@@ -122,6 +123,39 @@ const use全ての鉢一覧 = (user: User | undefined) => {
   return { 鉢一覧: state };
 };
 
+/**
+ * V1は内部的に `鉢一覧Selector` に依存しており、ここでデータを修正しているのでわかりずらい
+ * V2では単純に鉢一覧を取得するだけに止める
+ */
+export const use全ての鉢一覧V2 = (user: User | undefined, uniqueKey: string) => {
+  const [state, set] = useRecoilState(DATA_STATE_ATOM);
+
+  const id = `鉢一覧_${uniqueKey}` as 棚.Id;
+  const 鉢を購読 = (userId: User.Id) => {
+    return FSAppRepository.鉢.全て購読(userId, items => {
+      console.log('[購読]: 鉢一覧', items);
+      set(pre => ({
+        ...pre,
+        鉢一覧: {
+          ...pre.鉢一覧,
+          [id]: items.map(i => i.value),
+        },
+      }));
+    });
+  };
+
+  useEffect(() => {
+    if (!user?.id) return;
+    const { unsubscribe } = 鉢を購読(user.id);
+    return () => unsubscribe();
+  }, [user?.id]);
+
+  return {
+    鉢一覧: state.鉢一覧[id] || [],
+  };
+};
+
+// useCaseに持っていきたい
 export const 灌水が必要な鉢一覧 = (user: User | undefined) => {
   const { 鉢一覧 } = use全ての鉢一覧(user);
   type Res = {

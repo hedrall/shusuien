@@ -9,6 +9,7 @@ import { ROUTES } from '@frontend/settings/routes';
 type Item = { title: string; link: string; icon: React.ReactNode };
 const メニュー: Item[] = [
   { title: ROUTES.TOP.NAME, link: ROUTES.TOP.PATH, icon: ROUTES.TOP.ICON },
+  { title: ROUTES.お手入れ.NAME, link: ROUTES.お手入れ.PATH, icon: ROUTES.お手入れ.ICON },
   {
     title: ROUTES.棚の設定.NAME,
     link: ROUTES.棚の設定.PATH,
